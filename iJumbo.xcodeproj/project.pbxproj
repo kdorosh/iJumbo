@@ -1,0 +1,476 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		C87E7CBE198C566500366DF7 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C87E7CBD198C566500366DF7 /* Foundation.framework */; };
+		C87E7CC0198C566500366DF7 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C87E7CBF198C566500366DF7 /* CoreGraphics.framework */; };
+		C87E7CC2198C566500366DF7 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C87E7CC1198C566500366DF7 /* UIKit.framework */; };
+		C87E7CC4198C566500366DF7 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C87E7CC3198C566500366DF7 /* CoreData.framework */; };
+		C87E7CCA198C566500366DF7 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = C87E7CC8198C566500366DF7 /* InfoPlist.strings */; };
+		C87E7CCC198C566500366DF7 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = C87E7CCB198C566500366DF7 /* main.m */; };
+		C87E7CD0198C566500366DF7 /* IJAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = C87E7CCF198C566500366DF7 /* IJAppDelegate.m */; };
+		C87E7CD3198C566500366DF7 /* iJumbo.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = C87E7CD1198C566500366DF7 /* iJumbo.xcdatamodeld */; };
+		C87E7CD5198C566500366DF7 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C87E7CD4198C566500366DF7 /* Images.xcassets */; };
+		C87E7CDC198C566500366DF7 /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C87E7CDB198C566500366DF7 /* XCTest.framework */; };
+		C87E7CDD198C566500366DF7 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C87E7CBD198C566500366DF7 /* Foundation.framework */; };
+		C87E7CDE198C566500366DF7 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C87E7CC1198C566500366DF7 /* UIKit.framework */; };
+		C87E7CDF198C566500366DF7 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C87E7CC3198C566500366DF7 /* CoreData.framework */; };
+		C87E7CE7198C566600366DF7 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = C87E7CE5198C566600366DF7 /* InfoPlist.strings */; };
+		C87E7CE9198C566600366DF7 /* iJumboTests.m in Sources */ = {isa = PBXBuildFile; fileRef = C87E7CE8198C566600366DF7 /* iJumboTests.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		C87E7CE0198C566500366DF7 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = C87E7CB2198C566500366DF7 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = C87E7CB9198C566500366DF7;
+			remoteInfo = iJumbo;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		C87E7CBA198C566500366DF7 /* iJumbo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = iJumbo.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		C87E7CBD198C566500366DF7 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		C87E7CBF198C566500366DF7 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		C87E7CC1198C566500366DF7 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		C87E7CC3198C566500366DF7 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
+		C87E7CC7198C566500366DF7 /* iJumbo-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "iJumbo-Info.plist"; sourceTree = "<group>"; };
+		C87E7CC9198C566500366DF7 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		C87E7CCB198C566500366DF7 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		C87E7CCD198C566500366DF7 /* iJumbo-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "iJumbo-Prefix.pch"; sourceTree = "<group>"; };
+		C87E7CCE198C566500366DF7 /* IJAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = IJAppDelegate.h; sourceTree = "<group>"; };
+		C87E7CCF198C566500366DF7 /* IJAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = IJAppDelegate.m; sourceTree = "<group>"; };
+		C87E7CD2198C566500366DF7 /* iJumbo.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = iJumbo.xcdatamodel; sourceTree = "<group>"; };
+		C87E7CD4198C566500366DF7 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		C87E7CDA198C566500366DF7 /* iJumboTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = iJumboTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		C87E7CDB198C566500366DF7 /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
+		C87E7CE4198C566600366DF7 /* iJumboTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "iJumboTests-Info.plist"; sourceTree = "<group>"; };
+		C87E7CE6198C566600366DF7 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		C87E7CE8198C566600366DF7 /* iJumboTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = iJumboTests.m; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		C87E7CB7198C566500366DF7 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				C87E7CC0198C566500366DF7 /* CoreGraphics.framework in Frameworks */,
+				C87E7CC4198C566500366DF7 /* CoreData.framework in Frameworks */,
+				C87E7CC2198C566500366DF7 /* UIKit.framework in Frameworks */,
+				C87E7CBE198C566500366DF7 /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		C87E7CD7198C566500366DF7 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				C87E7CDC198C566500366DF7 /* XCTest.framework in Frameworks */,
+				C87E7CDF198C566500366DF7 /* CoreData.framework in Frameworks */,
+				C87E7CDE198C566500366DF7 /* UIKit.framework in Frameworks */,
+				C87E7CDD198C566500366DF7 /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		C87E7CB1198C566500366DF7 = {
+			isa = PBXGroup;
+			children = (
+				C87E7CC5198C566500366DF7 /* iJumbo */,
+				C87E7CE2198C566500366DF7 /* iJumboTests */,
+				C87E7CBC198C566500366DF7 /* Frameworks */,
+				C87E7CBB198C566500366DF7 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		C87E7CBB198C566500366DF7 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				C87E7CBA198C566500366DF7 /* iJumbo.app */,
+				C87E7CDA198C566500366DF7 /* iJumboTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		C87E7CBC198C566500366DF7 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				C87E7CBD198C566500366DF7 /* Foundation.framework */,
+				C87E7CBF198C566500366DF7 /* CoreGraphics.framework */,
+				C87E7CC1198C566500366DF7 /* UIKit.framework */,
+				C87E7CC3198C566500366DF7 /* CoreData.framework */,
+				C87E7CDB198C566500366DF7 /* XCTest.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		C87E7CC5198C566500366DF7 /* iJumbo */ = {
+			isa = PBXGroup;
+			children = (
+				C87E7CCE198C566500366DF7 /* IJAppDelegate.h */,
+				C87E7CCF198C566500366DF7 /* IJAppDelegate.m */,
+				C87E7CD4198C566500366DF7 /* Images.xcassets */,
+				C87E7CD1198C566500366DF7 /* iJumbo.xcdatamodeld */,
+				C87E7CC6198C566500366DF7 /* Supporting Files */,
+			);
+			path = iJumbo;
+			sourceTree = "<group>";
+		};
+		C87E7CC6198C566500366DF7 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				C87E7CC7198C566500366DF7 /* iJumbo-Info.plist */,
+				C87E7CC8198C566500366DF7 /* InfoPlist.strings */,
+				C87E7CCB198C566500366DF7 /* main.m */,
+				C87E7CCD198C566500366DF7 /* iJumbo-Prefix.pch */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		C87E7CE2198C566500366DF7 /* iJumboTests */ = {
+			isa = PBXGroup;
+			children = (
+				C87E7CE8198C566600366DF7 /* iJumboTests.m */,
+				C87E7CE3198C566600366DF7 /* Supporting Files */,
+			);
+			path = iJumboTests;
+			sourceTree = "<group>";
+		};
+		C87E7CE3198C566600366DF7 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				C87E7CE4198C566600366DF7 /* iJumboTests-Info.plist */,
+				C87E7CE5198C566600366DF7 /* InfoPlist.strings */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		C87E7CB9198C566500366DF7 /* iJumbo */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = C87E7CEC198C566600366DF7 /* Build configuration list for PBXNativeTarget "iJumbo" */;
+			buildPhases = (
+				C87E7CB6198C566500366DF7 /* Sources */,
+				C87E7CB7198C566500366DF7 /* Frameworks */,
+				C87E7CB8198C566500366DF7 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = iJumbo;
+			productName = iJumbo;
+			productReference = C87E7CBA198C566500366DF7 /* iJumbo.app */;
+			productType = "com.apple.product-type.application";
+		};
+		C87E7CD9198C566500366DF7 /* iJumboTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = C87E7CEF198C566600366DF7 /* Build configuration list for PBXNativeTarget "iJumboTests" */;
+			buildPhases = (
+				C87E7CD6198C566500366DF7 /* Sources */,
+				C87E7CD7198C566500366DF7 /* Frameworks */,
+				C87E7CD8198C566500366DF7 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				C87E7CE1198C566500366DF7 /* PBXTargetDependency */,
+			);
+			name = iJumboTests;
+			productName = iJumboTests;
+			productReference = C87E7CDA198C566500366DF7 /* iJumboTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		C87E7CB2198C566500366DF7 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				CLASSPREFIX = IJ;
+				LastUpgradeCheck = 0510;
+				ORGANIZATIONNAME = Amadou.It;
+				TargetAttributes = {
+					C87E7CD9198C566500366DF7 = {
+						TestTargetID = C87E7CB9198C566500366DF7;
+					};
+				};
+			};
+			buildConfigurationList = C87E7CB5198C566500366DF7 /* Build configuration list for PBXProject "iJumbo" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = C87E7CB1198C566500366DF7;
+			productRefGroup = C87E7CBB198C566500366DF7 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				C87E7CB9198C566500366DF7 /* iJumbo */,
+				C87E7CD9198C566500366DF7 /* iJumboTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		C87E7CB8198C566500366DF7 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				C87E7CCA198C566500366DF7 /* InfoPlist.strings in Resources */,
+				C87E7CD5198C566500366DF7 /* Images.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		C87E7CD8198C566500366DF7 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				C87E7CE7198C566600366DF7 /* InfoPlist.strings in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		C87E7CB6198C566500366DF7 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				C87E7CD3198C566500366DF7 /* iJumbo.xcdatamodeld in Sources */,
+				C87E7CCC198C566500366DF7 /* main.m in Sources */,
+				C87E7CD0198C566500366DF7 /* IJAppDelegate.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		C87E7CD6198C566500366DF7 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				C87E7CE9198C566600366DF7 /* iJumboTests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		C87E7CE1198C566500366DF7 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = C87E7CB9198C566500366DF7 /* iJumbo */;
+			targetProxy = C87E7CE0198C566500366DF7 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		C87E7CC8198C566500366DF7 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				C87E7CC9198C566500366DF7 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		C87E7CE5198C566600366DF7 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				C87E7CE6198C566600366DF7 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		C87E7CEA198C566600366DF7 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+			};
+			name = Debug;
+		};
+		C87E7CEB198C566600366DF7 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = YES;
+				ENABLE_NS_ASSERTIONS = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		C87E7CED198C566600366DF7 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "iJumbo/iJumbo-Prefix.pch";
+				INFOPLIST_FILE = "iJumbo/iJumbo-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Debug;
+		};
+		C87E7CEE198C566600366DF7 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "iJumbo/iJumbo-Prefix.pch";
+				INFOPLIST_FILE = "iJumbo/iJumbo-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Release;
+		};
+		C87E7CF0198C566600366DF7 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/iJumbo.app/iJumbo";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+					"$(DEVELOPER_FRAMEWORKS_DIR)",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "iJumbo/iJumbo-Prefix.pch";
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = "iJumboTests/iJumboTests-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUNDLE_LOADER)";
+				WRAPPER_EXTENSION = xctest;
+			};
+			name = Debug;
+		};
+		C87E7CF1198C566600366DF7 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/iJumbo.app/iJumbo";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+					"$(DEVELOPER_FRAMEWORKS_DIR)",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "iJumbo/iJumbo-Prefix.pch";
+				INFOPLIST_FILE = "iJumboTests/iJumboTests-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUNDLE_LOADER)";
+				WRAPPER_EXTENSION = xctest;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		C87E7CB5198C566500366DF7 /* Build configuration list for PBXProject "iJumbo" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				C87E7CEA198C566600366DF7 /* Debug */,
+				C87E7CEB198C566600366DF7 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		C87E7CEC198C566600366DF7 /* Build configuration list for PBXNativeTarget "iJumbo" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				C87E7CED198C566600366DF7 /* Debug */,
+				C87E7CEE198C566600366DF7 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+		C87E7CEF198C566600366DF7 /* Build configuration list for PBXNativeTarget "iJumboTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				C87E7CF0198C566600366DF7 /* Debug */,
+				C87E7CF1198C566600366DF7 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+/* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		C87E7CD1198C566500366DF7 /* iJumbo.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				C87E7CD2198C566500366DF7 /* iJumbo.xcdatamodel */,
+			);
+			currentVersion = C87E7CD2198C566500366DF7 /* iJumbo.xcdatamodel */;
+			path = iJumbo.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
+	};
+	rootObject = C87E7CB2198C566500366DF7 /* Project object */;
+}
