@@ -21,10 +21,10 @@ static NSDateFormatter* IJRecordDateFormatter;
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
     // TODO(amadou): Change this to whatever format the server actually returns.
     [dateFormatter setDateFormat:@"yyyy-MM-dd'T'HH:mm:ss.SSS'Z'"];
+    [dateFormatter setTimeZone:[NSTimeZone timeZoneWithName:@"GMT"]];
     IJRecordDateFormatter = dateFormatter;
   }
   return IJRecordDateFormatter;
 }
-
 
 @end

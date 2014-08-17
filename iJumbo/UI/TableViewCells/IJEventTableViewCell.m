@@ -64,7 +64,7 @@
 - (NSDateFormatter *)timeFormatter {
   if (!_timeFormatter) {
     _timeFormatter = [[NSDateFormatter alloc] init];
-    [_timeFormatter setDateFormat:@"hh:mm a"];
+    [_timeFormatter setDateFormat:@"h:mm aaa"];
   }
   return _timeFormatter;
 }
