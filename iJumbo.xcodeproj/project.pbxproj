@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		51717AB18D3441268926AA6D /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0027185B941C4F758572F481 /* libPods.a */; };
+		C8487ACE19A06F10008F034E /* IJEventTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = C8487ACD19A06F10008F034E /* IJEventTableViewCell.m */; };
+		C8487AD119A07399008F034E /* IJRecord.m in Sources */ = {isa = PBXBuildFile; fileRef = C8487AD019A07399008F034E /* IJRecord.m */; };
 		C87E7CBE198C566500366DF7 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C87E7CBD198C566500366DF7 /* Foundation.framework */; };
 		C87E7CC0198C566500366DF7 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C87E7CBF198C566500366DF7 /* CoreGraphics.framework */; };
 		C87E7CC2198C566500366DF7 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C87E7CC1198C566500366DF7 /* UIKit.framework */; };
@@ -22,6 +25,33 @@
 		C87E7CDF198C566500366DF7 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C87E7CC3198C566500366DF7 /* CoreData.framework */; };
 		C87E7CE7198C566600366DF7 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = C87E7CE5198C566600366DF7 /* InfoPlist.strings */; };
 		C87E7CE9198C566600366DF7 /* iJumboTests.m in Sources */ = {isa = PBXBuildFile; fileRef = C87E7CE8198C566600366DF7 /* iJumboTests.m */; };
+		C8B7000419A03D8A0004FE76 /* Roboto-Black.ttf in Resources */ = {isa = PBXBuildFile; fileRef = C8B7FFF819A03D8A0004FE76 /* Roboto-Black.ttf */; };
+		C8B7000519A03D8A0004FE76 /* Roboto-BlackItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = C8B7FFF919A03D8A0004FE76 /* Roboto-BlackItalic.ttf */; };
+		C8B7000619A03D8A0004FE76 /* Roboto-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = C8B7FFFA19A03D8A0004FE76 /* Roboto-Bold.ttf */; };
+		C8B7000719A03D8A0004FE76 /* Roboto-BoldItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = C8B7FFFB19A03D8A0004FE76 /* Roboto-BoldItalic.ttf */; };
+		C8B7000819A03D8A0004FE76 /* Roboto-Italic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = C8B7FFFC19A03D8A0004FE76 /* Roboto-Italic.ttf */; };
+		C8B7000919A03D8A0004FE76 /* Roboto-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = C8B7FFFD19A03D8A0004FE76 /* Roboto-Light.ttf */; };
+		C8B7000A19A03D8A0004FE76 /* Roboto-LightItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = C8B7FFFE19A03D8A0004FE76 /* Roboto-LightItalic.ttf */; };
+		C8B7000B19A03D8A0004FE76 /* Roboto-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = C8B7FFFF19A03D8A0004FE76 /* Roboto-Medium.ttf */; };
+		C8B7000C19A03D8A0004FE76 /* Roboto-MediumItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = C8B7000019A03D8A0004FE76 /* Roboto-MediumItalic.ttf */; };
+		C8B7000D19A03D8A0004FE76 /* Roboto-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = C8B7000119A03D8A0004FE76 /* Roboto-Regular.ttf */; };
+		C8B7000E19A03D8A0004FE76 /* Roboto-Thin.ttf in Resources */ = {isa = PBXBuildFile; fileRef = C8B7000219A03D8A0004FE76 /* Roboto-Thin.ttf */; };
+		C8B7000F19A03D8A0004FE76 /* Roboto-ThinItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = C8B7000319A03D8A0004FE76 /* Roboto-ThinItalic.ttf */; };
+		C8B7FFF0199FE31E0004FE76 /* IJVariables.h in Sources */ = {isa = PBXBuildFile; fileRef = C8B7FFEF199FE2200004FE76 /* IJVariables.h */; };
+		C8B7FFF319A030DB0004FE76 /* IJNavigationDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = C8B7FFF219A030DB0004FE76 /* IJNavigationDelegate.m */; };
+		C8B7FFF619A0375B0004FE76 /* IJNewsTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = C8B7FFF519A0375B0004FE76 /* IJNewsTableViewCell.m */; };
+		C8D67FB3199EC49F001C4FD2 /* IJEvent.m in Sources */ = {isa = PBXBuildFile; fileRef = C8D67FB2199EC49F001C4FD2 /* IJEvent.m */; };
+		C8D67FB6199EC6F8001C4FD2 /* IJEventTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C8D67FB5199EC6F8001C4FD2 /* IJEventTableViewController.m */; };
+		C8D67FB9199EE342001C4FD2 /* IJNewsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C8D67FB8199EE342001C4FD2 /* IJNewsTableViewController.m */; };
+		C8D67FBC199EE3EB001C4FD2 /* IJArticle.m in Sources */ = {isa = PBXBuildFile; fileRef = C8D67FBB199EE3EB001C4FD2 /* IJArticle.m */; };
+		C8D67FBF199EED7C001C4FD2 /* UIView+AddSubviews.m in Sources */ = {isa = PBXBuildFile; fileRef = C8D67FBE199EED7C001C4FD2 /* UIView+AddSubviews.m */; };
+		C8F0076B199DD47A006B7DC4 /* IJServer.m in Sources */ = {isa = PBXBuildFile; fileRef = C8F0076A199DD47A006B7DC4 /* IJServer.m */; };
+		C8F00775199DD624006B7DC4 /* IJLocation.m in Sources */ = {isa = PBXBuildFile; fileRef = C8F00774199DD624006B7DC4 /* IJLocation.m */; };
+		C8F00778199DD6F7006B7DC4 /* IJHours.m in Sources */ = {isa = PBXBuildFile; fileRef = C8F00777199DD6F7006B7DC4 /* IJHours.m */; };
+		C8F0077B199DD735006B7DC4 /* IJRange.m in Sources */ = {isa = PBXBuildFile; fileRef = C8F0077A199DD735006B7DC4 /* IJRange.m */; };
+		C8F0077E199DD872006B7DC4 /* IJHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = C8F0077D199DD872006B7DC4 /* IJHelper.m */; };
+		C8F00783199DDB3F006B7DC4 /* IJHomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C8F00782199DDB3F006B7DC4 /* IJHomeViewController.m */; };
+		C8F00788199DDDE6006B7DC4 /* IJLocationTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C8F00787199DDDE6006B7DC4 /* IJLocationTableViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -35,6 +65,12 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		0027185B941C4F758572F481 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		433B59560D494C359551A7CC /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = "<group>"; };
+		C8487ACC19A06F10008F034E /* IJEventTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = IJEventTableViewCell.h; path = iJumbo/UI/TableViewCells/IJEventTableViewCell.h; sourceTree = "<group>"; };
+		C8487ACD19A06F10008F034E /* IJEventTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = IJEventTableViewCell.m; path = iJumbo/UI/TableViewCells/IJEventTableViewCell.m; sourceTree = "<group>"; };
+		C8487ACF19A07399008F034E /* IJRecord.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = IJRecord.h; path = Models/IJRecord.h; sourceTree = "<group>"; };
+		C8487AD019A07399008F034E /* IJRecord.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = IJRecord.m; path = Models/IJRecord.m; sourceTree = "<group>"; };
 		C87E7CBA198C566500366DF7 /* iJumbo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = iJumbo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C87E7CBD198C566500366DF7 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		C87E7CBF198C566500366DF7 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -53,6 +89,47 @@
 		C87E7CE4198C566600366DF7 /* iJumboTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "iJumboTests-Info.plist"; sourceTree = "<group>"; };
 		C87E7CE6198C566600366DF7 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		C87E7CE8198C566600366DF7 /* iJumboTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = iJumboTests.m; sourceTree = "<group>"; };
+		C8B7000019A03D8A0004FE76 /* Roboto-MediumItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-MediumItalic.ttf"; sourceTree = "<group>"; };
+		C8B7000119A03D8A0004FE76 /* Roboto-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-Regular.ttf"; sourceTree = "<group>"; };
+		C8B7000219A03D8A0004FE76 /* Roboto-Thin.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-Thin.ttf"; sourceTree = "<group>"; };
+		C8B7000319A03D8A0004FE76 /* Roboto-ThinItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-ThinItalic.ttf"; sourceTree = "<group>"; };
+		C8B7FFEF199FE2200004FE76 /* IJVariables.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = IJVariables.h; path = Helpers/IJVariables.h; sourceTree = "<group>"; };
+		C8B7FFF119A030DB0004FE76 /* IJNavigationDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = IJNavigationDelegate.h; path = iJumbo/Helpers/IJNavigationDelegate.h; sourceTree = "<group>"; };
+		C8B7FFF219A030DB0004FE76 /* IJNavigationDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = IJNavigationDelegate.m; path = iJumbo/Helpers/IJNavigationDelegate.m; sourceTree = "<group>"; };
+		C8B7FFF419A0375B0004FE76 /* IJNewsTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IJNewsTableViewCell.h; sourceTree = "<group>"; };
+		C8B7FFF519A0375B0004FE76 /* IJNewsTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IJNewsTableViewCell.m; sourceTree = "<group>"; };
+		C8B7FFF819A03D8A0004FE76 /* Roboto-Black.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-Black.ttf"; sourceTree = "<group>"; };
+		C8B7FFF919A03D8A0004FE76 /* Roboto-BlackItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-BlackItalic.ttf"; sourceTree = "<group>"; };
+		C8B7FFFA19A03D8A0004FE76 /* Roboto-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-Bold.ttf"; sourceTree = "<group>"; };
+		C8B7FFFB19A03D8A0004FE76 /* Roboto-BoldItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-BoldItalic.ttf"; sourceTree = "<group>"; };
+		C8B7FFFC19A03D8A0004FE76 /* Roboto-Italic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-Italic.ttf"; sourceTree = "<group>"; };
+		C8B7FFFD19A03D8A0004FE76 /* Roboto-Light.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-Light.ttf"; sourceTree = "<group>"; };
+		C8B7FFFE19A03D8A0004FE76 /* Roboto-LightItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-LightItalic.ttf"; sourceTree = "<group>"; };
+		C8B7FFFF19A03D8A0004FE76 /* Roboto-Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-Medium.ttf"; sourceTree = "<group>"; };
+		C8D67FB1199EC49F001C4FD2 /* IJEvent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = IJEvent.h; path = Models/IJEvent.h; sourceTree = "<group>"; };
+		C8D67FB2199EC49F001C4FD2 /* IJEvent.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = IJEvent.m; path = Models/IJEvent.m; sourceTree = "<group>"; };
+		C8D67FB4199EC6F8001C4FD2 /* IJEventTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = IJEventTableViewController.h; path = iJumbo/UI/ViewControllers/IJEventTableViewController.h; sourceTree = "<group>"; };
+		C8D67FB5199EC6F8001C4FD2 /* IJEventTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = IJEventTableViewController.m; path = iJumbo/UI/ViewControllers/IJEventTableViewController.m; sourceTree = "<group>"; };
+		C8D67FB7199EE342001C4FD2 /* IJNewsTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = IJNewsTableViewController.h; path = iJumbo/UI/ViewControllers/IJNewsTableViewController.h; sourceTree = "<group>"; };
+		C8D67FB8199EE342001C4FD2 /* IJNewsTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = IJNewsTableViewController.m; path = iJumbo/UI/ViewControllers/IJNewsTableViewController.m; sourceTree = "<group>"; };
+		C8D67FBA199EE3EB001C4FD2 /* IJArticle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = IJArticle.h; path = Models/IJArticle.h; sourceTree = "<group>"; };
+		C8D67FBB199EE3EB001C4FD2 /* IJArticle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = IJArticle.m; path = Models/IJArticle.m; sourceTree = "<group>"; };
+		C8D67FBD199EED7C001C4FD2 /* UIView+AddSubviews.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIView+AddSubviews.h"; path = "Helpers/UIView+AddSubviews.h"; sourceTree = "<group>"; };
+		C8D67FBE199EED7C001C4FD2 /* UIView+AddSubviews.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIView+AddSubviews.m"; path = "Helpers/UIView+AddSubviews.m"; sourceTree = "<group>"; };
+		C8F00769199DD47A006B7DC4 /* IJServer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IJServer.h; sourceTree = "<group>"; };
+		C8F0076A199DD47A006B7DC4 /* IJServer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IJServer.m; sourceTree = "<group>"; };
+		C8F00773199DD624006B7DC4 /* IJLocation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IJLocation.h; sourceTree = "<group>"; };
+		C8F00774199DD624006B7DC4 /* IJLocation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IJLocation.m; sourceTree = "<group>"; };
+		C8F00776199DD6F7006B7DC4 /* IJHours.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = IJHours.h; path = Models/IJHours.h; sourceTree = "<group>"; };
+		C8F00777199DD6F7006B7DC4 /* IJHours.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = IJHours.m; path = Models/IJHours.m; sourceTree = "<group>"; };
+		C8F00779199DD735006B7DC4 /* IJRange.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = IJRange.h; path = Models/IJRange.h; sourceTree = "<group>"; };
+		C8F0077A199DD735006B7DC4 /* IJRange.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = IJRange.m; path = Models/IJRange.m; sourceTree = "<group>"; };
+		C8F0077C199DD872006B7DC4 /* IJHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = IJHelper.h; path = Helpers/IJHelper.h; sourceTree = "<group>"; };
+		C8F0077D199DD872006B7DC4 /* IJHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = IJHelper.m; path = Helpers/IJHelper.m; sourceTree = "<group>"; };
+		C8F00781199DDB3F006B7DC4 /* IJHomeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = IJHomeViewController.h; path = iJumbo/UI/ViewControllers/IJHomeViewController.h; sourceTree = "<group>"; };
+		C8F00782199DDB3F006B7DC4 /* IJHomeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = IJHomeViewController.m; path = iJumbo/UI/ViewControllers/IJHomeViewController.m; sourceTree = "<group>"; };
+		C8F00786199DDDE6006B7DC4 /* IJLocationTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = IJLocationTableViewController.h; path = iJumbo/UI/ViewControllers/IJLocationTableViewController.h; sourceTree = "<group>"; };
+		C8F00787199DDDE6006B7DC4 /* IJLocationTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = IJLocationTableViewController.m; path = iJumbo/UI/ViewControllers/IJLocationTableViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -64,6 +141,7 @@
 				C87E7CC4198C566500366DF7 /* CoreData.framework in Frameworks */,
 				C87E7CC2198C566500366DF7 /* UIKit.framework in Frameworks */,
 				C87E7CBE198C566500366DF7 /* Foundation.framework in Frameworks */,
+				51717AB18D3441268926AA6D /* libPods.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -88,6 +166,7 @@
 				C87E7CE2198C566500366DF7 /* iJumboTests */,
 				C87E7CBC198C566500366DF7 /* Frameworks */,
 				C87E7CBB198C566500366DF7 /* Products */,
+				433B59560D494C359551A7CC /* Pods.xcconfig */,
 			);
 			sourceTree = "<group>";
 		};
@@ -108,6 +187,7 @@
 				C87E7CC1198C566500366DF7 /* UIKit.framework */,
 				C87E7CC3198C566500366DF7 /* CoreData.framework */,
 				C87E7CDB198C566500366DF7 /* XCTest.framework */,
+				0027185B941C4F758572F481 /* libPods.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -117,9 +197,13 @@
 			children = (
 				C87E7CCE198C566500366DF7 /* IJAppDelegate.h */,
 				C87E7CCF198C566500366DF7 /* IJAppDelegate.m */,
-				C87E7CD4198C566500366DF7 /* Images.xcassets */,
-				C87E7CD1198C566500366DF7 /* iJumbo.xcdatamodeld */,
+				C8B7001019A03D8E0004FE76 /* Resources */,
+				C8F00780199DD998006B7DC4 /* Communication */,
+				C8F0077F199DD878006B7DC4 /* Helpers */,
+				C8F0076C199DD59B006B7DC4 /* Models */,
 				C87E7CC6198C566500366DF7 /* Supporting Files */,
+				C8F00784199DDB62006B7DC4 /* UI */,
+				C87E7CD4198C566500366DF7 /* Images.xcassets */,
 			);
 			path = iJumbo;
 			sourceTree = "<group>";
@@ -153,6 +237,104 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
+		C8B7001019A03D8E0004FE76 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				C8B7FFF819A03D8A0004FE76 /* Roboto-Black.ttf */,
+				C8B7FFF919A03D8A0004FE76 /* Roboto-BlackItalic.ttf */,
+				C8B7FFFA19A03D8A0004FE76 /* Roboto-Bold.ttf */,
+				C8B7FFFB19A03D8A0004FE76 /* Roboto-BoldItalic.ttf */,
+				C8B7FFFC19A03D8A0004FE76 /* Roboto-Italic.ttf */,
+				C8B7FFFD19A03D8A0004FE76 /* Roboto-Light.ttf */,
+				C8B7FFFE19A03D8A0004FE76 /* Roboto-LightItalic.ttf */,
+				C8B7FFFF19A03D8A0004FE76 /* Roboto-Medium.ttf */,
+				C8B7000019A03D8A0004FE76 /* Roboto-MediumItalic.ttf */,
+				C8B7000119A03D8A0004FE76 /* Roboto-Regular.ttf */,
+				C8B7000219A03D8A0004FE76 /* Roboto-Thin.ttf */,
+				C8B7000319A03D8A0004FE76 /* Roboto-ThinItalic.ttf */,
+			);
+			name = Resources;
+			sourceTree = "<group>";
+		};
+		C8B7FFF719A037600004FE76 /* TableViewCells */ = {
+			isa = PBXGroup;
+			children = (
+				C8B7FFF419A0375B0004FE76 /* IJNewsTableViewCell.h */,
+				C8B7FFF519A0375B0004FE76 /* IJNewsTableViewCell.m */,
+				C8487ACC19A06F10008F034E /* IJEventTableViewCell.h */,
+				C8487ACD19A06F10008F034E /* IJEventTableViewCell.m */,
+			);
+			name = TableViewCells;
+			sourceTree = "<group>";
+		};
+		C8F0076C199DD59B006B7DC4 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				C87E7CD1198C566500366DF7 /* iJumbo.xcdatamodeld */,
+				C8487ACF19A07399008F034E /* IJRecord.h */,
+				C8487AD019A07399008F034E /* IJRecord.m */,
+				C8D67FBA199EE3EB001C4FD2 /* IJArticle.h */,
+				C8D67FBB199EE3EB001C4FD2 /* IJArticle.m */,
+				C8D67FB1199EC49F001C4FD2 /* IJEvent.h */,
+				C8D67FB2199EC49F001C4FD2 /* IJEvent.m */,
+				C8F00776199DD6F7006B7DC4 /* IJHours.h */,
+				C8F00777199DD6F7006B7DC4 /* IJHours.m */,
+				C8F00773199DD624006B7DC4 /* IJLocation.h */,
+				C8F00774199DD624006B7DC4 /* IJLocation.m */,
+				C8F00779199DD735006B7DC4 /* IJRange.h */,
+				C8F0077A199DD735006B7DC4 /* IJRange.m */,
+			);
+			name = Models;
+			sourceTree = "<group>";
+		};
+		C8F0077F199DD878006B7DC4 /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				C8F0077C199DD872006B7DC4 /* IJHelper.h */,
+				C8F0077D199DD872006B7DC4 /* IJHelper.m */,
+				C8D67FBD199EED7C001C4FD2 /* UIView+AddSubviews.h */,
+				C8D67FBE199EED7C001C4FD2 /* UIView+AddSubviews.m */,
+				C8B7FFEF199FE2200004FE76 /* IJVariables.h */,
+			);
+			name = Helpers;
+			sourceTree = "<group>";
+		};
+		C8F00780199DD998006B7DC4 /* Communication */ = {
+			isa = PBXGroup;
+			children = (
+				C8F00769199DD47A006B7DC4 /* IJServer.h */,
+				C8F0076A199DD47A006B7DC4 /* IJServer.m */,
+			);
+			name = Communication;
+			sourceTree = "<group>";
+		};
+		C8F00784199DDB62006B7DC4 /* UI */ = {
+			isa = PBXGroup;
+			children = (
+				C8F00785199DDB67006B7DC4 /* ViewControllers */,
+				C8B7FFF719A037600004FE76 /* TableViewCells */,
+			);
+			name = UI;
+			path = ..;
+			sourceTree = "<group>";
+		};
+		C8F00785199DDB67006B7DC4 /* ViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				C8D67FB4199EC6F8001C4FD2 /* IJEventTableViewController.h */,
+				C8D67FB5199EC6F8001C4FD2 /* IJEventTableViewController.m */,
+				C8F00781199DDB3F006B7DC4 /* IJHomeViewController.h */,
+				C8F00782199DDB3F006B7DC4 /* IJHomeViewController.m */,
+				C8F00786199DDDE6006B7DC4 /* IJLocationTableViewController.h */,
+				C8F00787199DDDE6006B7DC4 /* IJLocationTableViewController.m */,
+				C8D67FB7199EE342001C4FD2 /* IJNewsTableViewController.h */,
+				C8D67FB8199EE342001C4FD2 /* IJNewsTableViewController.m */,
+				C8B7FFF119A030DB0004FE76 /* IJNavigationDelegate.h */,
+				C8B7FFF219A030DB0004FE76 /* IJNavigationDelegate.m */,
+			);
+			name = ViewControllers;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -160,9 +342,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = C87E7CEC198C566600366DF7 /* Build configuration list for PBXNativeTarget "iJumbo" */;
 			buildPhases = (
+				80ABC5174CCF4342B89DEB9C /* Check Pods Manifest.lock */,
 				C87E7CB6198C566500366DF7 /* Sources */,
 				C87E7CB7198C566500366DF7 /* Frameworks */,
 				C87E7CB8198C566500366DF7 /* Resources */,
+				CB69F30E2C974EFB9F4748DF /* Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -229,8 +413,20 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C8B7000B19A03D8A0004FE76 /* Roboto-Medium.ttf in Resources */,
+				C8B7000719A03D8A0004FE76 /* Roboto-BoldItalic.ttf in Resources */,
 				C87E7CCA198C566500366DF7 /* InfoPlist.strings in Resources */,
 				C87E7CD5198C566500366DF7 /* Images.xcassets in Resources */,
+				C8B7000619A03D8A0004FE76 /* Roboto-Bold.ttf in Resources */,
+				C8B7000819A03D8A0004FE76 /* Roboto-Italic.ttf in Resources */,
+				C8B7000D19A03D8A0004FE76 /* Roboto-Regular.ttf in Resources */,
+				C8B7000A19A03D8A0004FE76 /* Roboto-LightItalic.ttf in Resources */,
+				C8B7000419A03D8A0004FE76 /* Roboto-Black.ttf in Resources */,
+				C8B7000919A03D8A0004FE76 /* Roboto-Light.ttf in Resources */,
+				C8B7000F19A03D8A0004FE76 /* Roboto-ThinItalic.ttf in Resources */,
+				C8B7000C19A03D8A0004FE76 /* Roboto-MediumItalic.ttf in Resources */,
+				C8B7000E19A03D8A0004FE76 /* Roboto-Thin.ttf in Resources */,
+				C8B7000519A03D8A0004FE76 /* Roboto-BlackItalic.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -244,14 +440,64 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		80ABC5174CCF4342B89DEB9C /* Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		CB69F30E2C974EFB9F4748DF /* Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Pods-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		C87E7CB6198C566500366DF7 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C8B7FFF0199FE31E0004FE76 /* IJVariables.h in Sources */,
+				C8F0077E199DD872006B7DC4 /* IJHelper.m in Sources */,
 				C87E7CD3198C566500366DF7 /* iJumbo.xcdatamodeld in Sources */,
+				C8F00783199DDB3F006B7DC4 /* IJHomeViewController.m in Sources */,
+				C8D67FB3199EC49F001C4FD2 /* IJEvent.m in Sources */,
+				C8F00788199DDDE6006B7DC4 /* IJLocationTableViewController.m in Sources */,
+				C8D67FBC199EE3EB001C4FD2 /* IJArticle.m in Sources */,
 				C87E7CCC198C566500366DF7 /* main.m in Sources */,
+				C8F0077B199DD735006B7DC4 /* IJRange.m in Sources */,
+				C8D67FB6199EC6F8001C4FD2 /* IJEventTableViewController.m in Sources */,
+				C8D67FBF199EED7C001C4FD2 /* UIView+AddSubviews.m in Sources */,
+				C8B7FFF319A030DB0004FE76 /* IJNavigationDelegate.m in Sources */,
+				C8487ACE19A06F10008F034E /* IJEventTableViewCell.m in Sources */,
+				C8F00775199DD624006B7DC4 /* IJLocation.m in Sources */,
 				C87E7CD0198C566500366DF7 /* IJAppDelegate.m in Sources */,
+				C8F00778199DD6F7006B7DC4 /* IJHours.m in Sources */,
+				C8B7FFF619A0375B0004FE76 /* IJNewsTableViewCell.m in Sources */,
+				C8D67FB9199EE342001C4FD2 /* IJNewsTableViewController.m in Sources */,
+				C8F0076B199DD47A006B7DC4 /* IJServer.m in Sources */,
+				C8487AD119A07399008F034E /* IJRecord.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -365,6 +611,7 @@
 		};
 		C87E7CED198C566600366DF7 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 433B59560D494C359551A7CC /* Pods.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
@@ -378,6 +625,7 @@
 		};
 		C87E7CEE198C566600366DF7 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 433B59560D494C359551A7CC /* Pods.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
@@ -448,6 +696,7 @@
 				C87E7CEE198C566600366DF7 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		C87E7CEF198C566600366DF7 /* Build configuration list for PBXNativeTarget "iJumboTests" */ = {
 			isa = XCConfigurationList;
@@ -456,6 +705,7 @@
 				C87E7CF1198C566600366DF7 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 

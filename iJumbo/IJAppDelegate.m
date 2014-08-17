@@ -8,19 +8,87 @@
 
 #import "IJAppDelegate.h"
 
+#import <MMRecord/MMRecord.h>
+
+#import "IJHomeViewController.h"
+#import "IJNavigationDelegate.h"
+#import "IJServer.h"
+#import "IJHelper.h"
+
+// Navbar default animation is about 0.35 seconds so make this slightly faster.
+static NSTimeInterval kNavBarColorAnimationDuration = 0.30;
+
+@interface IJAppDelegate () <UINavigationControllerDelegate>
+@property(nonatomic) UINavigationController *navcon;
+@end
+
 @implementation IJAppDelegate
 
 @synthesize managedObjectContext = _managedObjectContext;
 @synthesize managedObjectModel = _managedObjectModel;
 @synthesize persistentStoreCoordinator = _persistentStoreCoordinator;
 
-- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
-{
-    self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
-    // Override point for customization after application launch.
-    self.window.backgroundColor = [UIColor whiteColor];
-    [self.window makeKeyAndVisible];
-    return YES;
+- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
+  [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
+  [MMRecord registerServerClass:[IJServer class]];
+  self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
+  [self addBackgroundImage];
+  // Override point for customization after application launch.
+  [[UITableViewCell appearance] setBackgroundColor:[UIColor clearColor]];
+  IJHomeViewController *home = [[IJHomeViewController alloc] init];
+  self.navcon = [[UINavigationController alloc] initWithRootViewController:home];
+  self.navcon.delegate = self;
+  self.navcon.navigationBar.barTintColor = kIJumboBlue;
+  self.navcon.navigationBar.tintColor = [UIColor whiteColor];
+  self.navcon.navigationBar.translucent = YES;
+  self.navcon.navigationBar.alpha = 0;
+  [self.navcon.navigationBar setBackgroundImage:[UIImage new]
+                                  forBarMetrics:UIBarMetricsDefault];
+  self.navcon.navigationBar.shadowImage = [UIImage new];
+  [self.navcon.navigationBar setTitleTextAttributes:@{NSForegroundColorAttributeName: [UIColor whiteColor]}];
+  [self.window setRootViewController:self.navcon];
+  UIView *statusBar = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.window.frame.size.width, 20)];
+  statusBar.backgroundColor = kIJumboBlue;
+  [self.window makeKeyAndVisible];
+  [self.window addSubview:statusBar];
+  
+  return YES;
+}
+
+- (void)animateNavBarClear {
+  self.navcon.navigationBar.translucent = YES;
+  [UIView animateWithDuration:kNavBarColorAnimationDuration animations:^{
+    self.navcon.navigationBar.alpha = 0;
+  }];
+}
+
+- (void)animateNavBarBlue {
+  self.navcon.navigationBar.translucent = NO;
+  [UIView animateWithDuration:kNavBarColorAnimationDuration animations:^{
+    self.navcon.navigationBar.alpha = 1;
+  }];
+}
+
+- (id<UIViewControllerAnimatedTransitioning>)navigationController:(UINavigationController *)navigationController
+                                  animationControllerForOperation:(UINavigationControllerOperation)operation
+                                               fromViewController:(UIViewController *)fromVC
+                                                 toViewController:(UIViewController *)toVC {
+  // When we leave the home view make the navbar blue.
+  if (operation == UINavigationControllerOperationPush && [fromVC isKindOfClass:[IJHomeViewController class]]) {
+    [self animateNavBarBlue];
+  }
+  // When we go back to the home view make the navbar clear.
+  else if (operation == UINavigationControllerOperationPop && [toVC isKindOfClass:[IJHomeViewController class]]) {
+    [self animateNavBarClear];
+  }
+  return nil;
+}
+
+- (void)addBackgroundImage {
+  UIImage *image = [UIImage imageNamed:@"west-olin-blur.png"];
+  UIImageView *backgroundImage = [[UIImageView alloc] initWithFrame:self.window.frame];
+  backgroundImage.image = image;
+  [self.window addSubview:backgroundImage];
 }
 
 - (void)applicationWillResignActive:(UIApplication *)application
@@ -45,69 +113,63 @@
     // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
 }
 
-- (void)applicationWillTerminate:(UIApplication *)application
-{
-    // Saves changes in the application's managed object context before the application terminates.
-    [self saveContext];
+- (void)applicationWillTerminate:(UIApplication *)application {
+  // Saves changes in the application's managed object context before the application terminates.
+  [self saveContext];
 }
 
-- (void)saveContext
-{
-    NSError *error = nil;
-    NSManagedObjectContext *managedObjectContext = self.managedObjectContext;
-    if (managedObjectContext != nil) {
-        if ([managedObjectContext hasChanges] && ![managedObjectContext save:&error]) {
-             // Replace this implementation with code to handle the error appropriately.
-             // abort() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development. 
-            NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
-            abort();
-        } 
+- (void)saveContext {
+  NSError *error = nil;
+  NSManagedObjectContext *managedObjectContext = self.managedObjectContext;
+  if (managedObjectContext != nil) {
+    if ([managedObjectContext hasChanges] && ![managedObjectContext save:&error]) {
+      // Replace this implementation with code to handle the error appropriately.
+      // abort() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
+      NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
+      abort();
     }
+  }
 }
 
 #pragma mark - Core Data stack
 
 // Returns the managed object context for the application.
 // If the context doesn't already exist, it is created and bound to the persistent store coordinator for the application.
-- (NSManagedObjectContext *)managedObjectContext
-{
-    if (_managedObjectContext != nil) {
-        return _managedObjectContext;
-    }
-    
-    NSPersistentStoreCoordinator *coordinator = [self persistentStoreCoordinator];
-    if (coordinator != nil) {
-        _managedObjectContext = [[NSManagedObjectContext alloc] init];
-        [_managedObjectContext setPersistentStoreCoordinator:coordinator];
-    }
+- (NSManagedObjectContext *)managedObjectContext {
+  if (_managedObjectContext != nil) {
     return _managedObjectContext;
+  }
+  NSPersistentStoreCoordinator *coordinator = [self persistentStoreCoordinator];
+  if (coordinator != nil) {
+    _managedObjectContext = [[NSManagedObjectContext alloc] init];
+    [_managedObjectContext setPersistentStoreCoordinator:coordinator];
+  }
+  return _managedObjectContext;
 }
 
 // Returns the managed object model for the application.
 // If the model doesn't already exist, it is created from the application's model.
-- (NSManagedObjectModel *)managedObjectModel
-{
-    if (_managedObjectModel != nil) {
-        return _managedObjectModel;
-    }
-    NSURL *modelURL = [[NSBundle mainBundle] URLForResource:@"iJumbo" withExtension:@"momd"];
-    _managedObjectModel = [[NSManagedObjectModel alloc] initWithContentsOfURL:modelURL];
+- (NSManagedObjectModel *)managedObjectModel {
+  if (_managedObjectModel != nil) {
     return _managedObjectModel;
+  }
+  NSURL *modelURL = [[NSBundle mainBundle] URLForResource:@"iJumbo" withExtension:@"momd"];
+  _managedObjectModel = [[NSManagedObjectModel alloc] initWithContentsOfURL:modelURL];
+  return _managedObjectModel;
 }
 
 // Returns the persistent store coordinator for the application.
 // If the coordinator doesn't already exist, it is created and the application's store added to it.
-- (NSPersistentStoreCoordinator *)persistentStoreCoordinator
-{
-    if (_persistentStoreCoordinator != nil) {
-        return _persistentStoreCoordinator;
-    }
+- (NSPersistentStoreCoordinator *)persistentStoreCoordinator {
+  if (_persistentStoreCoordinator != nil) {
+    return _persistentStoreCoordinator;
+  }
     
-    NSURL *storeURL = [[self applicationDocumentsDirectory] URLByAppendingPathComponent:@"iJumbo.sqlite"];
+  NSURL *storeURL = [[self applicationDocumentsDirectory] URLByAppendingPathComponent:@"iJumbo.sqlite"];
     
-    NSError *error = nil;
-    _persistentStoreCoordinator = [[NSPersistentStoreCoordinator alloc] initWithManagedObjectModel:[self managedObjectModel]];
-    if (![_persistentStoreCoordinator addPersistentStoreWithType:NSSQLiteStoreType configuration:nil URL:storeURL options:nil error:&error]) {
+  NSError *error = nil;
+  _persistentStoreCoordinator = [[NSPersistentStoreCoordinator alloc] initWithManagedObjectModel:[self managedObjectModel]];
+  if (![_persistentStoreCoordinator addPersistentStoreWithType:NSSQLiteStoreType configuration:nil URL:storeURL options:nil error:&error]) {
         /*
          Replace this implementation with code to handle the error appropriately.
          
@@ -131,19 +193,17 @@
          Lightweight migration will only work for a limited set of schema changes; consult "Core Data Model Versioning and Data Migration Programming Guide" for details.
          
          */
-        NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
-        abort();
-    }    
-    
-    return _persistentStoreCoordinator;
+    NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
+    abort();
+  }
+  return _persistentStoreCoordinator;
 }
 
 #pragma mark - Application's Documents directory
 
 // Returns the URL to the application's Documents directory.
-- (NSURL *)applicationDocumentsDirectory
-{
-    return [[[NSFileManager defaultManager] URLsForDirectory:NSDocumentDirectory inDomains:NSUserDomainMask] lastObject];
+- (NSURL *)applicationDocumentsDirectory {
+  return [[[NSFileManager defaultManager] URLsForDirectory:NSDocumentDirectory inDomains:NSUserDomainMask] lastObject];
 }
 
 @end
