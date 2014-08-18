@@ -9,6 +9,8 @@
 #import "IJEvent.h"
 #import "IJHelper.h"
 
+static NSDateFormatter *kEventDateFormatter;
+
 @implementation IJEvent
 
 @dynamic date;

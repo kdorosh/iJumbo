@@ -19,6 +19,7 @@
 @property(nonatomic) NSString *phone;
 @property(nonatomic) NSString *website;
 @property(nonatomic) NSString *address;
+@property(nonatomic) NSString *section;
 
 // Relationships.
 @property(nonatomic) IJHours *hours;

@@ -25,5 +25,4 @@
 + (void)getEventsWithSuccessBlock:(void (^)(NSArray *locations))successBlock
                      failureBlock:(void (^)(NSError *error))errorBlock;
 
-
 @end

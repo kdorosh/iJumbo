@@ -19,6 +19,7 @@
 @dynamic website;
 @dynamic address;
 @dynamic hours;
+@dynamic section;
 
 + (void)getLocationsWithSuccessBlock:(void (^)(NSArray *locations))successBlock
                         failureBlock:(void (^)(NSError *error))errorBlock {

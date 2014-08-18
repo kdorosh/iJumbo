@@ -9,6 +9,7 @@
 #import "IJHomeViewController.h"
 
 #import "IJEventTableViewController.h"
+#import "IJLinkTableViewController.h"
 #import "IJLocationTableViewController.h"
 #import "IJNewsTableViewController.h"
 
@@ -32,24 +33,39 @@ static const CGFloat kSeparatorBarWidth = 1.5;
   [super viewDidLoad];
   self.edgesForExtendedLayout = UIRectEdgeAll;
   self.view.backgroundColor = [UIColor clearColor];
+  self.navigationController.interactivePopGestureRecognizer.delegate = self;
   [self addSeparators];
   [self setupButtons];
+  [self setupIcons];
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
-  self.separatorView.hidden = YES;
+  [self setButtonsHidden:YES];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
-  self.separatorView.hidden = NO;
+  [self setButtonsHidden:NO];
 }
 
 - (void)viewDidAppear:(BOOL)animated {
-  self.separatorView.hidden = NO;
+  [self setButtonsHidden:NO];
 }
 
 - (void)viewDidDisappear:(BOOL)animated {
-  self.separatorView.hidden = YES;
+  [self setButtonsHidden:YES];
+}
+
+- (void)setButtonsHidden:(BOOL)hidden {
+  CGFloat alpha = (hidden) ? 0 : 1;
+  [UIView animateWithDuration:0.30 animations:^{
+    self.eventsButton.alpha = alpha;
+    self.newsButton.alpha = alpha;
+    self.locationsButton.alpha = alpha;
+    self.menusButton.alpha = alpha;
+    self.transportationButton.alpha = alpha;
+    self.linksButton.alpha = alpha;
+    self.separatorView.alpha = alpha;
+  }];
 }
 
 - (UIStatusBarStyle)preferredStatusBarStyle{
@@ -84,6 +100,13 @@ static const CGFloat kSeparatorBarWidth = 1.5;
   self.eventsButton.titleLabel.text = @"Events";
   self.linksButton.titleLabel.text = @"Links";
   
+  [self.eventsButton setImage:[UIImage imageNamed:@"events.png"] forState:UIControlStateNormal];
+  [self.newsButton setImage:[UIImage imageNamed:@"news.png"] forState:UIControlStateNormal];
+  [self.locationsButton setImage:[UIImage imageNamed:@"maps.png"] forState:UIControlStateNormal];
+  [self.menusButton setImage:[UIImage imageNamed:@"menu.png"] forState:UIControlStateNormal];
+  [self.transportationButton setImage:[UIImage imageNamed:@"transportation.png"] forState:UIControlStateNormal];
+  [self.linksButton setImage:[UIImage imageNamed:@"link.png"] forState:UIControlStateNormal];
+  
   [self.view addSubviews:@[
       self.newsButton,
       self.locationsButton,
@@ -92,6 +115,14 @@ static const CGFloat kSeparatorBarWidth = 1.5;
       self.eventsButton,
       self.linksButton
   ]];
+}
+   
+- (void)setupIcons {
+  UIImageView *eventsIcon = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"events.png"]];
+  eventsIcon.center = self.eventsButton.center;
+  [self.eventsButton setImage:[UIImage imageNamed:@"events.png"] forState:UIControlStateNormal];
+  //[self.view addSubview:eventsIcon];
+ // UIImageView *ewsIcon = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"news.png"]];
 }
 
 - (void)addSeparators {
@@ -131,7 +162,7 @@ static const CGFloat kSeparatorBarWidth = 1.5;
 }
 
 - (void)pushLinks {
-  [self.navigationController pushViewController:nil animated:YES];
+  [self.navigationController pushViewController:[[IJLinkTableViewController alloc] init] animated:YES];
 }
 
 @end

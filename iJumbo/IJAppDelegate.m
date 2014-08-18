@@ -15,9 +15,6 @@
 #import "IJServer.h"
 #import "IJHelper.h"
 
-// Navbar default animation is about 0.35 seconds so make this slightly faster.
-static NSTimeInterval kNavBarColorAnimationDuration = 0.30;
-
 @interface IJAppDelegate () <UINavigationControllerDelegate>
 @property(nonatomic) UINavigationController *navcon;
 @end
@@ -31,6 +28,7 @@ static NSTimeInterval kNavBarColorAnimationDuration = 0.30;
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
   [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
   [MMRecord registerServerClass:[IJServer class]];
+  [UIApplication sharedApplication].statusBarStyle = UIStatusBarStyleLightContent;
   self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
   [self addBackgroundImage];
   // Override point for customization after application launch.
@@ -40,11 +38,10 @@ static NSTimeInterval kNavBarColorAnimationDuration = 0.30;
   self.navcon.delegate = self;
   self.navcon.navigationBar.barTintColor = kIJumboBlue;
   self.navcon.navigationBar.tintColor = [UIColor whiteColor];
-  self.navcon.navigationBar.translucent = YES;
-  self.navcon.navigationBar.alpha = 0;
-  [self.navcon.navigationBar setBackgroundImage:[UIImage new]
-                                  forBarMetrics:UIBarMetricsDefault];
-  self.navcon.navigationBar.shadowImage = [UIImage new];
+  [self.navcon setNavigationBarHidden:YES animated:NO];
+  
+  self.navcon.navigationBar.translucent = NO;
+
   [self.navcon.navigationBar setTitleTextAttributes:@{NSForegroundColorAttributeName: [UIColor whiteColor]}];
   [self.window setRootViewController:self.navcon];
   UIView *statusBar = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.window.frame.size.width, 20)];
@@ -55,31 +52,19 @@ static NSTimeInterval kNavBarColorAnimationDuration = 0.30;
   return YES;
 }
 
-- (void)animateNavBarClear {
-  self.navcon.navigationBar.translucent = YES;
-  [UIView animateWithDuration:kNavBarColorAnimationDuration animations:^{
-    self.navcon.navigationBar.alpha = 0;
-  }];
-}
-
-- (void)animateNavBarBlue {
-  self.navcon.navigationBar.translucent = NO;
-  [UIView animateWithDuration:kNavBarColorAnimationDuration animations:^{
-    self.navcon.navigationBar.alpha = 1;
-  }];
-}
-
 - (id<UIViewControllerAnimatedTransitioning>)navigationController:(UINavigationController *)navigationController
                                   animationControllerForOperation:(UINavigationControllerOperation)operation
                                                fromViewController:(UIViewController *)fromVC
                                                  toViewController:(UIViewController *)toVC {
   // When we leave the home view make the navbar blue.
   if (operation == UINavigationControllerOperationPush && [fromVC isKindOfClass:[IJHomeViewController class]]) {
-    [self animateNavBarBlue];
+    //[self animateNavBarBlue];
+    [self.navcon setNavigationBarHidden:NO animated:YES];
   }
   // When we go back to the home view make the navbar clear.
   else if (operation == UINavigationControllerOperationPop && [toVC isKindOfClass:[IJHomeViewController class]]) {
-    [self animateNavBarClear];
+    //[self animateNavBarClear];
+    [self.navcon setNavigationBarHidden:YES animated:YES];
   }
   return nil;
 }

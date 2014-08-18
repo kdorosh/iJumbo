@@ -15,4 +15,7 @@
     #import <Foundation/Foundation.h>
     #import <CoreData/CoreData.h>
     #import "IJVariables.h"
+    #import "IJHelper.h"
+    #import "UITableView+MainThreadReload.h"
+    #import "IJAppDelegate.h"
 #endif

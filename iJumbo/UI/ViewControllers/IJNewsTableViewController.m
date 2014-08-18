@@ -15,10 +15,8 @@ static NSString * const kNewsDailyActionSheetText = @"Daily";
 static NSString * const kNewsObserverActionSheetText = @"Observer";
 
 @interface IJNewsTableViewController () <UIActionSheetDelegate>
-@property(nonatomic) NSArray *articles;
-@property(nonatomic) NSArray *dailyArtilces;
-@property(nonatomic) NSArray *observerArticles;
 @property(nonatomic) UIBarButtonItem *sourceBarButton;
+@property(nonatomic) NSFetchedResultsController *fetchedResultsController;
 @end
 
 @implementation IJNewsTableViewController
@@ -29,9 +27,6 @@ static NSString * const kNewsObserverActionSheetText = @"Observer";
   self.tableView.backgroundColor = self.view.backgroundColor;
   self.tableView.separatorColor = [UIColor clearColor];
   self.title = @"News";
-  self.dailyArtilces = [NSArray array];
-  self.observerArticles = [NSArray array];
-  self.articles = self.dailyArtilces;
   self.sourceBarButton = [[UIBarButtonItem alloc] initWithTitle:kNewsDailyActionSheetText
                                                                    style:UIBarButtonItemStylePlain
                                                                   target:self
@@ -50,50 +45,59 @@ static NSString * const kNewsObserverActionSheetText = @"Observer";
   [sourceActionSheet showFromRect:CGRectMake(320 - 60, 0, 60, 60) inView:self.view animated:YES];
 }
 
-- (void)setDatasourceFromUI {
-  if ([self.sourceBarButton.title isEqualToString:kNewsDailyActionSheetText]) {
-    self.articles = self.dailyArtilces;
-  } else {
-    self.articles = self.observerArticles;
-  }
-}
 
 - (UIStatusBarStyle)preferredStatusBarStyle{
   return UIStatusBarStyleLightContent;
 }
 
 - (void)loadData {
+  [self loadDailyArticles];
+  [self loadObserverArticles];
+}
+
+- (void)loadDailyArticles {
   [IJArticle getDailyArticlesWithSuccessBlock:^(NSArray *articles) {
-    self.dailyArtilces = articles;
-    [self setDatasourceFromUI];
+    NSError *error;
+    [self.fetchedResultsController performFetch:&error];
+    [self.tableView mainThreadReload];
   } failureBlock:^(NSError *error) {
     NSLog(@"News Daily Error: %@", error);
   }];
+}
+
+- (void)loadObserverArticles {
   [IJArticle getObserverArticlesWithSuccessBlock:^(NSArray *articles) {
-    self.observerArticles = articles;
-    [self setDatasourceFromUI];
+    NSError *error;
+    [self.fetchedResultsController performFetch:&error];
+    [self.tableView mainThreadReload];
   } failureBlock:^(NSError *error) {
     NSLog(@"News Observer Error: %@", error);
   }];
 }
 
 - (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex {
-  NSLog(@"Action sheet index: %i", buttonIndex);
   NSString *selectedText = [actionSheet buttonTitleAtIndex:buttonIndex];
   if ([selectedText isEqualToString:kNewsDailyActionSheetText]) {
     self.sourceBarButton.title = kNewsDailyActionSheetText;
-    self.articles = self.dailyArtilces;
+    [self updateFetchRequestForSource:selectedText];
   } else if ([selectedText isEqualToString:kNewsObserverActionSheetText]) {
     self.sourceBarButton.title = kNewsObserverActionSheetText;
-    self.articles = self.observerArticles;
+    [self updateFetchRequestForSource:selectedText];
   }
-  [self.tableView reloadData];
 }
 
 #pragma mark - Table view data source
 
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
+  return [[self.fetchedResultsController sections] count];
+}
+
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-  return [self.articles count];
+  if ([[self.fetchedResultsController sections] count] > 0) {
+    id <NSFetchedResultsSectionInfo> sectionInfo = [[self.fetchedResultsController sections] objectAtIndex:section];
+    return [sectionInfo numberOfObjects];
+  }
+  return 0;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -103,7 +107,7 @@ static NSString * const kNewsObserverActionSheetText = @"Observer";
     cell = [[IJNewsTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault
                                       reuseIdentifier:cellID];
   }
-  IJArticle *article = self.articles[indexPath.row];
+  IJArticle *article = [self.fetchedResultsController objectAtIndexPath:indexPath];
   [cell addDataFromArticle:article];
   return cell;
 }
@@ -113,13 +117,44 @@ static NSString * const kNewsObserverActionSheetText = @"Observer";
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-  IJArticle *article = self.articles[indexPath.row];
+  IJArticle *article = [self.fetchedResultsController objectAtIndexPath:indexPath];
   NSLog(@"Article: %@", article);
 }
 
-- (void)setArticles:(NSArray *)articles {
-  _articles = articles;
-  [self.tableView performSelectorOnMainThread:@selector(reloadData) withObject:nil waitUntilDone:NO];
+- (void)updateFetchRequestForSource:(NSString *)source {
+  self.fetchedResultsController.fetchRequest.predicate =
+      [NSPredicate predicateWithFormat:@"source == %@", source];
+  NSError *error;
+  [self.fetchedResultsController performFetch:&error];
+  if (error) {
+    NSLog(@"error updating news fetch request: %@", error);
+  }
+  [self.tableView mainThreadReload];
+}
+
+- (NSFetchedResultsController*)fetchedResultsController {
+  if (!_fetchedResultsController) {
+    NSManagedObjectContext *context = [IJHelper mainContext];
+    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] initWithEntityName:NSStringFromClass([IJArticle class])];
+    // Configure the request's entity, and optionally its predicate.
+    fetchRequest.predicate = [NSPredicate predicateWithFormat:@"source == %@", self.sourceBarButton.title];
+    NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"posted" ascending:NO];
+    NSArray *sortDescriptors = @[sortDescriptor];
+    [fetchRequest setSortDescriptors:sortDescriptors];
+    fetchRequest.fetchBatchSize = 10;
+    
+    _fetchedResultsController =
+        [[NSFetchedResultsController alloc] initWithFetchRequest:fetchRequest
+                                            managedObjectContext:context
+                                              sectionNameKeyPath:nil
+                                                       cacheName:nil];
+    NSError *error;
+    BOOL success = [_fetchedResultsController performFetch:&error];
+    if (!success) {
+      NSLog(@"Error getting events from core data: %@", error);
+    }
+  }
+  return _fetchedResultsController;
 }
 
 @end

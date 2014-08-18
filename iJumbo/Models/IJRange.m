@@ -9,8 +9,6 @@
 #import "IJRange.h"
 
 @implementation IJRange
-
 @dynamic start;
 @dynamic end;
-
 @end

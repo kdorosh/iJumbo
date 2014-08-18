@@ -8,6 +8,8 @@
 
 #import "IJNewsTableViewCell.h"
 
+static const CGFloat kNewsTableViewCellImageWidth = 120;
+
 @interface IJNewsTableViewCell ()
 @property(nonatomic) UILabel *titleLabel;
 @property(nonatomic) UILabel *authorLabel;
@@ -31,7 +33,7 @@
     contentView.backgroundColor = kIJumboGrey;
     CGSize contentSize = contentView.frame.size;
     
-    self.imageView.frame = CGRectMake(0, 0, contentSize.height + 20, contentSize.height);
+    self.imageView.frame = CGRectMake(0, 0, kNewsTableViewCellImageWidth, contentSize.height);
     self.imageView.backgroundColor = [UIColor blackColor];
     self.imageView.image = nil;
     UIView *imageBack = [[UIView alloc] initWithFrame:self.imageView.frame];

@@ -12,7 +12,7 @@
 
 static NSString * const kNewsTableViewCellID = @"IJNewsTableViewCellID";
 
-static const int kNewsTableViewCellHeight = 90;
+static const int kNewsTableViewCellHeight = 100;
 
 @interface IJNewsTableViewCell : UITableViewCell
 

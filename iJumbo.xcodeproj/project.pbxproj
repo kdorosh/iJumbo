@@ -10,6 +10,11 @@
 		51717AB18D3441268926AA6D /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0027185B941C4F758572F481 /* libPods.a */; };
 		C8487ACE19A06F10008F034E /* IJEventTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = C8487ACD19A06F10008F034E /* IJEventTableViewCell.m */; };
 		C8487AD119A07399008F034E /* IJRecord.m in Sources */ = {isa = PBXBuildFile; fileRef = C8487AD019A07399008F034E /* IJRecord.m */; };
+		C852A6A619A0FCD20048B1C3 /* UITableView+MainThreadReload.m in Sources */ = {isa = PBXBuildFile; fileRef = C852A6A519A0FCD20048B1C3 /* UITableView+MainThreadReload.m */; };
+		C852A6A919A1099B0048B1C3 /* IJLocationTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = C852A6A819A1099B0048B1C3 /* IJLocationTableViewCell.m */; };
+		C852A6AF19A18CF30048B1C3 /* IJLink.m in Sources */ = {isa = PBXBuildFile; fileRef = C852A6AE19A18CF30048B1C3 /* IJLink.m */; };
+		C852A6B219A192420048B1C3 /* IJLinkTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C852A6B119A192420048B1C3 /* IJLinkTableViewController.m */; };
+		C852A6B519A193100048B1C3 /* IJLinkTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = C852A6B419A193100048B1C3 /* IJLinkTableViewCell.m */; };
 		C87E7CBE198C566500366DF7 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C87E7CBD198C566500366DF7 /* Foundation.framework */; };
 		C87E7CC0198C566500366DF7 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C87E7CBF198C566500366DF7 /* CoreGraphics.framework */; };
 		C87E7CC2198C566500366DF7 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C87E7CC1198C566500366DF7 /* UIKit.framework */; };
@@ -71,6 +76,16 @@
 		C8487ACD19A06F10008F034E /* IJEventTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = IJEventTableViewCell.m; path = iJumbo/UI/TableViewCells/IJEventTableViewCell.m; sourceTree = "<group>"; };
 		C8487ACF19A07399008F034E /* IJRecord.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = IJRecord.h; path = Models/IJRecord.h; sourceTree = "<group>"; };
 		C8487AD019A07399008F034E /* IJRecord.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = IJRecord.m; path = Models/IJRecord.m; sourceTree = "<group>"; };
+		C852A6A419A0FCD20048B1C3 /* UITableView+MainThreadReload.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UITableView+MainThreadReload.h"; path = "Categories/UITableView+MainThreadReload.h"; sourceTree = "<group>"; };
+		C852A6A519A0FCD20048B1C3 /* UITableView+MainThreadReload.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UITableView+MainThreadReload.m"; path = "Categories/UITableView+MainThreadReload.m"; sourceTree = "<group>"; };
+		C852A6A719A1099B0048B1C3 /* IJLocationTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = IJLocationTableViewCell.h; path = iJumbo/UI/TableViewCells/IJLocationTableViewCell.h; sourceTree = "<group>"; };
+		C852A6A819A1099B0048B1C3 /* IJLocationTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = IJLocationTableViewCell.m; path = iJumbo/UI/TableViewCells/IJLocationTableViewCell.m; sourceTree = "<group>"; };
+		C852A6AD19A18CF30048B1C3 /* IJLink.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = IJLink.h; path = Models/IJLink.h; sourceTree = "<group>"; };
+		C852A6AE19A18CF30048B1C3 /* IJLink.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = IJLink.m; path = Models/IJLink.m; sourceTree = "<group>"; };
+		C852A6B019A192420048B1C3 /* IJLinkTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = IJLinkTableViewController.h; path = iJumbo/UI/ViewControllers/IJLinkTableViewController.h; sourceTree = "<group>"; };
+		C852A6B119A192420048B1C3 /* IJLinkTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = IJLinkTableViewController.m; path = iJumbo/UI/ViewControllers/IJLinkTableViewController.m; sourceTree = "<group>"; };
+		C852A6B319A193100048B1C3 /* IJLinkTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = IJLinkTableViewCell.h; path = iJumbo/UI/TableViewCells/IJLinkTableViewCell.h; sourceTree = "<group>"; };
+		C852A6B419A193100048B1C3 /* IJLinkTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = IJLinkTableViewCell.m; path = iJumbo/UI/TableViewCells/IJLinkTableViewCell.m; sourceTree = "<group>"; };
 		C87E7CBA198C566500366DF7 /* iJumbo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = iJumbo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C87E7CBD198C566500366DF7 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		C87E7CBF198C566500366DF7 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -159,6 +174,17 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		C852A6A319A0FCAE0048B1C3 /* Categories */ = {
+			isa = PBXGroup;
+			children = (
+				C8D67FBD199EED7C001C4FD2 /* UIView+AddSubviews.h */,
+				C8D67FBE199EED7C001C4FD2 /* UIView+AddSubviews.m */,
+				C852A6A419A0FCD20048B1C3 /* UITableView+MainThreadReload.h */,
+				C852A6A519A0FCD20048B1C3 /* UITableView+MainThreadReload.m */,
+			);
+			name = Categories;
+			sourceTree = "<group>";
+		};
 		C87E7CB1198C566500366DF7 = {
 			isa = PBXGroup;
 			children = (
@@ -197,6 +223,7 @@
 			children = (
 				C87E7CCE198C566500366DF7 /* IJAppDelegate.h */,
 				C87E7CCF198C566500366DF7 /* IJAppDelegate.m */,
+				C852A6A319A0FCAE0048B1C3 /* Categories */,
 				C8B7001019A03D8E0004FE76 /* Resources */,
 				C8F00780199DD998006B7DC4 /* Communication */,
 				C8F0077F199DD878006B7DC4 /* Helpers */,
@@ -263,6 +290,10 @@
 				C8B7FFF519A0375B0004FE76 /* IJNewsTableViewCell.m */,
 				C8487ACC19A06F10008F034E /* IJEventTableViewCell.h */,
 				C8487ACD19A06F10008F034E /* IJEventTableViewCell.m */,
+				C852A6A719A1099B0048B1C3 /* IJLocationTableViewCell.h */,
+				C852A6A819A1099B0048B1C3 /* IJLocationTableViewCell.m */,
+				C852A6B319A193100048B1C3 /* IJLinkTableViewCell.h */,
+				C852A6B419A193100048B1C3 /* IJLinkTableViewCell.m */,
 			);
 			name = TableViewCells;
 			sourceTree = "<group>";
@@ -283,6 +314,8 @@
 				C8F00774199DD624006B7DC4 /* IJLocation.m */,
 				C8F00779199DD735006B7DC4 /* IJRange.h */,
 				C8F0077A199DD735006B7DC4 /* IJRange.m */,
+				C852A6AD19A18CF30048B1C3 /* IJLink.h */,
+				C852A6AE19A18CF30048B1C3 /* IJLink.m */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -292,8 +325,6 @@
 			children = (
 				C8F0077C199DD872006B7DC4 /* IJHelper.h */,
 				C8F0077D199DD872006B7DC4 /* IJHelper.m */,
-				C8D67FBD199EED7C001C4FD2 /* UIView+AddSubviews.h */,
-				C8D67FBE199EED7C001C4FD2 /* UIView+AddSubviews.m */,
 				C8B7FFEF199FE2200004FE76 /* IJVariables.h */,
 			);
 			name = Helpers;
@@ -331,6 +362,8 @@
 				C8D67FB8199EE342001C4FD2 /* IJNewsTableViewController.m */,
 				C8B7FFF119A030DB0004FE76 /* IJNavigationDelegate.h */,
 				C8B7FFF219A030DB0004FE76 /* IJNavigationDelegate.m */,
+				C852A6B019A192420048B1C3 /* IJLinkTableViewController.h */,
+				C852A6B119A192420048B1C3 /* IJLinkTableViewController.m */,
 			);
 			name = ViewControllers;
 			sourceTree = "<group>";
@@ -481,7 +514,9 @@
 				C8B7FFF0199FE31E0004FE76 /* IJVariables.h in Sources */,
 				C8F0077E199DD872006B7DC4 /* IJHelper.m in Sources */,
 				C87E7CD3198C566500366DF7 /* iJumbo.xcdatamodeld in Sources */,
+				C852A6A919A1099B0048B1C3 /* IJLocationTableViewCell.m in Sources */,
 				C8F00783199DDB3F006B7DC4 /* IJHomeViewController.m in Sources */,
+				C852A6B219A192420048B1C3 /* IJLinkTableViewController.m in Sources */,
 				C8D67FB3199EC49F001C4FD2 /* IJEvent.m in Sources */,
 				C8F00788199DDDE6006B7DC4 /* IJLocationTableViewController.m in Sources */,
 				C8D67FBC199EE3EB001C4FD2 /* IJArticle.m in Sources */,
@@ -490,11 +525,14 @@
 				C8D67FB6199EC6F8001C4FD2 /* IJEventTableViewController.m in Sources */,
 				C8D67FBF199EED7C001C4FD2 /* UIView+AddSubviews.m in Sources */,
 				C8B7FFF319A030DB0004FE76 /* IJNavigationDelegate.m in Sources */,
+				C852A6A619A0FCD20048B1C3 /* UITableView+MainThreadReload.m in Sources */,
+				C852A6B519A193100048B1C3 /* IJLinkTableViewCell.m in Sources */,
 				C8487ACE19A06F10008F034E /* IJEventTableViewCell.m in Sources */,
 				C8F00775199DD624006B7DC4 /* IJLocation.m in Sources */,
 				C87E7CD0198C566500366DF7 /* IJAppDelegate.m in Sources */,
 				C8F00778199DD6F7006B7DC4 /* IJHours.m in Sources */,
 				C8B7FFF619A0375B0004FE76 /* IJNewsTableViewCell.m in Sources */,
+				C852A6AF19A18CF30048B1C3 /* IJLink.m in Sources */,
 				C8D67FB9199EE342001C4FD2 /* IJNewsTableViewController.m in Sources */,
 				C8F0076B199DD47A006B7DC4 /* IJServer.m in Sources */,
 				C8487AD119A07399008F034E /* IJRecord.m in Sources */,

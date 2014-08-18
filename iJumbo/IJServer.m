@@ -34,7 +34,6 @@ static NSString * const kBaseURL = @"http://ijumbo.herokuapp.com/api/";
   success:^(AFHTTPRequestOperation *operation, id responseObject) {
     responseBlock(responseObject);
   } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-    // TODO(amadou): make the error RC specific so it makes more sense.
     NSLog(@"Failure!!!!");
     NSLog(@"Response: %@", operation.responseString);
     failureBlock(error);
