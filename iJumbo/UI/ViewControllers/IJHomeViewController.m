@@ -33,39 +33,12 @@ static const CGFloat kSeparatorBarWidth = 1.5;
   [super viewDidLoad];
   self.edgesForExtendedLayout = UIRectEdgeAll;
   self.view.backgroundColor = [UIColor clearColor];
-  self.navigationController.interactivePopGestureRecognizer.delegate = self;
+  // TODO(amadou): get gesture pop to work. This is a hack to make it work but there needs to be a
+  // new implementation because the animations are done custom now.
+  // self.navigationController.interactivePopGestureRecognizer.delegate = self;
   [self addSeparators];
   [self setupButtons];
   [self setupIcons];
-}
-
-- (void)viewWillDisappear:(BOOL)animated {
-  [self setButtonsHidden:YES];
-}
-
-- (void)viewWillAppear:(BOOL)animated {
-  [self setButtonsHidden:NO];
-}
-
-- (void)viewDidAppear:(BOOL)animated {
-  [self setButtonsHidden:NO];
-}
-
-- (void)viewDidDisappear:(BOOL)animated {
-  [self setButtonsHidden:YES];
-}
-
-- (void)setButtonsHidden:(BOOL)hidden {
-  CGFloat alpha = (hidden) ? 0 : 1;
-  [UIView animateWithDuration:0.30 animations:^{
-    self.eventsButton.alpha = alpha;
-    self.newsButton.alpha = alpha;
-    self.locationsButton.alpha = alpha;
-    self.menusButton.alpha = alpha;
-    self.transportationButton.alpha = alpha;
-    self.linksButton.alpha = alpha;
-    self.separatorView.alpha = alpha;
-  }];
 }
 
 - (UIStatusBarStyle)preferredStatusBarStyle{
@@ -107,6 +80,51 @@ static const CGFloat kSeparatorBarWidth = 1.5;
   [self.transportationButton setImage:[UIImage imageNamed:@"transportation.png"] forState:UIControlStateNormal];
   [self.linksButton setImage:[UIImage imageNamed:@"link.png"] forState:UIControlStateNormal];
   
+  CGFloat labelWidth = self.view.frame.size.width/2.0f;
+  CGFloat labelHeight = 28;
+
+  UILabel *newsLabel = [[UILabel alloc] initWithFrame:(CGRect){0, [self.newsButton.imageView maxY] + 5, labelWidth, labelHeight}];
+  UILabel *placesLabel = [[UILabel alloc] initWithFrame:(CGRect){0, [self.newsButton.imageView maxY] + 5, labelWidth, labelHeight}];
+  UILabel *menuLabel = [[UILabel alloc] initWithFrame:(CGRect){0, [self.menusButton.imageView maxY] + 5, labelWidth, labelHeight}];
+  UILabel *transportLabel = [[UILabel alloc] initWithFrame:(CGRect){0, [self.menusButton.imageView maxY] + 5, labelWidth, labelHeight}];
+  UILabel *eventLabel = [[UILabel alloc] initWithFrame:(CGRect){0, [self.eventsButton.imageView maxY] + 5, labelWidth, labelHeight}];
+  UILabel *linksLabel = [[UILabel alloc] initWithFrame:(CGRect){0, [self.eventsButton.imageView maxY] + 5, labelWidth, labelHeight}];
+  
+  newsLabel.text = @"News";
+  newsLabel.textAlignment = NSTextAlignmentCenter;
+  placesLabel.text = @"Places";
+  placesLabel.textAlignment = NSTextAlignmentCenter;
+  menuLabel.text = @"Menus";
+  menuLabel.textAlignment = NSTextAlignmentCenter;
+  transportLabel.text = @"Transportation";
+  transportLabel.textAlignment = NSTextAlignmentCenter;
+  eventLabel.text = @"Events";
+  eventLabel.textAlignment = NSTextAlignmentCenter;
+  linksLabel.text = @"Links";
+  linksLabel.textAlignment = NSTextAlignmentCenter;
+  
+  UIFont *labelFont = [UIFont fontWithName:@"Roboto-Light" size:12];
+  newsLabel.font = labelFont;
+  placesLabel.font = labelFont;
+  menuLabel.font = labelFont;
+  transportLabel.font = labelFont;
+  eventLabel.font = labelFont;
+  linksLabel.font = labelFont;
+  
+  newsLabel.textColor = [UIColor whiteColor];
+  placesLabel.textColor = [UIColor whiteColor];
+  menuLabel.textColor = [UIColor whiteColor];
+  transportLabel.textColor = [UIColor whiteColor];
+  eventLabel.textColor = [UIColor whiteColor];
+  linksLabel.textColor = [UIColor whiteColor];
+  
+  [self.newsButton addSubview:newsLabel];
+  [self.locationsButton addSubview:placesLabel];
+  [self.menusButton addSubview:menuLabel];
+  [self.transportationButton addSubview:transportLabel];
+  [self.eventsButton addSubview:eventLabel];
+  [self.linksButton addSubview:linksLabel];
+  
   [self.view addSubviews:@[
       self.newsButton,
       self.locationsButton,
@@ -122,7 +140,7 @@ static const CGFloat kSeparatorBarWidth = 1.5;
   eventsIcon.center = self.eventsButton.center;
   [self.eventsButton setImage:[UIImage imageNamed:@"events.png"] forState:UIControlStateNormal];
   //[self.view addSubview:eventsIcon];
- // UIImageView *ewsIcon = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"news.png"]];
+ // UIImageView * = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"news.png"]];
 }
 
 - (void)addSeparators {
@@ -149,11 +167,11 @@ static const CGFloat kSeparatorBarWidth = 1.5;
 }
 
 - (void)pushMenus {
-  [self.navigationController pushViewController:nil animated:YES];
+  NSLog(@"please code me :(");
 }
 
 - (void)pushTransportation {
-  [self.navigationController pushViewController:nil animated:YES];
+  NSLog(@"why y no code me?");
 }
 
 - (void)pushEvents {

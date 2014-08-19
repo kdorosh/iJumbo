@@ -18,4 +18,5 @@
     #import "IJHelper.h"
     #import "UITableView+MainThreadReload.h"
     #import "IJAppDelegate.h"
+    #import "UIView+Position.h"
 #endif

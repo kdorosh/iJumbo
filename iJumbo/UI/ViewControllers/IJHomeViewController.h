@@ -7,7 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "IJViewController.h"
 
-@interface IJHomeViewController : UIViewController
+@interface IJHomeViewController : IJViewController
 
 @end

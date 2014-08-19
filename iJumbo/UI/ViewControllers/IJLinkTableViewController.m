@@ -18,7 +18,8 @@
 
 - (void)viewDidLoad {
   [super viewDidLoad];
-  self.tableView.backgroundColor = [UIColor colorWithWhite:1 alpha:0.28];
+  [self addTableViewWithDelegate:self];
+  self.tableView.backgroundColor = [UIColor clearColor];
   self.tableView.separatorColor = [UIColor clearColor];
   [self loadData];
 }

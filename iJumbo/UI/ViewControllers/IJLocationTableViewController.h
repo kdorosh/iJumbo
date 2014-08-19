@@ -7,7 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "IJViewController.h"
 
-@interface IJLocationTableViewController : UITableViewController
-
+@interface IJLocationTableViewController : IJViewController <UITableViewDelegate, UITableViewDataSource>
 @end

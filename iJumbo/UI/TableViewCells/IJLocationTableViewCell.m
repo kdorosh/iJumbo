@@ -52,6 +52,9 @@
 }
 
 - (void)addDataFromLocation:(IJLocation *)location {
+  if (!location.section) {
+    NSLog(@"%@", location);
+  }
   self.nameLabel.text = location.name;
 }
 

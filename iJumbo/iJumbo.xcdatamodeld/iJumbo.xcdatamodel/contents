@@ -34,8 +34,9 @@
         </userInfo>
     </entity>
     <entity name="IJFoodItem" representedClassName="IJFoodItem" syncable="YES"/>
-    <entity name="IJHours" syncable="YES">
+    <entity name="IJHours" representedClassName="IJHours" syncable="YES">
         <relationship name="friday" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="IJRange" syncable="YES"/>
+        <relationship name="location" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="IJLocation" inverseName="hours" inverseEntity="IJLocation" syncable="YES"/>
         <relationship name="monday" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="IJRange" syncable="YES"/>
         <relationship name="saturday" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="IJRange" syncable="YES"/>
         <relationship name="sunday" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="IJRange" syncable="YES"/>
@@ -63,22 +64,22 @@
         <attribute name="phone" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="section" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="website" optional="YES" attributeType="String" syncable="YES"/>
-        <relationship name="hours" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="IJHours" syncable="YES"/>
+        <relationship name="hours" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="IJHours" inverseName="location" inverseEntity="IJHours" syncable="YES"/>
         <userInfo>
             <entry key="MMRecordEntityPrimaryAttributeKey" value="id"/>
         </userInfo>
     </entity>
-    <entity name="IJRange" syncable="YES">
+    <entity name="IJRange" representedClassName="IJRange" syncable="YES">
         <attribute name="end" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
         <attribute name="start" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
     </entity>
     <elements>
         <element name="IJArticle" positionX="-36" positionY="9" width="128" height="148"/>
         <element name="IJEvent" positionX="-63" positionY="-18" width="128" height="163"/>
-        <element name="IJFoodItem" positionX="-54" positionY="-9" width="128" height="43"/>
-        <element name="IJHours" positionX="-36" positionY="45" width="128" height="148"/>
+        <element name="IJFoodItem" positionX="-54" positionY="-9" width="128" height="45"/>
+        <element name="IJHours" positionX="-36" positionY="45" width="128" height="165"/>
+        <element name="IJLink" positionX="-36" positionY="72" width="128" height="75"/>
         <element name="IJLocation" positionX="-18" positionY="27" width="128" height="178"/>
         <element name="IJRange" positionX="-27" positionY="72" width="128" height="75"/>
-        <element name="IJLink" positionX="-36" positionY="72" width="128" height="75"/>
     </elements>
 </model>

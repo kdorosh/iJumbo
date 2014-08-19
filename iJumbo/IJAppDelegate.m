@@ -39,6 +39,11 @@
   self.navcon.navigationBar.barTintColor = kIJumboBlue;
   self.navcon.navigationBar.tintColor = [UIColor whiteColor];
   [self.navcon setNavigationBarHidden:YES animated:NO];
+  UIView *whiteView = [[UIView alloc] initWithFrame:CGRectMake(self.window.maxX, 0, self.window.frame.size.width, self.window.frame.size.height)];
+  whiteView.backgroundColor = [UIColor colorWithWhite:1 alpha:0.28];
+  [whiteView setTag:4];
+  whiteView.alpha = 0;
+  [self.window addSubview:whiteView];
   
   self.navcon.navigationBar.translucent = NO;
 
@@ -55,17 +60,19 @@
 - (id<UIViewControllerAnimatedTransitioning>)navigationController:(UINavigationController *)navigationController
                                   animationControllerForOperation:(UINavigationControllerOperation)operation
                                                fromViewController:(UIViewController *)fromVC
-                                                 toViewController:(UIViewController *)toVC {
-  // When we leave the home view make the navbar blue.
-  if (operation == UINavigationControllerOperationPush && [fromVC isKindOfClass:[IJHomeViewController class]]) {
-    //[self animateNavBarBlue];
-    [self.navcon setNavigationBarHidden:NO animated:YES];
+                                                 toViewController:(UIViewController *)toVC {  
+  if (operation == UINavigationControllerOperationPush) {
+    if ([fromVC isKindOfClass:[IJHomeViewController class]]) {
+      [self.navcon setNavigationBarHidden:NO animated:YES];
+    }
+    return [[IJPushViewControllerTransition alloc] init];
+  } else if (operation == UINavigationControllerOperationPop) {
+    if ([toVC isKindOfClass:[IJHomeViewController class]]) {
+      [self.navcon setNavigationBarHidden:YES animated:YES];
+    }
+    return [[IJPopViewControllerTransition alloc] init];
   }
-  // When we go back to the home view make the navbar clear.
-  else if (operation == UINavigationControllerOperationPop && [toVC isKindOfClass:[IJHomeViewController class]]) {
-    //[self animateNavBarClear];
-    [self.navcon setNavigationBarHidden:YES animated:YES];
-  }
+  
   return nil;
 }
 

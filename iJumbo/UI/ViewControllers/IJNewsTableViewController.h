@@ -7,7 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "IJViewController.h"
 
-@interface IJNewsTableViewController : UITableViewController
-
+@interface IJNewsTableViewController : IJViewController <UITableViewDelegate, UITableViewDataSource>
 @end

@@ -7,7 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "IJViewController.h"
 
-@interface IJEventTableViewController : UIViewController <UITableViewDelegate, UITableViewDataSource>
-@property(nonatomic) UITableView *tableView;
+@interface IJEventTableViewController : IJViewController <UITableViewDelegate, UITableViewDataSource>
 @end

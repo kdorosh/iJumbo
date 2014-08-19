@@ -28,14 +28,14 @@ static NSDateFormatter *kEventsTableDateFormatter;
 - (void)viewDidLoad {
   [super viewDidLoad];
   self.title = @"Events";
-  self.view.backgroundColor = [UIColor colorWithWhite:1 alpha:0.28];
-  
-  self.tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, kEventsDateNavigationBarHeight, self.view.frame.size.width, self.view.frame.size.height - kEventsDateNavigationBarHeight - 64)];
+  [self addTableViewWithDelegate:self];
+  CGPoint tableCenter = self.tableView.center;
+  CGPoint newTableCenter = CGPointMake(tableCenter.x, tableCenter.y + kEventsDateNavigationBarHeight);
+  self.tableView.center = newTableCenter;
   self.tableView.delegate = self;
   self.tableView.dataSource = self;
   self.tableView.backgroundColor = [UIColor clearColor];
   self.tableView.separatorColor = [UIColor clearColor];
-  [self.view addSubview:self.tableView];
   [self setupDateNavigationBar];
   self.date = [NSDate date];
   [self.tableView reloadData];
@@ -43,8 +43,8 @@ static NSDateFormatter *kEventsTableDateFormatter;
 }
 
 - (void)setupDateNavigationBar {
-  UIView *dateNavigationBar = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, kEventsDateNavigationBarHeight)];
-  self.dateLabel = [[UILabel alloc] initWithFrame:dateNavigationBar.frame];
+  UIView *dateNavigationBar = [[UIView alloc] initWithFrame:CGRectMake(0, self.navigationController.navigationBar.maxY, self.view.frame.size.width, kEventsDateNavigationBarHeight)];
+  self.dateLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, dateNavigationBar.frame.size.width, dateNavigationBar.frame.size.height)];
   self.dateLabel.textAlignment = NSTextAlignmentCenter;
   self.dateLabel.font = [UIFont fontWithName:@"Roboto-Light" size:20];
   self.dateLabel.textColor = [UIColor colorWithWhite:0 alpha:0.8];

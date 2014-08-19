@@ -10,8 +10,9 @@
 
 #import "IJLocation.h"
 #import "IJLocationTableViewCell.h"
+#import "IJLocationViewController.h"
 
-@interface IJLocationTableViewController ()
+@interface IJLocationTableViewController () <NSFetchedResultsControllerDelegate>
 @property(nonatomic) NSFetchedResultsController *fetchedResultsController;
 @end
 
@@ -19,8 +20,9 @@
 
 - (void)viewDidLoad {
   [super viewDidLoad];
+  [self addTableViewWithDelegate:self];
   self.view.backgroundColor = [UIColor clearColor];
-  self.view.backgroundColor = [UIColor colorWithWhite:1 alpha:0.28];
+  self.tableView.backgroundColor = [UIColor clearColor];
   self.tableView.separatorColor = [UIColor clearColor];
   // TODO(amadou): Get search bar up there.
   self.title = @"Places";
@@ -29,13 +31,25 @@
   [self loadData];
 }
 
+- (void)animateHideView {
+  [UIView animateWithDuration:kIJViewControllerAnimationTime animations:^{
+    self.view.alpha = 0;
+  }];
+}
+
+- (void)animateShowView {
+  [UIView animateWithDuration:kIJViewControllerAnimationTime animations:^{
+    self.view.alpha = 1;
+  }];
+}
+
 - (UIStatusBarStyle)preferredStatusBarStyle{
   return UIStatusBarStyleLightContent;
 }
 
 - (void)loadData {
   [IJLocation getLocationsWithSuccessBlock:^(NSArray *locations) {
-    NSError *error;
+    NSError* error;
     [self.fetchedResultsController performFetch:&error];
     [self.tableView mainThreadReload];
   } failureBlock:^(NSError *error) {
@@ -91,31 +105,38 @@
   return kLocationTableViewCellHeight;
 }
 
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+  IJLocation *location = [self.fetchedResultsController objectAtIndexPath:indexPath];
+  IJLocationViewController *locationViewController = [[IJLocationViewController alloc] initWithLocation:location];
+  [self.navigationController pushViewController:locationViewController animated:YES];
+}
+
 - (NSFetchedResultsController*)fetchedResultsController {
   if (!_fetchedResultsController) {
     NSManagedObjectContext *context = [IJHelper mainContext];
     NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] initWithEntityName:NSStringFromClass([IJLocation class])];
     // Configure the request's entity, and optionally its predicate.
-    NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"name" ascending:YES];
-    NSArray *sortDescriptors = @[sortDescriptor];
+    NSSortDescriptor *nameSort = [[NSSortDescriptor alloc] initWithKey:@"name" ascending:YES];
+    NSSortDescriptor *sectionSort = [[NSSortDescriptor alloc] initWithKey:@"section" ascending:YES];
+    NSArray *sortDescriptors = @[sectionSort, nameSort];
     [fetchRequest setSortDescriptors:sortDescriptors];
-    fetchRequest.fetchBatchSize = 25;
+    [fetchRequest setIncludesPropertyValues:YES];
+    [fetchRequest setReturnsObjectsAsFaults:NO];
     
     _fetchedResultsController =
         [[NSFetchedResultsController alloc] initWithFetchRequest:fetchRequest
                                             managedObjectContext:context
                                               sectionNameKeyPath:@"section"
                                                        cacheName:nil];
+    _fetchedResultsController.delegate = self;
     NSError *error;
     BOOL success = [_fetchedResultsController performFetch:&error];
     if (!success) {
       NSLog(@"Error getting events from core data: %@", error);
     }
+    [self.tableView mainThreadReload];
   }
   return _fetchedResultsController;
 }
-
-
-
 
 @end

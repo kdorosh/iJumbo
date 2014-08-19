@@ -57,6 +57,10 @@
 		C8F0077E199DD872006B7DC4 /* IJHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = C8F0077D199DD872006B7DC4 /* IJHelper.m */; };
 		C8F00783199DDB3F006B7DC4 /* IJHomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C8F00782199DDB3F006B7DC4 /* IJHomeViewController.m */; };
 		C8F00788199DDDE6006B7DC4 /* IJLocationTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C8F00787199DDDE6006B7DC4 /* IJLocationTableViewController.m */; };
+		C8FB4FC119A24A5400AC043F /* IJLocationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C8FB4FC019A24A5400AC043F /* IJLocationViewController.m */; };
+		C8FB4FC419A24BC500AC043F /* UIView+Position.m in Sources */ = {isa = PBXBuildFile; fileRef = C8FB4FC319A24BC500AC043F /* UIView+Position.m */; };
+		C8FB4FC819A2D64600AC043F /* IJViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C8FB4FC719A2D64600AC043F /* IJViewController.m */; };
+		C8FB4FCB19A311F400AC043F /* IJWebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C8FB4FCA19A311F400AC043F /* IJWebViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -145,6 +149,14 @@
 		C8F00782199DDB3F006B7DC4 /* IJHomeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = IJHomeViewController.m; path = iJumbo/UI/ViewControllers/IJHomeViewController.m; sourceTree = "<group>"; };
 		C8F00786199DDDE6006B7DC4 /* IJLocationTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = IJLocationTableViewController.h; path = iJumbo/UI/ViewControllers/IJLocationTableViewController.h; sourceTree = "<group>"; };
 		C8F00787199DDDE6006B7DC4 /* IJLocationTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = IJLocationTableViewController.m; path = iJumbo/UI/ViewControllers/IJLocationTableViewController.m; sourceTree = "<group>"; };
+		C8FB4FBF19A24A5400AC043F /* IJLocationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = IJLocationViewController.h; path = iJumbo/UI/ViewControllers/IJLocationViewController.h; sourceTree = "<group>"; };
+		C8FB4FC019A24A5400AC043F /* IJLocationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = IJLocationViewController.m; path = iJumbo/UI/ViewControllers/IJLocationViewController.m; sourceTree = "<group>"; };
+		C8FB4FC219A24BC500AC043F /* UIView+Position.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIView+Position.h"; path = "Categories/UIView+Position.h"; sourceTree = "<group>"; };
+		C8FB4FC319A24BC500AC043F /* UIView+Position.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIView+Position.m"; path = "Categories/UIView+Position.m"; sourceTree = "<group>"; };
+		C8FB4FC619A2D64600AC043F /* IJViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = IJViewController.h; path = iJumbo/UI/ViewControllers/IJViewController.h; sourceTree = "<group>"; };
+		C8FB4FC719A2D64600AC043F /* IJViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = IJViewController.m; path = iJumbo/UI/ViewControllers/IJViewController.m; sourceTree = "<group>"; };
+		C8FB4FC919A311F400AC043F /* IJWebViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = IJWebViewController.h; path = iJumbo/UI/ViewControllers/IJWebViewController.h; sourceTree = "<group>"; };
+		C8FB4FCA19A311F400AC043F /* IJWebViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = IJWebViewController.m; path = iJumbo/UI/ViewControllers/IJWebViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -181,6 +193,8 @@
 				C8D67FBE199EED7C001C4FD2 /* UIView+AddSubviews.m */,
 				C852A6A419A0FCD20048B1C3 /* UITableView+MainThreadReload.h */,
 				C852A6A519A0FCD20048B1C3 /* UITableView+MainThreadReload.m */,
+				C8FB4FC219A24BC500AC043F /* UIView+Position.h */,
+				C8FB4FC319A24BC500AC043F /* UIView+Position.m */,
 			);
 			name = Categories;
 			sourceTree = "<group>";
@@ -364,6 +378,12 @@
 				C8B7FFF219A030DB0004FE76 /* IJNavigationDelegate.m */,
 				C852A6B019A192420048B1C3 /* IJLinkTableViewController.h */,
 				C852A6B119A192420048B1C3 /* IJLinkTableViewController.m */,
+				C8FB4FBF19A24A5400AC043F /* IJLocationViewController.h */,
+				C8FB4FC019A24A5400AC043F /* IJLocationViewController.m */,
+				C8FB4FC619A2D64600AC043F /* IJViewController.h */,
+				C8FB4FC719A2D64600AC043F /* IJViewController.m */,
+				C8FB4FC919A311F400AC043F /* IJWebViewController.h */,
+				C8FB4FCA19A311F400AC043F /* IJWebViewController.m */,
 			);
 			name = ViewControllers;
 			sourceTree = "<group>";
@@ -514,11 +534,15 @@
 				C8B7FFF0199FE31E0004FE76 /* IJVariables.h in Sources */,
 				C8F0077E199DD872006B7DC4 /* IJHelper.m in Sources */,
 				C87E7CD3198C566500366DF7 /* iJumbo.xcdatamodeld in Sources */,
+				C8FB4FC819A2D64600AC043F /* IJViewController.m in Sources */,
 				C852A6A919A1099B0048B1C3 /* IJLocationTableViewCell.m in Sources */,
+				C8FB4FC119A24A5400AC043F /* IJLocationViewController.m in Sources */,
 				C8F00783199DDB3F006B7DC4 /* IJHomeViewController.m in Sources */,
 				C852A6B219A192420048B1C3 /* IJLinkTableViewController.m in Sources */,
 				C8D67FB3199EC49F001C4FD2 /* IJEvent.m in Sources */,
 				C8F00788199DDDE6006B7DC4 /* IJLocationTableViewController.m in Sources */,
+				C8FB4FC419A24BC500AC043F /* UIView+Position.m in Sources */,
+				C8FB4FCB19A311F400AC043F /* IJWebViewController.m in Sources */,
 				C8D67FBC199EE3EB001C4FD2 /* IJArticle.m in Sources */,
 				C87E7CCC198C566500366DF7 /* main.m in Sources */,
 				C8F0077B199DD735006B7DC4 /* IJRange.m in Sources */,

@@ -10,3 +10,10 @@
 
 @interface IJNavigationDelegate : NSObject <UINavigationControllerDelegate>
 @end
+
+@interface IJPopViewControllerTransition : NSObject <UIViewControllerAnimatedTransitioning>
+@end
+
+@interface IJPushViewControllerTransition : NSObject <UIViewControllerAnimatedTransitioning>
+@end
+

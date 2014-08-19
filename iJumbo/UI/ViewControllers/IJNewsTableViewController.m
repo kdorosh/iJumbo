@@ -10,6 +10,7 @@
 
 #import "IJArticle.h"
 #import "IJNewsTableViewCell.h"
+#import "IJWebViewController.h"
 
 static NSString * const kNewsDailyActionSheetText = @"Daily";
 static NSString * const kNewsObserverActionSheetText = @"Observer";
@@ -23,7 +24,9 @@ static NSString * const kNewsObserverActionSheetText = @"Observer";
 
 - (void)viewDidLoad {
   [super viewDidLoad];
-  self.view.backgroundColor = [UIColor colorWithWhite:1 alpha:0.28];
+  [self addTableViewWithDelegate:self];
+  self.edgesForExtendedLayout = UIRectEdgeNone;
+//  self.view.backgroundColor = [UIColor colorWithWhite:1 alpha:0.28];
   self.tableView.backgroundColor = self.view.backgroundColor;
   self.tableView.separatorColor = [UIColor clearColor];
   self.title = @"News";
@@ -118,7 +121,7 @@ static NSString * const kNewsObserverActionSheetText = @"Observer";
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
   IJArticle *article = [self.fetchedResultsController objectAtIndexPath:indexPath];
-  NSLog(@"Article: %@", article);
+  [self.navigationController pushViewController:[[IJWebViewController alloc] initWithURL:article.link] animated:YES];
 }
 
 - (void)updateFetchRequestForSource:(NSString *)source {
