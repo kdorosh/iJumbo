@@ -9,6 +9,7 @@
 #import "IJLinkTableViewController.h"
 
 #import "IJLinkTableViewCell.h"
+#import "IJWebViewController.h"
 
 @interface IJLinkTableViewController ()
 @property(nonatomic) NSArray *links;
@@ -52,6 +53,11 @@
   IJLink *link = self.links[indexPath.row];
   [cell addDataFromLink:link];
   return cell;
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+  IJLink *link = self.links[indexPath.row];
+  [self.navigationController pushViewController:[[IJWebViewController alloc] initWithURL:link.url] animated:YES];
 }
 
 @end

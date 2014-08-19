@@ -74,7 +74,7 @@
 
   UIView *container = [transitionContext containerView];
   CGRect origFrame = toVC.view.frame;
-  toVC.view.frame = CGRectMake(-origFrame.size.width / 4.0f, origFrame.origin.y, origFrame.size.width, origFrame.size.height);
+  toVC.view.frame = CGRectMake(-origFrame.size.width / 4.0f, 0, origFrame.size.width, origFrame.size.height);
   [container insertSubview:toVC.view belowSubview:fromVC.view];
   CGSize fromSize = fromVC.view.frame.size;
   BOOL toHome = [toVC isKindOfClass:[IJHomeViewController class]];
