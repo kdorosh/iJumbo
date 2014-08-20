@@ -57,11 +57,11 @@
 }
 
 - (void)mapButtonAction {
-  NSAssert(NO, @"code -mapButtonAction");
+  [self.delegate didClickMapButton:self];
 }
 
 - (void)infoButtonAction {
-  NSAssert(NO, @"code -infoButtonAction");
+  [self.delegate didClickInfoButton:self];
 }
 
 - (void)addDataFromLocation:(IJLocation *)location {

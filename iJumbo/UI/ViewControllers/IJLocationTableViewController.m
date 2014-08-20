@@ -11,8 +11,9 @@
 #import "IJLocation.h"
 #import "IJLocationTableViewCell.h"
 #import "IJLocationViewController.h"
+#import "IJMapViewController.h"
 
-@interface IJLocationTableViewController () <NSFetchedResultsControllerDelegate, UISearchBarDelegate>
+@interface IJLocationTableViewController () <NSFetchedResultsControllerDelegate, UISearchBarDelegate, IJLocationTableViewCellDelegate, IJMapViewControllerDelegate>
 @property(nonatomic) NSFetchedResultsController *fetchedResultsController;
 @property(nonatomic) UISearchBar *searchBar;
 @end
@@ -24,6 +25,7 @@
   self.searchBar = [[UISearchBar alloc] initWithFrame:CGRectMake(0, 0, self.view.width, 40)];
   self.searchBar.delegate = self;
   self.searchBar.barTintColor = kIJumboBlue;
+  self.searchBar.tintColor = [UIColor whiteColor];
   [self.view addSubview:self.searchBar];
   self.tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, self.searchBar.maxY, self.view.width, self.view.height - self.searchBar.height - self.navigationController.navigationBar.maxY)];
   self.tableView.delegate = self;
@@ -32,11 +34,34 @@
   self.view.backgroundColor = [UIColor clearColor];
   self.tableView.backgroundColor = [UIColor clearColor];
   self.tableView.separatorColor = [UIColor clearColor];
+  
+  UIBarButtonItem *mapButton = [[UIBarButtonItem alloc] initWithTitle:@"Map"
+                                                                style:UIBarButtonItemStylePlain
+                                                               target:self
+                                                               action:@selector(showMap)];
+
   // TODO(amadou): Get search bar up there.
   self.title = @"Places";
   self.navigationController.navigationBarHidden = NO;
+  [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(showSearchBarCancelButton) name:UIKeyboardWillShowNotification object:nil];
+  [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(hideSearchBarCancelButton) name:UIKeyboardWillHideNotification object:nil];
   [self.tableView reloadData];
   [self loadData];
+}
+
+- (void)showMap {
+  // TODO(amadou): Have the map zoomed into the campus.
+  // TODO(amadou): Map should show current location.
+  // Ask for permission the first time the map launches.
+  [self.navigationController pushViewController:[[IJMapViewController alloc] init] animated:YES];
+}
+
+- (void)showSearchBarCancelButton {
+  [self.searchBar setShowsCancelButton:YES animated:YES];
+}
+
+- (void)hideSearchBarCancelButton {
+  [self.searchBar setShowsCancelButton:NO animated:YES];
 }
 
 - (void)animateHideView {
@@ -84,6 +109,7 @@
   IJLocationTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
   if (!cell) {
     cell = [[IJLocationTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier];
+    cell.delegate = self;
   }
   IJLocation *location = [self.fetchedResultsController objectAtIndexPath:indexPath];
   [cell addDataFromLocation:location];
@@ -132,8 +158,8 @@
     NSSortDescriptor *sectionSort = [[NSSortDescriptor alloc] initWithKey:@"section" ascending:YES];
     NSArray *sortDescriptors = @[sectionSort, nameSort];
     [fetchRequest setSortDescriptors:sortDescriptors];
-    // TODO(amadou): Create ophan checker to delete objects that do not match this predicate.
-    fetchRequest.predicate = [NSPredicate predicateWithFormat:@"name != nil AND section != nil"];
+    
+    fetchRequest.predicate = [IJLocationTableViewController defaultPredicate];
     
     _fetchedResultsController =
         [[NSFetchedResultsController alloc] initWithFetchRequest:fetchRequest
@@ -149,6 +175,68 @@
     [self.tableView mainThreadReload];
   }
   return _fetchedResultsController;
+}
+
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView {
+  if ([self.searchBar isFirstResponder]) {
+    [self.searchBar resignFirstResponder];
+  }
+}
+
+#pragma mark - IJTableViewCellDelegate
+
+- (void)didClickInfoButton:(IJLocationTableViewCell *)cell {
+  NSIndexPath *indexPath = [self.tableView indexPathForCell:cell];
+  [self tableView:self.tableView didSelectRowAtIndexPath:indexPath];
+}
+
+- (void)didClickMapButton:(IJLocationTableViewCell *)cell {
+  NSIndexPath *indexPath = [self.tableView indexPathForCell:cell];
+  // TODO(amadou): Should pass this location to mapVC to display.
+  // Map VC should take an arary of IJLocations and display them on the map in viewDidLoad.
+  IJLocation *location = [self.fetchedResultsController objectAtIndexPath:indexPath];
+  IJMapViewController *mapVC = [[IJMapViewController alloc] init];
+  mapVC.delegate = self;
+  [self.navigationController pushViewController:mapVC animated:YES];
+}
+
+#pragma mark - IJMapViewControllerDelegate
+
+- (void)mapViewController:(IJMapViewController *)mapVC didSearchForText:(NSString *)text {
+  [self.navigationController popViewControllerAnimated:YES];
+  self.searchBar.text = text;
+  [self searchBarSearchButtonClicked:self.searchBar];
+}
+
+#pragma mark - UISearchBarDelegate
+
+- (void)searchBarCancelButtonClicked:(UISearchBar *)searchBar {
+  self.searchBar.text = @"";
+  [self.searchBar resignFirstResponder];
+}
+
+- (void)searchBarSearchButtonClicked:(UISearchBar *)searchBar {
+  self.fetchedResultsController.fetchRequest.predicate =
+      [NSPredicate predicateWithFormat:@"name CONTAINS[c] %@", self.searchBar.text];
+  NSError *error;
+  [self.fetchedResultsController performFetch:&error];
+  [self.tableView reloadData];
+  [self.searchBar resignFirstResponder];
+}
+
+- (void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText {
+  if (searchText.length == 0) {
+    self.fetchedResultsController.fetchRequest.predicate =
+        [IJLocationTableViewController defaultPredicate];
+    NSError *error;
+    [self.fetchedResultsController performFetch:&error];
+    [self.tableView reloadData];
+  }
+}
+
+// TODO(amadou): Create ophan checker to delete objects that do not match this predicate.
++ (NSPredicate*)defaultPredicate {
+  return [NSPredicate predicateWithFormat:@"name != nil AND section != nil"];
 }
 
 @end

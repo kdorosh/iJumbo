@@ -12,7 +12,16 @@
 
 static const int kLocationTableViewCellHeight = 40;
 
+@class IJLocationTableViewCell;
+
+@protocol IJLocationTableViewCellDelegate <NSObject>
+- (void)didClickInfoButton:(IJLocationTableViewCell*)cell;
+- (void)didClickMapButton:(IJLocationTableViewCell*)cell;
+@end
+
 @interface IJLocationTableViewCell : UITableViewCell
+
+@property(nonatomic) id<IJLocationTableViewCellDelegate> delegate;
 
 - (void)addDataFromLocation:(IJLocation *)location;
 

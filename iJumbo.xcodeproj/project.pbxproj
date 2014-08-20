@@ -61,6 +61,7 @@
 		C8FB4FC419A24BC500AC043F /* UIView+Position.m in Sources */ = {isa = PBXBuildFile; fileRef = C8FB4FC319A24BC500AC043F /* UIView+Position.m */; };
 		C8FB4FC819A2D64600AC043F /* IJViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C8FB4FC719A2D64600AC043F /* IJViewController.m */; };
 		C8FB4FCB19A311F400AC043F /* IJWebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C8FB4FCA19A311F400AC043F /* IJWebViewController.m */; };
+		C8FB4FD119A465F000AC043F /* IJMapViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C8FB4FD019A465F000AC043F /* IJMapViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -157,6 +158,8 @@
 		C8FB4FC719A2D64600AC043F /* IJViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = IJViewController.m; path = iJumbo/UI/ViewControllers/IJViewController.m; sourceTree = "<group>"; };
 		C8FB4FC919A311F400AC043F /* IJWebViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = IJWebViewController.h; path = iJumbo/UI/ViewControllers/IJWebViewController.h; sourceTree = "<group>"; };
 		C8FB4FCA19A311F400AC043F /* IJWebViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = IJWebViewController.m; path = iJumbo/UI/ViewControllers/IJWebViewController.m; sourceTree = "<group>"; };
+		C8FB4FCF19A465F000AC043F /* IJMapViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = IJMapViewController.h; path = iJumbo/UI/ViewControllers/IJMapViewController.h; sourceTree = "<group>"; };
+		C8FB4FD019A465F000AC043F /* IJMapViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = IJMapViewController.m; path = iJumbo/UI/ViewControllers/IJMapViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -384,6 +387,8 @@
 				C8FB4FC719A2D64600AC043F /* IJViewController.m */,
 				C8FB4FC919A311F400AC043F /* IJWebViewController.h */,
 				C8FB4FCA19A311F400AC043F /* IJWebViewController.m */,
+				C8FB4FCF19A465F000AC043F /* IJMapViewController.h */,
+				C8FB4FD019A465F000AC043F /* IJMapViewController.m */,
 			);
 			name = ViewControllers;
 			sourceTree = "<group>";
@@ -535,6 +540,7 @@
 				C8F0077E199DD872006B7DC4 /* IJHelper.m in Sources */,
 				C87E7CD3198C566500366DF7 /* iJumbo.xcdatamodeld in Sources */,
 				C8FB4FC819A2D64600AC043F /* IJViewController.m in Sources */,
+				C8FB4FD119A465F000AC043F /* IJMapViewController.m in Sources */,
 				C852A6A919A1099B0048B1C3 /* IJLocationTableViewCell.m in Sources */,
 				C8FB4FC119A24A5400AC043F /* IJLocationViewController.m in Sources */,
 				C8F00783199DDB3F006B7DC4 /* IJHomeViewController.m in Sources */,
