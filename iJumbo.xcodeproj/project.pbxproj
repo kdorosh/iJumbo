@@ -62,6 +62,7 @@
 		C8FB4FC819A2D64600AC043F /* IJViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C8FB4FC719A2D64600AC043F /* IJViewController.m */; };
 		C8FB4FCB19A311F400AC043F /* IJWebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C8FB4FCA19A311F400AC043F /* IJWebViewController.m */; };
 		C8FB4FD119A465F000AC043F /* IJMapViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C8FB4FD019A465F000AC043F /* IJMapViewController.m */; };
+		C8FB4FD419A46F3100AC043F /* IJEventViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C8FB4FD319A46F3100AC043F /* IJEventViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -160,6 +161,8 @@
 		C8FB4FCA19A311F400AC043F /* IJWebViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = IJWebViewController.m; path = iJumbo/UI/ViewControllers/IJWebViewController.m; sourceTree = "<group>"; };
 		C8FB4FCF19A465F000AC043F /* IJMapViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = IJMapViewController.h; path = iJumbo/UI/ViewControllers/IJMapViewController.h; sourceTree = "<group>"; };
 		C8FB4FD019A465F000AC043F /* IJMapViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = IJMapViewController.m; path = iJumbo/UI/ViewControllers/IJMapViewController.m; sourceTree = "<group>"; };
+		C8FB4FD219A46F3100AC043F /* IJEventViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = IJEventViewController.h; path = iJumbo/UI/ViewControllers/IJEventViewController.h; sourceTree = "<group>"; };
+		C8FB4FD319A46F3100AC043F /* IJEventViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = IJEventViewController.m; path = iJumbo/UI/ViewControllers/IJEventViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -389,6 +392,8 @@
 				C8FB4FCA19A311F400AC043F /* IJWebViewController.m */,
 				C8FB4FCF19A465F000AC043F /* IJMapViewController.h */,
 				C8FB4FD019A465F000AC043F /* IJMapViewController.m */,
+				C8FB4FD219A46F3100AC043F /* IJEventViewController.h */,
+				C8FB4FD319A46F3100AC043F /* IJEventViewController.m */,
 			);
 			name = ViewControllers;
 			sourceTree = "<group>";
@@ -565,6 +570,7 @@
 				C852A6AF19A18CF30048B1C3 /* IJLink.m in Sources */,
 				C8D67FB9199EE342001C4FD2 /* IJNewsTableViewController.m in Sources */,
 				C8F0076B199DD47A006B7DC4 /* IJServer.m in Sources */,
+				C8FB4FD419A46F3100AC043F /* IJEventViewController.m in Sources */,
 				C8487AD119A07399008F034E /* IJRecord.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

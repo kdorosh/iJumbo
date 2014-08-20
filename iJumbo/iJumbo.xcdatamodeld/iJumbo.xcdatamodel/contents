@@ -18,7 +18,11 @@
     </entity>
     <entity name="IJEvent" representedClassName="IJEvent" syncable="YES">
         <attribute name="date" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="desc" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="desc" optional="YES" attributeType="String" syncable="YES">
+            <userInfo>
+                <entry key="MMRecordAttributeAlternateNameKey" value="description"/>
+            </userInfo>
+        </attribute>
         <attribute name="end" optional="YES" attributeType="Date" syncable="YES"/>
         <attribute name="id" optional="YES" attributeType="String" syncable="YES">
             <userInfo>
@@ -75,7 +79,7 @@
     </entity>
     <elements>
         <element name="IJArticle" positionX="-36" positionY="9" width="128" height="148"/>
-        <element name="IJEvent" positionX="-63" positionY="-18" width="128" height="163"/>
+        <element name="IJEvent" positionX="-63" positionY="-18" width="128" height="165"/>
         <element name="IJFoodItem" positionX="-54" positionY="-9" width="128" height="45"/>
         <element name="IJHours" positionX="-36" positionY="45" width="128" height="165"/>
         <element name="IJLink" positionX="-36" positionY="72" width="128" height="75"/>
