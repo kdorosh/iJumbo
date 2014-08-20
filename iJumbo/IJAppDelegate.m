@@ -38,6 +38,7 @@
   self.navcon.delegate = self;
   self.navcon.navigationBar.barTintColor = kIJumboBlue;
   self.navcon.navigationBar.tintColor = [UIColor whiteColor];
+  self.navcon.navigationBar.shadowImage = [[UIImage alloc] init];
   [self.navcon setNavigationBarHidden:YES animated:NO];
   UIView *whiteView = [[UIView alloc] initWithFrame:CGRectMake(self.window.maxX, 0, self.window.frame.size.width, self.window.frame.size.height)];
   whiteView.backgroundColor = [UIColor colorWithWhite:1 alpha:0.28];

@@ -20,6 +20,7 @@
 {
   self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
   if (self) {
+    self.selectionStyle = UITableViewCellSelectionStyleNone;
     UIView *backView = [[UIView alloc] initWithFrame:CGRectZero];
     self.backgroundView = backView;
     self.backgroundColor = [UIColor clearColor];

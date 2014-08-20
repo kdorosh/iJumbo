@@ -12,15 +12,23 @@
 #import "IJLocationTableViewCell.h"
 #import "IJLocationViewController.h"
 
-@interface IJLocationTableViewController () <NSFetchedResultsControllerDelegate>
+@interface IJLocationTableViewController () <NSFetchedResultsControllerDelegate, UISearchBarDelegate>
 @property(nonatomic) NSFetchedResultsController *fetchedResultsController;
+@property(nonatomic) UISearchBar *searchBar;
 @end
 
 @implementation IJLocationTableViewController
 
 - (void)viewDidLoad {
   [super viewDidLoad];
-  [self addTableViewWithDelegate:self];
+  self.searchBar = [[UISearchBar alloc] initWithFrame:CGRectMake(0, 0, self.view.width, 40)];
+  self.searchBar.delegate = self;
+  self.searchBar.barTintColor = kIJumboBlue;
+  [self.view addSubview:self.searchBar];
+  self.tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, self.searchBar.maxY, self.view.width, self.view.height - self.searchBar.height - self.navigationController.navigationBar.maxY)];
+  self.tableView.delegate = self;
+  self.tableView.dataSource = self;
+  [self.view addSubview:self.tableView];
   self.view.backgroundColor = [UIColor clearColor];
   self.tableView.backgroundColor = [UIColor clearColor];
   self.tableView.separatorColor = [UIColor clearColor];
@@ -87,7 +95,11 @@
   UITableViewHeaderFooterView *header = [tableView dequeueReusableHeaderFooterViewWithIdentifier:headerIdentifier];
   if (!header) {
     header = [[UITableViewHeaderFooterView alloc] initWithReuseIdentifier:headerIdentifier];
-    header.contentView.backgroundColor = [UIColor colorWithRed:26/255.0f green:191/255.0f blue:237/255.0 alpha:0.5];
+    header.contentView.backgroundColor = [UIColor colorWithRed:26/255.0f green:191/255.0f blue:237/255.0 alpha:0.75];
+    header.tintColor = header.contentView.backgroundColor;
+    UIView *backView = [[UIView alloc] initWithFrame:CGRectZero];
+    header.backgroundView = backView;
+    header.alpha = 0.1;
     const int padding = 20;
     UILabel *sectionTitle = [[UILabel alloc] initWithFrame:CGRectMake(padding, 0, tableView.frame.size.width - (2 * padding), kLocationTableViewCellHeight)];
     [sectionTitle setTextColor:[UIColor whiteColor]];
@@ -120,8 +132,8 @@
     NSSortDescriptor *sectionSort = [[NSSortDescriptor alloc] initWithKey:@"section" ascending:YES];
     NSArray *sortDescriptors = @[sectionSort, nameSort];
     [fetchRequest setSortDescriptors:sortDescriptors];
-    [fetchRequest setIncludesPropertyValues:YES];
-    [fetchRequest setReturnsObjectsAsFaults:NO];
+    // TODO(amadou): Create ophan checker to delete objects that do not match this predicate.
+    fetchRequest.predicate = [NSPredicate predicateWithFormat:@"name != nil AND section != nil"];
     
     _fetchedResultsController =
         [[NSFetchedResultsController alloc] initWithFetchRequest:fetchRequest

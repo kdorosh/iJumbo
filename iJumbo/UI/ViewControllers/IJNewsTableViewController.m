@@ -121,7 +121,9 @@ static NSString * const kNewsObserverActionSheetText = @"Observer";
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
   IJArticle *article = [self.fetchedResultsController objectAtIndexPath:indexPath];
-  [self.navigationController pushViewController:[[IJWebViewController alloc] initWithURL:article.link] animated:YES];
+  IJWebViewController *webVC = [[IJWebViewController alloc] initWithURL:article.link];
+  webVC.title = article.source;
+  [self.navigationController pushViewController:webVC animated:YES];
 }
 
 - (void)updateFetchRequestForSource:(NSString *)source {

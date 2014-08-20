@@ -43,7 +43,7 @@ static NSDateFormatter *kEventsTableDateFormatter;
 }
 
 - (void)setupDateNavigationBar {
-  UIView *dateNavigationBar = [[UIView alloc] initWithFrame:CGRectMake(0, self.navigationController.navigationBar.maxY, self.view.frame.size.width, kEventsDateNavigationBarHeight)];
+  UIView *dateNavigationBar = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, kEventsDateNavigationBarHeight)];
   self.dateLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, dateNavigationBar.frame.size.width, dateNavigationBar.frame.size.height)];
   self.dateLabel.textAlignment = NSTextAlignmentCenter;
   self.dateLabel.font = [UIFont fontWithName:@"Roboto-Light" size:20];

@@ -37,7 +37,7 @@
   UIView *container = [transitionContext containerView];
   UIView *toView = toVC.view;
   CGSize toSize = toView.frame.size;
-  toView.frame = CGRectMake(container.maxX, 0, toSize.width, toSize.height);
+  toView.frame = CGRectMake(container.maxX, toView.frame.origin.y, toSize.width, toSize.height);
   BOOL fromHome = [fromVC isKindOfClass:[IJHomeViewController class]];
   if (fromHome) {
     whiteView.alpha = 1;
@@ -46,7 +46,7 @@
   CGPoint newFromCenter = CGPointMake(fromVC.view.center.x - fromVC.view.frame.size.width / 4.0f, fromVC.view.center.y);
   [container addSubview:toView];
   [UIView animateWithDuration:[self transitionDuration:transitionContext] animations:^{
-    toView.frame = CGRectMake(0, 0, toSize.width, toSize.height);
+    toView.frame = CGRectMake(0, toView.frame.origin.y, toSize.width, toSize.height);
     fromVC.view.center = newFromCenter;
     fromVC.view.alpha = 0;
     if (fromHome) {
@@ -74,11 +74,11 @@
 
   UIView *container = [transitionContext containerView];
   CGRect origFrame = toVC.view.frame;
-  toVC.view.frame = CGRectMake(-origFrame.size.width / 4.0f, 0, origFrame.size.width, origFrame.size.height);
+  toVC.view.frame = CGRectMake(-origFrame.size.width / 4.0f, origFrame.origin.y, origFrame.size.width, origFrame.size.height);
   [container insertSubview:toVC.view belowSubview:fromVC.view];
   CGSize fromSize = fromVC.view.frame.size;
   BOOL toHome = [toVC isKindOfClass:[IJHomeViewController class]];
-  CGRect poppedFrame = CGRectMake(container.maxX, 0, fromSize.width, fromSize.height);
+  CGRect poppedFrame = CGRectMake(container.maxX, fromVC.view.frame.origin.y, fromSize.width, fromSize.height);
   [UIView animateWithDuration:[self transitionDuration:transitionContext] animations:^{
     fromVC.view.frame = poppedFrame;
     toVC.view.alpha = 1;

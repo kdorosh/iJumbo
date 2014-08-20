@@ -19,4 +19,12 @@
   return self.frame.origin.y + self.frame.size.height;
 }
 
+- (CGFloat)width {
+  return self.frame.size.width;
+}
+
+- (CGFloat)height {
+  return self.frame.size.height;
+}
+
 @end

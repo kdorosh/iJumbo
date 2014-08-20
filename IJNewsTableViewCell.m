@@ -21,6 +21,7 @@ static const CGFloat kNewsTableViewCellImageWidth = 120;
 - (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier {
   self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
   if (self) {
+    self.selectionStyle = UITableViewCellSelectionStyleNone;
     UIView *backView = [[UIView alloc] initWithFrame:CGRectZero];
     self.backgroundView = backView;
     self.backgroundColor = [UIColor clearColor];

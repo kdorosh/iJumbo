@@ -19,6 +19,7 @@
 
 - (void)viewDidLoad {
   [super viewDidLoad];
+  self.title = @"Links";
   [self addTableViewWithDelegate:self];
   self.tableView.backgroundColor = [UIColor clearColor];
   self.tableView.separatorColor = [UIColor clearColor];

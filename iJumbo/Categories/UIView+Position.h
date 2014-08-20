@@ -14,5 +14,7 @@
 - (CGFloat)maxY;
 // origin.x + size.width
 - (CGFloat)maxX;
+- (CGFloat)width;
+- (CGFloat)height;
 
 @end

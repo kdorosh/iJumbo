@@ -14,6 +14,11 @@
 
 @implementation IJViewController
 
+- (void)viewDidLoad {
+  [super viewDidLoad];
+  self.edgesForExtendedLayout = UIRectEdgeNone;
+}
+
 - (void)animateShowView {
   [UIView animateWithDuration:kIJViewControllerAnimationTime animations:^{
     self.view.alpha = 0;
@@ -28,7 +33,7 @@
 
 - (void)addTableViewWithDelegate:(id<UITableViewDelegate, UITableViewDataSource>)delegate {
   CGSize viewSize = self.view.frame.size;
-  self.tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, self.navigationController.navigationBar.maxY, viewSize.width, viewSize.height)];
+  self.tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, viewSize.width, viewSize.height)];
   // Subclasses might implement these functions
   self.tableView.delegate = delegate;
   self.tableView.dataSource = delegate;

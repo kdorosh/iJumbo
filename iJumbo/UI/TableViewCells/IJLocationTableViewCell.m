@@ -12,6 +12,7 @@
 @property(nonatomic) UILabel *nameLabel;
 @property(nonatomic) UIButton *mapButton;
 @property(nonatomic) UIButton *infoButton;
+@property(nonatomic) IJLocation *location;
 @end
 
 @implementation IJLocationTableViewCell
@@ -19,6 +20,7 @@
 - (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier {
   self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
   if (self) {
+    self.selectionStyle = UITableViewCellSelectionStyleNone;
     const CGFloat padding = 20;
     CGSize cellSize = self.frame.size;
     CGFloat width_third = (cellSize.width - (2 * padding))/3.0f;
@@ -44,6 +46,9 @@
     _mapButton.titleLabel.font = [UIFont fontWithName:@"Roboto-Light" size:15];
     _infoButton.titleLabel.font = [UIFont fontWithName:@"Roboto-Light" size:15];
     
+    [_mapButton addTarget:self action:@selector(mapButtonAction) forControlEvents:UIControlEventTouchUpInside];
+    [_infoButton addTarget:self action:@selector(infoButtonAction) forControlEvents:UIControlEventTouchUpInside];
+    
     [self addSubview:_nameLabel];
     [self addSubview:_mapButton];
     [self addSubview:_infoButton];
@@ -51,10 +56,16 @@
   return self;
 }
 
+- (void)mapButtonAction {
+  NSAssert(NO, @"code -mapButtonAction");
+}
+
+- (void)infoButtonAction {
+  NSAssert(NO, @"code -infoButtonAction");
+}
+
 - (void)addDataFromLocation:(IJLocation *)location {
-  if (!location.section) {
-    NSLog(@"%@", location);
-  }
+  self.location = location;
   self.nameLabel.text = location.name;
 }
 
