@@ -38,7 +38,8 @@ static const int padding = 20;
   // and delete it when there is a memory warning.
   NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
   // TODO(amadou): Add am/pm.
-  [dateFormatter setDateFormat:@"HH:mm"];
+  dateFormatter.locale = [[NSLocale alloc] initWithLocaleIdentifier:@"en_GB"];
+  [dateFormatter setDateFormat:@"hh:mma"];
   if (self.event.end) {
     time = [NSString stringWithFormat:@"%@-%@", [dateFormatter stringFromDate:self.event.start], [dateFormatter stringFromDate:self.event.end]];
   } else {

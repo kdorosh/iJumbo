@@ -8,9 +8,11 @@
 
 #import "IJRecord.h"
 
+#import <MapKit/MapKit.h>
+
 @class IJHours;
 
-@interface IJLocation : IJRecord
+@interface IJLocation : IJRecord <MKAnnotation>
 
 // Attributes.
 @property(nonatomic) NSNumber *latitude;

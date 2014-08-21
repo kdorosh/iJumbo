@@ -58,7 +58,9 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
   IJLink *link = self.links[indexPath.row];
-  [self.navigationController pushViewController:[[IJWebViewController alloc] initWithURL:link.url] animated:YES];
+  IJWebViewController *webVC = [[IJWebViewController alloc] initWithURL:link.url];
+  webVC.title = link.name;
+  [self.navigationController pushViewController:webVC animated:YES];
 }
 
 @end

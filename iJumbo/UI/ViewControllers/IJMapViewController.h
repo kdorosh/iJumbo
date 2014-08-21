@@ -18,6 +18,8 @@
 
 @property(nonatomic) id<IJMapViewControllerDelegate> delegate;
 
-// TODO(amadou): Make a function to setup the locations from an array of IJLocations.
+- (instancetype)initWithLocations:(NSArray *)locations;
+- (void)removeLocationsFromMap;
+- (void)addLocationsToMap:(NSArray *)locations;
 
 @end

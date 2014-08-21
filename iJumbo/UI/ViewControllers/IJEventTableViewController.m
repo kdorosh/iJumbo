@@ -191,7 +191,7 @@ static NSDateFormatter *kEventsTableDateFormatter;
     // Configure the request's entity, and optionally its predicate.
     // TODO(amadou): set the date on the backend and enable this again - causing a crash.
     fetchRequest.predicate = [NSPredicate predicateWithFormat:@"date == %@ AND start > %@", self.dateLabel.text, [NSDate dateWithTimeIntervalSince1970:[self.date timeIntervalSince1970] - kEventsDateSecondsInOneDay]];
-    NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"start" ascending:NO];
+    NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"start" ascending:YES];
     NSArray *sortDescriptors = @[sortDescriptor];
     [fetchRequest setSortDescriptors:sortDescriptors];
     fetchRequest.fetchBatchSize = 25;

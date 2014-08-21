@@ -70,8 +70,17 @@ static const CGFloat kNewsTableViewCellImageWidth = 120;
   } else {
     self.authorLabel.text = @"";
   }
-  // TODO(amadou): add images to the urls.
-  //[IJServer getImageAtURL:article. success:<#^(UIImage *image)success#> failure:<#^(NSError *error)failure#>]
+  if (!self.article.imageURL)
+    return;
+  NSString *imageURL = [self.article.imageURL copy];
+  [IJServer getImageAtURL:article.imageURL success:^(UIImage *image) {
+    // Only change the image if it is still for the current url.
+    if ([imageURL isEqualToString:self.article.imageURL]) {
+      self.imageView.image = image;
+    }
+  } failure:^(NSError *error) {
+    NSLog(@"Image failed %@", error);
+  }];
 }
 
 - (void)setTitleText:(NSString *)text {

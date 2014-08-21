@@ -196,7 +196,7 @@
   // TODO(amadou): Should pass this location to mapVC to display.
   // Map VC should take an arary of IJLocations and display them on the map in viewDidLoad.
   IJLocation *location = [self.fetchedResultsController objectAtIndexPath:indexPath];
-  IJMapViewController *mapVC = [[IJMapViewController alloc] init];
+  IJMapViewController *mapVC = [[IJMapViewController alloc] initWithLocations:@[location]];
   mapVC.delegate = self;
   [self.navigationController pushViewController:mapVC animated:YES];
 }

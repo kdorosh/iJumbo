@@ -8,6 +8,7 @@
                 <entry key="MMRecordAttributeAlternateNameKey" value="_id"/>
             </userInfo>
         </attribute>
+        <attribute name="imageURL" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="link" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="posted" optional="YES" attributeType="Date" syncable="YES"/>
         <attribute name="source" optional="YES" attributeType="String" syncable="YES"/>
@@ -78,7 +79,7 @@
         <attribute name="start" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
     </entity>
     <elements>
-        <element name="IJArticle" positionX="-36" positionY="9" width="128" height="148"/>
+        <element name="IJArticle" positionX="-36" positionY="9" width="128" height="165"/>
         <element name="IJEvent" positionX="-63" positionY="-18" width="128" height="165"/>
         <element name="IJFoodItem" positionX="-54" positionY="-9" width="128" height="45"/>
         <element name="IJHours" positionX="-36" positionY="45" width="128" height="165"/>

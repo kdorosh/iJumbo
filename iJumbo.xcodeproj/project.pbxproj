@@ -346,9 +346,9 @@
 		C8F0077F199DD878006B7DC4 /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
+				C8B7FFEF199FE2200004FE76 /* IJVariables.h */,
 				C8F0077C199DD872006B7DC4 /* IJHelper.h */,
 				C8F0077D199DD872006B7DC4 /* IJHelper.m */,
-				C8B7FFEF199FE2200004FE76 /* IJVariables.h */,
 				C841812219A58CAE007EB13E /* IJCacheManager.h */,
 				C841812319A58CAE007EB13E /* IJCacheManager.m */,
 			);

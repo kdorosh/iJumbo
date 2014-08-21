@@ -33,6 +33,7 @@
 
 - (void)viewDidLoad {
   [super viewDidLoad];
+  self.title = @"Info";
   NSAssert(self.location, @"Must initialize with -initWithLocation: with a valid location.");
   CGSize viewSize = self.view.frame.size;
   self.edgesForExtendedLayout = UIRectEdgeNone;
