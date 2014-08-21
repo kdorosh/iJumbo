@@ -10,4 +10,8 @@
 
 @interface IJServer : MMServer
 
++ (void)getImageAtURL:(NSString*)url
+              success:(void (^)(UIImage *image))success
+              failure:(void (^)(NSError *error))failure;
+
 @end

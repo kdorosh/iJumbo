@@ -10,6 +10,7 @@
 
 #import "IJEvent.h"
 #import "IJEventTableViewCell.h"
+#import "IJEventViewController.h"
 #import "IJHelper.h"
 
 static const int kEventsDateNavigationBarHeight = 44;
@@ -21,6 +22,7 @@ static NSDateFormatter *kEventsTableDateFormatter;
 @property(nonatomic) UILabel *dateLabel;
 @property(nonatomic) NSDate *date;
 @property(nonatomic) NSFetchedResultsController *fetchedResultsController;
+@property(nonatomic) UIDatePicker *datePicker;
 @end
 
 @implementation IJEventTableViewController
@@ -29,6 +31,18 @@ static NSDateFormatter *kEventsTableDateFormatter;
   [super viewDidLoad];
   self.title = @"Events";
   [self addTableViewWithDelegate:self];
+  
+  UIBarButtonItem *calendarBarButton = [[UIBarButtonItem alloc] initWithTitle:@"Calendar" style:UIBarButtonItemStylePlain target:self action:@selector(showCalendar:)];
+  self.navigationItem.rightBarButtonItem = calendarBarButton;
+  
+  self.datePicker = [[UIDatePicker alloc] init];
+  self.datePicker.frame = CGRectMake(0, self.view.height, self.view.width, self.datePicker.height);
+  self.datePicker.backgroundColor = [UIColor whiteColor];
+  self.datePicker.date = [NSDate date];
+  self.datePicker.datePickerMode = UIDatePickerModeDate;
+  [self.datePicker addTarget:self action:@selector(dateChanged:) forControlEvents:UIControlEventValueChanged];
+  [self.view addSubview:self.datePicker];
+  
   CGPoint tableCenter = self.tableView.center;
   CGPoint newTableCenter = CGPointMake(tableCenter.x, tableCenter.y + kEventsDateNavigationBarHeight);
   self.tableView.center = newTableCenter;
@@ -40,6 +54,26 @@ static NSDateFormatter *kEventsTableDateFormatter;
   self.date = [NSDate date];
   [self.tableView reloadData];
   [self loadData];
+}
+
+- (void)dateChanged:(id)sender {
+  self.date = self.datePicker.date;
+}
+
+- (void)showCalendar:(id)sender {
+  self.navigationItem.rightBarButtonItem.title = @"Hide";
+  [self.navigationItem.rightBarButtonItem setAction:@selector(hideCalendar:)];
+  [UIView animateWithDuration:0.35 animations:^{
+    self.datePicker.frame = CGRectMake(0, self.view.height - self.datePicker.height, self.datePicker.width, self.datePicker.height);
+  }];
+}
+
+- (void)hideCalendar:(id)sender {
+  self.navigationItem.rightBarButtonItem.title = @"Calendar";
+  [self.navigationItem.rightBarButtonItem setAction:@selector(showCalendar:)];
+  [UIView animateWithDuration:0.35 animations:^{
+    self.datePicker.frame = CGRectMake(0, self.view.height, self.datePicker.width, self.datePicker.height);
+  }];
 }
 
 - (void)setupDateNavigationBar {
@@ -118,7 +152,8 @@ static NSDateFormatter *kEventsTableDateFormatter;
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
   IJEvent* event = [self.fetchedResultsController objectAtIndexPath:indexPath];
-  NSLog(@"Event: %@", event);
+  IJEventViewController *eventVC = [[IJEventViewController alloc] initWithEvent:event];
+  [self.navigationController pushViewController:eventVC animated:YES];
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -136,7 +171,7 @@ static NSDateFormatter *kEventsTableDateFormatter;
     self.dateLabel.text = dateString;
     [self updateFetchRequestForDate:dateString];
   }
-  
+  self.datePicker.date = _date;
 }
 
 - (void)updateFetchRequestForDate:(NSString *)dateString {
@@ -155,7 +190,7 @@ static NSDateFormatter *kEventsTableDateFormatter;
     NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] initWithEntityName:NSStringFromClass([IJEvent class])];
     // Configure the request's entity, and optionally its predicate.
     // TODO(amadou): set the date on the backend and enable this again - causing a crash.
-    fetchRequest.predicate = [NSPredicate predicateWithFormat:@"date == %@", self.dateLabel.text];
+    fetchRequest.predicate = [NSPredicate predicateWithFormat:@"date == %@ AND start > %@", self.dateLabel.text, [NSDate dateWithTimeIntervalSince1970:[self.date timeIntervalSince1970] - kEventsDateSecondsInOneDay]];
     NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"start" ascending:NO];
     NSArray *sortDescriptors = @[sortDescriptor];
     [fetchRequest setSortDescriptors:sortDescriptors];

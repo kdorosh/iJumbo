@@ -8,6 +8,8 @@
 
 #import "IJServer.h"
 #import <AFNetworking/AFNetworking.h>
+#import <UIKit/UIKit.h>
+#import "IJCacheManager.h"
 
 static NSString * const kBaseURL = @"http://ijumbo.herokuapp.com/api/";
 
@@ -39,5 +41,24 @@ static NSString * const kBaseURL = @"http://ijumbo.herokuapp.com/api/";
     failureBlock(error);
   }];
 }
+
++ (void)getImageAtURL:(NSString*)url
+              success:(void (^)(UIImage *image))success
+              failure:(void (^)(NSError *error))failure {
+  UIImage* cachedImage = [IJCacheManager getImageForURL:url];
+  if (cachedImage) {
+    success(cachedImage);
+    return;
+  }
+  AFHTTPRequestOperationManager* httpManager = [[AFHTTPRequestOperationManager alloc] init];
+  httpManager.responseSerializer = [AFImageResponseSerializer serializer];
+  [httpManager GET:url parameters:nil success:^(AFHTTPRequestOperation *operation, UIImage* image) {
+    [IJCacheManager cacheImage:image forURL:url];
+    success(image);
+  } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+    failure(error);
+  }];
+}
+
 
 @end

@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		51717AB18D3441268926AA6D /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0027185B941C4F758572F481 /* libPods.a */; };
+		C841812419A58CAE007EB13E /* IJCacheManager.m in Sources */ = {isa = PBXBuildFile; fileRef = C841812319A58CAE007EB13E /* IJCacheManager.m */; };
 		C8487ACE19A06F10008F034E /* IJEventTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = C8487ACD19A06F10008F034E /* IJEventTableViewCell.m */; };
 		C8487AD119A07399008F034E /* IJRecord.m in Sources */ = {isa = PBXBuildFile; fileRef = C8487AD019A07399008F034E /* IJRecord.m */; };
 		C852A6A619A0FCD20048B1C3 /* UITableView+MainThreadReload.m in Sources */ = {isa = PBXBuildFile; fileRef = C852A6A519A0FCD20048B1C3 /* UITableView+MainThreadReload.m */; };
@@ -78,6 +79,8 @@
 /* Begin PBXFileReference section */
 		0027185B941C4F758572F481 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		433B59560D494C359551A7CC /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = "<group>"; };
+		C841812219A58CAE007EB13E /* IJCacheManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = IJCacheManager.h; path = Helpers/IJCacheManager.h; sourceTree = "<group>"; };
+		C841812319A58CAE007EB13E /* IJCacheManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = IJCacheManager.m; path = Helpers/IJCacheManager.m; sourceTree = "<group>"; };
 		C8487ACC19A06F10008F034E /* IJEventTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = IJEventTableViewCell.h; path = iJumbo/UI/TableViewCells/IJEventTableViewCell.h; sourceTree = "<group>"; };
 		C8487ACD19A06F10008F034E /* IJEventTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = IJEventTableViewCell.m; path = iJumbo/UI/TableViewCells/IJEventTableViewCell.m; sourceTree = "<group>"; };
 		C8487ACF19A07399008F034E /* IJRecord.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = IJRecord.h; path = Models/IJRecord.h; sourceTree = "<group>"; };
@@ -346,6 +349,8 @@
 				C8F0077C199DD872006B7DC4 /* IJHelper.h */,
 				C8F0077D199DD872006B7DC4 /* IJHelper.m */,
 				C8B7FFEF199FE2200004FE76 /* IJVariables.h */,
+				C841812219A58CAE007EB13E /* IJCacheManager.h */,
+				C841812319A58CAE007EB13E /* IJCacheManager.m */,
 			);
 			name = Helpers;
 			sourceTree = "<group>";
@@ -554,6 +559,7 @@
 				C8F00788199DDDE6006B7DC4 /* IJLocationTableViewController.m in Sources */,
 				C8FB4FC419A24BC500AC043F /* UIView+Position.m in Sources */,
 				C8FB4FCB19A311F400AC043F /* IJWebViewController.m in Sources */,
+				C841812419A58CAE007EB13E /* IJCacheManager.m in Sources */,
 				C8D67FBC199EE3EB001C4FD2 /* IJArticle.m in Sources */,
 				C87E7CCC198C566500366DF7 /* main.m in Sources */,
 				C8F0077B199DD735006B7DC4 /* IJRange.m in Sources */,

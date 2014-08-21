@@ -7,6 +7,7 @@
 //
 
 #import "IJNewsTableViewCell.h"
+#import "IJServer.h"
 
 static const CGFloat kNewsTableViewCellImageWidth = 120;
 
@@ -14,6 +15,7 @@ static const CGFloat kNewsTableViewCellImageWidth = 120;
 @property(nonatomic) UILabel *titleLabel;
 @property(nonatomic) UILabel *authorLabel;
 @property(nonatomic) CGRect originalTitleLabelFrame;
+@property(nonatomic) IJArticle *article;
 @end
 
 @implementation IJNewsTableViewCell
@@ -61,12 +63,15 @@ static const CGFloat kNewsTableViewCellImageWidth = 120;
 }
 
 - (void)addDataFromArticle:(IJArticle *)article {
+  self.article = article;
   [self setTitleText:article.title];
   if (article.author) {
     self.authorLabel.text = [NSString stringWithFormat:@"by %@", article.author];
   } else {
     self.authorLabel.text = @"";
   }
+  // TODO(amadou): add images to the urls.
+  //[IJServer getImageAtURL:article. success:<#^(UIImage *image)success#> failure:<#^(NSError *error)failure#>]
 }
 
 - (void)setTitleText:(NSString *)text {

@@ -39,6 +39,7 @@
                                                                 style:UIBarButtonItemStylePlain
                                                                target:self
                                                                action:@selector(showMap)];
+  self.navigationItem.rightBarButtonItem = mapButton;
 
   // TODO(amadou): Get search bar up there.
   self.title = @"Places";
