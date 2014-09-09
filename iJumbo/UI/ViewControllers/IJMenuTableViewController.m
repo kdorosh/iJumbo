@@ -9,6 +9,7 @@
 #import "IJMenuTableViewController.h"
 
 #import "IJFoodItem.h"
+#import "IJFoodItemTableViewCell.h"
 #import "IJMenuSection.h"
 #import "IJTableViewHeaderFooterView.h"
 
@@ -93,6 +94,7 @@ typedef NS_ENUM(NSInteger, IJDiningHall) {
   self.tableView.delegate = self;
   self.tableView.dataSource = self;
   self.tableView.backgroundColor = [UIColor clearColor];
+  self.tableView.separatorColor = [UIColor clearColor];
   
   //self.tableView.separatorColor = [UIColor clearColor];
   [self.view addSubview:self.tableView];
@@ -172,16 +174,16 @@ typedef NS_ENUM(NSInteger, IJDiningHall) {
 - (UITableViewCell*)tableView:(UITableView *)tableView
         cellForRowAtIndexPath:(NSIndexPath  *)indexPath {
   static NSString *cellID = @"MenuTableViewControllerCellID";
-  UITableViewCell *cell = [self.tableView dequeueReusableCellWithIdentifier:cellID];
+  IJFoodItemTableViewCell *cell = [self.tableView dequeueReusableCellWithIdentifier:cellID];
   if (!cell) {
-    cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle
+    cell = [[IJFoodItemTableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle
                                   reuseIdentifier:cellID];
   }
   id <NSFetchedResultsSectionInfo> sectionInfo = [[self.fetchedResultsController sections] objectAtIndex:0];
   NSArray *menuSections = [sectionInfo objects];
   IJMenuSection *menuSection = menuSections[indexPath.section];
   IJFoodItem *foodItem = [menuSection.foodItems.allObjects objectAtIndex:indexPath.row];
-  cell.textLabel.text = foodItem.name;
+  [cell addDataFromFoodItem:foodItem];
   return cell;
 }
 
@@ -202,7 +204,7 @@ typedef NS_ENUM(NSInteger, IJDiningHall) {
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-  return 30;
+  return kFoodItemTableViewCellHeight;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {

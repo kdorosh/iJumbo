@@ -110,7 +110,8 @@
   NSString *cellIdentifier = @"LocationCell";
   IJLocationTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
   if (!cell) {
-    cell = [[IJLocationTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier];
+    cell = [[IJLocationTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault
+                                          reuseIdentifier:cellIdentifier];
     cell.delegate = self;
   }
   IJLocation *location = [self.fetchedResultsController objectAtIndexPath:indexPath];
@@ -135,6 +136,7 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
   IJLocation *location = [self.fetchedResultsController objectAtIndexPath:indexPath];
+  NSLog(@"%@", location);
   IJLocationViewController *locationViewController = [[IJLocationViewController alloc] initWithLocation:location];
   [self.navigationController pushViewController:locationViewController animated:YES];
 }
