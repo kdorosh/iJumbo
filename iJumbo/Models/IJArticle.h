@@ -16,7 +16,6 @@
 @property(nonatomic) NSDate *posted;
 @property(nonatomic) NSString *source;
 @property(nonatomic) NSString *title;
-@property(nonatomic) NSString *imageURL;
 
 + (void)getArticlesWithSuccessBlock:(void (^)(NSArray *articles))successBlock
                        failureBlock:(void (^)(NSError *error))errorBlock;

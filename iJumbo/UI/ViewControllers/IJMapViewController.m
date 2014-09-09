@@ -12,7 +12,7 @@
 
 @interface IJMapViewController () <UISearchBarDelegate, MKMapViewDelegate>
 @property(nonatomic) MKMapView *mapView;
-@property(nonatomic) NSArray *locations;
+@property(nonatomic) NSMutableArray *locations;
 @end
 
 @implementation IJMapViewController
@@ -20,40 +20,60 @@
 - (instancetype)initWithLocations:(NSArray *)locations {
   self = [super init];
   if (self) {
-    self.locations = locations;
+    self.locations = [locations mutableCopy];
   }
   return self;
 }
 
 - (void)viewDidLoad {
   [super viewDidLoad];
+  self.edgesForExtendedLayout = UIRectEdgeNone;
   UISearchBar *searchBar = [[UISearchBar alloc] initWithFrame:CGRectMake(0, 0, self.view.width, 40)];
   searchBar.barTintColor = kIJumboBlue;
   searchBar.tintColor = [UIColor whiteColor];
   searchBar.delegate = self;
   self.mapView = [[MKMapView alloc] initWithFrame:CGRectMake(0, searchBar.maxY, self.view.width, self.view.height - searchBar.height)];
   self.mapView.delegate = self;
+  self.mapView.zoomEnabled = YES;
+  // TODO(amadou): Wait until they click on the current location button.
+  // Once that happens set a default that tracks this. And show if they have agreed.
+  if (YES) // Use default here.
+    self.mapView.showsUserLocation = YES;
+  [self.mapView setRegion:[self tuftsRegion] animated:NO];
   [self.view addSubview:searchBar];
   [self.view addSubview:self.mapView];
   if (self.locations) {
-    [self addLocationsToMap:self.locations];
+    [self.mapView showAnnotations:self.locations animated:YES];
   }
+}
+
+// Zooms the map view into the Tufts campus.
+- (MKCoordinateRegion)tuftsRegion {
+  CLLocationCoordinate2D center;
+  center.latitude = 42.405524;
+  center.longitude = -71.119802;
+  MKCoordinateSpan span;
+  span.latitudeDelta  = 0.017;
+  span.longitudeDelta = 0.017;
+  MKCoordinateRegion region;
+  region.center = center;
+  region.span = span;
+  return region;
 }
 
 - (void)removeLocationsFromMap {
   [self.mapView removeAnnotations:self.mapView.annotations];
 }
 
-- (void)addLocationsToMap:(NSArray *)locations {
-  for (IJLocation *location in locations) {
-    [self.mapView addAnnotation:location];
-  }
+- (void)addLocationToMap:(IJLocation *)location {
+  // TODO(amadou): Should drop the pin and zoom into it.
+  [self.mapView addAnnotation:location];  
 }
 
 #pragma mark - MKMapViewDelegate
 
 - (MKAnnotationView *)mapView:(MKMapView *)mapView viewForAnnotation:(id<MKAnnotation>)annotation {
-  static NSString * const identifier = @"AnnotationIdentifier";
+  static NSString * const identifier = @"IJMapVCAnnotationIdentifier";
   if ([annotation isKindOfClass:[IJLocation class]]) {
     MKAnnotationView *annotationView = [mapView dequeueReusableAnnotationViewWithIdentifier:identifier];
     if (!annotationView) {

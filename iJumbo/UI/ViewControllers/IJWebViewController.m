@@ -26,7 +26,8 @@
 
 - (void)viewDidLoad {
   [super viewDidLoad];
-  _webView = [[UIWebView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height)];
+  self.edgesForExtendedLayout = UIRectEdgeNone;
+  _webView = [[UIWebView alloc] initWithFrame:CGRectMake(0, 0, self.view.width, self.view.height - self.navigationController.navigationBar.height - 20)];
   _webView.delegate = self;
   _webView.backgroundColor = [UIColor clearColor];
   // TODO(amadou): Lolz - change this.

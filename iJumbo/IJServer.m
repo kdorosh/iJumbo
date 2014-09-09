@@ -11,8 +11,6 @@
 #import <UIKit/UIKit.h>
 #import "IJCacheManager.h"
 
-static NSString * const kBaseURL = @"http://ijumbo.herokuapp.com/api/";
-
 @implementation IJServer
 
 + (void)startRequestWithURN:(NSString *)URN
@@ -61,5 +59,17 @@ static NSString * const kBaseURL = @"http://ijumbo.herokuapp.com/api/";
   }];
 }
 
++ (void)getJSONAtURL:(NSString *)url
+             success:(void (^)(id object))success
+             failure:(void (^)(NSError *error))failure {
+  NSAssert(url && success && failure, @"Must pass all parameters.");
+  AFHTTPRequestOperationManager *manager = [[AFHTTPRequestOperationManager alloc] init];
+  manager.responseSerializer = [AFJSONResponseSerializer serializer];
+  [manager GET:url parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
+    success(responseObject);
+  } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+    failure(error);
+  }];
+}
 
 @end

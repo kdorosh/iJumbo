@@ -16,7 +16,7 @@
 
 - (void)viewDidLoad {
   [super viewDidLoad];
-  self.edgesForExtendedLayout = UIRectEdgeNone;
+  self.edgesForExtendedLayout = UIRectEdgeNone ;
 }
 
 - (void)animateShowView {
@@ -33,7 +33,10 @@
 
 - (void)addTableViewWithDelegate:(id<UITableViewDelegate, UITableViewDataSource>)delegate {
   CGSize viewSize = self.view.frame.size;
-  self.tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, viewSize.width, viewSize.height)];
+  self.tableView = [[UITableView alloc] initWithFrame:CGRectMake(0,
+                                                                 0,
+                                                                 viewSize.width,
+                                                                 viewSize.height - self.navigationController.navigationBar.maxY)];
   // Subclasses might implement these functions
   self.tableView.delegate = delegate;
   self.tableView.dataSource = delegate;

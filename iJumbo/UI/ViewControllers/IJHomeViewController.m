@@ -11,6 +11,7 @@
 #import "IJEventTableViewController.h"
 #import "IJLinkTableViewController.h"
 #import "IJLocationTableViewController.h"
+#import "IJMenuTableViewController.h"
 #import "IJNewsTableViewController.h"
 
 #import "UIView+AddSubviews.h"
@@ -167,7 +168,8 @@ static const CGFloat kSeparatorBarWidth = 1.5;
 }
 
 - (void)pushMenus {
-  NSLog(@"please code me :(");
+  [self.navigationController pushViewController:[[IJMenuTableViewController alloc] init]
+                                       animated:YES];
 }
 
 - (void)pushTransportation {

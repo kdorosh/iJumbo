@@ -8,10 +8,16 @@
 
 #import "MMServer.h"
 
+static NSString * const kBaseURL = @"http://ijumbo.herokuapp.com/api/";
+
 @interface IJServer : MMServer
 
 + (void)getImageAtURL:(NSString*)url
               success:(void (^)(UIImage *image))success
               failure:(void (^)(NSError *error))failure;
+
++ (void)getJSONAtURL:(NSString *)url
+             success:(void (^)(id object))success
+             failure:(void (^)(NSError *error))failure;
 
 @end

@@ -13,5 +13,67 @@
             stopOnStyle = "0">
          </BreakpointContent>
       </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "iJumbo/IJServer.m"
+            timestampString = "431490167.87524"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "36"
+            endingLineNumber = "36"
+            landmarkName = "+startRequestWithURN:data:paged:domain:batched:dispatchGroup:responseBlock:failureBlock:"
+            landmarkType = "5">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "__99+[IJServer startRequestWithURN:data:paged:domain:batched:dispatchGroup:responseBlock:failureBlock:]_block_invoke"
+                  moduleName = "iJumbo"
+                  urlString = "file:///Users/amadou/Desktop/iJumbo/iJumbo/IJServer.m"
+                  timestampString = "431490167.998239"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "36"
+                  endingLineNumber = "36"
+                  offsetFromSymbolStart = "108">
+               </Location>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "__99+[IJServer startRequestWithURN:data:paged:domain:batched:dispatchGroup:responseBlock:failureBlock:]_block_invoke15"
+                  moduleName = "iJumbo"
+                  urlString = "file:///Users/amadou/Desktop/iJumbo/iJumbo/IJServer.m"
+                  timestampString = "431490167.998467"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "36"
+                  endingLineNumber = "36"
+                  offsetFromSymbolStart = "72">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "iJumbo/IJServer.m"
+            timestampString = "431490168.316162"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "37"
+            endingLineNumber = "37"
+            landmarkName = "+startRequestWithURN:data:paged:domain:batched:dispatchGroup:responseBlock:failureBlock:"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
    </Breakpoints>
 </Bucket>

@@ -24,9 +24,8 @@ static NSString * const kNewsObserverActionSheetText = @"Observer";
 
 - (void)viewDidLoad {
   [super viewDidLoad];
-  [self addTableViewWithDelegate:self];
   self.edgesForExtendedLayout = UIRectEdgeNone;
-//  self.view.backgroundColor = [UIColor colorWithWhite:1 alpha:0.28];
+  [self addTableViewWithDelegate:self];
   self.tableView.backgroundColor = self.view.backgroundColor;
   self.tableView.separatorColor = [UIColor clearColor];
   self.title = @"News";
@@ -53,6 +52,8 @@ static NSString * const kNewsObserverActionSheetText = @"Observer";
   return UIStatusBarStyleLightContent;
 }
 
+// TODO(amadou): when articles load for the first time ever, they do not show after loading
+// and also causes a crash.
 - (void)loadData {
   [self loadDailyArticles];
   [self loadObserverArticles];

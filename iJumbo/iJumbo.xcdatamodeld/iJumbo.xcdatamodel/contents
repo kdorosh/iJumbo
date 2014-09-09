@@ -1,14 +1,17 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="5064" systemVersion="13D65" minimumToolsVersion="Automatic" macOSVersion="Automatic" iOSVersion="Automatic">
     <entity name="IJArticle" representedClassName="IJArticle" syncable="YES">
-        <attribute name="articleID" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="articleID" optional="YES" attributeType="String" syncable="YES">
+            <userInfo>
+                <entry key="MMRecordAttributeAlternateNameKey" value="article_id"/>
+            </userInfo>
+        </attribute>
         <attribute name="author" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="id" optional="YES" attributeType="String" syncable="YES">
             <userInfo>
                 <entry key="MMRecordAttributeAlternateNameKey" value="_id"/>
             </userInfo>
         </attribute>
-        <attribute name="imageURL" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="link" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="posted" optional="YES" attributeType="Date" syncable="YES"/>
         <attribute name="source" optional="YES" attributeType="String" syncable="YES"/>
@@ -38,7 +41,52 @@
             <entry key="MMRecordEntityPrimaryAttributeKey" value="id"/>
         </userInfo>
     </entity>
-    <entity name="IJFoodItem" representedClassName="IJFoodItem" syncable="YES"/>
+    <entity name="IJFoodItem" representedClassName="IJFoodItem" syncable="YES">
+        <attribute name="allergens" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="calories" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+        <attribute name="carbs" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="cholestoral" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="fatCalories" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES">
+            <userInfo>
+                <entry key="MMRecordAttributeAlternateNameKey" value="fat_calories"/>
+            </userInfo>
+        </attribute>
+        <attribute name="fiber" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="id" optional="YES" attributeType="String" syncable="YES">
+            <userInfo>
+                <entry key="MMRecordAttributeAlternateNameKey" value="_id"/>
+            </userInfo>
+        </attribute>
+        <attribute name="ingredients" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="protein" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="saturatedFat" optional="YES" attributeType="String" syncable="YES">
+            <userInfo>
+                <entry key="MMRecordAttributeAlternateNameKey" value="saturated_fat"/>
+            </userInfo>
+        </attribute>
+        <attribute name="servingSize" optional="YES" attributeType="String" syncable="YES">
+            <userInfo>
+                <entry key="MMRecordAttributeAlternateNameKey" value="serving_size"/>
+            </userInfo>
+        </attribute>
+        <attribute name="sodium" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="sugar" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="totalFat" optional="YES" attributeType="String" syncable="YES">
+            <userInfo>
+                <entry key="MMRecordAttributeAlternateNameKey" value="total_fat"/>
+            </userInfo>
+        </attribute>
+        <attribute name="transFat" optional="YES" attributeType="String" syncable="YES">
+            <userInfo>
+                <entry key="MMRecordAttributeAlternateNameKey" value="trans_fat"/>
+            </userInfo>
+        </attribute>
+        <relationship name="menuSections" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="IJMenuSection" inverseName="foodItems" inverseEntity="IJMenuSection" syncable="YES"/>
+        <userInfo>
+            <entry key="MMRecordEntityPrimaryAttributeKey" value="id"/>
+        </userInfo>
+    </entity>
     <entity name="IJHours" representedClassName="IJHours" syncable="YES">
         <relationship name="friday" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="IJRange" syncable="YES"/>
         <relationship name="location" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="IJLocation" inverseName="hours" inverseEntity="IJLocation" syncable="YES"/>
@@ -74,17 +122,46 @@
             <entry key="MMRecordEntityPrimaryAttributeKey" value="id"/>
         </userInfo>
     </entity>
+    <entity name="IJMenuSection" representedClassName="IJMenuSection" syncable="YES">
+        <attribute name="date" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="diningHall" optional="YES" attributeType="String" syncable="YES">
+            <userInfo>
+                <entry key="MMRecordAttributeAlternateNameKey" value="dining_hall"/>
+            </userInfo>
+        </attribute>
+        <attribute name="id" optional="YES" attributeType="String" syncable="YES">
+            <userInfo>
+                <entry key="MMRecordAttributeAlternateNameKey" value="_id"/>
+            </userInfo>
+        </attribute>
+        <attribute name="meal" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="sectionNum" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES">
+            <userInfo>
+                <entry key="MMRecordAttributeAlternateNameKey" value="section_num"/>
+            </userInfo>
+        </attribute>
+        <relationship name="foodItems" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="IJFoodItem" inverseName="menuSections" inverseEntity="IJFoodItem" syncable="YES">
+            <userInfo>
+                <entry key="MMRecordAttributeAlternateNameKey" value="food_items"/>
+            </userInfo>
+        </relationship>
+        <userInfo>
+            <entry key="MMRecordEntityPrimaryAttributeKey" value="id"/>
+        </userInfo>
+    </entity>
     <entity name="IJRange" representedClassName="IJRange" syncable="YES">
         <attribute name="end" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
         <attribute name="start" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
     </entity>
     <elements>
-        <element name="IJArticle" positionX="-36" positionY="9" width="128" height="165"/>
+        <element name="IJArticle" positionX="-36" positionY="9" width="128" height="148"/>
         <element name="IJEvent" positionX="-63" positionY="-18" width="128" height="165"/>
-        <element name="IJFoodItem" positionX="-54" positionY="-9" width="128" height="45"/>
+        <element name="IJFoodItem" positionX="-54" positionY="-9" width="128" height="298"/>
         <element name="IJHours" positionX="-36" positionY="45" width="128" height="165"/>
         <element name="IJLink" positionX="-36" positionY="72" width="128" height="75"/>
         <element name="IJLocation" positionX="-18" positionY="27" width="128" height="178"/>
+        <element name="IJMenuSection" positionX="-36" positionY="81" width="128" height="148"/>
         <element name="IJRange" positionX="-27" positionY="72" width="128" height="75"/>
     </elements>
 </model>

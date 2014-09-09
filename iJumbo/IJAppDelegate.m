@@ -27,6 +27,7 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
   [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
+  [[UINavigationBar appearance] setShadowImage:[[UIImage alloc] init]];
   [MMRecord registerServerClass:[IJServer class]];
   [UIApplication sharedApplication].statusBarStyle = UIStatusBarStyleLightContent;
   self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
@@ -39,13 +40,15 @@
   self.navcon.navigationBar.barTintColor = kIJumboBlue;
   self.navcon.navigationBar.tintColor = [UIColor whiteColor];
   self.navcon.navigationBar.shadowImage = [[UIImage alloc] init];
+  self.navcon.navigationBar.translucent = NO;
   [self.navcon setNavigationBarHidden:YES animated:NO];
-  UIView *whiteView = [[UIView alloc] initWithFrame:CGRectMake(self.window.maxX, 0, self.window.frame.size.width, self.window.frame.size.height)];
+  UIView *whiteView =
+      [[UIView alloc] initWithFrame:CGRectMake(self.window.maxX, 0, self.window.frame.size.width, self.window.frame.size.height)];
   whiteView.backgroundColor = [UIColor colorWithWhite:1 alpha:0.28];
   [whiteView setTag:4];
   whiteView.alpha = 0;
   [self.window addSubview:whiteView];
-  
+
   self.navcon.navigationBar.translucent = NO;
 
   [self.navcon.navigationBar setTitleTextAttributes:@{NSForegroundColorAttributeName: [UIColor whiteColor]}];
@@ -54,7 +57,7 @@
   statusBar.backgroundColor = kIJumboBlue;
   [self.window makeKeyAndVisible];
   [self.window addSubview:statusBar];
-  
+
   return YES;
 }
 

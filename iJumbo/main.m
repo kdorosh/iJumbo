@@ -11,7 +11,7 @@
 #import "IJAppDelegate.h"
 
 int main(int argc, char * argv[]) {
-    @autoreleasepool {
-        return UIApplicationMain(argc, argv, nil, NSStringFromClass([IJAppDelegate class]));
-    }
+  @autoreleasepool {
+    return UIApplicationMain(argc, argv, nil, NSStringFromClass([IJAppDelegate class]));
+  }
 }

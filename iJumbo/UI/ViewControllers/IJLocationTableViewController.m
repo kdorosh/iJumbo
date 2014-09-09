@@ -12,6 +12,7 @@
 #import "IJLocationTableViewCell.h"
 #import "IJLocationViewController.h"
 #import "IJMapViewController.h"
+#import "IJTableViewHeaderFooterView.h"
 
 @interface IJLocationTableViewController () <NSFetchedResultsControllerDelegate, UISearchBarDelegate, IJLocationTableViewCellDelegate, IJMapViewControllerDelegate>
 @property(nonatomic) NSFetchedResultsController *fetchedResultsController;
@@ -119,24 +120,12 @@
 
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
   static NSString *headerIdentifier = @"LocationHeader";
-  UITableViewHeaderFooterView *header = [tableView dequeueReusableHeaderFooterViewWithIdentifier:headerIdentifier];
+  IJTableViewHeaderFooterView *header = [tableView dequeueReusableHeaderFooterViewWithIdentifier:headerIdentifier];
   if (!header) {
-    header = [[UITableViewHeaderFooterView alloc] initWithReuseIdentifier:headerIdentifier];
-    header.contentView.backgroundColor = [UIColor colorWithRed:26/255.0f green:191/255.0f blue:237/255.0 alpha:0.75];
-    header.tintColor = header.contentView.backgroundColor;
-    UIView *backView = [[UIView alloc] initWithFrame:CGRectZero];
-    header.backgroundView = backView;
-    header.alpha = 0.1;
-    const int padding = 20;
-    UILabel *sectionTitle = [[UILabel alloc] initWithFrame:CGRectMake(padding, 0, tableView.frame.size.width - (2 * padding), kLocationTableViewCellHeight)];
-    [sectionTitle setTextColor:[UIColor whiteColor]];
-    [sectionTitle setTag:1];
-    [sectionTitle setBackgroundColor:[UIColor clearColor]];
-    [header addSubview:sectionTitle];
+    header = [[IJTableViewHeaderFooterView alloc] initWithReuseIdentifier:headerIdentifier];
   }
-  UILabel *title = (UILabel*)[header viewWithTag:1];
   id<NSFetchedResultsSectionInfo> sectionInfo = self.fetchedResultsController.sections[section];
-  title.text = [sectionInfo name];
+  header.sectionTitleLabel.text = [sectionInfo name];
   return header;
 }
 
