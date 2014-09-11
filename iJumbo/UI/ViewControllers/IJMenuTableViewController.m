@@ -147,18 +147,14 @@ typedef NS_ENUM(NSInteger, IJMenuActionSheet) {
 #pragma mark - Network
 
 - (void)loadMenus {
-  [IJMenuSection getTodaysMenusWithSuccessBlock:^(NSArray *menuSections) {
-    NSError *error;
-    [self.fetchedResultsController performFetch:&error];
-    [self.tableView mainThreadReload];
-  } failureBlock:^(NSError *error) {
+  [IJMenuSection getTodaysMenusWithSuccessBlock:^(NSArray *menuSections) { }
+                                   failureBlock:^(NSError *error) {
     NSLog(@"Could not get menus: %@", error);
   }];
   NSDate *tomorrow = [NSDate dateWithTimeIntervalSinceNow:(60 * 60 * 24)];
   NSString *tomorrowsDateString = [self.dateFormatter stringFromDate:tomorrow];
-  [IJMenuSection getMenusForDate:tomorrowsDateString withSuccessBlock:^(NSArray *menuSections) {
-    [self.tableView mainThreadReload];
-  } failureBlock:^(NSError *error) {
+  [IJMenuSection getMenusForDate:tomorrowsDateString withSuccessBlock:^(NSArray *menuSections) { }
+                    failureBlock:^(NSError *error) {
     NSLog(@"Could not get menus for tomorrow: %@", error);
   }];
 }
@@ -166,11 +162,8 @@ typedef NS_ENUM(NSInteger, IJMenuActionSheet) {
 - (void)loadMenusForDate:(NSDate *)date {
   NSAssert(date, @"Date cannot be nil.");
   NSString *dateString = [self.dateFormatter stringFromDate:date];
-  [IJMenuSection getMenusForDate:dateString withSuccessBlock:^(NSArray *menuSections) {
-    NSError *error;
-    [self.fetchedResultsController performFetch:&error];
-    [self.tableView mainThreadReload];
-  } failureBlock:^(NSError *error) {
+  [IJMenuSection getMenusForDate:dateString withSuccessBlock:^(NSArray *menuSections) { }
+                    failureBlock:^(NSError *error) {
     NSLog(@"error getting menus for date %@", dateString);
   }];
 }
@@ -340,6 +333,18 @@ typedef NS_ENUM(NSInteger, IJMenuActionSheet) {
             dateString,
             self.hallBarButton.title,
             [self.mealSegment titleForSegmentAtIndex:self.mealSegment.selectedSegmentIndex]];
+}
+
+#pragma mark - NSFetchedResultsControllerDelegate
+
+- (void)controllerDidChangeContent:(NSFetchedResultsController *)controller {
+  NSError *error;
+  if (![self.fetchedResultsController performFetch:&error] || error) {
+    NSLog(@"There was as error updating the links.");
+    NSLog(@"%@", error);
+  } else {
+    [self.tableView mainThreadReload];
+  }
 }
 
 #pragma mark - Getters and Setters

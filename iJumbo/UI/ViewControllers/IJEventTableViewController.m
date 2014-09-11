@@ -18,7 +18,7 @@ static const int kEventsDateSecondsInOneDay = (60 * 60 * 24);
 
 static NSDateFormatter *kEventsTableDateFormatter;
 
-@interface IJEventTableViewController ()
+@interface IJEventTableViewController () <NSFetchedResultsControllerDelegate>
 @property(nonatomic) UILabel *dateLabel;
 @property(nonatomic) NSDate *date;
 @property(nonatomic) NSFetchedResultsController *fetchedResultsController;
@@ -116,11 +116,8 @@ static NSDateFormatter *kEventsTableDateFormatter;
 }
 
 - (void)loadData {
-  [IJEvent getEventsWithSuccessBlock:^(NSArray *events) {
-    NSError *error;
-    [self.fetchedResultsController performFetch:&error];
-    [self.tableView mainThreadReload];
-  } failureBlock:^(NSError *error) {
+  [IJEvent getEventsWithSuccessBlock:^(NSArray *events) { }
+                        failureBlock:^(NSError *error) {
     NSLog(@"Error getting events: %@", error);
   }];
 }
@@ -201,6 +198,7 @@ static NSDateFormatter *kEventsTableDateFormatter;
                                             managedObjectContext:context
                                               sectionNameKeyPath:nil
                                                        cacheName:nil];
+    _fetchedResultsController.delegate = self;
     NSError *error;
     BOOL success = [_fetchedResultsController performFetch:&error];
     if (!success) {
@@ -210,53 +208,16 @@ static NSDateFormatter *kEventsTableDateFormatter;
   return _fetchedResultsController;
 }
 
-//****************************************
-//****************************************
-#pragma mark - NSFetchedResultsController Delegate
-//****************************************
-//****************************************
-
-- (void)controllerWillChangeContent:(NSFetchedResultsController *)controller {
-  [self.tableView beginUpdates];
-}
-
-- (void)controller:(NSFetchedResultsController *)controller didChangeSection:(id <NSFetchedResultsSectionInfo>)sectionInfo
-           atIndex:(NSUInteger)sectionIndex forChangeType:(NSFetchedResultsChangeType)type {
-  switch(type) {
-    case NSFetchedResultsChangeInsert:
-      [self.tableView insertSections:[NSIndexSet indexSetWithIndex:sectionIndex]
-                    withRowAnimation:UITableViewRowAnimationFade];
-      break;
-    case NSFetchedResultsChangeDelete:
-      [self.tableView deleteSections:[NSIndexSet indexSetWithIndex:sectionIndex]
-                    withRowAnimation:UITableViewRowAnimationFade];
-      break;
-  }
-}
-
-- (void)controller:(NSFetchedResultsController *)controller didChangeObject:(id)anObject
-       atIndexPath:(NSIndexPath *)indexPath forChangeType:(NSFetchedResultsChangeType)type
-      newIndexPath:(NSIndexPath *)newIndexPath {
-  switch(type) {
-    case NSFetchedResultsChangeInsert:
-      [self.tableView insertRowsAtIndexPaths:[NSArray arrayWithObject:newIndexPath]
-                            withRowAnimation:UITableViewRowAnimationAutomatic];
-      break;
-    case NSFetchedResultsChangeDelete:
-      [self.tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath]
-                            withRowAnimation:UITableViewRowAnimationAutomatic];
-      break;
-    case NSFetchedResultsChangeUpdate:
-      [self.tableView reloadRowsAtIndexPaths:@[indexPath]
-                            withRowAnimation:UITableViewRowAnimationAutomatic];
-      break;
-    default:
-      break;
-  }
-}
+#pragma mark - NSFetchedResultsControllerDelegate
 
 - (void)controllerDidChangeContent:(NSFetchedResultsController *)controller {
-  [self.tableView endUpdates];
+  NSError *error;
+  if (![self.fetchedResultsController performFetch:&error] || error) {
+    NSLog(@"There was as error updating the links.");
+    NSLog(@"%@", error);
+  } else {
+    [self.tableView mainThreadReload];
+  }
 }
 
 @end

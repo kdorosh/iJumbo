@@ -83,11 +83,8 @@
 }
 
 - (void)loadData {
-  [IJLocation getLocationsWithSuccessBlock:^(NSArray *locations) {
-    NSError* error;
-    [self.fetchedResultsController performFetch:&error];
-    [self.tableView mainThreadReload];
-  } failureBlock:^(NSError *error) {
+  [IJLocation getLocationsWithSuccessBlock:^(NSArray *locations) { }
+                              failureBlock:^(NSError *error) {
     NSLog(@"Error: %@", error);
   }];
 }
@@ -229,6 +226,16 @@
 // TODO(amadou): Create ophan checker to delete objects that do not match this predicate.
 + (NSPredicate*)defaultPredicate {
   return [NSPredicate predicateWithFormat:@"name != nil AND section != nil"];
+}
+
+- (void)controllerDidChangeContent:(NSFetchedResultsController *)controller {
+  NSError *error;
+  if (![self.fetchedResultsController performFetch:&error] || error) {
+    NSLog(@"There was as error updating the locations.");
+    NSLog(@"%@", error);
+  } else {
+    [self.tableView mainThreadReload];
+  }
 }
 
 @end

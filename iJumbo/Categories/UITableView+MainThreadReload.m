@@ -11,7 +11,7 @@
 @implementation UITableView (MainThreadReload)
 
 - (void)mainThreadReload {
-  [self performSelectorOnMainThread:@selector(reloadData) withObject:nil waitUntilDone:NO];
+  [self performSelectorOnMainThread:@selector(reloadData) withObject:nil waitUntilDone:YES];
 }
 
 @end

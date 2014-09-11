@@ -15,7 +15,7 @@
 static NSString * const kNewsDailyActionSheetText = @"Daily";
 static NSString * const kNewsObserverActionSheetText = @"Observer";
 
-@interface IJNewsTableViewController () <UIActionSheetDelegate>
+@interface IJNewsTableViewController () <UIActionSheetDelegate, NSFetchedResultsControllerDelegate>
 @property(nonatomic) UIBarButtonItem *sourceBarButton;
 @property(nonatomic) NSFetchedResultsController *fetchedResultsController;
 @end
@@ -60,21 +60,15 @@ static NSString * const kNewsObserverActionSheetText = @"Observer";
 }
 
 - (void)loadDailyArticles {
-  [IJArticle getDailyArticlesWithSuccessBlock:^(NSArray *articles) {
-    NSError *error;
-    [self.fetchedResultsController performFetch:&error];
-    [self.tableView mainThreadReload];
-  } failureBlock:^(NSError *error) {
+  [IJArticle getDailyArticlesWithSuccessBlock:^(NSArray *articles) { }
+                                 failureBlock:^(NSError *error) {
     NSLog(@"News Daily Error: %@", error);
   }];
 }
 
 - (void)loadObserverArticles {
-  [IJArticle getObserverArticlesWithSuccessBlock:^(NSArray *articles) {
-    NSError *error;
-    [self.fetchedResultsController performFetch:&error];
-    [self.tableView mainThreadReload];
-  } failureBlock:^(NSError *error) {
+  [IJArticle getObserverArticlesWithSuccessBlock:^(NSArray *articles) { }
+                                    failureBlock:^(NSError *error) {
     NSLog(@"News Observer Error: %@", error);
   }];
 }
@@ -138,6 +132,18 @@ static NSString * const kNewsObserverActionSheetText = @"Observer";
   [self.tableView mainThreadReload];
 }
 
+- (void)controllerDidChangeContent:(NSFetchedResultsController *)controller {
+  NSError *error;
+  BOOL success = [self.fetchedResultsController performFetch:&error];
+  if (!success || error) {
+    NSLog(@"There was an error fetching articles: %@", error);
+  } else {
+    [self.tableView mainThreadReload];
+  }
+}
+
+#pragma mark - Getters/Setters
+
 - (NSFetchedResultsController*)fetchedResultsController {
   if (!_fetchedResultsController) {
     NSManagedObjectContext *context = [IJHelper mainContext];
@@ -154,6 +160,7 @@ static NSString * const kNewsObserverActionSheetText = @"Observer";
                                             managedObjectContext:context
                                               sectionNameKeyPath:nil
                                                        cacheName:nil];
+    _fetchedResultsController.delegate = self;
     NSError *error;
     BOOL success = [_fetchedResultsController performFetch:&error];
     if (!success) {

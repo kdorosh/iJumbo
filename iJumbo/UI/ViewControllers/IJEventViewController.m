@@ -59,15 +59,14 @@ static const int padding = 20;
   NSAssert(title, @"Must provide a title.");
   const int titleHeight = 20;
   const int labelWidth = self.view.width - (2 * padding);
-  UIFont * const font = [UIFont lightFontWithSize:16];
   UILabel* titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(padding, y, labelWidth, titleHeight)];
   titleLabel.text = title;
-  titleLabel.font = font;
+  titleLabel.font = [UIFont regularFontWithSize:17];;
   [self.scrollView addSubview:titleLabel];
   
   UILabel *detailsLabel = [[UILabel alloc] initWithFrame:CGRectMake(padding, titleLabel.maxX + padding, labelWidth, titleHeight)];
   detailsLabel.text = (details) ? details : @"N/A";
-  detailsLabel.font = font;
+  detailsLabel.font = [UIFont lightFontWithSize:17];
   detailsLabel.numberOfLines = 0;
   [detailsLabel sizeToFit];
   detailsLabel.frame = CGRectMake(padding, titleLabel.maxY + padding/2.0f , labelWidth, detailsLabel.height);

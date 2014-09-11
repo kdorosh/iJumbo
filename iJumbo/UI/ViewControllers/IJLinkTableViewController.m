@@ -11,8 +11,7 @@
 #import "IJLinkTableViewCell.h"
 #import "IJWebViewController.h"
 
-@interface IJLinkTableViewController ()
-@property(nonatomic) NSArray *links;
+@interface IJLinkTableViewController () <NSFetchedResultsControllerDelegate>
 @property(nonatomic) NSFetchedResultsController *fetchedResultsController;
 // dictionary<NSString url, IJWebViewController webView>
 @property(nonatomic) NSMutableDictionary *urlWebViewMap;
@@ -31,7 +30,6 @@
 
 - (void)loadData {
   [IJLink getLinksWithSuccessBlock:^(NSArray *links) {
-    self.links = links;
     [self.tableView mainThreadReload];
   } failureBlock:^(NSError *error) {
     NSLog(@"There was an error getting the link: %@", error);
@@ -68,9 +66,22 @@
   IJWebViewController *webVC = self.urlWebViewMap[link.url];
   if (!webVC) {
     webVC = [[IJWebViewController alloc] initWithURL:link.url];
+    self.urlWebViewMap[link.url] = webVC;
   }
   webVC.title = link.name;
   [self.navigationController pushViewController:webVC animated:YES];
+}
+
+#pragma mark - NSFetchedResultsControllerDelegate
+
+- (void)controllerDidChangeContent:(NSFetchedResultsController *)controller {
+  NSError *error;
+  if (![self.fetchedResultsController performFetch:&error] || error) {
+    NSLog(@"There was as error updating the links.");
+    NSLog(@"%@", error);
+  } else {
+    [self.tableView mainThreadReload];
+  }
 }
 
 #pragma mark - Getters/Setters
@@ -88,8 +99,9 @@
     _fetchedResultsController =
         [[NSFetchedResultsController alloc] initWithFetchRequest:fetchRequest
                                             managedObjectContext:context
-                                              sectionNameKeyPath:@"section"
+                                              sectionNameKeyPath:nil
                                                        cacheName:nil];
+    _fetchedResultsController.delegate = self;
     NSError *error;
     BOOL success = [_fetchedResultsController performFetch:&error];
     if (!success) {
