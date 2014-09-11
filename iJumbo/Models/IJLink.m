@@ -10,10 +10,10 @@
 #import "IJHelper.h"
 
 @implementation IJLink
+
 @dynamic name;
 @dynamic url;
-@dynamic
-firstSeen;
+@dynamic id;
 
 + (void)getLinksWithSuccessBlock:(void (^)(NSArray *locations))successBlock
                    failureBlock:(void (^)(NSError *error))errorBlock {

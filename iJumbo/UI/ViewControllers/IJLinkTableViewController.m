@@ -13,6 +13,9 @@
 
 @interface IJLinkTableViewController ()
 @property(nonatomic) NSArray *links;
+@property(nonatomic) NSFetchedResultsController *fetchedResultsController;
+// dictionary<NSString url, IJWebViewController webView>
+@property(nonatomic) NSMutableDictionary *urlWebViewMap;
 @end
 
 @implementation IJLinkTableViewController
@@ -38,11 +41,15 @@
 #pragma mark - Table view data source
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-  return 1;
+  return [[self.fetchedResultsController sections] count];
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-  return [self.links count];
+  if ([[self.fetchedResultsController sections] count] > 0) {
+    id <NSFetchedResultsSectionInfo> sectionInfo = [[self.fetchedResultsController sections] objectAtIndex:section];
+    return [sectionInfo numberOfObjects];
+  }
+  return 0;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -51,16 +58,54 @@
   if (!cell) {
     cell = [[IJLinkTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellID];
   }
-  IJLink *link = self.links[indexPath.row];
+  IJLink *link = [self.fetchedResultsController objectAtIndexPath:indexPath];
   [cell addDataFromLink:link];
   return cell;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-  IJLink *link = self.links[indexPath.row];
-  IJWebViewController *webVC = [[IJWebViewController alloc] initWithURL:link.url];
+  IJLink *link = [self.fetchedResultsController objectAtIndexPath:indexPath];
+  IJWebViewController *webVC = self.urlWebViewMap[link.url];
+  if (!webVC) {
+    webVC = [[IJWebViewController alloc] initWithURL:link.url];
+  }
   webVC.title = link.name;
   [self.navigationController pushViewController:webVC animated:YES];
 }
+
+#pragma mark - Getters/Setters
+
+- (NSFetchedResultsController*)fetchedResultsController {
+  if (!_fetchedResultsController) {
+    NSManagedObjectContext *context = [IJHelper mainContext];
+    NSFetchRequest *fetchRequest =
+        [[NSFetchRequest alloc] initWithEntityName:NSStringFromClass([IJLink class])];
+    // Configure the request's entity, and optionally its predicate.
+    NSSortDescriptor *idSort = [[NSSortDescriptor alloc] initWithKey:@"id"
+                                                             ascending:YES];
+    [fetchRequest setSortDescriptors:@[idSort]];
+
+    _fetchedResultsController =
+        [[NSFetchedResultsController alloc] initWithFetchRequest:fetchRequest
+                                            managedObjectContext:context
+                                              sectionNameKeyPath:@"section"
+                                                       cacheName:nil];
+    NSError *error;
+    BOOL success = [_fetchedResultsController performFetch:&error];
+    if (!success) {
+      NSLog(@"Error getting events from core data: %@", error);
+    }
+    [self.tableView mainThreadReload];
+  }
+  return _fetchedResultsController;
+}
+
+- (NSMutableDictionary *)urlWebViewMap {
+  if (!_urlWebViewMap) {
+    _urlWebViewMap = [NSMutableDictionary dictionary];
+  }
+  return _urlWebViewMap;
+}
+
 
 @end

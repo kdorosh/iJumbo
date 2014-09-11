@@ -11,7 +11,7 @@
 @interface IJLink : IJRecord
 @property(nonatomic) NSString *name;
 @property(nonatomic) NSString *url;
-@property(nonatomic) NSDate *firstSeen;
+@property(nonatomic) NSNumber *id;
 
 // Functions.
 + (void)getLinksWithSuccessBlock:(void (^)(NSArray *locations))successBlock
