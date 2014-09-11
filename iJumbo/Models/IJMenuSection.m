@@ -18,9 +18,21 @@
 @dynamic sectionNum;
 @dynamic foodItems;
 
-+ (void)getMenusWithSuccessBlock:(void (^)(NSArray *menuSections))successBlock
-                    failureBlock:(void (^)(NSError *error))failureBlock {
++ (void)getTodaysMenusWithSuccessBlock:(void (^)(NSArray *menuSections))successBlock
+                          failureBlock:(void (^)(NSError *error))failureBlock {
   [IJMenuSection startRequestWithURN:@"/menus"
+                                data:nil
+                             context:[IJHelper mainContext]
+                              domain:nil
+                         resultBlock:successBlock
+                        failureBlock:failureBlock];
+}
+
++ (void)getMenusForDate:(NSString *)date
+       withSuccessBlock:(void (^)(NSArray *menuSections))successBlock
+           failureBlock:(void (^)(NSError *error))failureBlock {
+  NSAssert(date, @"date must not be nil.");
+  [IJMenuSection startRequestWithURN:[@"menus/date/" stringByAppendingPathComponent:date]
                                 data:nil
                              context:[IJHelper mainContext]
                               domain:nil

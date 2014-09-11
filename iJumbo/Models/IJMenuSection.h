@@ -21,10 +21,14 @@
 @property(nonatomic) NSNumber *sectionNum;
 
 // Relationships.
-@property(nonatomic) NSMutableSet *foodItems;
+@property(nonatomic) NSSet *foodItems;
 
 // Functions.
-+ (void)getMenusWithSuccessBlock:(void (^)(NSArray *menuSections))successBlock
-                    failureBlock:(void (^)(NSError *error))failureBlock;
++ (void)getTodaysMenusWithSuccessBlock:(void (^)(NSArray *menuSections))successBlock
+                          failureBlock:(void (^)(NSError *error))failureBlock;
+
++ (void)getMenusForDate:(NSString *)date
+       withSuccessBlock:(void (^)(NSArray *menuSections))successBlock
+           failureBlock:(void (^)(NSError *error))failureBlock;
 
 @end

@@ -10,7 +10,7 @@
 
 #import "IJLocation.h"
 
-static const int kLocationTableViewCellHeight = 40;
+static const int kLocationTableViewCellHeight = 50;
 
 @class IJLocationTableViewCell;
 

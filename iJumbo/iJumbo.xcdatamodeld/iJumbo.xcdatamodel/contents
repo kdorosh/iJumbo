@@ -14,6 +14,7 @@
         </attribute>
         <attribute name="link" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="posted" optional="YES" attributeType="Date" syncable="YES"/>
+        <attribute name="section" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="source" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="title" optional="YES" attributeType="String" syncable="YES"/>
         <userInfo>
@@ -98,10 +99,11 @@
         <relationship name="wednesday" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="IJRange" syncable="YES"/>
     </entity>
     <entity name="IJLink" representedClassName="IJLink" syncable="YES">
+        <attribute name="id" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
         <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="url" optional="YES" attributeType="String" syncable="YES"/>
         <userInfo>
-            <entry key="MMRecordEntityPrimaryAttributeKey" value="url"/>
+            <entry key="MMRecordEntityPrimaryAttributeKey" value="id"/>
         </userInfo>
     </entity>
     <entity name="IJLocation" representedClassName="IJLocation" syncable="YES">
@@ -155,11 +157,11 @@
         <attribute name="start" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
     </entity>
     <elements>
-        <element name="IJArticle" positionX="-36" positionY="9" width="128" height="148"/>
+        <element name="IJArticle" positionX="-36" positionY="9" width="128" height="163"/>
         <element name="IJEvent" positionX="-63" positionY="-18" width="128" height="165"/>
         <element name="IJFoodItem" positionX="-54" positionY="-9" width="128" height="298"/>
         <element name="IJHours" positionX="-36" positionY="45" width="128" height="165"/>
-        <element name="IJLink" positionX="-36" positionY="72" width="128" height="75"/>
+        <element name="IJLink" positionX="-36" positionY="72" width="128" height="88"/>
         <element name="IJLocation" positionX="-18" positionY="27" width="128" height="178"/>
         <element name="IJMenuSection" positionX="-36" positionY="81" width="128" height="148"/>
         <element name="IJRange" positionX="-27" positionY="72" width="128" height="75"/>

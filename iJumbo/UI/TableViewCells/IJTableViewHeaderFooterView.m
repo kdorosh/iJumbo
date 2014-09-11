@@ -25,6 +25,7 @@
     [self.sectionTitleLabel setTextColor:[UIColor whiteColor]];
     [self.sectionTitleLabel setTag:1];
     [self.sectionTitleLabel setBackgroundColor:[UIColor clearColor]];
+    self.sectionTitleLabel.font = [UIFont regularFontWithSize:18];
     [self addSubview:self.sectionTitleLabel];
   }
   return self;

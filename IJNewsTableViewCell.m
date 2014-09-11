@@ -9,12 +9,15 @@
 #import "IJNewsTableViewCell.h"
 #import "IJServer.h"
 
-static const CGFloat kNewsTableViewCellImageWidth = 120;
+static NSDateFormatter *kNewsCellDateFormatter;
 
 @interface IJNewsTableViewCell ()
 @property(nonatomic) UILabel *titleLabel;
 @property(nonatomic) UILabel *authorLabel;
 @property(nonatomic) CGRect originalTitleLabelFrame;
+@property(nonatomic) CGRect originalSectionLabelFrame;
+@property(nonatomic) UILabel *dateLabel;
+@property(nonatomic) UILabel *sectionLabel;
 @property(nonatomic) IJArticle *article;
 @end
 
@@ -28,34 +31,41 @@ static const CGFloat kNewsTableViewCellImageWidth = 120;
     self.backgroundView = backView;
     self.backgroundColor = [UIColor clearColor];
     CGFloat width = self.frame.size.width;
-    CGFloat contentInset = 5;
     
+    CGFloat contentInsetX = 10;
+    CGFloat contentInsetY = 4;
+
     UIView *contentView =
         [[UIView alloc] initWithFrame:
-            CGRectMake(contentInset, contentInset, width - (2 * contentInset), kNewsTableViewCellHeight - (2 * contentInset))];
+            CGRectMake(contentInsetX, contentInsetY, width - (2 * contentInsetX), kNewsTableViewCellHeight - (2 * contentInsetY))];
     contentView.backgroundColor = kIJumboGrey;
-    CGSize contentSize = contentView.frame.size;
-    
-    self.imageView.frame = CGRectMake(0, 0, kNewsTableViewCellImageWidth, contentSize.height);
-    self.imageView.backgroundColor = [UIColor blackColor];
-    self.imageView.image = nil;
-    UIView *imageBack = [[UIView alloc] initWithFrame:self.imageView.frame];
-    imageBack.backgroundColor = [UIColor darkGrayColor];
-    [imageBack addSubview:self.imageView];
-    [self.imageView removeFromSuperview];
-    [contentView addSubview:imageBack];
-    CGFloat imageWidth = self.imageView.frame.size.width;
-    self.titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(contentInset + imageWidth, contentInset, contentSize.width - (2 * contentInset) - imageWidth, contentSize.height - (2 * contentInset))];
+    width = contentView.width;
+
+    self.titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(contentInsetX, contentInsetY, 3 * width / 4.0f - 20, contentView.height/2.0f)];
     self.titleLabel.numberOfLines = 0;
-    self.titleLabel.textColor = [UIColor blackColor];
-    self.titleLabel.font = [UIFont fontWithName:@"Roboto-Light" size:13];
+    self.titleLabel.textColor = [UIColor colorWithWhite:0 alpha:0.65];
+    self.titleLabel.font = [UIFont regularFontWithSize:15];
+    
+    self.sectionLabel = [[UILabel alloc] initWithFrame:CGRectMake(3 * width / 4, contentInsetY, width / 4.0f - 10, contentView.height/5.0f)];
+    self.originalSectionLabelFrame = self.sectionLabel.frame;
+    self.sectionLabel.font = [UIFont regularFontWithSize:12];
+    self.sectionLabel.numberOfLines = 0;
+    self.sectionLabel.textAlignment = NSTextAlignmentRight;
+    self.sectionLabel.textColor = [UIColor colorWithWhite:0 alpha:0.55];
+
+    self.dateLabel = [[UILabel alloc ] initWithFrame:CGRectMake(contentInsetX, self.titleLabel.maxY, self.titleLabel.width, kNewsTableViewCellHeight/4)];
+    self.dateLabel.font = [UIFont lightFontWithSize:12];
+
     self.originalTitleLabelFrame = self.titleLabel.frame;
     CGSize titleSize = self.titleLabel.frame.size;
-    self.authorLabel = [[UILabel alloc] initWithFrame:CGRectMake(contentInset + imageWidth, kNewsTableViewCellHeight - (5.5 * contentInset), titleSize.width, kNewsTableViewCellHeight - titleSize.height)];
-    self.authorLabel.font = [UIFont fontWithName:@"Roboto-Light" size:10];
+    const CGFloat authorHeight = kNewsTableViewCellHeight/4.0f;
+    self.authorLabel = [[UILabel alloc] initWithFrame:CGRectMake(contentInsetX, contentView.height -  authorHeight, titleSize.width, authorHeight)];
+    self.authorLabel.font = [UIFont lightFontWithSize:12];
     self.authorLabel.textColor = [UIColor colorWithWhite:0 alpha:0.70];
     [contentView addSubview:self.titleLabel];
     [contentView addSubview:self.authorLabel];
+    [contentView addSubview:self.dateLabel];
+    [contentView addSubview:self.sectionLabel];
     self.authorLabel.text = @"";
     [self addSubview:contentView];
   }
@@ -65,17 +75,35 @@ static const CGFloat kNewsTableViewCellImageWidth = 120;
 - (void)addDataFromArticle:(IJArticle *)article {
   self.article = article;
   [self setTitleText:article.title];
+  [self setSectionText:article.section];
   if (article.author) {
     self.authorLabel.text = [NSString stringWithFormat:@"by %@", article.author];
   } else {
-    self.authorLabel.text = @"";
+    self.authorLabel.text = @"N/A";
   }
+  if (!kNewsCellDateFormatter) {
+    kNewsCellDateFormatter = [[NSDateFormatter alloc] init];
+    [kNewsCellDateFormatter setDateFormat:@"MMM, d YYYY"];
+  }
+  self.dateLabel.text = [kNewsCellDateFormatter stringFromDate:article.posted];
 }
 
 - (void)setTitleText:(NSString *)text {
   self.titleLabel.frame = self.originalTitleLabelFrame;
   self.titleLabel.text = text;
   [self.titleLabel sizeToFit];
+  if (self.titleLabel.height > self.originalTitleLabelFrame.size.height) {
+    self.titleLabel.frame = self.originalTitleLabelFrame;
+  }
+  self.dateLabel.frame = CGRectMake(self.titleLabel.frame.origin.x, self.titleLabel.maxY - 4, 3 * self.width / 4, kNewsTableViewCellHeight/4.0f);
+}
+
+- (void)setSectionText:(NSString *)text {
+  self.sectionLabel.text = text;
+  self.sectionLabel.frame = self.originalSectionLabelFrame;
+  [self.sectionLabel sizeToFit];
+  CGPoint oldCenter = self.sectionLabel.center;
+  self.sectionLabel.center = CGPointMake(self.sectionLabel.superview.width - self.sectionLabel.width / 2.0f - 10, oldCenter.y);
 }
 
 @end

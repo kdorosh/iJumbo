@@ -80,12 +80,12 @@ static NSDateFormatter *kEventsTableDateFormatter;
   UIView *dateNavigationBar = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, kEventsDateNavigationBarHeight)];
   self.dateLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, dateNavigationBar.frame.size.width, dateNavigationBar.frame.size.height)];
   self.dateLabel.textAlignment = NSTextAlignmentCenter;
-  self.dateLabel.font = [UIFont fontWithName:@"Roboto-Light" size:20];
-  self.dateLabel.textColor = [UIColor colorWithWhite:0 alpha:0.8];
+  self.dateLabel.font = [UIFont regularFontWithSize:20];
+  self.dateLabel.textColor = [UIColor colorWithWhite:0 alpha:0.7];
   [dateNavigationBar addSubview:self.dateLabel];
   const CGFloat arrowWidth = 50;
   const CGFloat arrowHeight = 20;
-  const CGFloat arrowPadding = 20;
+  const CGFloat arrowPadding = 10;
   const CGFloat arrow_y = (kEventsDateNavigationBarHeight / 2) - (arrowHeight / 2);
   // TODO(amadou): Make buttons bigger. They are hard to click as of now.
   

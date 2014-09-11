@@ -59,7 +59,7 @@ static const int padding = 20;
   NSAssert(title, @"Must provide a title.");
   const int titleHeight = 20;
   const int labelWidth = self.view.width - (2 * padding);
-  UIFont * const font = [UIFont fontWithName:@"Roboto-Light" size:16];
+  UIFont * const font = [UIFont lightFontWithSize:16];
   UILabel* titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(padding, y, labelWidth, titleHeight)];
   titleLabel.text = title;
   titleLabel.font = font;

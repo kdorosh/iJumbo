@@ -8,6 +8,8 @@
 
 #import <UIKit/UIKit.h>
 
+static const CGFloat kTableViewHeaderHeight = 40;
+
 @interface IJTableViewHeaderFooterView : UITableViewHeaderFooterView
 
 @property(nonatomic) UILabel *sectionTitleLabel;

@@ -32,16 +32,17 @@
     contentView.backgroundColor = kIJumboGrey;
     CGSize contentSize = contentView.frame.size;
     self.timeLabel = [[UILabel alloc] initWithFrame:CGRectMake(contentInset, 0, contentSize.width/3.0 - (2 * contentInset), contentSize.height)];
-    self.timeLabel.font = [UIFont fontWithName:@"Roboto-Light" size:10];
+    self.timeLabel.font = [UIFont lightFontWithSize:12];
     self.timeLabel.numberOfLines = 1;
     self.timeLabel.textAlignment = NSTextAlignmentCenter;
-    self.timeLabel.textColor = [UIColor colorWithWhite:0 alpha:0.70];
+    self.timeLabel.textColor = [UIColor colorWithWhite:0 alpha:0.8];
     [self addSubview:self.timeLabel];
     CGSize timeSize = self.timeLabel.frame.size;
     CGFloat fullTimeWidth = timeSize.width + (2 * contentInset);
     self.titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(fullTimeWidth, 0, contentSize.width - fullTimeWidth, contentSize.height)];
     self.titleLabel.numberOfLines = 0;
-    self.titleLabel.font = [UIFont fontWithName:@"Roboto-Light" size:12];
+    self.titleLabel.font = [UIFont regularFontWithSize:14];
+    self.titleLabel.textColor = [UIColor colorWithWhite:0 alpha:0.75];
     
     [contentView addSubview:self.timeLabel];
     [contentView addSubview:self.titleLabel];

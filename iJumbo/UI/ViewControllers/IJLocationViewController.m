@@ -44,13 +44,14 @@
   const int padding_y = 25;
   const int titleHeight = 20;
   const int labelWidth = viewSize.width - (2 * padding_x);
-  UIFont *font = [UIFont fontWithName:@"Roboto-Light" size:16];
+  UIFont *titleFont = [UIFont regularFontWithSize:17];
+  UIFont *labelFont = [UIFont lightFontWithSize:17];
   UILabel *addressTitle = [[UILabel alloc] initWithFrame:CGRectMake(padding_x, padding_y, labelWidth, titleHeight)];
   addressTitle.text = @"Address";
-  addressTitle.font = font;
+  addressTitle.font = titleFont;
   UILabel *addressLabel = [[UILabel alloc] initWithFrame:CGRectMake(padding_x, addressTitle.maxY + 5, labelWidth, 20)];
   addressLabel.text = (self.location.address) ? self.location.address : @"N/A";
-  addressLabel.font = font;
+  addressLabel.font = labelFont;
   addressLabel.numberOfLines = 0;
   [addressLabel sizeToFit];
   [_scrollView addSubview:addressTitle];
@@ -58,10 +59,10 @@
   
   UILabel *websiteTitle = [[UILabel alloc] initWithFrame:CGRectMake(padding_x, addressLabel.maxY + padding_y, labelWidth, titleHeight)];
   websiteTitle.text = @"Website";
-  websiteTitle.font = font;
+  websiteTitle.font = titleFont;
   UILabel *websiteLabel = [[UILabel alloc] initWithFrame:CGRectMake(padding_x, websiteTitle.maxY + 5, labelWidth, 20)];
   websiteLabel.text = (self.location.website) ? self.location.website : @"N/A";
-  websiteLabel.font = font;
+  websiteLabel.font = labelFont;
   websiteLabel.numberOfLines = 0;
   [websiteLabel sizeToFit];
   [_scrollView addSubview:websiteTitle];
@@ -69,10 +70,10 @@
   
   UILabel *phoneTitle = [[UILabel alloc] initWithFrame:CGRectMake(padding_x, websiteLabel.maxY + padding_y, labelWidth, titleHeight)];
   phoneTitle.text = @"Phone";
-  phoneTitle.font = font;
+  phoneTitle.font = titleFont;
   UILabel *phoneLabel = [[UILabel alloc] initWithFrame:CGRectMake(padding_x, phoneTitle.maxY + 5, labelWidth, 20)];
   phoneLabel.text = (self.location.phone) ? self.location.phone : @"N/A";
-  phoneLabel.font = font;
+  phoneLabel.font = labelFont;
   phoneLabel.numberOfLines = 0;
   [phoneLabel sizeToFit];
   [_scrollView addSubview:phoneTitle];
@@ -81,7 +82,7 @@
   if (self.location.hours) {
     UILabel *hoursTitle = [[UILabel alloc] initWithFrame:CGRectMake(padding_x, phoneLabel.maxY + padding_y, labelWidth, titleHeight)];
     hoursTitle.text = @"Hours";
-    hoursTitle.font = font;
+    hoursTitle.font = titleFont;
     [_scrollView addSubview:hoursTitle];
     UILabel *sundayLabel = [[UILabel alloc] initWithFrame:CGRectMake(2 * padding_x, hoursTitle.maxY + 5, labelWidth, titleHeight)];
     sundayLabel.text = [NSString stringWithFormat:@"Sunday:    %@", [IJLocationViewController hoursForRange:self.location.hours.sunday]];
@@ -97,13 +98,13 @@
     fridayLabel.text = [NSString stringWithFormat:@"Friday:    %@", [IJLocationViewController hoursForRange:self.location.hours.friday]];
     UILabel *saturdayLabel = [[UILabel alloc] initWithFrame:CGRectMake(2 * padding_x, fridayLabel.maxY + 5, labelWidth, titleHeight)];
     saturdayLabel.text = [NSString stringWithFormat:@"Saturday:  %@", [IJLocationViewController hoursForRange:self.location.hours.saturday]];
-    mondayLabel.font = font;
-    tuesdayLabel.font = font;
-    wednesdayLabel.font = font;
-    thursdayLabel.font = font;
-    fridayLabel.font = font;
-    saturdayLabel.font = font;
-    sundayLabel.font = font;
+    mondayLabel.font = labelFont;
+    tuesdayLabel.font = labelFont;
+    wednesdayLabel.font = labelFont;
+    thursdayLabel.font = labelFont;
+    fridayLabel.font = labelFont;
+    saturdayLabel.font = labelFont;
+    sundayLabel.font = labelFont;
     [_scrollView addSubviews:@[sundayLabel, mondayLabel, tuesdayLabel, wednesdayLabel, thursdayLabel, fridayLabel, saturdayLabel]];
   }
 }

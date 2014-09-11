@@ -39,16 +39,16 @@
   // Once that happens set a default that tracks this. And show if they have agreed.
   if (YES) // Use default here.
     self.mapView.showsUserLocation = YES;
-  [self.mapView setRegion:[self tuftsRegion] animated:NO];
   [self.view addSubview:searchBar];
   [self.view addSubview:self.mapView];
   if (self.locations) {
     [self.mapView showAnnotations:self.locations animated:YES];
   }
+  [self.mapView setRegion:[IJMapViewController tuftsRegion] animated:NO];
 }
 
 // Zooms the map view into the Tufts campus.
-- (MKCoordinateRegion)tuftsRegion {
++ (MKCoordinateRegion)tuftsRegion {
   CLLocationCoordinate2D center;
   center.latitude = 42.405524;
   center.longitude = -71.119802;
@@ -75,9 +75,11 @@
 - (MKAnnotationView *)mapView:(MKMapView *)mapView viewForAnnotation:(id<MKAnnotation>)annotation {
   static NSString * const identifier = @"IJMapVCAnnotationIdentifier";
   if ([annotation isKindOfClass:[IJLocation class]]) {
-    MKAnnotationView *annotationView = [mapView dequeueReusableAnnotationViewWithIdentifier:identifier];
+    MKAnnotationView *annotationView =
+        [mapView dequeueReusableAnnotationViewWithIdentifier:identifier];
     if (!annotationView) {
-      annotationView = [[MKAnnotationView alloc] initWithAnnotation:annotation reuseIdentifier:identifier];
+      annotationView =
+          [[MKAnnotationView alloc] initWithAnnotation:annotation reuseIdentifier:identifier];
       annotationView.enabled = YES;
       annotationView.canShowCallout = YES;
     } else {

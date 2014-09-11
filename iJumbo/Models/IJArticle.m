@@ -17,6 +17,7 @@
 @dynamic posted;
 @dynamic source;
 @dynamic title;
+@dynamic section;
 
 + (void)getArticlesWithSuccessBlock:(void (^)(NSArray *locations))successBlock
                        failureBlock:(void (^)(NSError *error))errorBlock {

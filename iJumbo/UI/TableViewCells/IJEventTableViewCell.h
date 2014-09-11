@@ -10,7 +10,7 @@
 
 #import "IJEvent.h"
 
-static const int kEventTableViewCellHeight = 60;
+static const int kEventTableViewCellHeight = 65;
 
 @interface IJEventTableViewCell : UITableViewCell
 

@@ -15,11 +15,11 @@
 
 static const double kDatePickerAnimationDuration = 0.4f;
 
-typedef NS_ENUM(NSInteger, IJDiningHall) {
-  IJDiningHallDewick,
-  IJDiningHallCarmichael,
-  IJDiningHallHodgdon,
-  IJDiningHallNumberOfValues
+typedef NS_ENUM(NSInteger, IJMenuActionSheet) {
+  IJMenuActionSheetDewick,
+  IJMenuActionSheetCarmichael,
+  IJMenuActionSheetHodgdon,
+  IJMenuActionSheetMyFood
 };
 
 @interface IJMenuTableViewController () <UIActionSheetDelegate, NSFetchedResultsControllerDelegate>
@@ -61,7 +61,7 @@ typedef NS_ENUM(NSInteger, IJDiningHall) {
   self.mealSegment.selectedSegmentIndex = 0;
   [mealsBackground addSubview:self.mealSegment];
   [self.view addSubview:mealsBackground];
-  
+
   // Date selection bar.
   self.dateSegment =
       [[UISegmentedControl alloc] initWithItems:@[@"Today", @"Tomorrow", @"Calendar"]];
@@ -90,7 +90,7 @@ typedef NS_ENUM(NSInteger, IJDiningHall) {
   self.tableView = [[UITableView alloc] initWithFrame:CGRectMake(0,
                                                                  self.dateSegment.maxY,
                                                                  self.view.width,
-                                                                 self.view.height - self.dateSegment.maxY - self.navigationController.navigationBar.height)];
+                                                                 self.view.height - self.dateSegment.maxY - self.navigationController.navigationBar.height - 20)];
   self.tableView.delegate = self;
   self.tableView.dataSource = self;
   self.tableView.backgroundColor = [UIColor clearColor];
@@ -121,25 +121,12 @@ typedef NS_ENUM(NSInteger, IJDiningHall) {
                      action:@selector(hideDatePicker)
            forControlEvents:UIControlEventTouchUpInside];
   
-  // TODO(amadou): SHIFTED TO FAR.
-  UIButton *todayButton = [[UIButton alloc] initWithFrame:CGRectMake(self.datePicker.width/2.0f, 0, self.datePicker.width/2.0f - 10, doneButtonHeight)];
-  todayButton.backgroundColor = [UIColor clearColor];
-  [todayButton setTitle:@"Today" forState:UIControlStateNormal];
-  [todayButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-  [todayButton setTitleColor:kIJumboBlue forState:UIControlStateSelected];
-  [todayButton setTitleEdgeInsets:UIEdgeInsetsZero];
-  todayButton.contentHorizontalAlignment = UIControlContentHorizontalAlignmentRight;
-  [todayButton addTarget:self
-                  action:@selector(todayButtonAction)
-        forControlEvents:UIControlEventTouchUpInside];
-  
   UIView *datePickerBackground = [[UIView alloc] initWithFrame:CGRectMake(0,
                                                                           self.view.maxY,
                                                                           self.view.width,
                                                                           self.datePicker.height + doneButtonHeight)];
   datePickerBackground.backgroundColor = [UIColor whiteColor];
   [datePickerBackground addSubview:dateDoneButton];
-  [datePickerBackground addSubview:todayButton];
   [datePickerBackground addSubview:self.datePicker];
   [self.view addSubview:datePickerBackground];
 }
@@ -160,12 +147,31 @@ typedef NS_ENUM(NSInteger, IJDiningHall) {
 #pragma mark - Network
 
 - (void)loadMenus {
-  [IJMenuSection getMenusWithSuccessBlock:^(NSArray *menuSections) {
+  [IJMenuSection getTodaysMenusWithSuccessBlock:^(NSArray *menuSections) {
     NSError *error;
     [self.fetchedResultsController performFetch:&error];
     [self.tableView mainThreadReload];
   } failureBlock:^(NSError *error) {
     NSLog(@"Could not get menus: %@", error);
+  }];
+  NSDate *tomorrow = [NSDate dateWithTimeIntervalSinceNow:(60 * 60 * 24)];
+  NSString *tomorrowsDateString = [self.dateFormatter stringFromDate:tomorrow];
+  [IJMenuSection getMenusForDate:tomorrowsDateString withSuccessBlock:^(NSArray *menuSections) {
+    [self.tableView mainThreadReload];
+  } failureBlock:^(NSError *error) {
+    NSLog(@"Could not get menus for tomorrow: %@", error);
+  }];
+}
+
+- (void)loadMenusForDate:(NSDate *)date {
+  NSAssert(date, @"Date cannot be nil.");
+  NSString *dateString = [self.dateFormatter stringFromDate:date];
+  [IJMenuSection getMenusForDate:dateString withSuccessBlock:^(NSArray *menuSections) {
+    NSError *error;
+    [self.fetchedResultsController performFetch:&error];
+    [self.tableView mainThreadReload];
+  } failureBlock:^(NSError *error) {
+    NSLog(@"error getting menus for date %@", dateString);
   }];
 }
 
@@ -208,7 +214,7 @@ typedef NS_ENUM(NSInteger, IJDiningHall) {
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
-  return 40;
+  return kTableViewHeaderHeight;
 }
 
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
@@ -224,51 +230,6 @@ typedef NS_ENUM(NSInteger, IJDiningHall) {
   return header;
 }
 
-#pragma mark - NSFetchedResultsController Delegate
-
-- (void)controllerWillChangeContent:(NSFetchedResultsController *)controller {
-  [self.tableView beginUpdates];
-}
-
-- (void)controller:(NSFetchedResultsController *)controller didChangeSection:(id <NSFetchedResultsSectionInfo>)sectionInfo
-           atIndex:(NSUInteger)sectionIndex forChangeType:(NSFetchedResultsChangeType)type {
-  switch(type) {
-    case NSFetchedResultsChangeInsert:
-      [self.tableView insertSections:[NSIndexSet indexSetWithIndex:sectionIndex]
-                    withRowAnimation:UITableViewRowAnimationFade];
-      break;
-    case NSFetchedResultsChangeDelete:
-      [self.tableView deleteSections:[NSIndexSet indexSetWithIndex:sectionIndex]
-                    withRowAnimation:UITableViewRowAnimationFade];
-      break;
-  }
-}
-
-- (void)controller:(NSFetchedResultsController *)controller didChangeObject:(id)anObject
-       atIndexPath:(NSIndexPath *)indexPath forChangeType:(NSFetchedResultsChangeType)type
-      newIndexPath:(NSIndexPath *)newIndexPath {
-  switch(type) {
-    case NSFetchedResultsChangeInsert:
-      [self.tableView insertRowsAtIndexPaths:[NSArray arrayWithObject:newIndexPath]
-                            withRowAnimation:UITableViewRowAnimationAutomatic];
-      break;
-    case NSFetchedResultsChangeDelete:
-      [self.tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath]
-                            withRowAnimation:UITableViewRowAnimationAutomatic];
-      break;
-    case NSFetchedResultsChangeUpdate:
-      [self.tableView reloadRowsAtIndexPaths:@[indexPath]
-                            withRowAnimation:UITableViewRowAnimationAutomatic];
-      break;
-    default:
-      break;
-  }
-}
-
-- (void)controllerDidChangeContent:(NSFetchedResultsController *)controller {
-  [self.tableView endUpdates];
-}
-
 #pragma mark - UIScrollView
 
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView {
@@ -280,8 +241,6 @@ typedef NS_ENUM(NSInteger, IJDiningHall) {
 #pragma mark - UISegmentControl
 
 - (void)mealSegmentDidChangeValue:(UISegmentedControl*)mealSegment {
-  NSLog(@"Value changed!");
-  NSLog(@"Segment: %@", mealSegment);
   [self updateFetchRequest];
 }
 
@@ -306,15 +265,17 @@ typedef NS_ENUM(NSInteger, IJDiningHall) {
                                   delegate:self
                          cancelButtonTitle:@"Cancel"
                     destructiveButtonTitle:nil
-                         otherButtonTitles:@"Dewick", @"Carmichael", @"Hodgdon", nil];
+                         otherButtonTitles:@"Dewick", @"Carmichael", @"Hodgdon", @"My Food", nil];
   [actionSheet showInView:self.view];
 }
 
 #pragma mark - UIActionSheet
 
 - (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex {
-  if (buttonIndex < IJDiningHallNumberOfValues) {
-    NSLog(@"Action Sheet Clicked: %li", (long)buttonIndex);
+  if (buttonIndex == IJMenuActionSheetMyFood) {
+    NSLog(@"Push the my food view controller.");
+  } else if (buttonIndex < IJMenuActionSheetMyFood)
+  {
     self.hallBarButton.title = [actionSheet buttonTitleAtIndex:buttonIndex];
     [self updateFetchRequest];
   }
@@ -334,7 +295,17 @@ typedef NS_ENUM(NSInteger, IJDiningHall) {
 
 - (void)hideDatePicker {
   [self moveDatePickerToY:self.view.maxY];
-  self.datePicker.date = [NSDate date];
+  NSString *dateString = [self.dateFormatter stringFromDate:_date];
+  NSString *todayString = [self.dateFormatter stringFromDate:[NSDate date]];
+  NSString *tomorrowString =
+  [self.dateFormatter stringFromDate:[NSDate dateWithTimeIntervalSinceNow:(60 * 60 * 24)]];
+  if (![dateString isEqualToString:todayString] && ![dateString isEqualToString:tomorrowString]) {
+    [self.dateSegment setSelectedSegmentIndex:UISegmentedControlNoSegment];
+    [self.dateSegment setTitle:[self.dateFormatter stringFromDate:_date] forSegmentAtIndex:2];
+  } else {
+    [self.dateSegment setSelectedSegmentIndex:self.dateSegment.selectedSegmentIndex];
+    [self.dateSegment setTitle:@"Calendar" forSegmentAtIndex:2];
+  }
 }
 
 - (void)moveDatePickerToY:(CGFloat)y {
@@ -357,12 +328,15 @@ typedef NS_ENUM(NSInteger, IJDiningHall) {
   if (error) {
     NSLog(@"error updating menu table fetch controller.");
   }
+  if ([self.fetchedResultsController.fetchedObjects count] == 0) {
+    [self loadMenusForDate:self.date];
+  }
   [self.tableView mainThreadReload];
 }
 
 - (NSPredicate *)predicateFromUI {
   NSString *dateString = [self.dateFormatter stringFromDate:self.date];
-  return [NSPredicate predicateWithFormat:@"date == %@ AND diningHall == %@ AND meal == %@",
+  return [NSPredicate predicateWithFormat:@"date == %@ AND diningHall == %@ AND (meal == %@ OR diningHall = 'Hodgdon')",
             dateString,
             self.hallBarButton.title,
             [self.mealSegment titleForSegmentAtIndex:self.mealSegment.selectedSegmentIndex]];
@@ -395,7 +369,6 @@ typedef NS_ENUM(NSInteger, IJDiningHall) {
                                             managedObjectContext:context
                                               sectionNameKeyPath:nil
                                                        cacheName:nil];
-    //_fetchedResultsController.delegate = self;
 
     NSError *error;
     BOOL success = [_fetchedResultsController performFetch:&error];
@@ -405,5 +378,29 @@ typedef NS_ENUM(NSInteger, IJDiningHall) {
   }
   return _fetchedResultsController;
 }
+
+- (void)setDate:(NSDate *)date {
+  _date = date;
+  self.datePicker.date = _date;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 @end
