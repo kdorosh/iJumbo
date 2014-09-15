@@ -83,18 +83,18 @@ static NSDateFormatter *kEventsTableDateFormatter;
   self.dateLabel.font = [UIFont regularFontWithSize:20];
   self.dateLabel.textColor = [UIColor colorWithWhite:0 alpha:0.7];
   [dateNavigationBar addSubview:self.dateLabel];
-  const CGFloat arrowWidth = 50;
-  const CGFloat arrowHeight = 20;
+  const CGFloat arrowWidth = 14;
+  const CGFloat arrowHeight = 22.5;
   const CGFloat arrowPadding = 10;
   const CGFloat arrow_y = (kEventsDateNavigationBarHeight / 2) - (arrowHeight / 2);
   // TODO(amadou): Make buttons bigger. They are hard to click as of now.
   
   UIButton *previousDateButton = [[UIButton alloc] initWithFrame:CGRectMake(arrowPadding, arrow_y, arrowWidth, arrowHeight)];
-  [previousDateButton setImage:[UIImage imageNamed:@"previous_arrow.png"] forState:UIControlStateNormal];
+  [previousDateButton setImage:[UIImage imageNamed:@"arrow_left.png"] forState:UIControlStateNormal];
   [dateNavigationBar addSubview:previousDateButton];
   const CGFloat nextArrow_x = dateNavigationBar.frame.size.width - arrowPadding - arrowWidth;
   UIButton *nextDateButton = [[UIButton alloc] initWithFrame:CGRectMake(nextArrow_x, arrow_y, arrowWidth, arrowHeight)];
-  [nextDateButton setImage:[UIImage imageNamed:@"next_arrow.png"] forState:UIControlStateNormal];
+  [nextDateButton setImage:[UIImage imageNamed:@"arrow_right.png"] forState:UIControlStateNormal];
   [dateNavigationBar addSubview:nextDateButton];
   
   [previousDateButton addTarget:self action:@selector(previousDateButtonAction) forControlEvents:UIControlEventTouchUpInside];

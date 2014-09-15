@@ -8,7 +8,7 @@
 
 #import "MMServer.h"
 
-static NSString * const kBaseURL = @"http://ijumbo.herokuapp.com/api/";
+static NSString * const kBaseURL = @"http://ijumboapp.com/v2/api";
 
 @interface IJServer : MMServer
 

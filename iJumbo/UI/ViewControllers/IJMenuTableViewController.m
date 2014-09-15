@@ -110,7 +110,8 @@ typedef NS_ENUM(NSInteger, IJMenuActionSheet) {
                       action:@selector(datePickerDidChangeValue:)
             forControlEvents:UIControlEventValueChanged];
   UIButton *dateDoneButton =
-      [[UIButton alloc] initWithFrame:CGRectMake(10, 0, self.datePicker.width/2.0f, doneButtonHeight)];
+      [[UIButton alloc] initWithFrame:CGRectMake(10, 0, self.datePicker.width, doneButtonHeight)];
+  dateDoneButton.titleLabel.textAlignment = NSTextAlignmentRight;
   dateDoneButton.backgroundColor = [UIColor clearColor];
   [dateDoneButton setTitle:@"Done" forState:UIControlStateNormal];
   [dateDoneButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];

@@ -44,7 +44,7 @@
   [self.navcon setNavigationBarHidden:YES animated:NO];
   UIView *whiteView =
       [[UIView alloc] initWithFrame:CGRectMake(self.window.maxX, 0, self.window.frame.size.width, self.window.frame.size.height)];
-  whiteView.backgroundColor = [UIColor colorWithWhite:1 alpha:0.28];
+  whiteView.backgroundColor = [UIColor colorWithWhite:1 alpha:0.5];
   [whiteView setTag:4];
   whiteView.alpha = 0;
   [self.window addSubview:whiteView];

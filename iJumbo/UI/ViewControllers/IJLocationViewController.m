@@ -6,6 +6,8 @@
 //  Copyright (c) 2014 Amadou.It. All rights reserved.
 //
 #define IJ_SetTextForLabel(text, label) if (text) { label.text = text; } else { label.text = @"N/A"; }
+#define titleFont [UIFont regularFontWithSize:17];
+#define labelFont [UIFont lightFontWithSize:17];
 
 
 #import "IJLocationViewController.h"
@@ -44,8 +46,6 @@
   const int padding_y = 25;
   const int titleHeight = 20;
   const int labelWidth = viewSize.width - (2 * padding_x);
-  UIFont *titleFont = [UIFont regularFontWithSize:17];
-  UIFont *labelFont = [UIFont lightFontWithSize:17];
   UILabel *addressTitle = [[UILabel alloc] initWithFrame:CGRectMake(padding_x, padding_y, labelWidth, titleHeight)];
   addressTitle.text = @"Address";
   addressTitle.font = titleFont;
@@ -84,29 +84,34 @@
     hoursTitle.text = @"Hours";
     hoursTitle.font = titleFont;
     [_scrollView addSubview:hoursTitle];
-    UILabel *sundayLabel = [[UILabel alloc] initWithFrame:CGRectMake(2 * padding_x, hoursTitle.maxY + 5, labelWidth, titleHeight)];
-    sundayLabel.text = [NSString stringWithFormat:@"Sunday:    %@", [IJLocationViewController hoursForRange:self.location.hours.sunday]];
-    UILabel *mondayLabel = [[UILabel alloc] initWithFrame:CGRectMake(2 * padding_x, sundayLabel.maxY + 5, labelWidth, titleHeight)];
-    mondayLabel.text = [NSString stringWithFormat:@"Monday:    %@", [IJLocationViewController hoursForRange:self.location.hours.monday]];
-    UILabel *tuesdayLabel = [[UILabel alloc] initWithFrame:CGRectMake(2 * padding_x, mondayLabel.maxY + 5, labelWidth, titleHeight)];
-    tuesdayLabel.text = [NSString stringWithFormat:@"Tuesday:   %@", [IJLocationViewController hoursForRange:self.location.hours.tuesday]];
-    UILabel *wednesdayLabel = [[UILabel alloc] initWithFrame:CGRectMake(2 * padding_x, tuesdayLabel.maxY + 5, labelWidth, titleHeight)];
-    wednesdayLabel.text = [NSString stringWithFormat:@"Wednesday: %@", [IJLocationViewController hoursForRange:self.location.hours.wednesday]];
-    UILabel *thursdayLabel = [[UILabel alloc] initWithFrame:CGRectMake(2 * padding_x, wednesdayLabel.maxY + 5, labelWidth, titleHeight)];
-    thursdayLabel.text = [NSString stringWithFormat:@"Thursday:  %@", [IJLocationViewController hoursForRange:self.location.hours.thursday]];
-    UILabel *fridayLabel = [[UILabel alloc] initWithFrame:CGRectMake(2 * padding_x, thursdayLabel.maxY + 5, labelWidth, titleHeight)];
-    fridayLabel.text = [NSString stringWithFormat:@"Friday:    %@", [IJLocationViewController hoursForRange:self.location.hours.friday]];
-    UILabel *saturdayLabel = [[UILabel alloc] initWithFrame:CGRectMake(2 * padding_x, fridayLabel.maxY + 5, labelWidth, titleHeight)];
-    saturdayLabel.text = [NSString stringWithFormat:@"Saturday:  %@", [IJLocationViewController hoursForRange:self.location.hours.saturday]];
-    mondayLabel.font = labelFont;
-    tuesdayLabel.font = labelFont;
-    wednesdayLabel.font = labelFont;
-    thursdayLabel.font = labelFont;
-    fridayLabel.font = labelFont;
-    saturdayLabel.font = labelFont;
-    sundayLabel.font = labelFont;
-    [_scrollView addSubviews:@[sundayLabel, mondayLabel, tuesdayLabel, wednesdayLabel, thursdayLabel, fridayLabel, saturdayLabel]];
+    // Sunday.
+    CGFloat y = hoursTitle.maxY;
+    y = [self addTitle:@"Sunday:" withRange:self.location.hours.sunday atY:y];
+    y = [self addTitle:@"Monday:" withRange:self.location.hours.monday atY:y];
+    y = [self addTitle:@"Tuesday:" withRange:self.location.hours.tuesday atY:y];
+    y = [self addTitle:@"Wednesday:" withRange:self.location.hours.wednesday atY:y];
+    y = [self addTitle:@"Thursday:" withRange:self.location.hours.thursday atY:y];
+    y = [self addTitle:@"Friday:" withRange:self.location.hours.friday atY:y];
+    y = [self addTitle:@"Saturday:" withRange:self.location.hours.saturday atY:y];
   }
+}
+
+// @param title @"Sunday:";
+// @return the Y plus the padding of where the stuff should change.
+- (CGFloat)addTitle:(NSString *)title withRange:(IJRange *)range atY:(CGFloat)y {
+  const int padding_x = 20;
+  const int labelWidth = self.view.frame.size.width - (2 * padding_x);
+  const int titleHeight = 20;
+  CGRect frame = CGRectMake(2 * padding_x, y + 5, labelWidth - padding_x, titleHeight);
+  UILabel *hoursTitle = [[UILabel alloc] initWithFrame:frame];
+  hoursTitle.text = title;
+  hoursTitle.font = titleFont;
+  UILabel *dayLabel = [[UILabel alloc] initWithFrame:frame];
+  dayLabel.text = [IJLocationViewController hoursForRange:range];
+  dayLabel.textAlignment = NSTextAlignmentRight;
+  dayLabel.font = labelFont;
+  [self.view addSubviews:@[hoursTitle, dayLabel]];
+  return dayLabel.maxY;
 }
 
 + (NSString *)hoursForRange:(IJRange *)range {

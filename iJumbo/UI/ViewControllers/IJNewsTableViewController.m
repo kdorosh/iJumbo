@@ -18,6 +18,7 @@ static NSString * const kNewsObserverActionSheetText = @"Observer";
 @interface IJNewsTableViewController () <UIActionSheetDelegate, NSFetchedResultsControllerDelegate>
 @property(nonatomic) UIBarButtonItem *sourceBarButton;
 @property(nonatomic) NSFetchedResultsController *fetchedResultsController;
+@property(nonatomic) UIRefreshControl *refreshControl;
 @end
 
 @implementation IJNewsTableViewController
@@ -26,6 +27,11 @@ static NSString * const kNewsObserverActionSheetText = @"Observer";
   [super viewDidLoad];
   self.edgesForExtendedLayout = UIRectEdgeNone;
   [self addTableViewWithDelegate:self];
+  self.refreshControl = [[UIRefreshControl alloc] init];
+  [self.refreshControl addTarget:self action:@selector(loadData)
+                forControlEvents:UIControlEventValueChanged];
+  [self.tableView addSubview:self.refreshControl];
+
   self.tableView.backgroundColor = self.view.backgroundColor;
   self.tableView.separatorColor = [UIColor clearColor];
   self.title = @"News";
@@ -43,7 +49,8 @@ static NSString * const kNewsObserverActionSheetText = @"Observer";
                                                                  delegate:self
                                                         cancelButtonTitle:@"Cancel"
                                                    destructiveButtonTitle:nil
-                                                        otherButtonTitles:kNewsDailyActionSheetText, kNewsObserverActionSheetText, nil];
+                                                        otherButtonTitles:kNewsDailyActionSheetText,
+                                                                          kNewsObserverActionSheetText, nil];
   [sourceActionSheet showFromRect:CGRectMake(320 - 60, 0, 60, 60) inView:self.view animated:YES];
 }
 
@@ -55,8 +62,13 @@ static NSString * const kNewsObserverActionSheetText = @"Observer";
 // TODO(amadou): when articles load for the first time ever, they do not show after loading
 // and also causes a crash.
 - (void)loadData {
-  [self loadDailyArticles];
-  [self loadObserverArticles];
+  [self.refreshControl beginRefreshing];
+  [IJArticle startBatchedRequestsInExecutionBlock:^{
+    [self loadDailyArticles];
+    [self loadObserverArticles];
+  } withCompletionBlock:^{
+    [self.refreshControl endRefreshing];
+  }];
 }
 
 - (void)loadDailyArticles {

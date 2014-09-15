@@ -26,6 +26,11 @@ static const CGFloat kSeparatorBarWidth = 1.5;
 @property(nonatomic) UIButton *eventsButton;
 @property(nonatomic) UIButton *linksButton;
 @property(nonatomic) UIView *separatorView;
+@property(nonatomic) IJEventTableViewController *eventsVC;
+@property(nonatomic) IJNewsTableViewController *newsVC;
+@property(nonatomic) IJMenuTableViewController *menusVC;
+@property(nonatomic) IJLinkTableViewController *linksVC;
+@property(nonatomic) IJLocationTableViewController *locationsVC;
 @end
 
 @implementation IJHomeViewController
@@ -158,17 +163,17 @@ static const CGFloat kSeparatorBarWidth = 1.5;
 }
 
 - (void)pushNews {
-  [self.navigationController pushViewController:[[IJNewsTableViewController alloc] init]
+  [self.navigationController pushViewController:self.newsVC
                                        animated:YES];
 }
 
 - (void)pushLocations {
-  [self.navigationController pushViewController:[[IJLocationTableViewController alloc] init]
+  [self.navigationController pushViewController:self.locationsVC
                                        animated:YES];
 }
 
 - (void)pushMenus {
-  [self.navigationController pushViewController:[[IJMenuTableViewController alloc] init]
+  [self.navigationController pushViewController:self.menusVC
                                        animated:YES];
 }
 
@@ -177,12 +182,50 @@ static const CGFloat kSeparatorBarWidth = 1.5;
 }
 
 - (void)pushEvents {
-  [self.navigationController pushViewController:[[IJEventTableViewController alloc] init]
+  [self.navigationController pushViewController:self.eventsVC
                                        animated:YES];
 }
 
 - (void)pushLinks {
-  [self.navigationController pushViewController:[[IJLinkTableViewController alloc] init] animated:YES];
+  [self.navigationController pushViewController:self.linksVC
+                                       animated:YES];
+}
+
+#pragma mark - Getters/Setters
+
+- (IJEventTableViewController *)eventsVC {
+  if (!_eventsVC) {
+    _eventsVC = [[IJEventTableViewController alloc] init];
+  }
+  return _eventsVC;
+}
+
+- (IJNewsTableViewController *)newsVC {
+  if (!_newsVC) {
+    _newsVC = [[IJNewsTableViewController alloc] init];
+  }
+  return _newsVC; 
+}
+
+- (IJLocationTableViewController *)locationsVC {
+  if (!_locationsVC) {
+    _locationsVC = [[IJLocationTableViewController alloc] init];
+  }
+  return _locationsVC;
+}
+
+- (IJMenuTableViewController *)menusVC {
+  if (!_menusVC) {
+    _menusVC = [[IJMenuTableViewController alloc] init];
+  }
+  return _menusVC;
+}
+
+- (IJLinkTableViewController *)linksVC {
+  if (!_linksVC) {
+    _linksVC = [[IJLinkTableViewController alloc] init];
+  }
+  return _linksVC;
 }
 
 @end

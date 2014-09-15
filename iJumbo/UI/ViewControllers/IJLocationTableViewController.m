@@ -17,6 +17,7 @@
 @interface IJLocationTableViewController () <NSFetchedResultsControllerDelegate, UISearchBarDelegate, IJLocationTableViewCellDelegate, IJMapViewControllerDelegate>
 @property(nonatomic) NSFetchedResultsController *fetchedResultsController;
 @property(nonatomic) UISearchBar *searchBar;
+@property(nonatomic) UIRefreshControl *refreshControl;
 @end
 
 @implementation IJLocationTableViewController
@@ -32,6 +33,12 @@
   self.tableView.delegate = self;
   self.tableView.dataSource = self;
   [self.view addSubview:self.tableView];
+  
+  self.refreshControl = [[UIRefreshControl alloc] init];
+  [self.refreshControl addTarget:self action:@selector(loadData)
+                forControlEvents:UIControlEventValueChanged];
+  [self.tableView addSubview:self.refreshControl];
+  
   self.view.backgroundColor = [UIColor clearColor];
   self.tableView.backgroundColor = [UIColor clearColor];
   self.tableView.separatorColor = [UIColor clearColor];
@@ -83,9 +90,12 @@
 }
 
 - (void)loadData {
-  [IJLocation getLocationsWithSuccessBlock:^(NSArray *locations) { }
-                              failureBlock:^(NSError *error) {
+  [self.refreshControl beginRefreshing];
+  [IJLocation getLocationsWithSuccessBlock:^(NSArray *locations) {
+    [self.refreshControl endRefreshing];
+  } failureBlock:^(NSError *error) {
     NSLog(@"Error: %@", error);
+    [self.refreshControl endRefreshing];
   }];
 }
 
