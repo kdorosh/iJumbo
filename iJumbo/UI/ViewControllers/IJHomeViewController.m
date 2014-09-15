@@ -109,7 +109,7 @@ static const CGFloat kSeparatorBarWidth = 1.5;
   linksLabel.text = @"Links";
   linksLabel.textAlignment = NSTextAlignmentCenter;
   
-  UIFont *labelFont = [UIFont lightFontWithSize:12];
+  UIFont *labelFont = [UIFont regularFontWithSize:12];
   newsLabel.font = labelFont;
   placesLabel.font = labelFont;
   menuLabel.font = labelFont;
