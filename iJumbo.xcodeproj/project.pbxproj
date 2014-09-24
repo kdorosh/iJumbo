@@ -32,6 +32,7 @@
 		C87E7CDF198C566500366DF7 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C87E7CC3198C566500366DF7 /* CoreData.framework */; };
 		C87E7CE7198C566600366DF7 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = C87E7CE5198C566600366DF7 /* InfoPlist.strings */; };
 		C87E7CE9198C566600366DF7 /* iJumboTests.m in Sources */ = {isa = PBXBuildFile; fileRef = C87E7CE8198C566600366DF7 /* iJumboTests.m */; };
+		C887F45E19D22B8F00D82898 /* IJLinkCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = C887F45D19D22B8F00D82898 /* IJLinkCollectionViewCell.m */; };
 		C898760B19B1256800CB425E /* IJMenuTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C898760A19B1256800CB425E /* IJMenuTableViewController.m */; };
 		C8B7000419A03D8A0004FE76 /* Roboto-Black.ttf in Resources */ = {isa = PBXBuildFile; fileRef = C8B7FFF819A03D8A0004FE76 /* Roboto-Black.ttf */; };
 		C8B7000519A03D8A0004FE76 /* Roboto-BlackItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = C8B7FFF919A03D8A0004FE76 /* Roboto-BlackItalic.ttf */; };
@@ -122,6 +123,8 @@
 		C87E7CE4198C566600366DF7 /* iJumboTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "iJumboTests-Info.plist"; sourceTree = "<group>"; };
 		C87E7CE6198C566600366DF7 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		C87E7CE8198C566600366DF7 /* iJumboTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = iJumboTests.m; sourceTree = "<group>"; };
+		C887F45C19D22B8F00D82898 /* IJLinkCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = IJLinkCollectionViewCell.h; path = iJumbo/UI/TableViewCells/IJLinkCollectionViewCell.h; sourceTree = "<group>"; };
+		C887F45D19D22B8F00D82898 /* IJLinkCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = IJLinkCollectionViewCell.m; path = iJumbo/UI/TableViewCells/IJLinkCollectionViewCell.m; sourceTree = "<group>"; };
 		C898760919B1256800CB425E /* IJMenuTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = IJMenuTableViewController.h; path = iJumbo/UI/ViewControllers/IJMenuTableViewController.h; sourceTree = "<group>"; };
 		C898760A19B1256800CB425E /* IJMenuTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = IJMenuTableViewController.m; path = iJumbo/UI/ViewControllers/IJMenuTableViewController.m; sourceTree = "<group>"; };
 		C8B7000019A03D8A0004FE76 /* Roboto-MediumItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-MediumItalic.ttf"; sourceTree = "<group>"; };
@@ -344,6 +347,8 @@
 				C8B7FFF519A0375B0004FE76 /* IJNewsTableViewCell.m */,
 				C8FADA6A19BECF530000E2A8 /* IJTableViewHeaderFooterView.h */,
 				C8FADA6B19BECF530000E2A8 /* IJTableViewHeaderFooterView.m */,
+				C887F45C19D22B8F00D82898 /* IJLinkCollectionViewCell.h */,
+				C887F45D19D22B8F00D82898 /* IJLinkCollectionViewCell.m */,
 			);
 			name = TableViewCells;
 			sourceTree = "<group>";
@@ -586,6 +591,7 @@
 				C8F0077E199DD872006B7DC4 /* IJHelper.m in Sources */,
 				C87E7CD3198C566500366DF7 /* iJumbo.xcdatamodeld in Sources */,
 				C8FADA6C19BECF530000E2A8 /* IJTableViewHeaderFooterView.m in Sources */,
+				C887F45E19D22B8F00D82898 /* IJLinkCollectionViewCell.m in Sources */,
 				C8FB4FC819A2D64600AC043F /* IJViewController.m in Sources */,
 				C8FB4FD119A465F000AC043F /* IJMapViewController.m in Sources */,
 				C852A6A919A1099B0048B1C3 /* IJLocationTableViewCell.m in Sources */,

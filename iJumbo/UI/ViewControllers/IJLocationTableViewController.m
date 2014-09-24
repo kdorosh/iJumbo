@@ -52,10 +52,16 @@
   // TODO(amadou): Get search bar up there.
   self.title = @"Places";
   self.navigationController.navigationBarHidden = NO;
-  [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(showSearchBarCancelButton) name:UIKeyboardWillShowNotification object:nil];
-  [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(hideSearchBarCancelButton) name:UIKeyboardWillHideNotification object:nil];
+  [[NSNotificationCenter defaultCenter] addObserver:self
+                                           selector:@selector(showSearchBarCancelButton)
+                                               name:UIKeyboardWillShowNotification
+                                             object:nil];
+  [[NSNotificationCenter defaultCenter] addObserver:self
+                                           selector:@selector(hideSearchBarCancelButton)
+                                               name:UIKeyboardWillHideNotification
+                                             object:nil];
   [self.tableView reloadData];
-  [self loadData];
+  [self loadData:NO];
 }
 
 - (void)showMap {
@@ -90,11 +96,16 @@
 }
 
 - (void)loadData {
-  [self.refreshControl beginRefreshing];
+  [self loadData:NO];
+}
+
+- (void)loadData:(BOOL)showRefresh {
+  if (showRefresh) {
+    [self.refreshControl beginRefreshing];
+  }
   [IJLocation getLocationsWithSuccessBlock:^(NSArray *locations) {
     [self.refreshControl endRefreshing];
   } failureBlock:^(NSError *error) {
-    NSLog(@"Error: %@", error);
     [self.refreshControl endRefreshing];
   }];
 }
@@ -107,7 +118,8 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
   if ([[self.fetchedResultsController sections] count] > 0) {
-    id <NSFetchedResultsSectionInfo> sectionInfo = [[self.fetchedResultsController sections] objectAtIndex:section];
+    id <NSFetchedResultsSectionInfo> sectionInfo =
+        [[self.fetchedResultsController sections] objectAtIndex:section];
     return [sectionInfo numberOfObjects];
   }
   return 0;
@@ -128,7 +140,8 @@
 
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
   static NSString *headerIdentifier = @"LocationHeader";
-  IJTableViewHeaderFooterView *header = [tableView dequeueReusableHeaderFooterViewWithIdentifier:headerIdentifier];
+  IJTableViewHeaderFooterView *header =
+      [tableView dequeueReusableHeaderFooterViewWithIdentifier:headerIdentifier];
   if (!header) {
     header = [[IJTableViewHeaderFooterView alloc] initWithReuseIdentifier:headerIdentifier];
   }
@@ -144,14 +157,16 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
   IJLocation *location = [self.fetchedResultsController objectAtIndexPath:indexPath];
   NSLog(@"%@", location);
-  IJLocationViewController *locationViewController = [[IJLocationViewController alloc] initWithLocation:location];
+  IJLocationViewController *locationViewController =
+      [[IJLocationViewController alloc] initWithLocation:location];
   [self.navigationController pushViewController:locationViewController animated:YES];
 }
 
 - (NSFetchedResultsController*)fetchedResultsController {
   if (!_fetchedResultsController) {
     NSManagedObjectContext *context = [IJHelper mainContext];
-    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] initWithEntityName:NSStringFromClass([IJLocation class])];
+    NSFetchRequest *fetchRequest =
+        [[NSFetchRequest alloc] initWithEntityName:NSStringFromClass([IJLocation class])];
     // Configure the request's entity, and optionally its predicate.
     NSSortDescriptor *nameSort = [[NSSortDescriptor alloc] initWithKey:@"name" ascending:YES];
     NSSortDescriptor *sectionSort = [[NSSortDescriptor alloc] initWithKey:@"section" ascending:YES];

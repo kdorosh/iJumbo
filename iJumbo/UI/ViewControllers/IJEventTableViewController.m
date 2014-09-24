@@ -43,9 +43,6 @@ static NSDateFormatter *kEventsTableDateFormatter;
   [self.datePicker addTarget:self action:@selector(dateChanged:) forControlEvents:UIControlEventValueChanged];
   [self.view addSubview:self.datePicker];
   
-  CGPoint tableCenter = self.tableView.center;
-  CGPoint newTableCenter = CGPointMake(tableCenter.x, tableCenter.y + kEventsDateNavigationBarHeight);
-  self.tableView.center = newTableCenter;
   self.tableView.delegate = self;
   self.tableView.dataSource = self;
   self.tableView.backgroundColor = [UIColor clearColor];
@@ -87,20 +84,30 @@ static NSDateFormatter *kEventsTableDateFormatter;
   const CGFloat arrowHeight = 22.5;
   const CGFloat arrowPadding = 10;
   const CGFloat arrow_y = (kEventsDateNavigationBarHeight / 2) - (arrowHeight / 2);
-  // TODO(amadou): Make buttons bigger. They are hard to click as of now.
   
-  UIButton *previousDateButton = [[UIButton alloc] initWithFrame:CGRectMake(arrowPadding, arrow_y, arrowWidth, arrowHeight)];
-  [previousDateButton setImage:[UIImage imageNamed:@"arrow_left.png"] forState:UIControlStateNormal];
+  // Previous Arrow Image.
+  UIImageView *previousButtonImage = [[UIImageView alloc] initWithFrame:CGRectMake(arrowPadding, arrow_y, arrowWidth, arrowHeight)];
+  [previousButtonImage setImage:[UIImage imageNamed:@"arrow_left.png"]];
+  UIButton *previousDateButton = [[UIButton alloc] initWithFrame:CGRectMake(arrowPadding, arrow_y, self.view.width/4.0f, arrowHeight)];
+  [dateNavigationBar addSubview:previousButtonImage];
   [dateNavigationBar addSubview:previousDateButton];
+  
+  // Next Arrow Image.
   const CGFloat nextArrow_x = dateNavigationBar.frame.size.width - arrowPadding - arrowWidth;
-  UIButton *nextDateButton = [[UIButton alloc] initWithFrame:CGRectMake(nextArrow_x, arrow_y, arrowWidth, arrowHeight)];
-  [nextDateButton setImage:[UIImage imageNamed:@"arrow_right.png"] forState:UIControlStateNormal];
+  UIButton *nextDateButton = [[UIButton alloc] initWithFrame:CGRectMake(3 * (self.view.width/4.0f), arrow_y, self.view.width/4.0f, arrowHeight)];
+  UIImageView *nextButtonImage =
+      [[UIImageView alloc] initWithFrame:CGRectMake(nextArrow_x, arrow_y, arrowWidth, arrowHeight)];
+  [nextButtonImage setImage:[UIImage imageNamed:@"arrow_right.png"]];
+  [dateNavigationBar addSubview:nextButtonImage];
   [dateNavigationBar addSubview:nextDateButton];
   
+  // Button actions.
   [previousDateButton addTarget:self action:@selector(previousDateButtonAction) forControlEvents:UIControlEventTouchUpInside];
   [nextDateButton addTarget:self action:@selector(nextDateButtonAction) forControlEvents:UIControlEventTouchUpInside];
   
   [self.view addSubview:dateNavigationBar];
+  
+  self.tableView.frame = CGRectMake(0, dateNavigationBar.maxY, self.view.width, self.tableView.height - dateNavigationBar.height);
 }
 
 - (void)previousDateButtonAction {

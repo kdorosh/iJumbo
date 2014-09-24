@@ -44,7 +44,7 @@
   [self.navcon setNavigationBarHidden:YES animated:NO];
   UIView *whiteView =
       [[UIView alloc] initWithFrame:CGRectMake(self.window.maxX, 0, self.window.frame.size.width, self.window.frame.size.height)];
-  whiteView.backgroundColor = [UIColor colorWithWhite:1 alpha:0.5];
+  whiteView.backgroundColor = [UIColor colorWithWhite:1 alpha:0.65];
   [whiteView setTag:4];
   whiteView.alpha = 0;
   [self.window addSubview:whiteView];
@@ -199,7 +199,8 @@
 
 // Returns the URL to the application's Documents directory.
 - (NSURL *)applicationDocumentsDirectory {
-  return [[[NSFileManager defaultManager] URLsForDirectory:NSDocumentDirectory inDomains:NSUserDomainMask] lastObject];
+  return [[[NSFileManager defaultManager] URLsForDirectory:NSDocumentDirectory
+                                                 inDomains:NSUserDomainMask] lastObject];
 }
 
 @end

@@ -31,6 +31,7 @@ typedef NS_ENUM(NSInteger, IJMenuActionSheet) {
 @property(nonatomic) NSFetchedResultsController *fetchedResultsController;
 @property(nonatomic) UISegmentedControl *mealSegment;
 @property(nonatomic) UISegmentedControl *dateSegment;
+@property(nonatomic) NSMutableSet *datesBeingLoaded;
 @end
 
 @implementation IJMenuTableViewController
@@ -42,7 +43,19 @@ typedef NS_ENUM(NSInteger, IJMenuActionSheet) {
   self.edgesForExtendedLayout = UIRectEdgeNone;
   [self setupUI];
   [self loadMenus];
+  UIRefreshControl *refreshControl = [[UIRefreshControl alloc] init];
+  [refreshControl addTarget:self
+                     action:@selector(pullToRefresh:)
+           forControlEvents:UIControlEventValueChanged];
+  refreshControl.backgroundColor = [UIColor clearColor];
+  refreshControl.tintColor = [UIColor clearColor];
+  [self.tableView addSubview:refreshControl];
   [self.tableView mainThreadReload];
+}
+   
+- (void)pullToRefresh:(UIRefreshControl *)refreshControl {
+  [refreshControl endRefreshing];
+  [self loadMenusForDate:[self.date copy]];
 }
 
 - (void)setupUI {
@@ -148,14 +161,21 @@ typedef NS_ENUM(NSInteger, IJMenuActionSheet) {
 #pragma mark - Network
 
 - (void)loadMenus {
-  [IJMenuSection getTodaysMenusWithSuccessBlock:^(NSArray *menuSections) { }
-                                   failureBlock:^(NSError *error) {
+  NSDate *today = [NSDate date];
+  [self startedLoadingDate:today];
+  [IJMenuSection getTodaysMenusWithSuccessBlock:^(NSArray *menuSections) {
+    [self stoppedLoadingDate:today];
+  } failureBlock:^(NSError *error) {
+    [self stoppedLoadingDate:today];
     NSLog(@"Could not get menus: %@", error);
   }];
   NSDate *tomorrow = [NSDate dateWithTimeIntervalSinceNow:(60 * 60 * 24)];
+  [self startedLoadingDate:tomorrow];
   NSString *tomorrowsDateString = [self.dateFormatter stringFromDate:tomorrow];
-  [IJMenuSection getMenusForDate:tomorrowsDateString withSuccessBlock:^(NSArray *menuSections) { }
-                    failureBlock:^(NSError *error) {
+  [IJMenuSection getMenusForDate:tomorrowsDateString withSuccessBlock:^(NSArray *menuSections) {
+    [self stoppedLoadingDate:tomorrow];
+  } failureBlock:^(NSError *error) {
+    [self stoppedLoadingDate:tomorrow];
     NSLog(@"Could not get menus for tomorrow: %@", error);
   }];
 }
@@ -163,8 +183,11 @@ typedef NS_ENUM(NSInteger, IJMenuActionSheet) {
 - (void)loadMenusForDate:(NSDate *)date {
   NSAssert(date, @"Date cannot be nil.");
   NSString *dateString = [self.dateFormatter stringFromDate:date];
-  [IJMenuSection getMenusForDate:dateString withSuccessBlock:^(NSArray *menuSections) { }
-                    failureBlock:^(NSError *error) {
+  [self startedLoadingDate:date];
+  [IJMenuSection getMenusForDate:dateString withSuccessBlock:^(NSArray *menuSections) {
+    [self stoppedLoadingDate:date];
+  } failureBlock:^(NSError *error) {
+    [self stoppedLoadingDate:date];
     NSLog(@"error getting menus for date %@", dateString);
   }];
 }
@@ -348,6 +371,36 @@ typedef NS_ENUM(NSInteger, IJMenuActionSheet) {
   }
 }
 
+- (void)startedLoadingDate:(NSDate *)date {
+  [self.datesBeingLoaded addObject:date];
+  if ([self.datesBeingLoaded count] > 0) {
+    [self startRefreshUI];
+  }
+}
+
+- (void)stoppedLoadingDate:(NSDate *)date {
+  [self.datesBeingLoaded removeObject:date];
+  if ([self.datesBeingLoaded count] == 0) {
+    [self stopRefreshUI];
+  }
+}
+
+- (void)startRefreshUI {
+  dispatch_async(dispatch_get_main_queue(), ^{
+    UIActivityIndicatorView *activityIndicator = [[UIActivityIndicatorView alloc] initWithFrame:CGRectMake(0, 0, 40, 40)];
+    [activityIndicator setTintColor:[UIColor whiteColor]];
+    self.navigationItem.titleView = activityIndicator;
+    [activityIndicator startAnimating];
+  });
+}
+
+- (void)stopRefreshUI {
+  dispatch_async(dispatch_get_main_queue(), ^{
+    self.navigationItem.titleView = nil;
+    self.navigationItem.title = @"Menus";
+  });
+}
+
 #pragma mark - Getters and Setters
 
 - (NSDateFormatter *)dateFormatter {
@@ -368,14 +421,15 @@ typedef NS_ENUM(NSInteger, IJMenuActionSheet) {
     NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"sectionNum"
                                                                    ascending:YES];
     [fetchRequest setSortDescriptors:@[sortDescriptor]];
-    fetchRequest.fetchBatchSize = 10;
+    fetchRequest.fetchBatchSize = 8;
 
     _fetchedResultsController =
         [[NSFetchedResultsController alloc] initWithFetchRequest:fetchRequest
                                             managedObjectContext:context
                                               sectionNameKeyPath:nil
                                                        cacheName:nil];
-
+    _fetchedResultsController.delegate = self;
+    
     NSError *error;
     BOOL success = [_fetchedResultsController performFetch:&error];
     if (!success) {
@@ -389,24 +443,12 @@ typedef NS_ENUM(NSInteger, IJMenuActionSheet) {
   _date = date;
   self.datePicker.date = _date;
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+   
+- (NSMutableSet *)datesBeingLoaded {
+  if (!_datesBeingLoaded) {
+    _datesBeingLoaded = [NSMutableSet set];
+  }
+  return _datesBeingLoaded;
+}
 
 @end

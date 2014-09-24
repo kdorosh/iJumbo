@@ -9,12 +9,19 @@
 #import "IJLinkTableViewController.h"
 
 #import "IJLinkTableViewCell.h"
+#import "IJLinkCollectionViewCell.h"
 #import "IJWebViewController.h"
 
-@interface IJLinkTableViewController () <NSFetchedResultsControllerDelegate>
+const int kNumberOfColumns = 2;
+static const int kCellHeight = 100;
+
+
+@interface IJLinkTableViewController () <NSFetchedResultsControllerDelegate, UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout>
 @property(nonatomic) NSFetchedResultsController *fetchedResultsController;
 // dictionary<NSString url, IJWebViewController webView>
 @property(nonatomic) NSMutableDictionary *urlWebViewMap;
+@property(nonatomic) UICollectionView *collectionView;
+@property(nonatomic) UIRefreshControl *refreshControl;
 @end
 
 @implementation IJLinkTableViewController
@@ -22,47 +29,55 @@
 - (void)viewDidLoad {
   [super viewDidLoad];
   self.title = @"Links";
-  [self addTableViewWithDelegate:self];
-  self.tableView.backgroundColor = [UIColor clearColor];
-  self.tableView.separatorColor = [UIColor clearColor];
-  [self loadData];
+  UICollectionViewFlowLayout *layout = [[UICollectionViewFlowLayout alloc] init];
+  //[layout setItemSize:CGSizeMake(self.view.width/2.0f - 5, kCellHeight)];
+  [layout setScrollDirection:UICollectionViewScrollDirectionVertical];
+  self.collectionView = [[UICollectionView alloc] initWithFrame:CGRectMake(0, 0, self.view.width, self.view.height - 64)
+                                           collectionViewLayout:layout];
+  [self.collectionView registerClass:[IJLinkCollectionViewCell class]
+          forCellWithReuseIdentifier:@"LinkTableViewCell"];
+  self.collectionView.delegate = self;
+  self.collectionView.dataSource = self;
+  self.collectionView.backgroundColor = [UIColor clearColor];
+  self.collectionView.bounces = YES;
+  self.collectionView.alwaysBounceVertical = YES;
+  
+  self.refreshControl = [[UIRefreshControl alloc] init];
+  self.refreshControl.tintColor = [UIColor blackColor];
+  [self.refreshControl addTarget:self action:@selector(loadData)
+                forControlEvents:UIControlEventValueChanged];
+  [self.collectionView addSubview:self.refreshControl];
+  
+  [self.view addSubview:self.collectionView];
+  [self.collectionView reloadData];
+  [self loadDataAnimate:NO];
 }
 
 - (void)loadData {
+  [self loadDataAnimate:YES];
+}
+
+- (void)loadDataAnimate:(BOOL)animate {
+  if (animate) {
+    [self.refreshControl beginRefreshing];
+  }
   [IJLink getLinksWithSuccessBlock:^(NSArray *links) {
-    [self.tableView mainThreadReload];
+    [self.refreshControl endRefreshing];
+    [self.collectionView performSelectorOnMainThread:@selector(reloadData)
+                                          withObject:nil
+                                       waitUntilDone:YES];
   } failureBlock:^(NSError *error) {
+    [self.refreshControl endRefreshing];
     NSLog(@"There was an error getting the link: %@", error);
   }];
 }
 
-#pragma mark - Table view data source
+#pragma mark - CollectionView Delegate & DataSource
 
-- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-  return [[self.fetchedResultsController sections] count];
-}
-
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-  if ([[self.fetchedResultsController sections] count] > 0) {
-    id <NSFetchedResultsSectionInfo> sectionInfo = [[self.fetchedResultsController sections] objectAtIndex:section];
-    return [sectionInfo numberOfObjects];
-  }
-  return 0;
-}
-
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-  static NSString * const cellID = @"LinkTableCell";
-  IJLinkTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellID];
-  if (!cell) {
-    cell = [[IJLinkTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellID];
-  }
-  IJLink *link = [self.fetchedResultsController objectAtIndexPath:indexPath];
-  [cell addDataFromLink:link];
-  return cell;
-}
-
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-  IJLink *link = [self.fetchedResultsController objectAtIndexPath:indexPath];
+- (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
+  NSInteger index = indexPath.section * kNumberOfColumns;
+  index += indexPath.row;
+  IJLink *link = [[self.fetchedResultsController fetchedObjects] objectAtIndex:index];
   IJWebViewController *webVC = self.urlWebViewMap[link.url];
   if (!webVC) {
     webVC = [[IJWebViewController alloc] initWithURL:link.url];
@@ -70,6 +85,37 @@
   }
   webVC.title = link.name;
   [self.navigationController pushViewController:webVC animated:YES];
+}
+
+- (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
+  NSArray *links = [self.fetchedResultsController fetchedObjects];
+  return [links count];
+}
+
+- (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView
+                  cellForItemAtIndexPath:(NSIndexPath *)indexPath {
+  IJLinkCollectionViewCell *cell =
+      [collectionView dequeueReusableCellWithReuseIdentifier:@"LinkTableViewCell"
+                                                forIndexPath:indexPath];
+  IJLink *link = [self.fetchedResultsController objectAtIndexPath:indexPath];
+  [cell addDataFromLink:link];
+  return cell;
+}
+
+- (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView {
+  return 1;
+}
+
+- (UIEdgeInsets)collectionView:(UICollectionView *)collectionView
+                        layout:(UICollectionViewLayout *)collectionViewLayout
+        insetForSectionAtIndex:(NSInteger)section {
+  return UIEdgeInsetsMake(5, 5, 5, 5);
+}
+
+- (CGSize)collectionView:(UICollectionView *)collectionView
+                  layout:(UICollectionViewLayout *)collectionViewLayout
+  sizeForItemAtIndexPath:(NSIndexPath *)indexPath {
+  return CGSizeMake(self.view.width/2.0f - 10, kCellHeight);
 }
 
 #pragma mark - NSFetchedResultsControllerDelegate
@@ -80,7 +126,9 @@
     NSLog(@"There was as error updating the links.");
     NSLog(@"%@", error);
   } else {
-    [self.tableView mainThreadReload];
+    [self.collectionView performSelectorOnMainThread:@selector(reloadData)
+                                          withObject:nil
+                                       waitUntilDone:YES];
   }
 }
 
@@ -107,7 +155,9 @@
     if (!success) {
       NSLog(@"Error getting events from core data: %@", error);
     }
-    [self.tableView mainThreadReload];
+    [self.collectionView performSelectorOnMainThread:@selector(reloadData)
+                                          withObject:nil
+                                       waitUntilDone:YES];
   }
   return _fetchedResultsController;
 }
@@ -118,6 +168,5 @@
   }
   return _urlWebViewMap;
 }
-
 
 @end

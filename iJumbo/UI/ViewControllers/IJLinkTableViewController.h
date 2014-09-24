@@ -9,5 +9,5 @@
 #import <UIKit/UIKit.h>
 #import "IJViewController.h"
 
-@interface IJLinkTableViewController : IJViewController <UITableViewDelegate, UITableViewDataSource>
+@interface IJLinkTableViewController : UIViewController
 @end
