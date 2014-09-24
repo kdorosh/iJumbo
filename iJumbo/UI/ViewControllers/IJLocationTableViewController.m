@@ -24,12 +24,15 @@
 
 - (void)viewDidLoad {
   [super viewDidLoad];
-  self.searchBar = [[UISearchBar alloc] initWithFrame:CGRectMake(0, 0, self.view.width, 40)];
+  // -1 puts the search bar slightly under the navbar so that the border does not show.
+  self.searchBar = [[UISearchBar alloc] initWithFrame:CGRectMake(0, -1, self.view.width, 42)];
   self.searchBar.delegate = self;
   self.searchBar.barTintColor = kIJumboBlue;
+  self.searchBar.backgroundColor = kIJumboBlue;
   self.searchBar.tintColor = [UIColor whiteColor];
+  self.searchBar.searchBarStyle = UISearchBarStyleProminent;
   [self.view addSubview:self.searchBar];
-  self.tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, self.searchBar.maxY, self.view.width, self.view.height - self.searchBar.height - self.navigationController.navigationBar.maxY)];
+  self.tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, self.searchBar.maxY - 1, self.view.width, self.view.height - self.searchBar.height - self.navigationController.navigationBar.maxY)];
   self.tableView.delegate = self;
   self.tableView.dataSource = self;
   [self.view addSubview:self.tableView];

@@ -40,6 +40,7 @@
   self.navcon.navigationBar.barTintColor = kIJumboBlue;
   self.navcon.navigationBar.tintColor = [UIColor whiteColor];
   self.navcon.navigationBar.shadowImage = [[UIImage alloc] init];
+  self.navcon.navigationBar.clipsToBounds = YES;
   self.navcon.navigationBar.translucent = NO;
   [self.navcon setNavigationBarHidden:YES animated:NO];
   UIView *whiteView =
