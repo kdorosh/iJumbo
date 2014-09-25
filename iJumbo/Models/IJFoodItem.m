@@ -26,5 +26,6 @@
 @dynamic sugar;
 @dynamic totalFat;
 @dynamic transFat;
+@dynamic menuSections;
 
 @end

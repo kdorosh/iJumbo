@@ -13,6 +13,7 @@
 #import "IJLocationTableViewController.h"
 #import "IJMenuTableViewController.h"
 #import "IJNewsTableViewController.h"
+#import "IJTransportationCollectionViewController.h"
 
 #import "UIView+AddSubviews.h"
 
@@ -31,6 +32,7 @@ static const CGFloat kSeparatorBarWidth = 1.5;
 @property(nonatomic) IJMenuTableViewController *menusVC;
 @property(nonatomic) IJLinkTableViewController *linksVC;
 @property(nonatomic) IJLocationTableViewController *locationsVC;
+@property(nonatomic) IJTransportationCollectionViewController *transportationVC;
 @end
 
 @implementation IJHomeViewController
@@ -178,7 +180,8 @@ static const CGFloat kSeparatorBarWidth = 1.5;
 }
 
 - (void)pushTransportation {
-  NSLog(@"why y no code me?");
+  [self.navigationController pushViewController:self.transportationVC
+                                       animated:YES];
 }
 
 - (void)pushEvents {
@@ -226,6 +229,13 @@ static const CGFloat kSeparatorBarWidth = 1.5;
     _linksVC = [[IJLinkTableViewController alloc] init];
   }
   return _linksVC;
+}
+
+- (IJTransportationCollectionViewController *)transportationVC {
+  if (!_transportationVC) {
+    _transportationVC = [[IJTransportationCollectionViewController alloc] init];
+  }
+  return _transportationVC;
 }
 
 @end

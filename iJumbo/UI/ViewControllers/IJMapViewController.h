@@ -20,6 +20,5 @@
 
 - (instancetype)initWithLocations:(NSArray *)locations;
 - (void)removeLocationsFromMap;
-- (void)addLocationsToMap:(NSArray *)locations;
 
 @end

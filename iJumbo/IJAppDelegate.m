@@ -8,6 +8,7 @@
 
 #import "IJAppDelegate.h"
 
+#import <Crashlytics/Crashlytics.h>
 #import <MMRecord/MMRecord.h>
 
 #import "IJHomeViewController.h"
@@ -26,9 +27,10 @@
 @synthesize persistentStoreCoordinator = _persistentStoreCoordinator;
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
+  [Crashlytics startWithAPIKey:@"091a4baa8905651db15d358449cc69ef24a9d492"];
+  [MMRecord registerServerClass:[IJServer class]];
   [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
   [[UINavigationBar appearance] setShadowImage:[[UIImage alloc] init]];
-  [MMRecord registerServerClass:[IJServer class]];
   [UIApplication sharedApplication].statusBarStyle = UIStatusBarStyleLightContent;
   self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
   [self addBackgroundImage];

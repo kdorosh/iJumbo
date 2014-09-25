@@ -27,6 +27,8 @@
 
 - (void)viewDidLoad {
   [super viewDidLoad];
+  if (!self.title || [self.title isEqualToString:@""])
+    self.title = @"Map";
   self.edgesForExtendedLayout = UIRectEdgeNone;
   UISearchBar *searchBar = [[UISearchBar alloc] initWithFrame:CGRectMake(0, 0, self.view.width, 40)];
   searchBar.barTintColor = kIJumboBlue;

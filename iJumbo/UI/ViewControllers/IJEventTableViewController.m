@@ -23,6 +23,7 @@ static NSDateFormatter *kEventsTableDateFormatter;
 @property(nonatomic) NSDate *date;
 @property(nonatomic) NSFetchedResultsController *fetchedResultsController;
 @property(nonatomic) UIDatePicker *datePicker;
+@property(nonatomic) UIRefreshControl *refreshControl;
 @end
 
 @implementation IJEventTableViewController
@@ -32,9 +33,12 @@ static NSDateFormatter *kEventsTableDateFormatter;
   self.title = @"Events";
   [self addTableViewWithDelegate:self];
   
-  UIBarButtonItem *calendarBarButton = [[UIBarButtonItem alloc] initWithTitle:@"Calendar" style:UIBarButtonItemStylePlain target:self action:@selector(showCalendar:)];
+  UIBarButtonItem *calendarBarButton = [[UIBarButtonItem alloc] initWithTitle:@"Calendar"
+                                                                        style:UIBarButtonItemStylePlain
+                                                                       target:self
+                                                                      action:@selector(showCalendar:)];
   self.navigationItem.rightBarButtonItem = calendarBarButton;
-  
+
   self.datePicker = [[UIDatePicker alloc] init];
   self.datePicker.frame = CGRectMake(0, self.view.height, self.view.width, self.datePicker.height);
   self.datePicker.backgroundColor = [UIColor whiteColor];
@@ -49,6 +53,13 @@ static NSDateFormatter *kEventsTableDateFormatter;
   self.tableView.separatorColor = [UIColor clearColor];
   [self setupDateNavigationBar];
   self.date = [NSDate date];
+  
+  self.refreshControl = [[UIRefreshControl alloc] init];
+  [self.refreshControl addTarget:self
+                          action:@selector(loadData)
+                forControlEvents:UIControlEventValueChanged];
+  [self.tableView addSubview:self.refreshControl];
+  
   [self.tableView reloadData];
   [self loadData];
 }
@@ -123,8 +134,10 @@ static NSDateFormatter *kEventsTableDateFormatter;
 }
 
 - (void)loadData {
-  [IJEvent getEventsWithSuccessBlock:^(NSArray *events) { }
-                        failureBlock:^(NSError *error) {
+  [IJEvent getEventsWithSuccessBlock:^(NSArray *events) {
+    [self.refreshControl endRefreshing];
+  } failureBlock:^(NSError *error) {
+    [self.refreshControl endRefreshing];
     NSLog(@"Error getting events: %@", error);
   }];
 }

@@ -32,6 +32,7 @@ typedef NS_ENUM(NSInteger, IJMenuActionSheet) {
 @property(nonatomic) UISegmentedControl *mealSegment;
 @property(nonatomic) UISegmentedControl *dateSegment;
 @property(nonatomic) NSMutableSet *datesBeingLoaded;
+@property(nonatomic) NSDate *pullToRefreshTime;
 @end
 
 @implementation IJMenuTableViewController
@@ -43,20 +44,10 @@ typedef NS_ENUM(NSInteger, IJMenuActionSheet) {
   self.edgesForExtendedLayout = UIRectEdgeNone;
   [self setupUI];
   [self loadMenus];
-  UIRefreshControl *refreshControl = [[UIRefreshControl alloc] init];
-  [refreshControl addTarget:self
-                     action:@selector(pullToRefresh:)
-           forControlEvents:UIControlEventValueChanged];
-  refreshControl.backgroundColor = [UIColor clearColor];
-  refreshControl.tintColor = [UIColor clearColor];
-  [self.tableView addSubview:refreshControl];
+
   [self.tableView mainThreadReload];
 }
-   
-- (void)pullToRefresh:(UIRefreshControl *)refreshControl {
-  [refreshControl endRefreshing];
-  [self loadMenusForDate:[self.date copy]];
-}
+
 
 - (void)setupUI {
   [self.navigationController.navigationBar setShadowImage:[[UIImage alloc] init]];
@@ -252,6 +243,10 @@ typedef NS_ENUM(NSInteger, IJMenuActionSheet) {
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView {
   if ([self datePickerIsShown]) {
     [self hideDatePicker];
+  }
+  if (scrollView.contentOffset.y < -40 && [self.pullToRefreshTime timeIntervalSinceNow] < -1) {
+    self.pullToRefreshTime = [NSDate date];
+    [self loadMenusForDate:[self.date copy]];
   }
 }
 
@@ -449,6 +444,13 @@ typedef NS_ENUM(NSInteger, IJMenuActionSheet) {
     _datesBeingLoaded = [NSMutableSet set];
   }
   return _datesBeingLoaded;
+}
+
+- (NSDate *)pullToRefreshTime {
+  if (!_pullToRefreshTime) {
+    _pullToRefreshTime = [NSDate dateWithTimeIntervalSince1970:0];
+  }
+  return _pullToRefreshTime;
 }
 
 @end

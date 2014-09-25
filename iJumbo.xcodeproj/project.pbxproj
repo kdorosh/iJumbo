@@ -17,6 +17,8 @@
 		C852A6B219A192420048B1C3 /* IJLinkTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C852A6B119A192420048B1C3 /* IJLinkTableViewController.m */; };
 		C852A6B519A193100048B1C3 /* IJLinkTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = C852A6B419A193100048B1C3 /* IJLinkTableViewCell.m */; };
 		C878609F19BF5401002B2A3C /* IJFoodItemTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = C878609E19BF5401002B2A3C /* IJFoodItemTableViewCell.m */; };
+		C87BB9C819D364FE001BB67B /* IJTransportationCollectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C87BB9C719D364FE001BB67B /* IJTransportationCollectionViewController.m */; };
+		C87BB9CB19D36F51001BB67B /* Crashlytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C87BB9CA19D36F51001BB67B /* Crashlytics.framework */; };
 		C87E7CBE198C566500366DF7 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C87E7CBD198C566500366DF7 /* Foundation.framework */; };
 		C87E7CC0198C566500366DF7 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C87E7CBF198C566500366DF7 /* CoreGraphics.framework */; };
 		C87E7CC2198C566500366DF7 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C87E7CC1198C566500366DF7 /* UIKit.framework */; };
@@ -55,6 +57,7 @@
 		C8D67FB9199EE342001C4FD2 /* IJNewsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C8D67FB8199EE342001C4FD2 /* IJNewsTableViewController.m */; };
 		C8D67FBC199EE3EB001C4FD2 /* IJArticle.m in Sources */ = {isa = PBXBuildFile; fileRef = C8D67FBB199EE3EB001C4FD2 /* IJArticle.m */; };
 		C8D67FBF199EED7C001C4FD2 /* UIView+AddSubviews.m in Sources */ = {isa = PBXBuildFile; fileRef = C8D67FBE199EED7C001C4FD2 /* UIView+AddSubviews.m */; };
+		C8EE725C19D3C80900A36F57 /* IJMinutesTillCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = C8EE725B19D3C80900A36F57 /* IJMinutesTillCollectionViewCell.m */; };
 		C8F0076B199DD47A006B7DC4 /* IJServer.m in Sources */ = {isa = PBXBuildFile; fileRef = C8F0076A199DD47A006B7DC4 /* IJServer.m */; };
 		C8F00775199DD624006B7DC4 /* IJLocation.m in Sources */ = {isa = PBXBuildFile; fileRef = C8F00774199DD624006B7DC4 /* IJLocation.m */; };
 		C8F00778199DD6F7006B7DC4 /* IJHours.m in Sources */ = {isa = PBXBuildFile; fileRef = C8F00777199DD6F7006B7DC4 /* IJHours.m */; };
@@ -105,6 +108,9 @@
 		C852A6B419A193100048B1C3 /* IJLinkTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = IJLinkTableViewCell.m; path = iJumbo/UI/TableViewCells/IJLinkTableViewCell.m; sourceTree = "<group>"; };
 		C878609D19BF5401002B2A3C /* IJFoodItemTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = IJFoodItemTableViewCell.h; path = iJumbo/UI/TableViewCells/IJFoodItemTableViewCell.h; sourceTree = "<group>"; };
 		C878609E19BF5401002B2A3C /* IJFoodItemTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = IJFoodItemTableViewCell.m; path = iJumbo/UI/TableViewCells/IJFoodItemTableViewCell.m; sourceTree = "<group>"; };
+		C87BB9C619D364FE001BB67B /* IJTransportationCollectionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = IJTransportationCollectionViewController.h; path = iJumbo/UI/ViewControllers/IJTransportationCollectionViewController.h; sourceTree = "<group>"; };
+		C87BB9C719D364FE001BB67B /* IJTransportationCollectionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = IJTransportationCollectionViewController.m; path = iJumbo/UI/ViewControllers/IJTransportationCollectionViewController.m; sourceTree = "<group>"; };
+		C87BB9CA19D36F51001BB67B /* Crashlytics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Crashlytics.framework; sourceTree = "<group>"; };
 		C87E7CBA198C566500366DF7 /* iJumbo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = iJumbo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C87E7CBD198C566500366DF7 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		C87E7CBF198C566500366DF7 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -156,6 +162,8 @@
 		C8D67FBB199EE3EB001C4FD2 /* IJArticle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = IJArticle.m; path = Models/IJArticle.m; sourceTree = "<group>"; };
 		C8D67FBD199EED7C001C4FD2 /* UIView+AddSubviews.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIView+AddSubviews.h"; path = "Helpers/UIView+AddSubviews.h"; sourceTree = "<group>"; };
 		C8D67FBE199EED7C001C4FD2 /* UIView+AddSubviews.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIView+AddSubviews.m"; path = "Helpers/UIView+AddSubviews.m"; sourceTree = "<group>"; };
+		C8EE725A19D3C80900A36F57 /* IJMinutesTillCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = IJMinutesTillCollectionViewCell.h; path = iJumbo/UI/CollectionViewCells/IJMinutesTillCollectionViewCell.h; sourceTree = "<group>"; };
+		C8EE725B19D3C80900A36F57 /* IJMinutesTillCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = IJMinutesTillCollectionViewCell.m; path = iJumbo/UI/CollectionViewCells/IJMinutesTillCollectionViewCell.m; sourceTree = "<group>"; };
 		C8F00769199DD47A006B7DC4 /* IJServer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IJServer.h; sourceTree = "<group>"; };
 		C8F0076A199DD47A006B7DC4 /* IJServer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IJServer.m; sourceTree = "<group>"; };
 		C8F00773199DD624006B7DC4 /* IJLocation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IJLocation.h; sourceTree = "<group>"; };
@@ -201,6 +209,7 @@
 				C87E7CC4198C566500366DF7 /* CoreData.framework in Frameworks */,
 				C87E7CC2198C566500366DF7 /* UIKit.framework in Frameworks */,
 				C87E7CBE198C566500366DF7 /* Foundation.framework in Frameworks */,
+				C87BB9CB19D36F51001BB67B /* Crashlytics.framework in Frameworks */,
 				51717AB18D3441268926AA6D /* libPods.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -257,6 +266,7 @@
 		C87E7CBC198C566500366DF7 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				C87BB9CA19D36F51001BB67B /* Crashlytics.framework */,
 				C87E7CBD198C566500366DF7 /* Foundation.framework */,
 				C87E7CBF198C566500366DF7 /* CoreGraphics.framework */,
 				C87E7CC1198C566500366DF7 /* UIKit.framework */,
@@ -347,10 +357,19 @@
 				C8B7FFF519A0375B0004FE76 /* IJNewsTableViewCell.m */,
 				C8FADA6A19BECF530000E2A8 /* IJTableViewHeaderFooterView.h */,
 				C8FADA6B19BECF530000E2A8 /* IJTableViewHeaderFooterView.m */,
-				C887F45C19D22B8F00D82898 /* IJLinkCollectionViewCell.h */,
-				C887F45D19D22B8F00D82898 /* IJLinkCollectionViewCell.m */,
 			);
 			name = TableViewCells;
+			sourceTree = "<group>";
+		};
+		C8EE725D19D3C81300A36F57 /* CollectionVIewCells */ = {
+			isa = PBXGroup;
+			children = (
+				C887F45C19D22B8F00D82898 /* IJLinkCollectionViewCell.h */,
+				C887F45D19D22B8F00D82898 /* IJLinkCollectionViewCell.m */,
+				C8EE725A19D3C80900A36F57 /* IJMinutesTillCollectionViewCell.h */,
+				C8EE725B19D3C80900A36F57 /* IJMinutesTillCollectionViewCell.m */,
+			);
+			name = CollectionVIewCells;
 			sourceTree = "<group>";
 		};
 		C8F0076C199DD59B006B7DC4 /* Models */ = {
@@ -405,6 +424,7 @@
 			children = (
 				C8F00785199DDB67006B7DC4 /* ViewControllers */,
 				C8B7FFF719A037600004FE76 /* TableViewCells */,
+				C8EE725D19D3C81300A36F57 /* CollectionVIewCells */,
 			);
 			name = UI;
 			path = ..;
@@ -439,6 +459,8 @@
 				C8FB4FC719A2D64600AC043F /* IJViewController.m */,
 				C8FB4FC919A311F400AC043F /* IJWebViewController.h */,
 				C8FB4FCA19A311F400AC043F /* IJWebViewController.m */,
+				C87BB9C619D364FE001BB67B /* IJTransportationCollectionViewController.h */,
+				C87BB9C719D364FE001BB67B /* IJTransportationCollectionViewController.m */,
 			);
 			name = ViewControllers;
 			sourceTree = "<group>";
@@ -455,6 +477,7 @@
 				C87E7CB7198C566500366DF7 /* Frameworks */,
 				C87E7CB8198C566500366DF7 /* Resources */,
 				CB69F30E2C974EFB9F4748DF /* Copy Pods Resources */,
+				C87BB9C919D36EEF001BB67B /* Crashlytics Build Phase */,
 			);
 			buildRules = (
 			);
@@ -564,6 +587,20 @@
 			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
+		C87BB9C919D36EEF001BB67B /* Crashlytics Build Phase */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Crashlytics Build Phase";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "./Crashlytics.framework/run 091a4baa8905651db15d358449cc69ef24a9d492 80f5a3ee1281792647c51f275c280e58cd7ea2ecd2f8b6c7077f5cd9ad019c35";
+		};
 		CB69F30E2C974EFB9F4748DF /* Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -592,7 +629,9 @@
 				C87E7CD3198C566500366DF7 /* iJumbo.xcdatamodeld in Sources */,
 				C8FADA6C19BECF530000E2A8 /* IJTableViewHeaderFooterView.m in Sources */,
 				C887F45E19D22B8F00D82898 /* IJLinkCollectionViewCell.m in Sources */,
+				C8EE725C19D3C80900A36F57 /* IJMinutesTillCollectionViewCell.m in Sources */,
 				C8FB4FC819A2D64600AC043F /* IJViewController.m in Sources */,
+				C87BB9C819D364FE001BB67B /* IJTransportationCollectionViewController.m in Sources */,
 				C8FB4FD119A465F000AC043F /* IJMapViewController.m in Sources */,
 				C852A6A919A1099B0048B1C3 /* IJLocationTableViewCell.m in Sources */,
 				C8FB4FC119A24A5400AC043F /* IJLocationViewController.m in Sources */,
@@ -744,6 +783,10 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "iPhone Developer: Amadou Crookes (V23VPS752M)";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "iJumbo/iJumbo-Prefix.pch";
 				INFOPLIST_FILE = "iJumbo/iJumbo-Info.plist";
@@ -759,6 +802,10 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "iPhone Developer: Amadou Crookes (V23VPS752M)";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "iJumbo/iJumbo-Prefix.pch";
 				INFOPLIST_FILE = "iJumbo/iJumbo-Info.plist";
