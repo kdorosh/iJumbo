@@ -84,6 +84,8 @@ static NSDateFormatter *kNewsCellDateFormatter;
   if (!kNewsCellDateFormatter) {
     kNewsCellDateFormatter = [[NSDateFormatter alloc] init];
     [kNewsCellDateFormatter setDateFormat:@"MMM, d YYYY"];
+    NSTimeZone *timeZone = [[NSTimeZone alloc] initWithName:@"GMT"];
+    [kNewsCellDateFormatter setTimeZone:timeZone];
   }
   self.dateLabel.text = [kNewsCellDateFormatter stringFromDate:article.posted];
 }

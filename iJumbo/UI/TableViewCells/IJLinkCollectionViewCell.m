@@ -38,7 +38,10 @@ static const int kBackgroundPadding = 5;
 }
 
 - (void)addDataFromLink:(IJLink *)link {
-  self.nameLabel.text = link.name;
+  NSAttributedString *underlinedName =
+      [[NSAttributedString alloc] initWithString:link.name
+                                      attributes:@{NSUnderlineStyleAttributeName: @(1)}];
+  self.nameLabel.attributedText = underlinedName;
 }
 
 @end
