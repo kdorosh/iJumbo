@@ -41,12 +41,11 @@
     [_infoButton setAttributedTitle:underlinedInfoString forState:UIControlStateNormal];
     [_mapButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
     [_infoButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-    // TODO(amadou): Add underline to map and info buttons.
     _nameLabel.font = [UIFont regularFontWithSize:17];
     _nameLabel.textColor = [UIColor colorWithWhite:0 alpha:0.75];
     _mapButton.titleLabel.font = [UIFont lightFontWithSize:17];
     _infoButton.titleLabel.font = [UIFont lightFontWithSize:17];
-    
+
     [_mapButton addTarget:self action:@selector(mapButtonAction) forControlEvents:UIControlEventTouchUpInside];
     [_infoButton addTarget:self action:@selector(infoButtonAction) forControlEvents:UIControlEventTouchUpInside];
     

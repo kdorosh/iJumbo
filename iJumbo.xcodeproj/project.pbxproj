@@ -789,8 +789,11 @@
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "iJumbo/iJumbo-Prefix.pch";
+				GCC_WARN_SHADOW = YES;
+				GCC_WARN_UNUSED_PARAMETER = YES;
 				INFOPLIST_FILE = "iJumbo/iJumbo-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				WARNING_CFLAGS = "-Werror";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -808,8 +811,11 @@
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "iJumbo/iJumbo-Prefix.pch";
+				GCC_WARN_SHADOW = YES;
+				GCC_WARN_UNUSED_PARAMETER = YES;
 				INFOPLIST_FILE = "iJumbo/iJumbo-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				WARNING_CFLAGS = "-Werror";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;

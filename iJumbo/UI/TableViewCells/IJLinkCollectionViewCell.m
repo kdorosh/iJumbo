@@ -7,7 +7,6 @@
 //
 
 static const int kNameLabelHeight = 25;
-static const int kBackgroundPadding = 5;
 
 #import "IJLinkCollectionViewCell.h"
 
@@ -23,10 +22,7 @@ static const int kBackgroundPadding = 5;
 {
     self = [super initWithFrame:frame];
     if (self) {
-      self.backgroundColor = [UIColor clearColor];
-      UIView *background = [[UIView alloc] initWithFrame:CGRectMake(kBackgroundPadding, kBackgroundPadding, self.width - 2 * kBackgroundPadding, self.height - kBackgroundPadding)];
-      background.backgroundColor = [UIColor colorWithWhite:1 alpha:0.75f];
-      [self addSubview:background];
+      self.backgroundColor = [UIColor colorWithWhite:1 alpha:0.75];
       self.nameLabel = [[UILabel alloc] init];
       self.nameLabel.frame = CGRectMake(0, self.height/2.0f - kNameLabelHeight/2.0f, self.width, kNameLabelHeight);
       self.nameLabel.textAlignment = NSTextAlignmentCenter;

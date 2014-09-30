@@ -13,8 +13,6 @@
 #import "IJWebViewController.h"
 
 const int kNumberOfColumns = 2;
-static const int kCellHeight = 100;
-
 
 @interface IJLinkTableViewController () <NSFetchedResultsControllerDelegate, UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout>
 @property(nonatomic) NSFetchedResultsController *fetchedResultsController;
@@ -30,7 +28,6 @@ static const int kCellHeight = 100;
   [super viewDidLoad];
   self.title = @"Links";
   UICollectionViewFlowLayout *layout = [[UICollectionViewFlowLayout alloc] init];
-  //[layout setItemSize:CGSizeMake(self.view.width/2.0f - 5, kCellHeight)];
   [layout setScrollDirection:UICollectionViewScrollDirectionVertical];
   self.collectionView = [[UICollectionView alloc] initWithFrame:CGRectMake(0, 0, self.view.width, self.view.height - 64)
                                            collectionViewLayout:layout];
@@ -115,7 +112,7 @@ static const int kCellHeight = 100;
 - (CGSize)collectionView:(UICollectionView *)collectionView
                   layout:(UICollectionViewLayout *)collectionViewLayout
   sizeForItemAtIndexPath:(NSIndexPath *)indexPath {
-  return CGSizeMake(self.view.width/2.0f - 10, kCellHeight);
+  return CGSizeMake(self.view.width/2.0f - 10, self.view.width/3.0f);
 }
 
 #pragma mark - NSFetchedResultsControllerDelegate
