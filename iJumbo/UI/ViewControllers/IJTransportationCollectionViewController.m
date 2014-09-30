@@ -9,6 +9,8 @@
 #import "IJTransportationCollectionViewController.h"
 
 #import "IJMinutesTillCollectionViewCell.h"
+#import "IJServer.h"
+#import "IJRecord.h"
 
 typedef NS_ENUM(NSInteger, IJTransportationSection) {
   IJTransportationSectionMBTA = 0,
@@ -17,7 +19,8 @@ typedef NS_ENUM(NSInteger, IJTransportationSection) {
 };
 
 @interface IJTransportationCollectionViewController ()
-@property(nonatomic) NSArray *mbtaData;
+@property(nonatomic) NSMutableDictionary *mbtaTimes;
+@property(nonatomic) UIRefreshControl *refreshControl;
 @end
 
 @implementation IJTransportationCollectionViewController
@@ -25,6 +28,7 @@ typedef NS_ENUM(NSInteger, IJTransportationSection) {
 - (void)viewDidLoad {
   [super viewDidLoad];
   self.title = @"Transportation";
+  self.mbtaTimes = [NSMutableDictionary dictionaryWithCapacity:2];
   UICollectionViewFlowLayout *layout = [[UICollectionViewFlowLayout alloc] init];
   [layout setScrollDirection:UICollectionViewScrollDirectionVertical];
   layout.headerReferenceSize = CGSizeMake(self.view.width, 40);
@@ -44,14 +48,75 @@ typedef NS_ENUM(NSInteger, IJTransportationSection) {
           forSupplementaryViewOfKind:UICollectionElementKindSectionHeader
                  withReuseIdentifier:@"MinutesTillHeader"];
   
+  self.refreshControl = [[UIRefreshControl alloc] init];
+  self.refreshControl.tintColor = [UIColor blackColor];
+  [self.refreshControl addTarget:self
+                          action:@selector(loadData)
+                forControlEvents:UIControlEventValueChanged];
+  [self.collectionView addSubview:self.refreshControl];
   [self.view addSubview:self.collectionView];
   [self.collectionView reloadData];
+  [self loadDataAnimated:NO];
 }
 
 #pragma mark - Network Calls
 
-- (void)loadMBTAData {
-  
+- (void)loadData {
+  [self loadDataAnimated:YES];
+}
+
+- (void)loadDataAnimated:(BOOL)animated {
+  if (animated) {
+    [self.refreshControl beginRefreshing];
+  }
+  [IJRecord startBatchedRequestsInExecutionBlock:^{
+    [self loadMBTATimes];
+    [self loadJoeySchedule];
+  } withCompletionBlock:^{
+    [self.refreshControl endRefreshing];
+  }];
+}
+
+// TOOD(amadou): Get the time going to alewife?
+- (void)loadMBTATimes {
+  NSString *url = @"http://realtime.mbta.com/developer/api/v2/predictionsbystop?"
+  @"api_key=CvuMAlPRQkKWxdmB_v9FCg&stop=place-davis&format=json";
+  [IJServer getJSONAtURL:url success:^(NSDictionary *object) {
+    NSArray *modes = object[@"mode"];
+    // Loop through all MBTA data for stops at Davis (Bus and Subway).
+    self.mbtaTimes = @{@"Southbound": @[].mutableCopy, @"Northbound": @[].mutableCopy}.mutableCopy;
+    for (NSDictionary *dict in modes) {
+      // Use the subway data.
+      if ([dict[@"mode_name"] isEqualToString:@"Subway"]) {
+        NSArray *routes = dict[@"route"];
+        for (NSDictionary *route in routes) {
+          NSDictionary *directions = route[@"direction"];
+          for (NSDictionary *direction in directions) {
+            // What direction the train is going, Southbound or Northbound.
+            NSString *dir_name = direction[@"direction_name"];
+            // A list of the trips going in this direction
+            NSArray *trips = direction[@"trip"];
+            // A list of the departure times.
+            NSMutableArray *departureTimes = [NSMutableArray arrayWithCapacity:[trips count]];
+            // Get every estimated time of departure for this direction
+            for (NSDictionary *trip in trips) {
+              NSNumber *dateInSeconds = (NSNumber*)trip[@"sch_dep_dt"];
+              [departureTimes addObject:dateInSeconds];
+            }
+            NSMutableArray *times = self.mbtaTimes[dir_name];
+            [times addObjectsFromArray:departureTimes];
+          }
+        }
+      }
+    }
+    NSSortDescriptor *sort = [NSSortDescriptor sortDescriptorWithKey:@"self" ascending:YES];
+    [self.mbtaTimes enumerateKeysAndObjectsUsingBlock:^(NSString *key, NSMutableArray *times, BOOL *stop) {
+      [times sortUsingDescriptors:@[sort]];
+    }];
+    [self.collectionView performSelectorOnMainThread:@selector(reloadData) withObject:nil waitUntilDone:YES];
+  } failure:^(NSError *error) {
+    NSLog(@"Error: %@", error);
+  }];
 }
 
 - (void)loadJoeySchedule {
@@ -111,7 +176,15 @@ typedef NS_ENUM(NSInteger, IJTransportationSection) {
   NSNumber *minutesTill = (indexPath.row == 0) ? @(3) : @(7);
   NSString *detailText = (indexPath.row == 0) ? @"to Boston" : @"to Alewife";
   if (indexPath.section == IJTransportationSectionMBTA) {
-    
+    NSString *directionKey = (indexPath.row == 0) ? @"Southbound" : @"Northbound";
+    NSNumber *time = [self getNextTimeForDirection:directionKey];
+    if (time) {
+      NSTimeInterval secondsSince1970 = [[NSDate date] timeIntervalSince1970];
+      NSInteger minutesTillTrain = (time.doubleValue - secondsSince1970) / 60.0f;
+      minutesTill = @(minutesTillTrain);
+    } else {
+      minutesTill = nil;
+    }
   } else if (indexPath.section == IJTransportationSectionJoeyTime) {
     
   }
@@ -119,6 +192,19 @@ typedef NS_ENUM(NSInteger, IJTransportationSection) {
   return cell;
 }
 
+- (NSNumber *)getNextTimeForDirection:(NSString *)direction {
+  NSMutableArray *times = self.mbtaTimes[direction];
+  if (!times || [times count] == 0) {
+    return nil;
+  }
+  NSTimeInterval timeInterval = [[NSDate date] timeIntervalSince1970];
+  for (NSNumber *time in times) {
+    if (time.doubleValue > timeInterval) {
+      return time;
+    }
+  }
+  return nil;
+}
 
 - (UIEdgeInsets)collectionView:(UICollectionView *)collectionView
                         layout:(UICollectionViewLayout *)collectionViewLayout

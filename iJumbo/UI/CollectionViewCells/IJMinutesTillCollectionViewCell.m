@@ -22,7 +22,7 @@
     self.backgroundColor = [UIColor colorWithWhite:1 alpha:0.75];
     self.minutesTillLabel = [[UILabel alloc] initWithFrame:CGRectMake(self.width/4.0f,
                                                                       self.height/5.0f,
-                                                                      self.width/2.0f,
+                                                                      3 * self.width/4.0f,
                                                                       self.height/3.0f)];
     self.detailLabel = [[UILabel alloc] initWithFrame:CGRectMake(self.minutesTillLabel.frame.origin.x,
                                                                  self.minutesTillLabel.maxY - 10,
@@ -40,13 +40,15 @@
 - (void)updateWithMinutes:(NSNumber *)minutes detailText:(NSString *)detailText {
   UIFont *numberFont = [UIFont regularFontWithSize:40];
   UIFont *minuteFont = [UIFont lightFontWithSize:13];  // Used for the @"min(s)" after the number.
+  NSString *minutesString = (minutes) ? [NSString stringWithFormat:@"%i", minutes.intValue] : @"n/a";
   NSMutableAttributedString *numberString =
-      [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"%i", minutes.intValue]
+      [[NSMutableAttributedString alloc] initWithString:minutesString
                                              attributes:@{NSFontAttributeName: numberFont}];
   NSMutableAttributedString *minsString =
       [[NSMutableAttributedString alloc] initWithString:(minutes.intValue >= 2) ? @" mins" : @" min"
                                              attributes:@{NSFontAttributeName: minuteFont}];
-  [numberString appendAttributedString:minsString];
+  if (minutes)
+    [numberString appendAttributedString:minsString];
   self.minutesTillLabel.attributedText = numberString;
   self.detailLabel.text = detailText;
 }
