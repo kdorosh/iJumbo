@@ -74,7 +74,6 @@
 		C8FB4FCB19A311F400AC043F /* IJWebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C8FB4FCA19A311F400AC043F /* IJWebViewController.m */; };
 		C8FB4FD119A465F000AC043F /* IJMapViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C8FB4FD019A465F000AC043F /* IJMapViewController.m */; };
 		C8FB4FD419A46F3100AC043F /* IJEventViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C8FB4FD319A46F3100AC043F /* IJEventViewController.m */; };
-		C8FF29C919AAB16500915666 /* IJTransportationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C8FF29C819AAB16500915666 /* IJTransportationViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -196,8 +195,6 @@
 		C8FB4FD019A465F000AC043F /* IJMapViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = IJMapViewController.m; path = iJumbo/UI/ViewControllers/IJMapViewController.m; sourceTree = "<group>"; };
 		C8FB4FD219A46F3100AC043F /* IJEventViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = IJEventViewController.h; path = iJumbo/UI/ViewControllers/IJEventViewController.h; sourceTree = "<group>"; };
 		C8FB4FD319A46F3100AC043F /* IJEventViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = IJEventViewController.m; path = iJumbo/UI/ViewControllers/IJEventViewController.m; sourceTree = "<group>"; };
-		C8FF29C719AAB16500915666 /* IJTransportationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = IJTransportationViewController.h; path = iJumbo/UI/ViewControllers/IJTransportationViewController.h; sourceTree = "<group>"; };
-		C8FF29C819AAB16500915666 /* IJTransportationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = IJTransportationViewController.m; path = iJumbo/UI/ViewControllers/IJTransportationViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -453,8 +450,6 @@
 				C8D67FB8199EE342001C4FD2 /* IJNewsTableViewController.m */,
 				C8B7FFF119A030DB0004FE76 /* IJNavigationDelegate.h */,
 				C8B7FFF219A030DB0004FE76 /* IJNavigationDelegate.m */,
-				C8FF29C719AAB16500915666 /* IJTransportationViewController.h */,
-				C8FF29C819AAB16500915666 /* IJTransportationViewController.m */,
 				C8FB4FC619A2D64600AC043F /* IJViewController.h */,
 				C8FB4FC719A2D64600AC043F /* IJViewController.m */,
 				C8FB4FC919A311F400AC043F /* IJWebViewController.h */,
@@ -660,7 +655,6 @@
 				C8B7FFF619A0375B0004FE76 /* IJNewsTableViewCell.m in Sources */,
 				C852A6AF19A18CF30048B1C3 /* IJLink.m in Sources */,
 				C8D67FB9199EE342001C4FD2 /* IJNewsTableViewController.m in Sources */,
-				C8FF29C919AAB16500915666 /* IJTransportationViewController.m in Sources */,
 				C8F0076B199DD47A006B7DC4 /* IJServer.m in Sources */,
 				C8FADA6619BE91920000E2A8 /* IJFoodItem.m in Sources */,
 				C8FB4FD419A46F3100AC043F /* IJEventViewController.m in Sources */,
@@ -790,8 +784,9 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "iJumbo/iJumbo-Prefix.pch";
 				GCC_WARN_SHADOW = YES;
-				GCC_WARN_UNUSED_PARAMETER = YES;
+				GCC_WARN_UNUSED_PARAMETER = NO;
 				INFOPLIST_FILE = "iJumbo/iJumbo-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WARNING_CFLAGS = "-Werror";
 				WRAPPER_EXTENSION = app;
@@ -812,8 +807,9 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "iJumbo/iJumbo-Prefix.pch";
 				GCC_WARN_SHADOW = YES;
-				GCC_WARN_UNUSED_PARAMETER = YES;
+				GCC_WARN_UNUSED_PARAMETER = NO;
 				INFOPLIST_FILE = "iJumbo/iJumbo-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WARNING_CFLAGS = "-Werror";
 				WRAPPER_EXTENSION = app;

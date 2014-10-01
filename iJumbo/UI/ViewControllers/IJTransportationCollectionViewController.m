@@ -21,6 +21,7 @@ typedef NS_ENUM(NSInteger, IJTransportationSection) {
 @interface IJTransportationCollectionViewController ()
 @property(nonatomic) NSMutableDictionary *mbtaTimes;
 @property(nonatomic) UIRefreshControl *refreshControl;
+@property(nonatomic) NSArray *joeySchedule;
 @end
 
 @implementation IJTransportationCollectionViewController
@@ -29,6 +30,8 @@ typedef NS_ENUM(NSInteger, IJTransportationSection) {
   [super viewDidLoad];
   self.title = @"Transportation";
   self.mbtaTimes = [NSMutableDictionary dictionaryWithCapacity:2];
+  self.joeySchedule =
+      [NSArray arrayWithContentsOfFile:[IJTransportationCollectionViewController joeyScheduleFile]];
   UICollectionViewFlowLayout *layout = [[UICollectionViewFlowLayout alloc] init];
   [layout setScrollDirection:UICollectionViewScrollDirectionVertical];
   layout.headerReferenceSize = CGSizeMake(self.view.width, 40);
@@ -56,6 +59,9 @@ typedef NS_ENUM(NSInteger, IJTransportationSection) {
   [self.collectionView addSubview:self.refreshControl];
   [self.view addSubview:self.collectionView];
   [self.collectionView reloadData];
+}
+
+- (void)viewWillAppear:(BOOL)animated {
   [self loadDataAnimated:NO];
 }
 
@@ -120,7 +126,21 @@ typedef NS_ENUM(NSInteger, IJTransportationSection) {
 }
 
 - (void)loadJoeySchedule {
-  
+  [IJServer getJSONAtURL:[kBaseURL stringByAppendingPathComponent:@"joey_schedule"]
+  success:^(NSArray *schedule) {
+    self.joeySchedule = schedule;
+    [self.joeySchedule writeToFile:[IJTransportationCollectionViewController joeyScheduleFile]
+                        atomically:YES];
+  } failure:^(NSError *error) {
+    NSLog(@"Error: %@", error);
+  }];
+}
+
++ (NSString *)joeyScheduleFile {
+  NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+  NSString *documentsDirectory = [paths objectAtIndex:0];
+  NSString *joeyFile = [documentsDirectory stringByAppendingPathComponent:@"joey_file.data"];
+  return joeyFile;
 }
 
 #pragma mark - CollectionView Delegate & DataSource
@@ -139,7 +159,7 @@ typedef NS_ENUM(NSInteger, IJTransportationSection) {
     return 2;
   } else if (section == IJTransportationSectionJoeyTime) {
     // should always have these 4 times pulled from the schedule.
-    return 0;
+    return 3;
   } else if (section == IJTransportationSectionJoeySchedule) {
     // The big cell that has the schedule.
     return 1;
@@ -186,7 +206,18 @@ typedef NS_ENUM(NSInteger, IJTransportationSection) {
       minutesTill = nil;
     }
   } else if (indexPath.section == IJTransportationSectionJoeyTime) {
-    
+    NSString *locationKey = (indexPath.row == 0) ? @"Campus Center" : (indexPath.row == 1) ? @"Davis Square" : @"Olin Center";
+    NSCalendar *gregorian = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
+    NSDateComponents *components =
+        [gregorian components:NSWeekdayCalendarUnit fromDate:[NSDate date]];
+    NSInteger weekdays = [components weekday] - 1;
+    NSArray *times = self.joeySchedule[weekdays][locationKey];
+    if (times == nil) {
+      minutesTill = nil;
+    } else {
+      minutesTill = @(arc4random_uniform(10));
+    }
+    detailText = locationKey;
   }
   [cell updateWithMinutes:minutesTill detailText:detailText];
   return cell;

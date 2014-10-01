@@ -244,7 +244,7 @@ typedef NS_ENUM(NSInteger, IJMenuActionSheet) {
   if ([self datePickerIsShown]) {
     [self hideDatePicker];
   }
-  if (scrollView.contentOffset.y < -40 && [self.pullToRefreshTime timeIntervalSinceNow] < -1) {
+  if (scrollView.contentOffset.y < -60 && [self.pullToRefreshTime timeIntervalSinceNow] < -1) {
     self.pullToRefreshTime = [NSDate date];
     [self loadMenusForDate:[self.date copy]];
   }

@@ -10,29 +10,29 @@
 	<string>iJumbo</string>
 	<key>IDESourceControlProjectOriginsDictionary</key>
 	<dict>
-		<key>61BFF023-2C21-4AA6-B116-2E5C615AE58E</key>
+		<key>A8A61AA09D2FF2D61459A91DE6D22B3F242252DE</key>
 		<string>ssh://github.com/ASCrookes/iJumbo.git</string>
 	</dict>
 	<key>IDESourceControlProjectPath</key>
 	<string>iJumbo.xcworkspace</string>
 	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
 	<dict>
-		<key>61BFF023-2C21-4AA6-B116-2E5C615AE58E</key>
+		<key>A8A61AA09D2FF2D61459A91DE6D22B3F242252DE</key>
 		<string>..</string>
 	</dict>
 	<key>IDESourceControlProjectURL</key>
 	<string>ssh://github.com/ASCrookes/iJumbo.git</string>
 	<key>IDESourceControlProjectVersion</key>
-	<integer>110</integer>
+	<integer>111</integer>
 	<key>IDESourceControlProjectWCCIdentifier</key>
-	<string>61BFF023-2C21-4AA6-B116-2E5C615AE58E</string>
+	<string>A8A61AA09D2FF2D61459A91DE6D22B3F242252DE</string>
 	<key>IDESourceControlProjectWCConfigurations</key>
 	<array>
 		<dict>
 			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
 			<string>public.vcs.git</string>
 			<key>IDESourceControlWCCIdentifierKey</key>
-			<string>61BFF023-2C21-4AA6-B116-2E5C615AE58E</string>
+			<string>A8A61AA09D2FF2D61459A91DE6D22B3F242252DE</string>
 			<key>IDESourceControlWCCName</key>
 			<string>iJumbo</string>
 		</dict>

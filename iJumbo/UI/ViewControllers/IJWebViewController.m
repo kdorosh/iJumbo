@@ -8,8 +8,6 @@
 
 #import "IJWebViewController.h"
 
-static const CGFloat kBottomBarHeight = 45;
-
 @interface IJWebViewController () <UIWebViewDelegate>
 @property(nonatomic) UIWebView *webView;
 @property(nonatomic) NSString *url;

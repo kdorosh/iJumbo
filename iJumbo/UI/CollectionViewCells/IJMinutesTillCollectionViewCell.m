@@ -20,25 +20,25 @@
   self = [super initWithFrame:frame];
   if (self) {
     self.backgroundColor = [UIColor colorWithWhite:1 alpha:0.75];
-    self.minutesTillLabel = [[UILabel alloc] initWithFrame:CGRectMake(self.width/4.0f,
+    self.minutesTillLabel = [[UILabel alloc] initWithFrame:CGRectMake(self.width/5.0f,
                                                                       self.height/5.0f,
                                                                       3 * self.width/4.0f,
                                                                       self.height/3.0f)];
     self.detailLabel = [[UILabel alloc] initWithFrame:CGRectMake(self.minutesTillLabel.frame.origin.x,
                                                                  self.minutesTillLabel.maxY - 10,
-                                                                 self.width - self.width/2.0f,
+                                                                 3 * self.width/4.0f,
                                                                  self.height - self.minutesTillLabel.maxY)];
-    self.detailLabel.font = [UIFont regularFontWithSize:16];
+    self.detailLabel.font = [UIFont regularFontWithSize:14];
     self.detailLabel.textColor = [UIColor colorWithWhite:0 alpha:0.65];
+    self.minutesTillLabel.textColor = [UIColor colorWithWhite:0 alpha:0.8];
     [self addSubview:self.minutesTillLabel];
     [self addSubview:self.detailLabel];
-    [self updateWithMinutes:@(6) detailText:@"to Amadou's Lair ;)"];
   }
   return self;
 }
 
 - (void)updateWithMinutes:(NSNumber *)minutes detailText:(NSString *)detailText {
-  UIFont *numberFont = [UIFont regularFontWithSize:40];
+  UIFont *numberFont = [UIFont regularFontWithSize:28];
   UIFont *minuteFont = [UIFont lightFontWithSize:13];  // Used for the @"min(s)" after the number.
   NSString *minutesString = (minutes) ? [NSString stringWithFormat:@"%i", minutes.intValue] : @"n/a";
   NSMutableAttributedString *numberString =
