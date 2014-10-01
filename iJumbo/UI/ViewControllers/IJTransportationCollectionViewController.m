@@ -12,6 +12,8 @@
 #import "IJServer.h"
 #import "IJRecord.h"
 
+static const int kTimeLowerBound = 4 * 60;
+
 typedef NS_ENUM(NSInteger, IJTransportationSection) {
   IJTransportationSectionMBTA = 0,
   IJTransportationSectionJoeyTime,
@@ -58,6 +60,7 @@ typedef NS_ENUM(NSInteger, IJTransportationSection) {
                 forControlEvents:UIControlEventValueChanged];
   [self.collectionView addSubview:self.refreshControl];
   [self.view addSubview:self.collectionView];
+  [self loadJoeySchedule];
   [self.collectionView reloadData];
 }
 
@@ -131,6 +134,9 @@ typedef NS_ENUM(NSInteger, IJTransportationSection) {
     self.joeySchedule = schedule;
     [self.joeySchedule writeToFile:[IJTransportationCollectionViewController joeyScheduleFile]
                         atomically:YES];
+    [self.collectionView performSelectorOnMainThread:@selector(reloadData)
+                                          withObject:nil
+                                       waitUntilDone:YES];
   } failure:^(NSError *error) {
     NSLog(@"Error: %@", error);
   }];
@@ -207,20 +213,49 @@ typedef NS_ENUM(NSInteger, IJTransportationSection) {
     }
   } else if (indexPath.section == IJTransportationSectionJoeyTime) {
     NSString *locationKey = (indexPath.row == 0) ? @"Campus Center" : (indexPath.row == 1) ? @"Davis Square" : @"Olin Center";
-    NSCalendar *gregorian = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
-    NSDateComponents *components =
-        [gregorian components:NSWeekdayCalendarUnit fromDate:[NSDate date]];
-    NSInteger weekdays = [components weekday] - 1;
-    NSArray *times = self.joeySchedule[weekdays][locationKey];
-    if (times == nil) {
-      minutesTill = nil;
-    } else {
-      minutesTill = @(arc4random_uniform(10));
-    }
+    minutesTill = [self getTimeUntilNextJoeyForStop:locationKey];
     detailText = locationKey;
   }
   [cell updateWithMinutes:minutesTill detailText:detailText];
   return cell;
+}
+
+- (NSNumber *)getTimeUntilNextJoeyForStop:(NSString *)stop {
+  long minutesSinceMidnight = [self minutesSinceMidnight:[NSDate date]];
+  NSCalendar *gregorian = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
+  NSDateComponents *components =
+      [gregorian components:NSWeekdayCalendarUnit fromDate:[NSDate date]];
+  NSInteger weekdays = [components weekday] - 1;
+  if (minutesSinceMidnight < kTimeLowerBound) {
+    weekdays = (weekdays - 1) % 7;
+  }
+  NSArray *times = self.joeySchedule[weekdays][stop];
+  NSNumber *nextTime = nil;
+  if (times == nil) {
+    return nil;
+  } else {
+    int distance = 24 * 60;
+    for (NSNumber *time in times) {
+      NSInteger minutes = (time.integerValue <= kTimeLowerBound) ? time.integerValue + (24 * 60) : time.integerValue;
+      if (minutes - minutesSinceMidnight > 0 &&
+          minutes - minutesSinceMidnight < distance) {
+        distance = (int)minutes - (int)minutesSinceMidnight;
+        nextTime = time;
+      }
+    }
+  }
+  if (!nextTime)
+    return nil;
+  return @(nextTime.integerValue - minutesSinceMidnight);
+}
+
+- (long)minutesSinceMidnight:(NSDate *)date {
+  NSCalendar *gregorian =
+      [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
+  unsigned unitFlags =  NSHourCalendarUnit | NSMinuteCalendarUnit;
+  NSDateComponents *components = [gregorian components:unitFlags fromDate:date];
+  
+  return 60 * [components hour] + [components minute];
 }
 
 - (NSNumber *)getNextTimeForDirection:(NSString *)direction {
