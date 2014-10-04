@@ -450,12 +450,12 @@
 				C8D67FB8199EE342001C4FD2 /* IJNewsTableViewController.m */,
 				C8B7FFF119A030DB0004FE76 /* IJNavigationDelegate.h */,
 				C8B7FFF219A030DB0004FE76 /* IJNavigationDelegate.m */,
+				C87BB9C619D364FE001BB67B /* IJTransportationCollectionViewController.h */,
+				C87BB9C719D364FE001BB67B /* IJTransportationCollectionViewController.m */,
 				C8FB4FC619A2D64600AC043F /* IJViewController.h */,
 				C8FB4FC719A2D64600AC043F /* IJViewController.m */,
 				C8FB4FC919A311F400AC043F /* IJWebViewController.h */,
 				C8FB4FCA19A311F400AC043F /* IJWebViewController.m */,
-				C87BB9C619D364FE001BB67B /* IJTransportationCollectionViewController.h */,
-				C87BB9C719D364FE001BB67B /* IJTransportationCollectionViewController.m */,
 			);
 			name = ViewControllers;
 			sourceTree = "<group>";

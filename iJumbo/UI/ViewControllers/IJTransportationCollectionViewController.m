@@ -52,6 +52,9 @@ typedef NS_ENUM(NSInteger, IJTransportationSection) {
   [self.collectionView registerClass:[UICollectionReusableView class]
           forSupplementaryViewOfKind:UICollectionElementKindSectionHeader
                  withReuseIdentifier:@"MinutesTillHeader"];
+  [self.collectionView registerClass:[UICollectionReusableView class]
+          forSupplementaryViewOfKind:UICollectionElementKindSectionHeader
+                 withReuseIdentifier:@"ScheduleHeader"];
   
   self.refreshControl = [[UIRefreshControl alloc] init];
   self.refreshControl.tintColor = [UIColor blackColor];
@@ -66,6 +69,10 @@ typedef NS_ENUM(NSInteger, IJTransportationSection) {
 
 - (void)viewWillAppear:(BOOL)animated {
   [self loadDataAnimated:NO];
+}
+
+- (void)viewDidAppear:(BOOL)animated {
+  [self.collectionView reloadData];
 }
 
 #pragma mark - Network Calls
@@ -156,7 +163,7 @@ typedef NS_ENUM(NSInteger, IJTransportationSection) {
 // Full Joey Schedule.
 - (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView {
   // TODO(amadou): Change this once the MBTA stuff works.
-  return 2;
+  return 3;
 }
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
@@ -168,7 +175,7 @@ typedef NS_ENUM(NSInteger, IJTransportationSection) {
     return 3;
   } else if (section == IJTransportationSectionJoeySchedule) {
     // The big cell that has the schedule.
-    return 1;
+    return 0;
   }
   return 0;
 }
@@ -275,12 +282,15 @@ typedef NS_ENUM(NSInteger, IJTransportationSection) {
 - (UIEdgeInsets)collectionView:(UICollectionView *)collectionView
                         layout:(UICollectionViewLayout *)collectionViewLayout
         insetForSectionAtIndex:(NSInteger)section {
-  return UIEdgeInsetsMake(5, 5, 5, 5);
+  return UIEdgeInsetsMake(0, 5, 5, 5);
 }
 
 - (CGSize)collectionView:(UICollectionView *)collectionView
                   layout:(UICollectionViewLayout *)collectionViewLayout
   sizeForItemAtIndexPath:(NSIndexPath *)indexPath {
+  if (indexPath.section == IJTransportationSectionJoeyTime && indexPath.row == 2) {
+    //return CGSizeMake(self.view.width - 20, self.view.width/3.0f);
+  }
   return CGSizeMake(self.view.width/2.0f - 10, self.view.width/3.0f);
 }
 
@@ -290,22 +300,31 @@ typedef NS_ENUM(NSInteger, IJTransportationSection) {
   if (![kind isEqualToString:UICollectionElementKindSectionHeader]) {
     return nil;
   }
-  NSString *identifier = @"MinutesTillHeader";
+  NSString *identifier = (indexPath.section == IJTransportationSectionJoeySchedule) ? @"ScheduleHeader" : @"MinutesTillHeader";
   UICollectionReusableView *header = [collectionView dequeueReusableSupplementaryViewOfKind:kind
                                                                         withReuseIdentifier:identifier
                                                                                forIndexPath:indexPath];
-  header.backgroundColor = [UIColor colorWithRed:26/255.0f
-                                           green:191/255.0f
-                                            blue:237/255.0
-                                           alpha:0.65];
+  
   UILabel *headerLabel = (UILabel*)[header viewWithTag:2];
   if (!headerLabel) {
     const int padding = 20;
     headerLabel = [[UILabel alloc] initWithFrame:CGRectMake(20, 0, header.width - (2 * padding), header.height)];
     [headerLabel setTag:2];
     headerLabel.font = [UIFont regularFontWithSize:18];
-    headerLabel.textColor = [UIColor whiteColor];
+    headerLabel.textColor = (indexPath.section == IJTransportationSectionJoeySchedule) ? [UIColor colorWithWhite:0 alpha:0.75] : [UIColor whiteColor];
     [header addSubview:headerLabel];
+    UIColor *backgroundColor;
+    if (indexPath.section == IJTransportationSectionJoeySchedule) {
+      backgroundColor = [UIColor colorWithWhite:1 alpha:0.65];
+      headerLabel.textAlignment = NSTextAlignmentCenter;
+      headerLabel.font = [UIFont regularFontWithSize:15];
+    } else {
+      backgroundColor = [UIColor colorWithRed:26/255.0f
+                                        green:191/255.0f
+                                         blue:237/255.0
+                                        alpha:0.65];
+    }
+    header.backgroundColor = backgroundColor;
   }
   if (indexPath.section == IJTransportationSectionMBTA) {
     headerLabel.text = @"MBTA | Davis Square T Stop";
@@ -313,6 +332,7 @@ typedef NS_ENUM(NSInteger, IJTransportationSection) {
     headerLabel.text = @"Joey | Based on Calendar";
   } else if (indexPath.section == IJTransportationSectionJoeySchedule) {
     // Look at mocks for bar that helps select the the date for the schedule.
+    headerLabel.text = @"Joey Schedule";
   }
   return header;
 }
