@@ -84,11 +84,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "iJumbo/UI/ViewControllers/IJMenuTableViewController.m"
-            timestampString = "433234188.821003"
+            timestampString = "434514276.354169"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "249"
-            endingLineNumber = "249"
+            startingLineNumber = "264"
+            endingLineNumber = "264"
             landmarkName = "-scrollViewDidScroll:"
             landmarkType = "5">
          </BreakpointContent>
@@ -100,11 +100,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "iJumbo/UI/ViewControllers/IJTransportationCollectionViewController.m"
-            timestampString = "433977438.510221"
+            timestampString = "434395349.789766"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "137"
-            endingLineNumber = "137"
+            startingLineNumber = "151"
+            endingLineNumber = "151"
             landmarkName = "-loadJoeySchedule"
             landmarkType = "5">
          </BreakpointContent>
@@ -116,58 +116,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "iJumbo/UI/ViewControllers/IJTransportationCollectionViewController.m"
-            timestampString = "433977438.510221"
+            timestampString = "434395349.789766"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "220"
-            endingLineNumber = "220"
-            landmarkName = "-collectionView:cellForItemAtIndexPath:"
-            landmarkType = "5">
-            <Locations>
-               <Location
-                  shouldBeEnabled = "No"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "-[IJTransportationCollectionViewController collectionView:cellForItemAtIndexPath:]"
-                  moduleName = "iJumbo"
-                  urlString = "file:///Users/amadou/Desktop/iJumbo/iJumbo/UI/ViewControllers/IJTransportationCollectionViewController.m"
-                  timestampString = "433975845.405356"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "218"
-                  endingLineNumber = "218"
-                  offsetFromSymbolStart = "1027">
-               </Location>
-               <Location
-                  shouldBeEnabled = "No"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "-[IJTransportationCollectionViewController collectionView:cellForItemAtIndexPath:]"
-                  moduleName = "iJumbo"
-                  urlString = "file:///Users/amadou/Desktop/iJumbo/iJumbo/UI/ViewControllers/IJTransportationCollectionViewController.m"
-                  timestampString = "433975845.405624"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "218"
-                  endingLineNumber = "218"
-                  offsetFromSymbolStart = "1062">
-               </Location>
-            </Locations>
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "iJumbo/UI/ViewControllers/IJWebViewController.m"
-            timestampString = "434132682.060814"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "69"
-            endingLineNumber = "69"
-            landmarkName = "-viewDidAppear:"
+            startingLineNumber = "145"
+            endingLineNumber = "145"
+            landmarkName = "-loadMBTATimes"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -177,13 +131,13 @@
             shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "iJumbo/UI/ViewControllers/IJWebViewController.m"
-            timestampString = "434132810.199671"
+            filePath = "iJumbo/UI/ViewControllers/IJTransportationCollectionViewController.m"
+            timestampString = "434395349.789766"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "108"
-            endingLineNumber = "108"
-            landmarkName = "-enableBackForwardButtons"
+            startingLineNumber = "146"
+            endingLineNumber = "146"
+            landmarkName = "-loadMBTATimes"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -193,13 +147,13 @@
             shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "iJumbo/UI/ViewControllers/IJWebViewController.m"
-            timestampString = "434132747.562069"
+            filePath = "iJumbo/UI/CollectionViewCells/IJMinutesTillCollectionViewCell.m"
+            timestampString = "434232203.943662"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "97"
-            endingLineNumber = "97"
-            landmarkName = "-webViewDidFinishLoad:"
+            startingLineNumber = "53"
+            endingLineNumber = "53"
+            landmarkName = "-updateWithMinutes:detailText:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -209,13 +163,13 @@
             shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "iJumbo/UI/ViewControllers/IJWebViewController.m"
-            timestampString = "434132810.199671"
+            filePath = "iJumbo/UI/ViewControllers/IJTransportationCollectionViewController.m"
+            timestampString = "434395349.789766"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "100"
-            endingLineNumber = "100"
-            landmarkName = "-webViewDidFinishLoad:"
+            startingLineNumber = "260"
+            endingLineNumber = "260"
+            landmarkName = "+weekdayForScheduleOnDate:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -225,13 +179,93 @@
             shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "iJumbo/UI/ViewControllers/IJWebViewController.m"
-            timestampString = "434132810.199671"
+            filePath = "iJumbo/UI/ViewControllers/IJTransportationCollectionViewController.m"
+            timestampString = "434395349.789766"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "98"
-            endingLineNumber = "98"
-            landmarkName = "-webViewDidFinishLoad:"
+            startingLineNumber = "284"
+            endingLineNumber = "284"
+            landmarkName = "-getTimeUntilNextJoeyForStop:"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "iJumbo/UI/ViewControllers/IJTransportationCollectionViewController.m"
+            timestampString = "434395349.789766"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "276"
+            endingLineNumber = "276"
+            landmarkName = "-getTimeUntilNextJoeyForStop:"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "iJumbo/UI/ViewControllers/IJTransportationCollectionViewController.m"
+            timestampString = "434395349.789766"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "280"
+            endingLineNumber = "280"
+            landmarkName = "-getTimeUntilNextJoeyForStop:"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "iJumbo/UI/ViewControllers/IJTransportationCollectionViewController.m"
+            timestampString = "434395349.789766"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "196"
+            endingLineNumber = "196"
+            landmarkName = "-collectionView:numberOfItemsInSection:"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "iJumbo/UI/ViewControllers/IJTransportationCollectionViewController.m"
+            timestampString = "434395349.789766"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "281"
+            endingLineNumber = "281"
+            landmarkName = "-getTimeUntilNextJoeyForStop:"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "iJumbo/UI/ViewControllers/IJNewsTableViewController.m"
+            timestampString = "434481755.140924"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "65"
+            endingLineNumber = "65"
+            landmarkName = "-loadData"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>

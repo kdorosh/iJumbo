@@ -15,6 +15,11 @@
 #import "IJNavigationDelegate.h"
 #import "IJServer.h"
 #import "IJHelper.h"
+#import "IJLocation.h"
+#import "IJMenuSection.h"
+#import "IJEvent.h"
+#import "IJArticle.h"
+#import "IJLink.h"
 
 @interface IJAppDelegate () <UINavigationControllerDelegate>
 @property(nonatomic) UINavigationController *navcon;
@@ -29,6 +34,14 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
   [Crashlytics startWithAPIKey:@"091a4baa8905651db15d358449cc69ef24a9d492"];
   [MMRecord registerServerClass:[IJServer class]];
+  
+  // Things that need to be run the first time this app opens should be done here
+  if (![[NSUserDefaults standardUserDefaults] boolForKey:kFirstRunUserDefaultsKey]) {
+    [self seedDatabaseWithLocalJSON];
+    [self preloadNetworkData];
+    [[NSUserDefaults standardUserDefaults] setBool:YES forKey:kFirstRunUserDefaultsKey];
+  }
+  
   [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
   [[UINavigationBar appearance] setShadowImage:[[UIImage alloc] init]];
   [UIApplication sharedApplication].statusBarStyle = UIStatusBarStyleLightContent;
@@ -63,6 +76,22 @@
 
   return YES;
 }
+
+- (void)preloadNetworkData {
+  [IJRecord startBatchedRequestsInExecutionBlock:^{
+    [IJLocation getLocationsWithSuccessBlock:nil failureBlock:nil];
+    [IJEvent getEventsWithSuccessBlock:nil failureBlock:nil];
+    [IJMenuSection getMenusForDateObject:[NSDate date] withSuccessBlock:nil failureBlock:nil];
+    [IJArticle getArticlesWithSuccessBlock:nil failureBlock:nil];
+  } withCompletionBlock:^{
+    NSLog(@"preloading done!");
+  }];
+}
+
+- (void)seedDatabaseWithLocalJSON {
+  // TODO(amadou): Do this at somepoint.
+}
+
 
 - (id<UIViewControllerAnimatedTransitioning>)navigationController:(UINavigationController *)navigationController
                                   animationControllerForOperation:(UINavigationControllerOperation)operation

@@ -8,7 +8,7 @@
 
 #import "IJWebViewController.h"
 
-@interface IJWebViewController () <UIWebViewDelegate>
+@interface IJWebViewController () <UIWebViewDelegate, UIActionSheetDelegate>
 @property(nonatomic) UIWebView *webView;
 @property(nonatomic) NSString *url;
 @property(nonatomic) UIActivityIndicatorView *activityIndicator;
@@ -61,12 +61,29 @@
                                       action:@selector(webViewForwardAction)];
   self.forwardButton.enabled = NO;
   UIBarButtonItem *spacing =
-    [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFixedSpace
-                                                  target:self
-                                                  action:@selector(webViewForwardAction)];
+      [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFixedSpace
+                                                    target:nil
+                                                    action:nil];
+  UIBarButtonItem *firstSpace =
+      [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFixedSpace
+                                                    target:nil
+                                                    action:nil];
   
-  spacing.width = self.navigationController.toolbar.width - (2 * leftArrow.size.width) - (2 * 22);
-  [self setToolbarItems:@[self.backButton, spacing, self.forwardButton]];
+  UIBarButtonItem *reload =
+      [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemRefresh
+                                                    target:self.webView
+                                                    action:@selector(reload)];
+  
+  // Share on safari, copy link, chrome if on phone.
+  UIBarButtonItem *options =
+      [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"Upload.png"]
+                                       style:UIBarButtonItemStylePlain
+                                      target:self
+                                      action:@selector(showWebOptions)];
+  const CGFloat spaceFifth = self.navigationController.toolbar.width/7.0f;
+  spacing.width = spaceFifth;
+  firstSpace.width = 30;
+  [self setToolbarItems:@[firstSpace, self.backButton, spacing, self.forwardButton, spacing, reload, spacing, options]];
 }
 
 - (void)webViewBackAction {
@@ -78,6 +95,27 @@
 - (void)webViewForwardAction {
   if ([self.webView canGoForward]) {
     [self.webView goForward];
+  }
+}
+
+- (void)showWebOptions {
+  // TODO(amadou): Show action sheet with the options.
+  // Find out if Chrome is installed on this phone.
+  UIActionSheet *actionSheet =
+      [[UIActionSheet alloc] initWithTitle:@"Options"
+                                  delegate:self
+                         cancelButtonTitle:@"Cancel"
+                    destructiveButtonTitle:nil
+                         otherButtonTitles:@"Open in Safari", @"Copy Link", nil];
+  [actionSheet showInView:self.view];
+}
+
+- (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex {
+  if (buttonIndex == 0) {
+    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:self.url]];
+  } else if (buttonIndex == 1) {
+    UIPasteboard *pasteBoard = [UIPasteboard generalPasteboard];
+    [pasteBoard setString:self.url];
   }
 }
 

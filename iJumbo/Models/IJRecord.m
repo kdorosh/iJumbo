@@ -26,4 +26,14 @@ static NSDateFormatter* IJRecordDateFormatter;
   return IJRecordDateFormatter;
 }
 
++ (void)addRecordsFromJSONFile:(NSString *)fileName {
+  NSError *error;
+  NSArray *records = [NSJSONSerialization JSONObjectWithData:[NSData dataWithContentsOfFile:fileName]
+                                                     options:kNilOptions
+                                                       error:&error];
+  if (!records || error) {
+    NSLog(@"Something went wrong when reading data from %@\n%@", fileName, error);
+  }
+}
+
 @end

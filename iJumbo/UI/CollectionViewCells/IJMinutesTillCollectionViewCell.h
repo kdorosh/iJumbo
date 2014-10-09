@@ -8,6 +8,8 @@
 
 #import <UIKit/UIKit.h>
 
+static const CGFloat kMinutesTillCellHeight = 95;
+
 @interface IJMinutesTillCollectionViewCell : UICollectionViewCell
 
 - (void)updateWithMinutes:(NSNumber *)minutes detailText:(NSString *)detailText;

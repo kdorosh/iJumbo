@@ -128,7 +128,7 @@
   NSUInteger minutes = (seconds.integerValue - (hours * (60.0f * 60.0f))) / 60.0f;
   hours %= 12;
   if (hours == 0) hours = 12;
-  return [NSString stringWithFormat:@"%02lu:%02lu%@", hours, (unsigned long)minutes, apm];
+  return [NSString stringWithFormat:@"%02lu:%02lu%@", (unsigned long)hours, (unsigned long)minutes, apm];
 }
 
 @end

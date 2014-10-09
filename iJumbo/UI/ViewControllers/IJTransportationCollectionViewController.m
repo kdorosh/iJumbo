@@ -8,19 +8,21 @@
 
 #import "IJTransportationCollectionViewController.h"
 
+#import "IJJoeyTimeCollectionViewCell.h"
 #import "IJMinutesTillCollectionViewCell.h"
 #import "IJServer.h"
 #import "IJRecord.h"
 
-static const int kTimeLowerBound = 4 * 60;
+static const int kTimeLowerBound = 2 * 60;
 
 typedef NS_ENUM(NSInteger, IJTransportationSection) {
   IJTransportationSectionMBTA = 0,
   IJTransportationSectionJoeyTime,
-  IJTransportationSectionJoeySchedule
+  IJTransportationSectionJoeySchedule,
+  IJTransportationSectionNumberOfSections
 };
 
-@interface IJTransportationCollectionViewController ()
+@interface IJTransportationCollectionViewController () <UICollectionViewDelegateFlowLayout>
 @property(nonatomic) NSMutableDictionary *mbtaTimes;
 @property(nonatomic) UIRefreshControl *refreshControl;
 @property(nonatomic) NSArray *joeySchedule;
@@ -45,9 +47,12 @@ typedef NS_ENUM(NSInteger, IJTransportationSection) {
   self.collectionView.dataSource = self;
   self.collectionView.delegate = self;
   self.collectionView.backgroundColor = [UIColor clearColor];
+
   [self.collectionView registerClass:[IJMinutesTillCollectionViewCell class]
-          forCellWithReuseIdentifier:@"TransportationMinutesTillCell"];
-  [self.collectionView registerClass:[UICollectionViewCell class]
+          forCellWithReuseIdentifier:@"JoeyTimeID"];
+  [self.collectionView registerClass:[IJMinutesTillCollectionViewCell class]
+          forCellWithReuseIdentifier:@"MBTATimeID"];
+  [self.collectionView registerClass:[IJJoeyTimeCollectionViewCell class]
           forCellWithReuseIdentifier:@"JoeyScheduleCell"];
   [self.collectionView registerClass:[UICollectionReusableView class]
           forSupplementaryViewOfKind:UICollectionElementKindSectionHeader
@@ -116,8 +121,8 @@ typedef NS_ENUM(NSInteger, IJTransportationSection) {
             NSMutableArray *departureTimes = [NSMutableArray arrayWithCapacity:[trips count]];
             // Get every estimated time of departure for this direction
             for (NSDictionary *trip in trips) {
-              NSNumber *dateInSeconds = (NSNumber*)trip[@"sch_dep_dt"];
-              [departureTimes addObject:dateInSeconds];
+              NSNumber *timeTillDeparture = (NSNumber*)trip[@"pre_away"];
+              [departureTimes addObject:timeTillDeparture];
             }
             NSMutableArray *times = self.mbtaTimes[dir_name];
             [times addObjectsFromArray:departureTimes];
@@ -128,6 +133,15 @@ typedef NS_ENUM(NSInteger, IJTransportationSection) {
     NSSortDescriptor *sort = [NSSortDescriptor sortDescriptorWithKey:@"self" ascending:YES];
     [self.mbtaTimes enumerateKeysAndObjectsUsingBlock:^(NSString *key, NSMutableArray *times, BOOL *stop) {
       [times sortUsingDescriptors:@[sort]];
+      [times sortUsingComparator:^NSComparisonResult(NSNumber *obj1, NSNumber *obj2) {
+        if (obj1.integerValue > obj2.integerValue) {
+          return (NSComparisonResult)NSOrderedDescending;
+        } else if (obj1.integerValue < obj2.integerValue) {
+          return (NSComparisonResult)NSOrderedAscending;
+        } else {
+          return (NSComparisonResult)NSOrderedSame;
+        }
+      }];
     }];
     [self.collectionView performSelectorOnMainThread:@selector(reloadData) withObject:nil waitUntilDone:YES];
   } failure:^(NSError *error) {
@@ -163,7 +177,7 @@ typedef NS_ENUM(NSInteger, IJTransportationSection) {
 // Full Joey Schedule.
 - (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView {
   // TODO(amadou): Change this once the MBTA stuff works.
-  return 3;
+  return IJTransportationSectionNumberOfSections;
 }
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
@@ -175,7 +189,12 @@ typedef NS_ENUM(NSInteger, IJTransportationSection) {
     return 3;
   } else if (section == IJTransportationSectionJoeySchedule) {
     // The big cell that has the schedule.
-    return 0;
+    NSInteger weekday =
+        [IJTransportationCollectionViewController weekdayForScheduleOnDate:[NSDate date]];
+    NSArray *times = self.joeySchedule[weekday][@"Olin Center"];
+    if (times) {
+      return  3 * [times count] + 1;
+    }
   }
   return 0;
 }
@@ -195,13 +214,23 @@ typedef NS_ENUM(NSInteger, IJTransportationSection) {
   if (indexPath.section == IJTransportationSectionJoeySchedule) {
     // give the cell the schedule data (maybe do that in the cell.
     // return it.
-    UICollectionViewCell *cell =
+    IJJoeyTimeCollectionViewCell *cell =
         [collectionView dequeueReusableCellWithReuseIdentifier:@"JoeyScheduleCell"
                                                   forIndexPath:indexPath];
-    // THIS CELL SHOULD BE GIANT.
+    NSString *location = @"Campus Center";
+    if (indexPath.row % 3 == 1) {
+      location = @"Davis Square";
+    } else if (indexPath.row % 3 == 2) {
+      location = @"Olin Center";
+    }
+    NSInteger weekday = [IJTransportationCollectionViewController weekdayForDate:[NSDate date]];
+    NSArray *times = self.joeySchedule[weekday][location];
+    NSNumber *time = times[indexPath.row / 3];
+    [cell setTimeSinceMidnight:time];
     return cell;
   }
-  NSString *cellIdentifier = @"TransportationMinutesTillCell";
+  NSString *cellIdentifier =
+      (indexPath.section == IJTransportationSectionJoeyTime) ? @"JoeyTimeID" : @"MBTATimeID";
   IJMinutesTillCollectionViewCell *cell =
       [collectionView dequeueReusableCellWithReuseIdentifier:cellIdentifier
                                                 forIndexPath:indexPath];
@@ -211,13 +240,7 @@ typedef NS_ENUM(NSInteger, IJTransportationSection) {
   if (indexPath.section == IJTransportationSectionMBTA) {
     NSString *directionKey = (indexPath.row == 0) ? @"Southbound" : @"Northbound";
     NSNumber *time = [self getNextTimeForDirection:directionKey];
-    if (time) {
-      NSTimeInterval secondsSince1970 = [[NSDate date] timeIntervalSince1970];
-      NSInteger minutesTillTrain = (time.doubleValue - secondsSince1970) / 60.0f;
-      minutesTill = @(minutesTillTrain);
-    } else {
-      minutesTill = nil;
-    }
+    minutesTill =  (time) ? @(ceil(time.doubleValue / 60.0f)) : nil;
   } else if (indexPath.section == IJTransportationSectionJoeyTime) {
     NSString *locationKey = (indexPath.row == 0) ? @"Campus Center" : (indexPath.row == 1) ? @"Davis Square" : @"Olin Center";
     minutesTill = [self getTimeUntilNextJoeyForStop:locationKey];
@@ -227,16 +250,34 @@ typedef NS_ENUM(NSInteger, IJTransportationSection) {
   return cell;
 }
 
-- (NSNumber *)getTimeUntilNextJoeyForStop:(NSString *)stop {
-  long minutesSinceMidnight = [self minutesSinceMidnight:[NSDate date]];
++ (NSInteger)weekdayForDate:(NSDate *)date {
   NSCalendar *gregorian = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
   NSDateComponents *components =
-      [gregorian components:NSWeekdayCalendarUnit fromDate:[NSDate date]];
-  NSInteger weekdays = [components weekday] - 1;
+  [gregorian components:NSWeekdayCalendarUnit fromDate:date];
+  NSInteger weekday = [components weekday] - 1;
+  return weekday;
+}
+
++ (NSInteger)weekdayForScheduleOnDate:(NSDate*)date {
+  NSInteger weekday = [self weekdayForDate:date];
+  NSInteger minutesSinceMidnight = [self minutesSinceMidnight:date];
   if (minutesSinceMidnight < kTimeLowerBound) {
-    weekdays = (weekdays - 1) % 7;
+    weekday = (weekday - 1) % 7;
   }
-  NSArray *times = self.joeySchedule[weekdays][stop];
+  return weekday;
+}
+
+- (NSNumber *)getTimeUntilNextJoeyForStop:(NSString *)stop {
+  NSDate *date = [NSDate date];
+  long minutesSinceMidnight = [IJTransportationCollectionViewController minutesSinceMidnight:date];
+  NSInteger weekday = [IJTransportationCollectionViewController weekdayForDate:date];
+  NSNumber *lastTime = [self.joeySchedule[weekday][stop] lastObject];
+  if (minutesSinceMidnight < kTimeLowerBound && minutesSinceMidnight > lastTime.integerValue) {
+    date = [NSDate dateWithTimeIntervalSinceNow:60 * 60 * 24];
+    weekday = [IJTransportationCollectionViewController weekdayForDate:date];
+  }
+
+  NSArray *times = self.joeySchedule[weekday][stop];
   NSNumber *nextTime = nil;
   if (times == nil) {
     return nil;
@@ -244,19 +285,23 @@ typedef NS_ENUM(NSInteger, IJTransportationSection) {
     int distance = 24 * 60;
     for (NSNumber *time in times) {
       NSInteger minutes = (time.integerValue <= kTimeLowerBound) ? time.integerValue + (24 * 60) : time.integerValue;
-      if (minutes - minutesSinceMidnight > 0 &&
+      if (minutes > minutesSinceMidnight &&
           minutes - minutesSinceMidnight < distance) {
         distance = (int)minutes - (int)minutesSinceMidnight;
         nextTime = time;
       }
     }
   }
-  if (!nextTime)
+  if (!nextTime) {
     return nil;
+  }
+  if (nextTime.integerValue < minutesSinceMidnight) {
+    return @((24 * 60) - minutesSinceMidnight + nextTime.integerValue);
+  }
   return @(nextTime.integerValue - minutesSinceMidnight);
 }
 
-- (long)minutesSinceMidnight:(NSDate *)date {
++ (long)minutesSinceMidnight:(NSDate *)date {
   NSCalendar *gregorian =
       [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
   unsigned unitFlags =  NSHourCalendarUnit | NSMinuteCalendarUnit;
@@ -270,28 +315,27 @@ typedef NS_ENUM(NSInteger, IJTransportationSection) {
   if (!times || [times count] == 0) {
     return nil;
   }
-  NSTimeInterval timeInterval = [[NSDate date] timeIntervalSince1970];
-  for (NSNumber *time in times) {
-    if (time.doubleValue > timeInterval) {
-      return time;
-    }
-  }
-  return nil;
+  return [times firstObject];
 }
 
 - (UIEdgeInsets)collectionView:(UICollectionView *)collectionView
                         layout:(UICollectionViewLayout *)collectionViewLayout
         insetForSectionAtIndex:(NSInteger)section {
-  return UIEdgeInsetsMake(0, 5, 5, 5);
+  return UIEdgeInsetsZero;
 }
 
 - (CGSize)collectionView:(UICollectionView *)collectionView
                   layout:(UICollectionViewLayout *)collectionViewLayout
   sizeForItemAtIndexPath:(NSIndexPath *)indexPath {
-  if (indexPath.section == IJTransportationSectionJoeyTime && indexPath.row == 2) {
-    //return CGSizeMake(self.view.width - 20, self.view.width/3.0f);
+  CGFloat height = kMinutesTillCellHeight;
+  if (indexPath.section == IJTransportationSectionMBTA) {
+    return CGSizeMake(self.view.width/2.0f - 1, height);
+  } else if (indexPath.section == IJTransportationSectionJoeyTime) {
+    return CGSizeMake(self.view.width, height);
+  } else if (indexPath.section == IJTransportationSectionJoeySchedule) {
+    return CGSizeMake(self.view.width/3.0f - 2, 30);
   }
-  return CGSizeMake(self.view.width/2.0f - 10, self.view.width/3.0f);
+  return CGSizeZero;
 }
 
 - (UICollectionReusableView *)collectionView:(UICollectionView *)collectionView
@@ -301,9 +345,10 @@ typedef NS_ENUM(NSInteger, IJTransportationSection) {
     return nil;
   }
   NSString *identifier = (indexPath.section == IJTransportationSectionJoeySchedule) ? @"ScheduleHeader" : @"MinutesTillHeader";
-  UICollectionReusableView *header = [collectionView dequeueReusableSupplementaryViewOfKind:kind
-                                                                        withReuseIdentifier:identifier
-                                                                               forIndexPath:indexPath];
+  UICollectionReusableView *header =
+      [collectionView dequeueReusableSupplementaryViewOfKind:kind
+                                         withReuseIdentifier:identifier
+                                                forIndexPath:indexPath];
   
   UILabel *headerLabel = (UILabel*)[header viewWithTag:2];
   if (!headerLabel) {
@@ -317,7 +362,8 @@ typedef NS_ENUM(NSInteger, IJTransportationSection) {
     if (indexPath.section == IJTransportationSectionJoeySchedule) {
       backgroundColor = [UIColor colorWithWhite:1 alpha:0.65];
       headerLabel.textAlignment = NSTextAlignmentCenter;
-      headerLabel.font = [UIFont regularFontWithSize:15];
+      headerLabel.font = [UIFont regularFontWithSize:12];
+      headerLabel.numberOfLines = 2;
     } else {
       backgroundColor = [UIColor colorWithRed:26/255.0f
                                         green:191/255.0f
@@ -332,9 +378,26 @@ typedef NS_ENUM(NSInteger, IJTransportationSection) {
     headerLabel.text = @"Joey | Based on Calendar";
   } else if (indexPath.section == IJTransportationSectionJoeySchedule) {
     // Look at mocks for bar that helps select the the date for the schedule.
-    headerLabel.text = @"Joey Schedule";
+    headerLabel.text = @"Joey Schedule\nCampus Center\tDavis Square\tOlin Center";
   }
   return header;
+}
+
++ (UICollectionReusableView *)joeyScheduleHeader {
+  // UICollectionReusableView * header =
+  return nil;
+}
+
+- (CGFloat)collectionView:(UICollectionView *)collectionView
+                   layout:(UICollectionViewLayout *)collectionViewLayout
+      minimumInteritemSpacingForSectionAtIndex:(NSInteger)section {
+  return 2.0f;
+}
+
+- (CGFloat)collectionView:(UICollectionView *)collectionView
+                   layout:(UICollectionViewLayout *)collectionViewLayout
+      minimumLineSpacingForSectionAtIndex:(NSInteger)section {
+  return 2.0f;
 }
 
 @end

@@ -14,4 +14,6 @@
 
 #define IJ_runOnMainThread if (![NSThread isMainThread]) { dispatch_sync(dispatch_get_main_queue(), ^{ [self performSelector:_cmd]; }); return; };
 
+#define kFirstRunUserDefaultsKey @"FirstRunVersion_1_UserDefaultsKey"
+
 #endif

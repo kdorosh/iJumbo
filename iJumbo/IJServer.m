@@ -48,7 +48,6 @@
     success(cachedImage);
     return;
   }
-  // TODO(amadou): Do something to stop urls from loading if they are already loading.
   AFHTTPRequestOperationManager* httpManager = [[AFHTTPRequestOperationManager alloc] init];
   httpManager.responseSerializer = [AFImageResponseSerializer serializer];
   [httpManager GET:url parameters:nil success:^(AFHTTPRequestOperation *operation, UIImage* image) {

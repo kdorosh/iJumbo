@@ -8,6 +8,8 @@
 
 #import "IJMenuSection.h"
 
+static NSDateFormatter *dateFormatter;
+
 @implementation IJMenuSection
 
 @dynamic name;
@@ -17,6 +19,7 @@
 @dynamic meal;
 @dynamic sectionNum;
 @dynamic foodItems;
+
 
 + (void)getTodaysMenusWithSuccessBlock:(void (^)(NSArray *menuSections))successBlock
                           failureBlock:(void (^)(NSError *error))failureBlock {
@@ -40,6 +43,13 @@
                         failureBlock:failureBlock];
 }
 
++ (void)getMenusForDateObject:(NSDate *)date
+             withSuccessBlock:(void (^)(NSArray *))successBlock
+                 failureBlock:(void (^)(NSError *))failureBlock {
+  NSString *dateString = [[self dateFormatter] stringFromDate:date];
+  [self getMenusForDate:dateString withSuccessBlock:successBlock failureBlock:failureBlock];
+}
+
 - (NSString *)description {
   NSString *regular_desc = [super description];
   NSString *desc = [NSString stringWithFormat:@"\nDate: %@\nDining Hall: %@\nMeal: %@",
@@ -47,6 +57,14 @@
                         self.diningHall,
                         self.meal];
   return [regular_desc stringByAppendingString:desc];
+}
+
++ (NSDateFormatter *)dateFormatter {
+  if (!dateFormatter) {
+    dateFormatter = [[NSDateFormatter alloc] init];
+    [dateFormatter setDateFormat:@"yyyy-M-d"];
+  }
+  return dateFormatter;
 }
 
 @end

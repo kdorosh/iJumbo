@@ -19,8 +19,8 @@
 {
   self = [super initWithFrame:frame];
   if (self) {
-    self.backgroundColor = [UIColor colorWithWhite:1 alpha:0.75];
-    self.minutesTillLabel = [[UILabel alloc] initWithFrame:CGRectMake(self.width/5.0f,
+    self.backgroundColor = [UIColor colorWithWhite:1 alpha:0.4];
+    self.minutesTillLabel = [[UILabel alloc] initWithFrame:CGRectMake(self.width/4.0f,
                                                                       self.height/5.0f,
                                                                       3 * self.width/4.0f,
                                                                       self.height/3.0f)];

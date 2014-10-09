@@ -62,7 +62,7 @@ typedef NS_ENUM(NSInteger, IJMenuActionSheet) {
   [self.mealSegment addTarget:self
                    action:@selector(mealSegmentDidChangeValue:)
          forControlEvents:UIControlEventValueChanged];
-  self.mealSegment.selectedSegmentIndex = 0;
+  self.mealSegment.selectedSegmentIndex = [IJMenuTableViewController mealSegmentBasedOnTime];
   [mealsBackground addSubview:self.mealSegment];
   [self.view addSubview:mealsBackground];
 
@@ -134,6 +134,21 @@ typedef NS_ENUM(NSInteger, IJMenuActionSheet) {
   [datePickerBackground addSubview:dateDoneButton];
   [datePickerBackground addSubview:self.datePicker];
   [self.view addSubview:datePickerBackground];
+}
+
++ (NSUInteger)mealSegmentBasedOnTime {
+  NSDate *date = [NSDate date];
+  NSCalendar *calendar = [NSCalendar currentCalendar];
+  NSDateComponents *components = [calendar components:NSHourCalendarUnit fromDate:date];
+  NSInteger hour = [components hour];
+  if (hour < 11) {
+    return 0;
+  } else if (hour >= 5) {
+    return 2;
+  } else {
+    return 1;
+  }
+  return 0;
 }
 
 - (void)todayButtonAction {

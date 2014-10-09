@@ -31,4 +31,8 @@
        withSuccessBlock:(void (^)(NSArray *menuSections))successBlock
            failureBlock:(void (^)(NSError *error))failureBlock;
 
++ (void)getMenusForDateObject:(NSDate *)date
+             withSuccessBlock:(void (^)(NSArray *menuSections))successBlock
+                 failureBlock:(void (^)(NSError *error))failureBlock;
+
 @end

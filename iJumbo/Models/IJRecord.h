@@ -10,4 +10,6 @@
 
 @interface IJRecord : MMRecord
 
++ (void)addRecordsFromJSONFile:(NSString *)fileName;
+
 @end
