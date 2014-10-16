@@ -67,6 +67,14 @@
   [self loadData:NO];
 }
 
+- (BOOL)shouldAutorotate {
+  return NO;
+}
+
+- (NSUInteger)supportedInterfaceOrientations {
+  return UIInterfaceOrientationMaskPortrait;
+}
+
 - (void)showMap {
   // TODO(amadou): Have the map zoomed into the campus.
   // TODO(amadou): Map should show current location.

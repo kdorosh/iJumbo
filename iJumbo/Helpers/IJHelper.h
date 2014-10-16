@@ -9,6 +9,8 @@
 #import <Foundation/Foundation.h>
 #import "IJAppDelegate.h"
 
+#define IJNSNumberToString(n) [NSString stringWithFormat:@"%@", n]
+
 @interface IJHelper : NSObject
 + (NSManagedObjectContext *)mainContext;
 + (UIImageView *)backGroundImage;

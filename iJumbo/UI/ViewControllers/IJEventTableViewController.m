@@ -64,6 +64,14 @@ static NSDateFormatter *kEventsTableDateFormatter;
   [self loadData];
 }
 
+- (BOOL)shouldAutorotate {
+  return NO;
+}
+
+- (NSUInteger)supportedInterfaceOrientations {
+  return UIInterfaceOrientationMaskPortrait;
+}
+
 - (void)dateChanged:(id)sender {
   self.date = self.datePicker.date;
 }
@@ -84,13 +92,20 @@ static NSDateFormatter *kEventsTableDateFormatter;
   }];
 }
 
+- (void)setDateToToday:(id)sender {
+  self.date = [NSDate date];
+}
+
 - (void)setupDateNavigationBar {
   UIView *dateNavigationBar = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, kEventsDateNavigationBarHeight)];
   self.dateLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, dateNavigationBar.frame.size.width, dateNavigationBar.frame.size.height)];
   self.dateLabel.textAlignment = NSTextAlignmentCenter;
   self.dateLabel.font = [UIFont regularFontWithSize:20];
   self.dateLabel.textColor = [UIColor colorWithWhite:0 alpha:0.7];
+  UIButton *backToTodayButton = [[UIButton alloc] initWithFrame:self.dateLabel.frame];
+  [backToTodayButton addTarget:self action:@selector(setDateToToday:) forControlEvents:UIControlEventTouchUpInside];
   [dateNavigationBar addSubview:self.dateLabel];
+  [dateNavigationBar addSubview:backToTodayButton];
   const CGFloat arrowWidth = 14;
   const CGFloat arrowHeight = 22.5;
   const CGFloat arrowPadding = 10;

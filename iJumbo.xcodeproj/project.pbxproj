@@ -16,6 +16,7 @@
 		C852A6AF19A18CF30048B1C3 /* IJLink.m in Sources */ = {isa = PBXBuildFile; fileRef = C852A6AE19A18CF30048B1C3 /* IJLink.m */; };
 		C852A6B219A192420048B1C3 /* IJLinkTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C852A6B119A192420048B1C3 /* IJLinkTableViewController.m */; };
 		C852A6B519A193100048B1C3 /* IJLinkTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = C852A6B419A193100048B1C3 /* IJLinkTableViewCell.m */; };
+		C864283B19EF4614003EE89C /* IJFoodItemViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C864283919EF4614003EE89C /* IJFoodItemViewController.m */; };
 		C878609F19BF5401002B2A3C /* IJFoodItemTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = C878609E19BF5401002B2A3C /* IJFoodItemTableViewCell.m */; };
 		C87BB9C819D364FE001BB67B /* IJTransportationCollectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C87BB9C719D364FE001BB67B /* IJTransportationCollectionViewController.m */; };
 		C87BB9CB19D36F51001BB67B /* Crashlytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C87BB9CA19D36F51001BB67B /* Crashlytics.framework */; };
@@ -41,6 +42,8 @@
 		C884074519E5FA16002545AD /* joey_schedule.json in CopyFiles */ = {isa = PBXBuildFile; fileRef = C884073B19E5F6A0002545AD /* joey_schedule.json */; };
 		C884074619E5FA1A002545AD /* places.json in CopyFiles */ = {isa = PBXBuildFile; fileRef = C884074019E5F70F002545AD /* places.json */; };
 		C884074719E5FA1C002545AD /* links.json in CopyFiles */ = {isa = PBXBuildFile; fileRef = C884074219E5F79E002545AD /* links.json */; };
+		C884074D19E64B96002545AD /* OpenInChromeController.m in Sources */ = {isa = PBXBuildFile; fileRef = C884074C19E64B96002545AD /* OpenInChromeController.m */; };
+		C884075119E6D587002545AD /* IJBottomNotificationView.m in Sources */ = {isa = PBXBuildFile; fileRef = C884075019E6D587002545AD /* IJBottomNotificationView.m */; };
 		C887F45E19D22B8F00D82898 /* IJLinkCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = C887F45D19D22B8F00D82898 /* IJLinkCollectionViewCell.m */; };
 		C898760B19B1256800CB425E /* IJMenuTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C898760A19B1256800CB425E /* IJMenuTableViewController.m */; };
 		C8B7000419A03D8A0004FE76 /* Roboto-Black.ttf in Resources */ = {isa = PBXBuildFile; fileRef = C8B7FFF819A03D8A0004FE76 /* Roboto-Black.ttf */; };
@@ -58,6 +61,7 @@
 		C8B7FFF0199FE31E0004FE76 /* IJVariables.h in Sources */ = {isa = PBXBuildFile; fileRef = C8B7FFEF199FE2200004FE76 /* IJVariables.h */; };
 		C8B7FFF319A030DB0004FE76 /* IJNavigationDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = C8B7FFF219A030DB0004FE76 /* IJNavigationDelegate.m */; };
 		C8B7FFF619A0375B0004FE76 /* IJNewsTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = C8B7FFF519A0375B0004FE76 /* IJNewsTableViewCell.m */; };
+		C8C4AEBF19E84BEE003A5332 /* UINavigationController+Orientations.m in Sources */ = {isa = PBXBuildFile; fileRef = C8C4AEBE19E84BEE003A5332 /* UINavigationController+Orientations.m */; };
 		C8C783F719C16FA400A3898B /* UIFont+iJumboFonts.m in Sources */ = {isa = PBXBuildFile; fileRef = C8C783F619C16FA400A3898B /* UIFont+iJumboFonts.m */; };
 		C8D2500C19E4568E00E708C6 /* IJJoeyTimeCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = C8D2500B19E4568E00E708C6 /* IJJoeyTimeCollectionViewCell.m */; };
 		C8D67FB3199EC49F001C4FD2 /* IJEvent.m in Sources */ = {isa = PBXBuildFile; fileRef = C8D67FB2199EC49F001C4FD2 /* IJEvent.m */; };
@@ -128,6 +132,8 @@
 		C852A6B119A192420048B1C3 /* IJLinkTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = IJLinkTableViewController.m; path = iJumbo/UI/ViewControllers/IJLinkTableViewController.m; sourceTree = "<group>"; };
 		C852A6B319A193100048B1C3 /* IJLinkTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = IJLinkTableViewCell.h; path = iJumbo/UI/TableViewCells/IJLinkTableViewCell.h; sourceTree = "<group>"; };
 		C852A6B419A193100048B1C3 /* IJLinkTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = IJLinkTableViewCell.m; path = iJumbo/UI/TableViewCells/IJLinkTableViewCell.m; sourceTree = "<group>"; };
+		C864283819EF4614003EE89C /* IJFoodItemViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IJFoodItemViewController.h; sourceTree = "<group>"; };
+		C864283919EF4614003EE89C /* IJFoodItemViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IJFoodItemViewController.m; sourceTree = "<group>"; };
 		C878609D19BF5401002B2A3C /* IJFoodItemTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = IJFoodItemTableViewCell.h; path = iJumbo/UI/TableViewCells/IJFoodItemTableViewCell.h; sourceTree = "<group>"; };
 		C878609E19BF5401002B2A3C /* IJFoodItemTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = IJFoodItemTableViewCell.m; path = iJumbo/UI/TableViewCells/IJFoodItemTableViewCell.m; sourceTree = "<group>"; };
 		C87BB9C619D364FE001BB67B /* IJTransportationCollectionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = IJTransportationCollectionViewController.h; path = iJumbo/UI/ViewControllers/IJTransportationCollectionViewController.h; sourceTree = "<group>"; };
@@ -155,6 +161,10 @@
 		C884073C19E5F6A0002545AD /* TemplateIcon2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = TemplateIcon2x.png; path = JSON/TemplateIcon2x.png; sourceTree = "<group>"; };
 		C884074019E5F70F002545AD /* places.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = places.json; path = JSON/places.json; sourceTree = "<group>"; };
 		C884074219E5F79E002545AD /* links.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = links.json; path = JSON/links.json; sourceTree = "<group>"; };
+		C884074B19E64B95002545AD /* OpenInChromeController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OpenInChromeController.h; sourceTree = "<group>"; };
+		C884074C19E64B96002545AD /* OpenInChromeController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OpenInChromeController.m; sourceTree = "<group>"; };
+		C884074F19E6D587002545AD /* IJBottomNotificationView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IJBottomNotificationView.h; sourceTree = "<group>"; };
+		C884075019E6D587002545AD /* IJBottomNotificationView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IJBottomNotificationView.m; sourceTree = "<group>"; };
 		C887F45C19D22B8F00D82898 /* IJLinkCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = IJLinkCollectionViewCell.h; path = iJumbo/UI/TableViewCells/IJLinkCollectionViewCell.h; sourceTree = "<group>"; };
 		C887F45D19D22B8F00D82898 /* IJLinkCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = IJLinkCollectionViewCell.m; path = iJumbo/UI/TableViewCells/IJLinkCollectionViewCell.m; sourceTree = "<group>"; };
 		C898760919B1256800CB425E /* IJMenuTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = IJMenuTableViewController.h; path = iJumbo/UI/ViewControllers/IJMenuTableViewController.h; sourceTree = "<group>"; };
@@ -176,6 +186,8 @@
 		C8B7FFFD19A03D8A0004FE76 /* Roboto-Light.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-Light.ttf"; sourceTree = "<group>"; };
 		C8B7FFFE19A03D8A0004FE76 /* Roboto-LightItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-LightItalic.ttf"; sourceTree = "<group>"; };
 		C8B7FFFF19A03D8A0004FE76 /* Roboto-Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-Medium.ttf"; sourceTree = "<group>"; };
+		C8C4AEBD19E84BEE003A5332 /* UINavigationController+Orientations.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UINavigationController+Orientations.h"; path = "Categories/UINavigationController+Orientations.h"; sourceTree = "<group>"; };
+		C8C4AEBE19E84BEE003A5332 /* UINavigationController+Orientations.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UINavigationController+Orientations.m"; path = "Categories/UINavigationController+Orientations.m"; sourceTree = "<group>"; };
 		C8C783F519C16FA400A3898B /* UIFont+iJumboFonts.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIFont+iJumboFonts.h"; path = "Categories/UIFont+iJumboFonts.h"; sourceTree = "<group>"; };
 		C8C783F619C16FA400A3898B /* UIFont+iJumboFonts.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIFont+iJumboFonts.m"; path = "Categories/UIFont+iJumboFonts.m"; sourceTree = "<group>"; };
 		C8D2500A19E4568E00E708C6 /* IJJoeyTimeCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = IJJoeyTimeCollectionViewCell.h; path = iJumbo/UI/CollectionViewCells/IJJoeyTimeCollectionViewCell.h; sourceTree = "<group>"; };
@@ -260,6 +272,8 @@
 				C8D67FBD199EED7C001C4FD2 /* UIView+AddSubviews.h */,
 				C8D67FBE199EED7C001C4FD2 /* UIView+AddSubviews.m */,
 				C852A6A419A0FCD20048B1C3 /* UITableView+MainThreadReload.h */,
+				C8C4AEBD19E84BEE003A5332 /* UINavigationController+Orientations.h */,
+				C8C4AEBE19E84BEE003A5332 /* UINavigationController+Orientations.m */,
 				C852A6A519A0FCD20048B1C3 /* UITableView+MainThreadReload.m */,
 				C8FB4FC219A24BC500AC043F /* UIView+Position.h */,
 				C8FB4FC319A24BC500AC043F /* UIView+Position.m */,
@@ -308,6 +322,7 @@
 			children = (
 				C87E7CCE198C566500366DF7 /* IJAppDelegate.h */,
 				C87E7CCF198C566500366DF7 /* IJAppDelegate.m */,
+				C884074E19E64B9F002545AD /* 3rd Party */,
 				C852A6A319A0FCAE0048B1C3 /* Categories */,
 				C8B7001019A03D8E0004FE76 /* Resources */,
 				C8F00780199DD998006B7DC4 /* Communication */,
@@ -315,8 +330,8 @@
 				C8F0076C199DD59B006B7DC4 /* Models */,
 				C87E7CC6198C566500366DF7 /* Supporting Files */,
 				C8F00784199DDB62006B7DC4 /* UI */,
-				C87E7CD4198C566500366DF7 /* Images.xcassets */,
 				C884073F19E5F6AD002545AD /* JSON */,
+				C87E7CD4198C566500366DF7 /* Images.xcassets */,
 				C884073C19E5F6A0002545AD /* TemplateIcon2x.png */,
 			);
 			path = iJumbo;
@@ -359,6 +374,15 @@
 				C884074219E5F79E002545AD /* links.json */,
 			);
 			name = JSON;
+			sourceTree = "<group>";
+		};
+		C884074E19E64B9F002545AD /* 3rd Party */ = {
+			isa = PBXGroup;
+			children = (
+				C884074B19E64B95002545AD /* OpenInChromeController.h */,
+				C884074C19E64B96002545AD /* OpenInChromeController.m */,
+			);
+			name = "3rd Party";
 			sourceTree = "<group>";
 		};
 		C8B7001019A03D8E0004FE76 /* Resources */ = {
@@ -465,6 +489,8 @@
 				C8F00785199DDB67006B7DC4 /* ViewControllers */,
 				C8B7FFF719A037600004FE76 /* TableViewCells */,
 				C8EE725D19D3C81300A36F57 /* CollectionVIewCells */,
+				C884074F19E6D587002545AD /* IJBottomNotificationView.h */,
+				C884075019E6D587002545AD /* IJBottomNotificationView.m */,
 			);
 			name = UI;
 			path = ..;
@@ -477,6 +503,8 @@
 				C8FB4FD319A46F3100AC043F /* IJEventViewController.m */,
 				C8D67FB4199EC6F8001C4FD2 /* IJEventTableViewController.h */,
 				C8D67FB5199EC6F8001C4FD2 /* IJEventTableViewController.m */,
+				C864283819EF4614003EE89C /* IJFoodItemViewController.h */,
+				C864283919EF4614003EE89C /* IJFoodItemViewController.m */,
 				C8F00781199DDB3F006B7DC4 /* IJHomeViewController.h */,
 				C8F00782199DDB3F006B7DC4 /* IJHomeViewController.m */,
 				C852A6B019A192420048B1C3 /* IJLinkTableViewController.h */,
@@ -666,6 +694,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C864283B19EF4614003EE89C /* IJFoodItemViewController.m in Sources */,
 				C8B7FFF0199FE31E0004FE76 /* IJVariables.h in Sources */,
 				C898760B19B1256800CB425E /* IJMenuTableViewController.m in Sources */,
 				C8F0077E199DD872006B7DC4 /* IJHelper.m in Sources */,
@@ -678,8 +707,10 @@
 				C8FB4FD119A465F000AC043F /* IJMapViewController.m in Sources */,
 				C852A6A919A1099B0048B1C3 /* IJLocationTableViewCell.m in Sources */,
 				C8FB4FC119A24A5400AC043F /* IJLocationViewController.m in Sources */,
+				C884074D19E64B96002545AD /* OpenInChromeController.m in Sources */,
 				C8F00783199DDB3F006B7DC4 /* IJHomeViewController.m in Sources */,
 				C852A6B219A192420048B1C3 /* IJLinkTableViewController.m in Sources */,
+				C884075119E6D587002545AD /* IJBottomNotificationView.m in Sources */,
 				C8D67FB3199EC49F001C4FD2 /* IJEvent.m in Sources */,
 				C8F00788199DDDE6006B7DC4 /* IJLocationTableViewController.m in Sources */,
 				C8FB4FC419A24BC500AC043F /* UIView+Position.m in Sources */,
@@ -694,6 +725,7 @@
 				C852A6A619A0FCD20048B1C3 /* UITableView+MainThreadReload.m in Sources */,
 				C852A6B519A193100048B1C3 /* IJLinkTableViewCell.m in Sources */,
 				C8C783F719C16FA400A3898B /* UIFont+iJumboFonts.m in Sources */,
+				C8C4AEBF19E84BEE003A5332 /* UINavigationController+Orientations.m in Sources */,
 				C8487ACE19A06F10008F034E /* IJEventTableViewCell.m in Sources */,
 				C878609F19BF5401002B2A3C /* IJFoodItemTableViewCell.m in Sources */,
 				C8F00775199DD624006B7DC4 /* IJLocation.m in Sources */,

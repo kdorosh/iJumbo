@@ -49,6 +49,14 @@
   [self.mapView setRegion:[IJMapViewController tuftsRegion] animated:NO];
 }
 
+- (BOOL)shouldAutorotate {
+  return NO;
+}
+
+- (NSUInteger)supportedInterfaceOrientations {
+  return UIInterfaceOrientationMaskPortrait;
+}
+
 // Zooms the map view into the Tufts campus.
 + (MKCoordinateRegion)tuftsRegion {
   CLLocationCoordinate2D center;

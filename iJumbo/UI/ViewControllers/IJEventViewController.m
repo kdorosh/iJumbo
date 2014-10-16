@@ -75,4 +75,14 @@ static const int padding = 20;
   return detailsLabel.maxY;
 }
 
+- (BOOL)shouldAutorotate
+{
+  return NO;
+}
+
+- (NSUInteger)supportedInterfaceOrientations
+{
+  return UIInterfaceOrientationMaskPortrait;
+}
+
 @end

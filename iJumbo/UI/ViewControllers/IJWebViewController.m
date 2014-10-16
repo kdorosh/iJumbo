@@ -8,6 +8,12 @@
 
 #import "IJWebViewController.h"
 
+#import "OpenInChromeController.h"
+
+static NSString * const kActionSheetButtonTitleOpenInSafari = @"Open in Safari";
+static NSString * const kActionSheetButtonTitleOpenInChrome = @"Open in Chrome";
+static NSString * const kActionSheetButtonTitleCopyLink     = @"Copy Link";
+
 @interface IJWebViewController () <UIWebViewDelegate, UIActionSheetDelegate>
 @property(nonatomic) UIWebView *webView;
 @property(nonatomic) NSString *url;
@@ -24,6 +30,16 @@
     self.url = url;
   }
   return self;
+}
+
+- (BOOL)shouldAutorotate {
+  return YES;
+}
+
+- (NSUInteger)supportedInterfaceOrientations {
+  return UIInterfaceOrientationMaskPortrait |
+         UIInterfaceOrientationLandscapeLeft |
+         UIInterfaceOrientationLandscapeRight;
 }
 
 - (void)viewDidLoad {
@@ -106,16 +122,24 @@
                                   delegate:self
                          cancelButtonTitle:@"Cancel"
                     destructiveButtonTitle:nil
-                         otherButtonTitles:@"Open in Safari", @"Copy Link", nil];
+                         otherButtonTitles:nil];
+  [actionSheet addButtonWithTitle:kActionSheetButtonTitleOpenInSafari];
+  if ([[OpenInChromeController sharedInstance] isChromeInstalled]) {
+    [actionSheet addButtonWithTitle:kActionSheetButtonTitleOpenInChrome];
+  }
+  [actionSheet addButtonWithTitle:@"Copy Link"];
   [actionSheet showInView:self.view];
 }
 
 - (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex {
-  if (buttonIndex == 0) {
+  NSString *buttonTitle = [actionSheet buttonTitleAtIndex:buttonIndex];
+  if ([buttonTitle isEqualToString:kActionSheetButtonTitleOpenInSafari]) {
     [[UIApplication sharedApplication] openURL:[NSURL URLWithString:self.url]];
-  } else if (buttonIndex == 1) {
+  } else if ([buttonTitle isEqualToString:kActionSheetButtonTitleCopyLink]) {
     UIPasteboard *pasteBoard = [UIPasteboard generalPasteboard];
     [pasteBoard setString:self.url];
+  } else if ([buttonTitle isEqualToString:kActionSheetButtonTitleOpenInChrome]) {
+    [[OpenInChromeController sharedInstance] openInChrome:[NSURL URLWithString:self.url]];
   }
 }
 

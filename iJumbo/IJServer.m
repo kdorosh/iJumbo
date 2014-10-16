@@ -7,9 +7,14 @@
 //
 
 #import "IJServer.h"
+
 #import <AFNetworking/AFNetworking.h>
 #import <UIKit/UIKit.h>
+
 #import "IJCacheManager.h"
+#import "IJBottomNotificationView.h"
+
+static NSDate *lastAlertTime;
 
 @implementation IJServer
 
@@ -36,6 +41,11 @@
   } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
     NSLog(@"Failure!!!!");
     NSLog(@"Response: %@", operation.responseString);
+    if (error.code == NSURLErrorNotConnectedToInternet) {
+      [IJBottomNotificationView presentNotificationWithText:@"No Internet Connection"
+                                               detailedText:@"Try again later"
+                                                forDuration:6.5f];
+    }
     failureBlock(error);
   }];
 }

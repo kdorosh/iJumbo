@@ -10,6 +10,7 @@
 
 #import "IJFoodItem.h"
 #import "IJFoodItemTableViewCell.h"
+#import "IJFoodItemViewController.h"
 #import "IJMenuSection.h"
 #import "IJTableViewHeaderFooterView.h"
 
@@ -48,6 +49,13 @@ typedef NS_ENUM(NSInteger, IJMenuActionSheet) {
   [self.tableView mainThreadReload];
 }
 
+- (BOOL)shouldAutorotate {
+  return NO;
+}
+
+- (NSUInteger)supportedInterfaceOrientations {
+  return UIInterfaceOrientationMaskPortrait;
+}
 
 - (void)setupUI {
   [self.navigationController.navigationBar setShadowImage:[[UIImage alloc] init]];
@@ -251,6 +259,15 @@ typedef NS_ENUM(NSInteger, IJMenuActionSheet) {
   IJMenuSection *menuSection = [menuSections objectAtIndex:section];
   header.sectionTitleLabel.text = menuSection.name;
   return header;
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+  id <NSFetchedResultsSectionInfo> sectionInfo = [[self.fetchedResultsController sections] objectAtIndex:0];
+  NSArray *menuSections = [sectionInfo objects];
+  IJMenuSection *menuSection = menuSections[indexPath.section];
+  IJFoodItem *foodItem = [menuSection.foodItems.allObjects objectAtIndex:indexPath.row];
+  IJFoodItemViewController *foodVC = [[IJFoodItemViewController alloc] initWithFoodItem:foodItem];
+  [self.navigationController pushViewController:foodVC animated:YES];
 }
 
 #pragma mark - UIScrollView

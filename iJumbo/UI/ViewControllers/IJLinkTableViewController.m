@@ -50,6 +50,14 @@ const int kNumberOfColumns = 2;
   [self loadDataAnimate:NO];
 }
 
+- (BOOL)shouldAutorotate {
+  return NO;
+}
+
+- (NSUInteger)supportedInterfaceOrientations {
+  return UIInterfaceOrientationMaskPortrait;
+}
+
 - (void)loadData {
   [self loadDataAnimate:YES];
 }

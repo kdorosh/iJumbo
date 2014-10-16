@@ -44,6 +44,14 @@ static NSString * const kNewsObserverActionSheetText = @"Observer";
   [self loadData];
 }
 
+- (BOOL)shouldAutorotate {
+  return NO;
+}
+
+- (NSUInteger)supportedInterfaceOrientations {
+  return UIInterfaceOrientationMaskPortrait;
+}
+
 - (void)displaySources {
   UIActionSheet *sourceActionSheet = [[UIActionSheet alloc] initWithTitle:@"Select News Source"
                                                                  delegate:self

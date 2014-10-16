@@ -11,6 +11,7 @@
 
 #define kIJumboBlue [UIColor colorWithRed:26/255.0f green:191/255.0f blue:237/255.0 alpha:1]
 #define kIJumboGrey [UIColor colorWithRed:240/255.0f green:240/255.0f blue:238/255.0f alpha:1]
+#define iJumboBlueWithAlpha(a) [UIColor colorWithRed:26/255.0f green:191/255.0f blue:237/255.0 alpha:a];
 
 #define IJ_runOnMainThread if (![NSThread isMainThread]) { dispatch_sync(dispatch_get_main_queue(), ^{ [self performSelector:_cmd]; }); return; };
 

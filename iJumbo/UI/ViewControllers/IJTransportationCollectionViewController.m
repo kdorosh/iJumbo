@@ -80,6 +80,14 @@ typedef NS_ENUM(NSInteger, IJTransportationSection) {
   [self.collectionView reloadData];
 }
 
+- (BOOL)shouldAutorotate {
+  return NO;
+}
+
+- (NSUInteger)supportedInterfaceOrientations {
+  return UIInterfaceOrientationMaskPortrait;
+}
+
 #pragma mark - Network Calls
 
 - (void)loadData {
@@ -193,7 +201,7 @@ typedef NS_ENUM(NSInteger, IJTransportationSection) {
         [IJTransportationCollectionViewController weekdayForScheduleOnDate:[NSDate date]];
     NSArray *times = self.joeySchedule[weekday][@"Olin Center"];
     if (times) {
-      return  3 * [times count] + 1;
+      return  3 * [times count];
     }
   }
   return 0;
@@ -225,8 +233,13 @@ typedef NS_ENUM(NSInteger, IJTransportationSection) {
     }
     NSInteger weekday = [IJTransportationCollectionViewController weekdayForDate:[NSDate date]];
     NSArray *times = self.joeySchedule[weekday][location];
-    NSNumber *time = times[indexPath.row / 3];
-    [cell setTimeSinceMidnight:time];
+    int index = indexPath.row / 3;
+    if (index < [times count]) {
+      NSNumber *time = times[indexPath.row / 3];
+      [cell setTimeSinceMidnight:time];
+    } else {
+      cell.timeLabel.text = @"";
+    }
     return cell;
   }
   NSString *cellIdentifier =

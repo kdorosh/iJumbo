@@ -8,10 +8,6 @@
 
 #import "IJJoeyTimeCollectionViewCell.h"
 
-@interface IJJoeyTimeCollectionViewCell ()
-@property(nonatomic) UILabel *timeLabel;
-@end
-
 @implementation IJJoeyTimeCollectionViewCell
 
 - (id)initWithFrame:(CGRect)frame

@@ -10,6 +10,8 @@
 
 @interface IJJoeyTimeCollectionViewCell : UICollectionViewCell
 
+@property(nonatomic) UILabel *timeLabel;
+
 // Changes the time shown in the cell to @a timeSince.
 // @param timeSince The time since midnight that this time represents.
 - (void)setTimeSinceMidnight:(NSNumber *)minutesSince;
