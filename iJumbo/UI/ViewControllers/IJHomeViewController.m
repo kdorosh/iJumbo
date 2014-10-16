@@ -62,15 +62,20 @@ static const CGFloat kSeparatorBarWidth = 1.5;
     UIViewController *currentVC = self.navigationController.viewControllers[1];
     if (self.eventsVC != currentVC) {
       self.eventsVC = nil;
-    } else if (self.newsVC != currentVC) {
+    }
+    if (self.newsVC != currentVC) {
       self.newsVC = nil;
-    } else if (self.menusVC != currentVC) {
+    }
+    if (self.menusVC != currentVC) {
       self.menusVC = nil;
-    } else if (self.linksVC != currentVC) {
+    }
+    if (self.linksVC != currentVC) {
       self.linksVC = nil;
-    } else if (self.locationsVC != currentVC) {
+    }
+    if (self.locationsVC != currentVC) {
       self.locationsVC = nil;
-    } else if (self.transportationVC != currentVC) {
+    }
+    if (self.transportationVC != currentVC) {
       self.transportationVC = nil;
     }
   }

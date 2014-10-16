@@ -232,7 +232,7 @@ typedef NS_ENUM(NSInteger, IJTransportationSection) {
     }
     NSInteger weekday = [IJTransportationCollectionViewController weekdayForDate:[NSDate date]];
     NSArray *times = self.joeySchedule[weekday][location];
-    int index = indexPath.row / 3;
+    int index = (int)indexPath.row / 3;
     if (index < [times count]) {
       NSNumber *time = times[indexPath.row / 3];
       [cell setTimeSinceMidnight:time];

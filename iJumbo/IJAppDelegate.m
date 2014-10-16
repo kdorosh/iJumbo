@@ -85,6 +85,7 @@
     [IJEvent getEventsWithSuccessBlock:nil failureBlock:nil];
     [IJMenuSection getMenusForDateObject:[NSDate date] withSuccessBlock:nil failureBlock:nil];
     [IJArticle getArticlesWithSuccessBlock:nil failureBlock:nil];
+    [IJLink getLinksWithSuccessBlock:nil failureBlock:nil];
   } withCompletionBlock:^{
     NSLog(@"preloading done!");
   }];

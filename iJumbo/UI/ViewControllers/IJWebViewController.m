@@ -24,6 +24,22 @@ static NSString * const kActionSheetButtonTitleCopyLink     = @"Copy Link";
 
 @implementation IJWebViewController
 
++ (IJWebViewController *)sharedInstance {
+  static IJWebViewController* webVC = nil;
+  static dispatch_once_t onceToken;
+  dispatch_once(&onceToken, ^{
+    webVC = [[IJWebViewController alloc] initWithURL:@"about:blank"];
+  });
+  return webVC;
+}
+
++ (IJWebViewController *)defaultInstanceWithURL:(NSString *)url {
+  IJWebViewController *webVC = [self sharedInstance];
+  [webVC.webView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:@"about:blank"]]];
+  webVC.url = url;
+  return webVC;
+}
+
 - (instancetype)initWithURL:(NSString *)url {
   self = [super init];
   if (self) {
@@ -58,11 +74,11 @@ static NSString * const kActionSheetButtonTitleCopyLink     = @"Copy Link";
   UIBarButtonItem * barButton =
       [[UIBarButtonItem alloc] initWithCustomView:self.activityIndicator];
   [self navigationItem].rightBarButtonItem = barButton;
-  [_webView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:self.url]]];
   [self.view addSubview:_webView];
 }
 
 - (void)viewDidAppear:(BOOL)animated {
+  [self.webView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:self.url]]];
   UIImage *leftArrow = [UIImage imageNamed:@"previous_arrow"];
   self.backButton =
       [[UIBarButtonItem alloc] initWithImage:leftArrow
@@ -144,6 +160,9 @@ static NSString * const kActionSheetButtonTitleCopyLink     = @"Copy Link";
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
+  if ([IJWebViewController sharedInstance] == self && [self.webView isLoading]) {
+    [self.webView stopLoading];
+  }
   [self.navigationController setToolbarHidden:YES animated:NO];
 }
 

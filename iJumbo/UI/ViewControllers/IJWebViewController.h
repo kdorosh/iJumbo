@@ -10,4 +10,5 @@
 
 @interface IJWebViewController : UIViewController
 - (instancetype)initWithURL:(NSString *)url;
++ (IJWebViewController *)defaultInstanceWithURL:(NSString *)url;
 @end
