@@ -21,8 +21,6 @@
 #import "IJArticle.h"
 #import "IJLink.h"
 
-#import "UINavigationController+Orientations.h"
-
 @interface IJAppDelegate () <UINavigationControllerDelegate>
 @property(nonatomic) UINavigationController *navcon;
 @end

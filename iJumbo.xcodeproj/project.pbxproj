@@ -61,7 +61,6 @@
 		C8B7FFF0199FE31E0004FE76 /* IJVariables.h in Sources */ = {isa = PBXBuildFile; fileRef = C8B7FFEF199FE2200004FE76 /* IJVariables.h */; };
 		C8B7FFF319A030DB0004FE76 /* IJNavigationDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = C8B7FFF219A030DB0004FE76 /* IJNavigationDelegate.m */; };
 		C8B7FFF619A0375B0004FE76 /* IJNewsTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = C8B7FFF519A0375B0004FE76 /* IJNewsTableViewCell.m */; };
-		C8C4AEBF19E84BEE003A5332 /* UINavigationController+Orientations.m in Sources */ = {isa = PBXBuildFile; fileRef = C8C4AEBE19E84BEE003A5332 /* UINavigationController+Orientations.m */; };
 		C8C783F719C16FA400A3898B /* UIFont+iJumboFonts.m in Sources */ = {isa = PBXBuildFile; fileRef = C8C783F619C16FA400A3898B /* UIFont+iJumboFonts.m */; };
 		C8D2500C19E4568E00E708C6 /* IJJoeyTimeCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = C8D2500B19E4568E00E708C6 /* IJJoeyTimeCollectionViewCell.m */; };
 		C8D67FB3199EC49F001C4FD2 /* IJEvent.m in Sources */ = {isa = PBXBuildFile; fileRef = C8D67FB2199EC49F001C4FD2 /* IJEvent.m */; };
@@ -186,8 +185,6 @@
 		C8B7FFFD19A03D8A0004FE76 /* Roboto-Light.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-Light.ttf"; sourceTree = "<group>"; };
 		C8B7FFFE19A03D8A0004FE76 /* Roboto-LightItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-LightItalic.ttf"; sourceTree = "<group>"; };
 		C8B7FFFF19A03D8A0004FE76 /* Roboto-Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-Medium.ttf"; sourceTree = "<group>"; };
-		C8C4AEBD19E84BEE003A5332 /* UINavigationController+Orientations.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UINavigationController+Orientations.h"; path = "Categories/UINavigationController+Orientations.h"; sourceTree = "<group>"; };
-		C8C4AEBE19E84BEE003A5332 /* UINavigationController+Orientations.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UINavigationController+Orientations.m"; path = "Categories/UINavigationController+Orientations.m"; sourceTree = "<group>"; };
 		C8C783F519C16FA400A3898B /* UIFont+iJumboFonts.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIFont+iJumboFonts.h"; path = "Categories/UIFont+iJumboFonts.h"; sourceTree = "<group>"; };
 		C8C783F619C16FA400A3898B /* UIFont+iJumboFonts.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIFont+iJumboFonts.m"; path = "Categories/UIFont+iJumboFonts.m"; sourceTree = "<group>"; };
 		C8D2500A19E4568E00E708C6 /* IJJoeyTimeCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = IJJoeyTimeCollectionViewCell.h; path = iJumbo/UI/CollectionViewCells/IJJoeyTimeCollectionViewCell.h; sourceTree = "<group>"; };
@@ -272,8 +269,6 @@
 				C8D67FBD199EED7C001C4FD2 /* UIView+AddSubviews.h */,
 				C8D67FBE199EED7C001C4FD2 /* UIView+AddSubviews.m */,
 				C852A6A419A0FCD20048B1C3 /* UITableView+MainThreadReload.h */,
-				C8C4AEBD19E84BEE003A5332 /* UINavigationController+Orientations.h */,
-				C8C4AEBE19E84BEE003A5332 /* UINavigationController+Orientations.m */,
 				C852A6A519A0FCD20048B1C3 /* UITableView+MainThreadReload.m */,
 				C8FB4FC219A24BC500AC043F /* UIView+Position.h */,
 				C8FB4FC319A24BC500AC043F /* UIView+Position.m */,
@@ -725,7 +720,6 @@
 				C852A6A619A0FCD20048B1C3 /* UITableView+MainThreadReload.m in Sources */,
 				C852A6B519A193100048B1C3 /* IJLinkTableViewCell.m in Sources */,
 				C8C783F719C16FA400A3898B /* UIFont+iJumboFonts.m in Sources */,
-				C8C4AEBF19E84BEE003A5332 /* UINavigationController+Orientations.m in Sources */,
 				C8487ACE19A06F10008F034E /* IJEventTableViewCell.m in Sources */,
 				C878609F19BF5401002B2A3C /* IJFoodItemTableViewCell.m in Sources */,
 				C8F00775199DD624006B7DC4 /* IJLocation.m in Sources */,

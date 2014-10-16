@@ -37,6 +37,7 @@ static NSString * const kActionSheetButtonTitleCopyLink     = @"Copy Link";
   IJWebViewController *webVC = [self sharedInstance];
   [webVC.webView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:@"about:blank"]]];
   webVC.url = url;
+  [webVC.webView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:webVC.url]]];
   return webVC;
 }
 
@@ -75,10 +76,10 @@ static NSString * const kActionSheetButtonTitleCopyLink     = @"Copy Link";
       [[UIBarButtonItem alloc] initWithCustomView:self.activityIndicator];
   [self navigationItem].rightBarButtonItem = barButton;
   [self.view addSubview:_webView];
+  [self.webView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:self.url]]];
 }
 
 - (void)viewDidAppear:(BOOL)animated {
-  [self.webView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:self.url]]];
   UIImage *leftArrow = [UIImage imageNamed:@"previous_arrow"];
   self.backButton =
       [[UIBarButtonItem alloc] initWithImage:leftArrow
