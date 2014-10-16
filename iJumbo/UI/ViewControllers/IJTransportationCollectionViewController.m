@@ -42,7 +42,6 @@ typedef NS_ENUM(NSInteger, IJTransportationSection) {
   self.collectionView =
       [[UICollectionView alloc] initWithFrame:CGRectMake(0, 0, self.view.width, self.view.height - self.navigationController.navigationBar.maxY)
                          collectionViewLayout:layout];
-  self.collectionView.backgroundColor = [UIColor lightGrayColor];
   self.collectionView.alwaysBounceVertical = YES;
   self.collectionView.dataSource = self;
   self.collectionView.delegate = self;

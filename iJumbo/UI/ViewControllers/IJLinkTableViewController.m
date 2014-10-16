@@ -36,7 +36,6 @@ const int kNumberOfColumns = 2;
   self.collectionView.delegate = self;
   self.collectionView.dataSource = self;
   self.collectionView.backgroundColor = [UIColor clearColor];
-  self.collectionView.bounces = YES;
   self.collectionView.alwaysBounceVertical = YES;
   
   self.refreshControl = [[UIRefreshControl alloc] init];
@@ -114,14 +113,27 @@ const int kNumberOfColumns = 2;
 - (UIEdgeInsets)collectionView:(UICollectionView *)collectionView
                         layout:(UICollectionViewLayout *)collectionViewLayout
         insetForSectionAtIndex:(NSInteger)section {
-  return UIEdgeInsetsMake(5, 5, 5, 5);
+  return UIEdgeInsetsZero;
 }
 
 - (CGSize)collectionView:(UICollectionView *)collectionView
                   layout:(UICollectionViewLayout *)collectionViewLayout
   sizeForItemAtIndexPath:(NSIndexPath *)indexPath {
-  return CGSizeMake(self.view.width/2.0f - 10, self.view.width/3.0f);
+  return CGSizeMake(self.view.width/2.0f - 1, self.view.width/3.0f);
 }
+
+- (CGFloat)collectionView:(UICollectionView *)collectionView
+                   layout:(UICollectionViewLayout *)collectionViewLayout
+minimumInteritemSpacingForSectionAtIndex:(NSInteger)section {
+  return 2.0f;
+}
+
+- (CGFloat)collectionView:(UICollectionView *)collectionView
+                   layout:(UICollectionViewLayout *)collectionViewLayout
+minimumLineSpacingForSectionAtIndex:(NSInteger)section {
+  return 2.0f;
+}
+
 
 #pragma mark - NSFetchedResultsControllerDelegate
 

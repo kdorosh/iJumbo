@@ -105,7 +105,8 @@ static NSDateFormatter *kEventsTableDateFormatter;
   UIButton *backToTodayButton = [[UIButton alloc] initWithFrame:self.dateLabel.frame];
   [backToTodayButton addTarget:self action:@selector(setDateToToday:) forControlEvents:UIControlEventTouchUpInside];
   [dateNavigationBar addSubview:self.dateLabel];
-  [dateNavigationBar addSubview:backToTodayButton];
+  // TODO(amadou): The sizing of this was off, leading to a jump back to today.
+  //[dateNavigationBar addSubview:backToTodayButton];
   const CGFloat arrowWidth = 14;
   const CGFloat arrowHeight = 22.5;
   const CGFloat arrowPadding = 10;
