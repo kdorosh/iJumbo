@@ -12,6 +12,7 @@
 #import "IJFoodItemTableViewCell.h"
 #import "IJFoodItemViewController.h"
 #import "IJMenuSection.h"
+#import "IJMyFoodViewController.h"
 #import "IJTableViewHeaderFooterView.h"
 
 static const double kDatePickerAnimationDuration = 0.4f;
@@ -49,6 +50,11 @@ typedef NS_ENUM(NSInteger, IJMenuActionSheet) {
   [self.tableView mainThreadReload];
 }
 
+- (void)viewDidAppear:(BOOL)animated {
+  [super viewDidAppear:animated];
+  
+}
+
 - (BOOL)shouldAutorotate {
   return NO;
 }
@@ -70,7 +76,6 @@ typedef NS_ENUM(NSInteger, IJMenuActionSheet) {
   [self.mealSegment addTarget:self
                    action:@selector(mealSegmentDidChangeValue:)
          forControlEvents:UIControlEventValueChanged];
-  self.mealSegment.selectedSegmentIndex = [IJMenuTableViewController mealSegmentBasedOnTime];
   [mealsBackground addSubview:self.mealSegment];
   [self.view addSubview:mealsBackground];
 
@@ -85,7 +90,8 @@ typedef NS_ENUM(NSInteger, IJMenuActionSheet) {
   [self.dateSegment addTarget:self
                        action:@selector(dateSegmentDidChangeValue:)
              forControlEvents:UIControlEventValueChanged];
-  self.dateSegment.frame = CGRectMake(0, mealsBackground.maxY + 5, self.view.width, self.mealSegment.height);
+  self.dateSegment.frame =
+      CGRectMake(0, mealsBackground.maxY + 5, self.view.width, self.mealSegment.height);
   self.dateSegment.selectedSegmentIndex = 0;
   self.dateSegment.tintColor = [UIColor clearColor];
   [self.view addSubview:self.dateSegment];
@@ -129,7 +135,7 @@ typedef NS_ENUM(NSInteger, IJMenuActionSheet) {
   [dateDoneButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
   [dateDoneButton setTitleColor:kIJumboBlue forState:UIControlStateSelected];
   [dateDoneButton setTitleEdgeInsets:UIEdgeInsetsZero];
-  dateDoneButton.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
+  dateDoneButton.contentHorizontalAlignment = UIControlContentHorizontalAlignmentRight;
   [dateDoneButton addTarget:self
                      action:@selector(hideDatePicker)
            forControlEvents:UIControlEventTouchUpInside];
@@ -142,6 +148,7 @@ typedef NS_ENUM(NSInteger, IJMenuActionSheet) {
   [datePickerBackground addSubview:dateDoneButton];
   [datePickerBackground addSubview:self.datePicker];
   [self.view addSubview:datePickerBackground];
+  self.mealSegment.selectedSegmentIndex = [IJMenuTableViewController mealSegmentBasedOnTime];
 }
 
 + (NSUInteger)mealSegmentBasedOnTime {
@@ -195,7 +202,7 @@ typedef NS_ENUM(NSInteger, IJMenuActionSheet) {
 }
 
 - (void)loadMenusForDate:(NSDate *)date {
-  NSAssert(date, @"Date cannot be nil.");
+  IJAssertNotNil(date);
   NSString *dateString = [self.dateFormatter stringFromDate:date];
   [self startedLoadingDate:date];
   [IJMenuSection getMenusForDate:dateString withSuccessBlock:^(NSArray *menuSections) {
@@ -318,8 +325,9 @@ typedef NS_ENUM(NSInteger, IJMenuActionSheet) {
 - (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex {
   if (buttonIndex == IJMenuActionSheetMyFood) {
     NSLog(@"Push the my food view controller.");
-  } else if (buttonIndex < IJMenuActionSheetMyFood)
-  {
+    IJMyFoodViewController *myFoodVC = [[IJMyFoodViewController alloc] init];
+    [self.navigationController pushViewController:myFoodVC animated:YES];
+  } else if (buttonIndex < IJMenuActionSheetMyFood) {
     self.hallBarButton.title = [actionSheet buttonTitleAtIndex:buttonIndex];
     [self updateFetchRequest];
   }

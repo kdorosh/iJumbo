@@ -12,12 +12,24 @@ static NSString * const kBaseURL = @"http://ijumboapp.com/v2/api";
 
 @interface IJServer : MMServer
 
+/* Do not need this since the news does not have images anymore.
 + (void)getImageAtURL:(NSString*)url
               success:(void (^)(UIImage *image))success
               failure:(void (^)(NSError *error))failure;
+*/
 
 + (void)getJSONAtURL:(NSString *)url
              success:(void (^)(id object))success
              failure:(void (^)(NSError *error))failure;
+
++ (void)postData:(NSDictionary *)data
+           toURL:(NSString *)url
+         success:(void (^)(id object))success
+         failure:(void (^)(NSError *error))failure;
+
++ (void)deleteData:(NSDictionary *)data
+             toURL:(NSString *)url
+           success:(void (^)(id object))success
+           failure:(void (^)(NSError *error))failure;
 
 @end

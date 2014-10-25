@@ -200,7 +200,7 @@ typedef NS_ENUM(NSInteger, IJTransportationSection) {
         [IJTransportationCollectionViewController weekdayForScheduleOnDate:[NSDate date]];
     NSArray *times = self.joeySchedule[weekday][@"Olin Center"];
     if (times) {
-      return  3 * [times count];
+      return  3 * [times count] + 1;
     }
   }
   return 0;
@@ -221,20 +221,37 @@ typedef NS_ENUM(NSInteger, IJTransportationSection) {
   if (indexPath.section == IJTransportationSectionJoeySchedule) {
     // give the cell the schedule data (maybe do that in the cell.
     // return it.
+    
     IJJoeyTimeCollectionViewCell *cell =
         [collectionView dequeueReusableCellWithReuseIdentifier:@"JoeyScheduleCell"
                                                   forIndexPath:indexPath];
+    
     NSString *location = @"Campus Center";
     if (indexPath.row % 3 == 1) {
       location = @"Davis Square";
     } else if (indexPath.row % 3 == 2) {
       location = @"Olin Center";
     }
+    
+    // TODO(amadou): This header should be its own class!
+    if (indexPath.row == 0 || indexPath.row == 1 || indexPath.row == 2) {
+      cell.timeLabel.numberOfLines = 0;
+      cell.timeLabel.textAlignment = NSTextAlignmentCenter;
+      cell.timeLabel.font = [UIFont regularFontWithSize:14];
+      cell.timeLabel.text = location;
+      return cell;
+    } else {
+      cell.timeLabel.numberOfLines = 1;
+      cell.timeLabel.font = [UIFont lightFontWithSize:13];
+    }
+    
+    
+    
     NSInteger weekday = [IJTransportationCollectionViewController weekdayForDate:[NSDate date]];
     NSArray *times = self.joeySchedule[weekday][location];
-    int index = (int)indexPath.row / 3;
+    int index = ((int)indexPath.row - 1) / 3;
     if (index < [times count]) {
-      NSNumber *time = times[indexPath.row / 3];
+      NSNumber *time = times[index];
       [cell setTimeSinceMidnight:time];
     } else {
       cell.timeLabel.text = @"";
@@ -387,18 +404,42 @@ typedef NS_ENUM(NSInteger, IJTransportationSection) {
   if (indexPath.section == IJTransportationSectionMBTA) {
     headerLabel.text = @"MBTA | Davis Square T Stop";
   } else if (indexPath.section == IJTransportationSectionJoeyTime) {
-    headerLabel.text = @"Joey | Based on Calendar";
+    headerLabel.text = @"Joey | Based on Schedule";
   } else if (indexPath.section == IJTransportationSectionJoeySchedule) {
     // Look at mocks for bar that helps select the the date for the schedule.
-    headerLabel.text = @"Joey Schedule\nCampus Center\tDavis Square\tOlin Center";
+    headerLabel.text = @"Joey Schedule";
   }
   return header;
 }
 
-+ (UICollectionReusableView *)joeyScheduleHeader {
-  // UICollectionReusableView * header =
-  return nil;
-}
+//+ (UICollectionReusableView *)joeyScheduleHeader:(UICollectionView *)collectionView
+//                                    forIndexPath:(NSIndexPath *)indexPath {
+//  NSString *headerID = @"JoeyScheduleHeaderID";
+//  UICollectionReusableView *header =
+//      [collectionView dequeueReusableSupplementaryViewOfKind:UICollectionElementKindSectionHeader
+//                                         withReuseIdentifier:headerID
+//                                                forIndexPath:indexPath];
+//  UILabel *titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, header.width, header.height /2.0f)];
+//  titleLabel.text = @"Joey Schedule";
+//  titleLabel.textAlignment = NSTextAlignmentCenter;
+//  
+//  CGRect detailFrame = CGRectMake(0, header.height / 2.0f, header.width, header.height / 2.0f);
+//  
+//  UILabel *leftDetail = [[UILabel alloc] initWithFrame:detailFrame];
+//  leftDetail.textAlignment = NSTextAlignmentLeft;
+//  UILabel *centerDetail = [[UILabel alloc] initWithFrame:detailFrame];
+//  centerDetail.textAlignment = NSTextAlignmentCenter;
+//  UILabel *rightDetail = [[UILabel alloc] initWithFrame:detailFrame];
+//  rightDetail.textAlignment = NSTextAlignmentRight;
+//  
+//  
+//  
+//  
+//  
+//  
+//  
+//  
+//}
 
 - (CGFloat)collectionView:(UICollectionView *)collectionView
                    layout:(UICollectionViewLayout *)collectionViewLayout

@@ -10,6 +10,7 @@
 #import "IJAppDelegate.h"
 
 #define IJNSNumberToString(n) [NSString stringWithFormat:@"%@", n]
+#define IJAssertNotNil(a) NSAssert(a, @"%s cannot be nil in %s. Line: %i", #a, __func__, __LINE__)
 
 @interface IJHelper : NSObject
 + (NSManagedObjectContext *)mainContext;

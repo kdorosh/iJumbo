@@ -8,7 +8,9 @@
 
 #import "IJEventViewController.h"
 #import "IJLocation.h"
+#import "IJLocationViewController.h"
 #import "IJRecord.h"
+#import "IJWebViewController.h"
 
 static const int padding = 20;
 
@@ -28,7 +30,7 @@ static const int padding = 20;
 }
 
 - (void)viewDidLoad {
-  NSAssert(self.event, @"Must provide an event.");
+  IJAssertNotNil(self.event);
   [super viewDidLoad];
   self.title = self.event.date;
   self.scrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 0, self.view.width, self.view.height)];
@@ -48,15 +50,18 @@ static const int padding = 20;
   CGFloat y = [self insertLabelAtY:20  withTitle:@"Title" andDetails:self.event.title];
   y = [self insertLabelAtY:y + padding withTitle:@"Time" andDetails:time];
   y = [self insertLabelAtY:y + padding withTitle:@"Location" andDetails:self.event.location.name];
-  // TODO(amadou): Make the url clickable.
-  y = [self insertLabelAtY:y + padding withTitle:@"Website" andDetails:self.event.website];
+  y = [self insertLabelAtY:y + padding withTitle:@"Website" andDetails:self.event.website withAction:@selector(pushWebView)];
   y = [self insertLabelAtY:y + padding withTitle:@"Description" andDetails:self.event.desc];
   self.scrollView.contentSize = CGSizeMake(self.view.width, y + padding);
 }
 
-// @return the maxY of the label holding details.
 - (CGFloat)insertLabelAtY:(CGFloat)y withTitle:(NSString *)title andDetails:(NSString *)details {
-  NSAssert(title, @"Must provide a title.");
+  return [self insertLabelAtY:y withTitle:title andDetails:details withAction:nil];
+}
+
+// @return the maxY of the label holding details.
+- (CGFloat)insertLabelAtY:(CGFloat)y withTitle:(NSString *)title andDetails:(NSString *)details withAction:(SEL)action {
+  IJAssertNotNil(title);
   const int titleHeight = 20;
   const int labelWidth = self.view.width - (2 * padding);
   UILabel* titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(padding, y, labelWidth, titleHeight)];
@@ -64,15 +69,27 @@ static const int padding = 20;
   titleLabel.font = [UIFont regularFontWithSize:17];;
   [self.scrollView addSubview:titleLabel];
   
-  UILabel *detailsLabel = [[UILabel alloc] initWithFrame:CGRectMake(padding, titleLabel.maxX + padding, labelWidth, titleHeight)];
-  detailsLabel.text = (details) ? details : @"N/A";
-  detailsLabel.font = [UIFont lightFontWithSize:17];
-  detailsLabel.numberOfLines = 0;
-  [detailsLabel sizeToFit];
-  detailsLabel.frame = CGRectMake(padding, titleLabel.maxY + padding/2.0f , labelWidth, detailsLabel.height);
-  [self.scrollView addSubview:detailsLabel];
+  UIButton *detailsButton =
+      [[UIButton alloc] initWithFrame:CGRectMake(padding, titleLabel.maxX + padding, labelWidth, titleHeight * 3)];
+  [detailsButton setTitle:(details) ? details : @"N/A" forState:UIControlStateNormal];
+  detailsButton.titleLabel.font = [UIFont lightFontWithSize:17];
+  detailsButton.titleLabel.numberOfLines = 0;
+  [detailsButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+  [detailsButton setTitleColor:kIJumboBlue forState:UIControlStateHighlighted];
+  detailsButton.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
+  detailsButton.contentEdgeInsets = UIEdgeInsetsZero;
+  [detailsButton sizeToFit];
+  detailsButton.frame = CGRectMake(padding, titleLabel.maxY + padding/2.0f , labelWidth, detailsButton.height);
+  [self.scrollView addSubview:detailsButton];
   
-  return detailsLabel.maxY;
+  // Setup if this data should be able interactive.
+  if (action) {
+    [detailsButton addTarget:self action:action forControlEvents:UIControlEventTouchUpInside];
+  } else {
+    detailsButton.userInteractionEnabled = NO;
+  }
+  
+  return detailsButton.maxY;
 }
 
 - (BOOL)shouldAutorotate
@@ -84,5 +101,10 @@ static const int padding = 20;
 {
   return UIInterfaceOrientationMaskPortrait;
 }
+
+- (void)pushWebView {
+  IJWebViewController *webVC = [IJWebViewController defaultInstanceWithURL:self.event.website];
+  [self.navigationController pushViewController:webVC animated:YES];
+} 
 
 @end

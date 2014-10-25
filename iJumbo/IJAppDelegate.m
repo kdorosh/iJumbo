@@ -13,6 +13,7 @@
 
 #import "IJHomeViewController.h"
 #import "IJNavigationDelegate.h"
+#import "IJFoodItem.h"
 #import "IJServer.h"
 #import "IJHelper.h"
 #import "IJLocation.h"
@@ -20,6 +21,7 @@
 #import "IJEvent.h"
 #import "IJArticle.h"
 #import "IJLink.h"
+#import "IJFoodItem.h"
 
 @interface IJAppDelegate () <UINavigationControllerDelegate>
 @property(nonatomic) UINavigationController *navcon;
@@ -38,8 +40,25 @@
   // Things that need to be run the first time this app opens should be done here
   if (![[NSUserDefaults standardUserDefaults] boolForKey:kFirstRunUserDefaultsKey]) {
     [self seedDatabaseWithLocalJSON];
+    [self setupInitialSubscribedFood];
     [self preloadNetworkData];
     [[NSUserDefaults standardUserDefaults] setBool:YES forKey:kFirstRunUserDefaultsKey];
+  } else {
+    // Change this for later versions in case they are actually subscribed to food already.
+    [IJFoodItem fetchSubscribedFoodWithSuccessBlock:^(NSArray *foodItems) {
+      NSLog(@"%@", foodItems);
+    } failureBlock:^(NSError *error) {
+      NSLog(@"%@", error);
+    }];
+  }
+  
+  // If they began registering for notifications but did not finish start the process again.
+  NSData *deviceToken =
+      [[NSUserDefaults standardUserDefaults] dataForKey:kDeviceIdDataUserDefaultsKey];
+  NSString *deviceString =
+      [[NSUserDefaults standardUserDefaults] stringForKey:kDeviceIdUserDefaultsKey];
+  if (deviceToken && !deviceString) {  // Have the data but have not exchanged with the server yet.
+    [self postDeviceIDForServerID:deviceToken];
   }
   
   [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
@@ -91,6 +110,13 @@
 
 - (void)seedDatabaseWithLocalJSON {
   // TODO(amadou): Do this at somepoint.
+}
+
+- (void)setupInitialSubscribedFood {
+  NSArray *food = [IJFoodItem subscribedFood];
+  if (food == nil) {
+    [IJFoodItem writeSubscribedFoodsToDisk:@[]];
+  }
 }
 
 
@@ -158,6 +184,33 @@
       abort();
     }
   }
+}
+
+#pragma mark - Push Notifications
+
+- (void)application:(UIApplication*)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken {
+  [[NSUserDefaults standardUserDefaults] setValue:deviceToken forKey:kDeviceIdDataUserDefaultsKey];
+  [self postDeviceIDForServerID:deviceToken];
+}
+
+- (void)application:(UIApplication*)application didFailToRegisterForRemoteNotificationsWithError:(NSError *)error {
+  NSLog(@"Failed to register remote notifications: %@", error);
+}
+
+// Sends the device id used for push notifications for the server and gets back another id used to
+// represent the device on the server. When subscribing to notifications use that token the server gives.
+- (void)postDeviceIDForServerID:(NSData *)deviceToken {
+  IJAssertNotNil(deviceToken);
+  NSString *deviceString = [[deviceToken description] stringByTrimmingCharactersInSet:[NSCharacterSet characterSetWithCharactersInString:@"<>"]];
+  deviceString = [deviceString stringByReplacingOccurrencesOfString:@" " withString:@""];
+  NSString *url = [kBaseURL stringByAppendingPathComponent:@"/device"];
+  [IJServer postData:@{@"device_id": deviceString} toURL:url success:^(NSDictionary *device) {
+    NSString *serverDeviceID = device[@"_id"];
+    // Save the id given by mongo on the db to pass when we subscribe/unsubscribe from alerts.
+    [[NSUserDefaults standardUserDefaults] setValue:serverDeviceID forKey:kDeviceIdUserDefaultsKey];
+  } failure:^(NSError *error) {
+    NSLog(@"There was an error");
+  }];
 }
 
 #pragma mark - Core Data stack

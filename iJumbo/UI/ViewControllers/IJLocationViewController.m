@@ -44,7 +44,7 @@
 - (void)viewDidLoad {
   [super viewDidLoad];
   self.title = @"Info";
-  NSAssert(self.location, @"Must initialize with -initWithLocation: with a valid location.");
+  IJAssertNotNil(self.location);
   CGSize viewSize = self.view.frame.size;
   self.edgesForExtendedLayout = UIRectEdgeNone;
   _scrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 0, viewSize.width, viewSize.height)];

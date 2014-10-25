@@ -32,5 +32,18 @@
 @property(nonatomic) NSMutableSet *menuSections;
 
 // Functions.
++ (void)subscribeToFoodItem:(IJFoodItem *)foodItem;
+// Make this and the above function use another helper function to stop code duplication.
++ (void)unsubscribeFromFoodItem:(IJFoodItem *)foodItem;
+
+/// If this device is subscribed to this foot item.
++ (BOOL)isSubscribedToFoodItem:(IJFoodItem *)foodItem;
+
++ (NSArray *)subscribedFood;
+
++ (void)writeSubscribedFoodsToDisk:(NSArray *)subscribedFood;
+
++ (void)fetchSubscribedFoodWithSuccessBlock:(void (^)(NSArray *foodItems))successBlock
+                               failureBlock:(void (^)(NSError *error))errorBlock;
 
 @end

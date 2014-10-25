@@ -20,7 +20,6 @@ static NSDateFormatter *dateFormatter;
 @dynamic sectionNum;
 @dynamic foodItems;
 
-
 + (void)getTodaysMenusWithSuccessBlock:(void (^)(NSArray *menuSections))successBlock
                           failureBlock:(void (^)(NSError *error))failureBlock {
   [IJMenuSection startRequestWithURN:@"/menus"
@@ -34,7 +33,7 @@ static NSDateFormatter *dateFormatter;
 + (void)getMenusForDate:(NSString *)date
        withSuccessBlock:(void (^)(NSArray *menuSections))successBlock
            failureBlock:(void (^)(NSError *error))failureBlock {
-  NSAssert(date, @"date must not be nil.");
+  IJAssertNotNil(date);
   [IJMenuSection startRequestWithURN:[@"menus/date/" stringByAppendingPathComponent:date]
                                 data:nil
                              context:[IJHelper mainContext]
@@ -46,6 +45,7 @@ static NSDateFormatter *dateFormatter;
 + (void)getMenusForDateObject:(NSDate *)date
              withSuccessBlock:(void (^)(NSArray *))successBlock
                  failureBlock:(void (^)(NSError *))failureBlock {
+  IJAssertNotNil(date);
   NSString *dateString = [[self dateFormatter] stringFromDate:date];
   [self getMenusForDate:dateString withSuccessBlock:successBlock failureBlock:failureBlock];
 }

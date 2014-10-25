@@ -16,5 +16,7 @@
 #define IJ_runOnMainThread if (![NSThread isMainThread]) { dispatch_sync(dispatch_get_main_queue(), ^{ [self performSelector:_cmd]; }); return; };
 
 #define kFirstRunUserDefaultsKey @"FirstRunVersion_1_UserDefaultsKey"
+#define kDeviceIdUserDefaultsKey @"DeviceIdUserDefaultsKey"
+#define kDeviceIdDataUserDefaultsKey @"DeviceNSDataDefaultsKey"  // The key that stores the actualy NSData given by the delegate function.
 
 #endif

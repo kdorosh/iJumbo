@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		51717AB18D3441268926AA6D /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0027185B941C4F758572F481 /* libPods.a */; };
+		C818148619F635C0005218D8 /* UIAlertView+Blocks.m in Sources */ = {isa = PBXBuildFile; fileRef = C818148519F635C0005218D8 /* UIAlertView+Blocks.m */; };
 		C841812419A58CAE007EB13E /* IJCacheManager.m in Sources */ = {isa = PBXBuildFile; fileRef = C841812319A58CAE007EB13E /* IJCacheManager.m */; };
 		C8487ACE19A06F10008F034E /* IJEventTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = C8487ACD19A06F10008F034E /* IJEventTableViewCell.m */; };
 		C8487AD119A07399008F034E /* IJRecord.m in Sources */ = {isa = PBXBuildFile; fileRef = C8487AD019A07399008F034E /* IJRecord.m */; };
@@ -20,6 +21,7 @@
 		C878609F19BF5401002B2A3C /* IJFoodItemTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = C878609E19BF5401002B2A3C /* IJFoodItemTableViewCell.m */; };
 		C87BB9C819D364FE001BB67B /* IJTransportationCollectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C87BB9C719D364FE001BB67B /* IJTransportationCollectionViewController.m */; };
 		C87BB9CB19D36F51001BB67B /* Crashlytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C87BB9CA19D36F51001BB67B /* Crashlytics.framework */; };
+		C87D2F4319F30D0A00FC1910 /* IJMyFoodViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C87D2F4219F30D0A00FC1910 /* IJMyFoodViewController.m */; };
 		C87E7CBE198C566500366DF7 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C87E7CBD198C566500366DF7 /* Foundation.framework */; };
 		C87E7CC0198C566500366DF7 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C87E7CBF198C566500366DF7 /* CoreGraphics.framework */; };
 		C87E7CC2198C566500366DF7 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C87E7CC1198C566500366DF7 /* UIKit.framework */; };
@@ -85,6 +87,7 @@
 		C8FB4FCB19A311F400AC043F /* IJWebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C8FB4FCA19A311F400AC043F /* IJWebViewController.m */; };
 		C8FB4FD119A465F000AC043F /* IJMapViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C8FB4FD019A465F000AC043F /* IJMapViewController.m */; };
 		C8FB4FD419A46F3100AC043F /* IJEventViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C8FB4FD319A46F3100AC043F /* IJEventViewController.m */; };
+		C8FFD0CF19F614A600B65BA5 /* UIActionSheet+Blocks.m in Sources */ = {isa = PBXBuildFile; fileRef = C8FFD0CE19F614A600B65BA5 /* UIActionSheet+Blocks.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -115,6 +118,8 @@
 /* Begin PBXFileReference section */
 		0027185B941C4F758572F481 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		433B59560D494C359551A7CC /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = "<group>"; };
+		C818148419F635C0005218D8 /* UIAlertView+Blocks.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIAlertView+Blocks.h"; sourceTree = "<group>"; };
+		C818148519F635C0005218D8 /* UIAlertView+Blocks.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIAlertView+Blocks.m"; sourceTree = "<group>"; };
 		C841812219A58CAE007EB13E /* IJCacheManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = IJCacheManager.h; path = Helpers/IJCacheManager.h; sourceTree = "<group>"; };
 		C841812319A58CAE007EB13E /* IJCacheManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = IJCacheManager.m; path = Helpers/IJCacheManager.m; sourceTree = "<group>"; };
 		C8487ACC19A06F10008F034E /* IJEventTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = IJEventTableViewCell.h; path = iJumbo/UI/TableViewCells/IJEventTableViewCell.h; sourceTree = "<group>"; };
@@ -138,6 +143,8 @@
 		C87BB9C619D364FE001BB67B /* IJTransportationCollectionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = IJTransportationCollectionViewController.h; path = iJumbo/UI/ViewControllers/IJTransportationCollectionViewController.h; sourceTree = "<group>"; };
 		C87BB9C719D364FE001BB67B /* IJTransportationCollectionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = IJTransportationCollectionViewController.m; path = iJumbo/UI/ViewControllers/IJTransportationCollectionViewController.m; sourceTree = "<group>"; };
 		C87BB9CA19D36F51001BB67B /* Crashlytics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Crashlytics.framework; sourceTree = "<group>"; };
+		C87D2F4119F30D0A00FC1910 /* IJMyFoodViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IJMyFoodViewController.h; sourceTree = "<group>"; };
+		C87D2F4219F30D0A00FC1910 /* IJMyFoodViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IJMyFoodViewController.m; sourceTree = "<group>"; };
 		C87E7CBA198C566500366DF7 /* iJumbo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = iJumbo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C87E7CBD198C566500366DF7 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		C87E7CBF198C566500366DF7 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -233,6 +240,8 @@
 		C8FB4FD019A465F000AC043F /* IJMapViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = IJMapViewController.m; path = iJumbo/UI/ViewControllers/IJMapViewController.m; sourceTree = "<group>"; };
 		C8FB4FD219A46F3100AC043F /* IJEventViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = IJEventViewController.h; path = iJumbo/UI/ViewControllers/IJEventViewController.h; sourceTree = "<group>"; };
 		C8FB4FD319A46F3100AC043F /* IJEventViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = IJEventViewController.m; path = iJumbo/UI/ViewControllers/IJEventViewController.m; sourceTree = "<group>"; };
+		C8FFD0CD19F614A600B65BA5 /* UIActionSheet+Blocks.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIActionSheet+Blocks.h"; sourceTree = "<group>"; };
+		C8FFD0CE19F614A600B65BA5 /* UIActionSheet+Blocks.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIActionSheet+Blocks.m"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -263,6 +272,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		C8139C3919F965C900D89076 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				C884074F19E6D587002545AD /* IJBottomNotificationView.h */,
+				C884075019E6D587002545AD /* IJBottomNotificationView.m */,
+			);
+			name = Views;
+			sourceTree = "<group>";
+		};
 		C852A6A319A0FCAE0048B1C3 /* Categories */ = {
 			isa = PBXGroup;
 			children = (
@@ -376,6 +394,10 @@
 			children = (
 				C884074B19E64B95002545AD /* OpenInChromeController.h */,
 				C884074C19E64B96002545AD /* OpenInChromeController.m */,
+				C8FFD0CD19F614A600B65BA5 /* UIActionSheet+Blocks.h */,
+				C8FFD0CE19F614A600B65BA5 /* UIActionSheet+Blocks.m */,
+				C818148419F635C0005218D8 /* UIAlertView+Blocks.h */,
+				C818148519F635C0005218D8 /* UIAlertView+Blocks.m */,
 			);
 			name = "3rd Party";
 			sourceTree = "<group>";
@@ -484,8 +506,7 @@
 				C8F00785199DDB67006B7DC4 /* ViewControllers */,
 				C8B7FFF719A037600004FE76 /* TableViewCells */,
 				C8EE725D19D3C81300A36F57 /* CollectionVIewCells */,
-				C884074F19E6D587002545AD /* IJBottomNotificationView.h */,
-				C884075019E6D587002545AD /* IJBottomNotificationView.m */,
+				C8139C3919F965C900D89076 /* Views */,
 			);
 			name = UI;
 			path = ..;
@@ -512,6 +533,8 @@
 				C8FB4FD019A465F000AC043F /* IJMapViewController.m */,
 				C898760919B1256800CB425E /* IJMenuTableViewController.h */,
 				C898760A19B1256800CB425E /* IJMenuTableViewController.m */,
+				C87D2F4119F30D0A00FC1910 /* IJMyFoodViewController.h */,
+				C87D2F4219F30D0A00FC1910 /* IJMyFoodViewController.m */,
 				C8D67FB7199EE342001C4FD2 /* IJNewsTableViewController.h */,
 				C8D67FB8199EE342001C4FD2 /* IJNewsTableViewController.m */,
 				C8B7FFF119A030DB0004FE76 /* IJNavigationDelegate.h */,
@@ -578,6 +601,9 @@
 				LastUpgradeCheck = 0510;
 				ORGANIZATIONNAME = Amadou.It;
 				TargetAttributes = {
+					C87E7CB9198C566500366DF7 = {
+						DevelopmentTeam = NR3QK94585;
+					};
 					C87E7CD9198C566500366DF7 = {
 						TestTargetID = C87E7CB9198C566500366DF7;
 					};
@@ -698,8 +724,10 @@
 				C887F45E19D22B8F00D82898 /* IJLinkCollectionViewCell.m in Sources */,
 				C8EE725C19D3C80900A36F57 /* IJMinutesTillCollectionViewCell.m in Sources */,
 				C8FB4FC819A2D64600AC043F /* IJViewController.m in Sources */,
+				C818148619F635C0005218D8 /* UIAlertView+Blocks.m in Sources */,
 				C87BB9C819D364FE001BB67B /* IJTransportationCollectionViewController.m in Sources */,
 				C8FB4FD119A465F000AC043F /* IJMapViewController.m in Sources */,
+				C87D2F4319F30D0A00FC1910 /* IJMyFoodViewController.m in Sources */,
 				C852A6A919A1099B0048B1C3 /* IJLocationTableViewCell.m in Sources */,
 				C8FB4FC119A24A5400AC043F /* IJLocationViewController.m in Sources */,
 				C884074D19E64B96002545AD /* OpenInChromeController.m in Sources */,
@@ -715,6 +743,7 @@
 				C87E7CCC198C566500366DF7 /* main.m in Sources */,
 				C8F0077B199DD735006B7DC4 /* IJRange.m in Sources */,
 				C8D67FB6199EC6F8001C4FD2 /* IJEventTableViewController.m in Sources */,
+				C8FFD0CF19F614A600B65BA5 /* UIActionSheet+Blocks.m in Sources */,
 				C8D67FBF199EED7C001C4FD2 /* UIView+AddSubviews.m in Sources */,
 				C8B7FFF319A030DB0004FE76 /* IJNavigationDelegate.m in Sources */,
 				C852A6A619A0FCD20048B1C3 /* UITableView+MainThreadReload.m in Sources */,
@@ -850,8 +879,9 @@
 			baseConfigurationReference = 433B59560D494C359551A7CC /* Pods.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = "LaunchImage-1";
 				CODE_SIGN_IDENTITY = "iPhone Developer: Amadou Crookes (V23VPS752M)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Amadou Crookes (V23VPS752M)";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
@@ -863,6 +893,7 @@
 				INFOPLIST_FILE = "iJumbo/iJumbo-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "7e1561e8-b6c8-4778-bb77-43adc190a5ec";
 				WARNING_CFLAGS = "-Werror";
 				WRAPPER_EXTENSION = app;
 			};
@@ -873,8 +904,9 @@
 			baseConfigurationReference = 433B59560D494C359551A7CC /* Pods.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = "LaunchImage-1";
 				CODE_SIGN_IDENTITY = "iPhone Developer: Amadou Crookes (V23VPS752M)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Amadou Crookes (V23VPS752M)";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
@@ -886,6 +918,7 @@
 				INFOPLIST_FILE = "iJumbo/iJumbo-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "7e1561e8-b6c8-4778-bb77-43adc190a5ec";
 				WARNING_CFLAGS = "-Werror";
 				WRAPPER_EXTENSION = app;
 			};

@@ -21,7 +21,7 @@ static const int kFoodItemPadding = 16;
 @implementation IJFoodItemViewController
 
 - (instancetype)initWithFoodItem:(IJFoodItem *)foodItem {
-  NSAssert(foodItem, @"foodItem cannot be nil.");
+  IJAssertNotNil(foodItem);
   self = [super init];
   if (self) {
     self.foodItem = foodItem;
@@ -35,20 +35,28 @@ static const int kFoodItemPadding = 16;
   self.scrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 0, self.view.width, self.view.height)];
   [self.view addSubview:self.scrollView];
   [self addLabelsForFoodItem];
-  UIBarButtonItem *alertButton = [[UIBarButtonItem alloc] initWithTitle:@"Alert"
-                                                                  style:UIBarButtonItemStylePlain
-                                                                 target:self
-                                                                 action:@selector(toggleAlert)];
+  NSString *alertString;
+  NSSet *subscribedFoods = [NSSet setWithArray:[IJFoodItem subscribedFood]];
+  if ([subscribedFoods member:self.foodItem]) {
+    alertString = @"Unsubscribe";
+  } else {
+    alertString = @"Subscribe";
+  }
+  UIBarButtonItem *alertButton =
+      [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"Bell.png"]
+                                       style:UIBarButtonItemStylePlain
+                                      target:self
+                                      action:@selector(toggleAlert)];
   self.navigationItem.rightBarButtonItem = alertButton;
 }
 
 - (void)toggleAlert {
-  // If they have not allowed food alerts ask them if they are willing to get notifications.
-  // If they are subscribed to the food tell them, and ask if they want to unsubscribe.
-  // Else make request to server passing the device id given for notifications.
-  [IJBottomNotificationView presentNotificationWithText:[NSString stringWithFormat:@"Subscribed to %@ alerts!", self.foodItem.name]
-                                           detailedText:nil
-                                            forDuration:3.5];
+  NSSet *subscribedFoods = [NSSet setWithArray:[IJFoodItem subscribedFood]];
+  if ([subscribedFoods member:self.foodItem]) {
+    [IJFoodItem unsubscribeFromFoodItem:self.foodItem];
+  } else {
+    [IJFoodItem subscribeToFoodItem:self.foodItem];
+  }
 }
 
 - (void)addLabelsForFoodItem {
@@ -75,7 +83,7 @@ static const int kFoodItemPadding = 16;
 }
 
 - (CGFloat)insertLabelAtY:(CGFloat)y withTitle:(NSString *)title andDetails:(NSString *)details {
-  NSAssert(title, @"Must provide a title.");
+  IJAssertNotNil(title);
   const int labelHeight = 20;
   const int labelWidth = self.view.width - (2.0f * kFoodItemPadding);
   UILabel* titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(kFoodItemPadding, y, labelWidth, labelHeight)];
@@ -95,7 +103,9 @@ static const int kFoodItemPadding = 16;
 
 // Adds the ingredients to the view in a bordered box.
 - (CGFloat)addBoxedText:(NSString *)text atY:(CGFloat)y {
-  NSAssert(text, @"Must pass text.");
+  if (!text) {
+    return y;
+  }
   UILabel *label = [[UILabel alloc] init];
   label.text = text;
   label.numberOfLines = 0;

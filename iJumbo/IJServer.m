@@ -27,14 +27,10 @@ static NSDate *lastAlertTime;
               responseBlock:(void (^)(id))responseBlock
                failureBlock:(void (^)(NSError *))failureBlock {
   NSString* url = [kBaseURL stringByAppendingPathComponent:URN];
-  AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
-  AFHTTPRequestSerializer *requestSerializer = [AFJSONRequestSerializer serializer];
-  //[requestSerializer setValue:[RCSession accessToken] forHTTPHeaderField:@"auth_key"];
-  manager.requestSerializer = requestSerializer;
-  manager.responseSerializer = [AFJSONResponseSerializer serializer];
   NSMutableDictionary *params_auth = [NSMutableDictionary dictionaryWithDictionary:params];
   // TODO(amadou): pass something that can help id this device/user for daily active users etc...
   //params_auth[@"auth_key"] = [RCSession accessToken];
+  AFHTTPRequestOperationManager *manager = [self defaultManager];
   [manager GET:url parameters:params_auth
   success:^(AFHTTPRequestOperation *operation, id responseObject) {
     responseBlock(responseObject);
@@ -50,6 +46,7 @@ static NSDate *lastAlertTime;
   }];
 }
 
+/*
 + (void)getImageAtURL:(NSString*)url
               success:(void (^)(UIImage *image))success
               failure:(void (^)(NSError *error))failure {
@@ -67,18 +64,56 @@ static NSDate *lastAlertTime;
     failure(error);
   }];
 }
+ */
 
 + (void)getJSONAtURL:(NSString *)url
              success:(void (^)(id object))success
              failure:(void (^)(NSError *error))failure {
-  NSAssert(url && success && failure, @"Must pass all parameters.");
-  AFHTTPRequestOperationManager *manager = [[AFHTTPRequestOperationManager alloc] init];
-  manager.responseSerializer = [AFJSONResponseSerializer serializer];
+  IJAssertNotNil(url);
+  AFHTTPRequestOperationManager *manager = [self defaultManager];
   [manager GET:url parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
     success(responseObject);
   } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
     failure(error);
   }];
+}
+
++ (void)postData:(NSDictionary *)data
+           toURL:(NSString *)url
+         success:(void (^)(id object))success
+         failure:(void (^)(NSError *error))failure {
+  IJAssertNotNil(url);
+  AFHTTPRequestOperationManager *manager = [self defaultManager];
+  [manager POST:url parameters:data success:^(AFHTTPRequestOperation *operation, id responseObject) {
+    success(responseObject);
+  } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+    failure(error);
+  }];
+}
+
++ (void)deleteData:(NSDictionary *)data
+             toURL:(NSString *)url
+           success:(void (^)(id object))success
+           failure:(void (^)(NSError *error))failure {
+  IJAssertNotNil(url);
+  AFHTTPRequestOperationManager *manager = [[AFHTTPRequestOperationManager alloc] init];
+  manager.responseSerializer = [AFJSONResponseSerializer serializer];
+  manager.requestSerializer = [AFJSONRequestSerializer serializer];
+  [manager DELETE:url parameters:data success:^(AFHTTPRequestOperation *operation, id responseObject) {
+    success(responseObject);
+  } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+    failure(error);
+  }];
+}
+
++ (AFHTTPRequestOperationManager *)defaultManager {
+  NSString *deviceID = [[NSUserDefaults standardUserDefaults] stringForKey:kDeviceIdUserDefaultsKey];
+  AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+  AFHTTPRequestSerializer *requestSerializer = [AFJSONRequestSerializer serializer];
+  [requestSerializer setValue:deviceID forHTTPHeaderField:@"device_id"];
+  manager.requestSerializer = requestSerializer;
+  manager.responseSerializer = [AFJSONResponseSerializer serializer];
+  return manager;
 }
 
 @end
