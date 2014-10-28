@@ -36,12 +36,13 @@ static NSString * const kNewsObserverActionSheetText = @"Observer";
   self.tableView.separatorColor = [UIColor clearColor];
   self.title = @"News";
   self.sourceBarButton = [[UIBarButtonItem alloc] initWithTitle:kNewsDailyActionSheetText
-                                                                   style:UIBarButtonItemStylePlain
-                                                                  target:self
-                                                                  action:@selector(displaySources)];
+                                                          style:UIBarButtonItemStylePlain
+                                                         target:self
+                                                         action:@selector(displaySources)];
   [self.navigationItem setRightBarButtonItem:self.sourceBarButton];
   [self.tableView reloadData];
   [self loadData];
+  [self updateFetchRequestForSource:kNewsDailyActionSheetText];
 }
 
 - (BOOL)shouldAutorotate {

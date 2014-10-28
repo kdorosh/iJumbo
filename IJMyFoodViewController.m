@@ -41,7 +41,9 @@
   [IJFoodItem fetchSubscribedFoodWithSuccessBlock:^(NSArray *foodItems) {
     NSArray *ids = [foodItems valueForKey:@"id"];
     [IJFoodItem writeSubscribedFoodsToDisk:ids];
-    weakSelf.subscribedFoods = foodItems;
+    NSSortDescriptor *sort = [NSSortDescriptor sortDescriptorWithKey:@"name" ascending:YES];
+    weakSelf.subscribedFoods = [foodItems sortedArrayUsingDescriptors:@[sort]];
+    [weakSelf.tableView mainThreadReload];
   } failureBlock:^(NSError *error) {
     NSLog(@"fetch my food error: %@", error);
   }];
