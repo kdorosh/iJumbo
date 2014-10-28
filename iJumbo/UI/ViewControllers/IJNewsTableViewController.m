@@ -28,7 +28,8 @@ static NSString * const kNewsObserverActionSheetText = @"Observer";
   self.edgesForExtendedLayout = UIRectEdgeNone;
   [self addTableViewWithDelegate:self];
   self.refreshControl = [[UIRefreshControl alloc] init];
-  [self.refreshControl addTarget:self action:@selector(loadData)
+  [self.refreshControl addTarget:self
+                          action:@selector(loadData)
                 forControlEvents:UIControlEventValueChanged];
   [self.tableView addSubview:self.refreshControl];
 

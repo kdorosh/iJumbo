@@ -84,6 +84,7 @@ static const int padding = 20;
   
   // Setup if this data should be able interactive.
   if (action) {
+    detailsButton.userInteractionEnabled = YES;
     [detailsButton addTarget:self action:action forControlEvents:UIControlEventTouchUpInside];
   } else {
     detailsButton.userInteractionEnabled = NO;

@@ -115,7 +115,7 @@ static NSDateFormatter *kEventsTableDateFormatter;
   // Previous Arrow Image.
   UIImageView *previousButtonImage = [[UIImageView alloc] initWithFrame:CGRectMake(arrowPadding, arrow_y, arrowWidth, arrowHeight)];
   [previousButtonImage setImage:[UIImage imageNamed:@"arrow_left.png"]];
-  UIButton *previousDateButton = [[UIButton alloc] initWithFrame:CGRectMake(arrowPadding, arrow_y, self.view.width/4.0f, arrowHeight)];
+  UIButton *previousDateButton = [[UIButton alloc] initWithFrame:CGRectMake(0, arrow_y, self.view.width/4.0f, arrowHeight)];
   [dateNavigationBar addSubview:previousButtonImage];
   [dateNavigationBar addSubview:previousDateButton];
   
