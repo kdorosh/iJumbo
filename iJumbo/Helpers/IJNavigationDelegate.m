@@ -9,6 +9,7 @@
 #import "IJNavigationDelegate.h"
 
 #import "IJHomeViewController.h"
+#import "IJAllFoodViewController.h"
 
 @implementation IJNavigationDelegate
 
@@ -37,7 +38,10 @@
   UIView *container = [transitionContext containerView];
   UIView *toView = toVC.view;
   CGSize toSize = toView.frame.size;
-  toView.frame = CGRectMake(container.maxX, toView.frame.origin.y, toSize.width, toSize.height);
+  CGFloat originalY = toView.frame.origin.y;
+  CGFloat x = ([toVC class] == [IJAllFoodViewController class]) ? 0 : container.maxX;
+  CGFloat y = ([toVC class] == [IJAllFoodViewController class]) ? container.maxY : toView.frame.origin.y;
+  toView.frame = CGRectMake(x, y, toSize.width, toSize.height);
   BOOL fromHome = [fromVC isKindOfClass:[IJHomeViewController class]];
   if (fromHome) {
     whiteView.alpha = 1;
@@ -46,7 +50,7 @@
   CGPoint newFromCenter = CGPointMake(fromVC.view.center.x - fromVC.view.frame.size.width / 4.0f, fromVC.view.center.y);
   [container addSubview:toView];
   [UIView animateWithDuration:[self transitionDuration:transitionContext] animations:^{
-    toView.frame = CGRectMake(0, toView.frame.origin.y, toSize.width, toSize.height);
+    toView.frame = CGRectMake(0, originalY, toSize.width, toSize.height);
     fromVC.view.center = newFromCenter;
     fromVC.view.alpha = 0;
     if (fromHome) {
@@ -78,7 +82,9 @@
   [container insertSubview:toVC.view belowSubview:fromVC.view];
   CGSize fromSize = fromVC.view.frame.size;
   BOOL toHome = [toVC isKindOfClass:[IJHomeViewController class]];
-  CGRect poppedFrame = CGRectMake(container.maxX, fromVC.view.frame.origin.y, fromSize.width, fromSize.height);
+  CGFloat x = ([fromVC class] == [IJAllFoodViewController class]) ? 0 : container.maxX;
+  CGFloat y = ([fromVC class] == [IJAllFoodViewController class]) ? container.maxY : fromVC.view.frame.origin.y;
+  CGRect poppedFrame = CGRectMake(x, y, fromSize.width, fromSize.height);
   [UIView animateWithDuration:[self transitionDuration:transitionContext] animations:^{
     fromVC.view.frame = poppedFrame;
     toVC.view.alpha = 1;
@@ -92,6 +98,10 @@
 }
 
 - (NSTimeInterval)transitionDuration:(id<UIViewControllerContextTransitioning>)transitionContext {
+  UIViewController *fromVC = [transitionContext viewControllerForKey:UITransitionContextFromViewControllerKey];
+  if ([fromVC class] == [IJAllFoodViewController class])  {
+    return 0.35;
+  }
   return 0.2;
 }
 

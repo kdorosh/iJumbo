@@ -32,4 +32,9 @@ static NSString * const kBaseURL = @"http://ijumboapp.com/v2/api";
            success:(void (^)(id object))success
            failure:(void (^)(NSError *error))failure;
 
++ (void)putData:(NSDictionary *)data
+          toURL:(NSString *)url
+        success:(void (^)(id object))success
+        failure:(void (^)(NSError *error))failure;
+
 @end

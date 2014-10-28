@@ -16,6 +16,7 @@ static const int kFoodItemPadding = 16;
 @interface IJFoodItemViewController ()
 @property(nonatomic) IJFoodItem *foodItem;
 @property(nonatomic) UIScrollView *scrollView;
+@property(nonatomic) UIBarButtonItem *alertButton;
 @end
 
 @implementation IJFoodItemViewController
@@ -35,24 +36,18 @@ static const int kFoodItemPadding = 16;
   self.scrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 0, self.view.width, self.view.height)];
   [self.view addSubview:self.scrollView];
   [self addLabelsForFoodItem];
-  NSString *alertString;
   NSSet *subscribedFoods = [NSSet setWithArray:[IJFoodItem subscribedFood]];
-  if ([subscribedFoods member:self.foodItem]) {
-    alertString = @"Unsubscribe";
-  } else {
-    alertString = @"Subscribe";
-  }
-  UIBarButtonItem *alertButton =
-      [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"Bell.png"]
-                                       style:UIBarButtonItemStylePlain
-                                      target:self
-                                      action:@selector(toggleAlert)];
-  self.navigationItem.rightBarButtonItem = alertButton;
+  NSString *alertString = ([subscribedFoods member:self.foodItem]) ? @"Cancel" : @"Alert";
+  self.alertButton = [[UIBarButtonItem alloc] initWithTitle:alertString
+                                                      style:UIBarButtonItemStylePlain
+                                                     target:self
+                                                     action:@selector(toggleAlert)];
+  self.navigationItem.rightBarButtonItem = self.alertButton;
 }
 
 - (void)toggleAlert {
-  NSSet *subscribedFoods = [NSSet setWithArray:[IJFoodItem subscribedFood]];
-  if ([subscribedFoods member:self.foodItem]) {
+  NSSet *subscribedFoods = [NSSet setWithArray:[IJFoodItem subscribedFoodIds]];
+  if ([subscribedFoods member:self.foodItem.id]) {
     [IJFoodItem unsubscribeFromFoodItem:self.foodItem];
   } else {
     [IJFoodItem subscribeToFoodItem:self.foodItem];
@@ -124,4 +119,5 @@ static const int kFoodItemPadding = 16;
   [self.scrollView addSubview:boundingBox];
   return boundingBox.maxY;
 }
+
 @end

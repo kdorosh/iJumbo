@@ -41,6 +41,7 @@
   self.tableView.delegate = delegate;
   self.tableView.dataSource = delegate;
   [self.view addSubview:self.tableView];
+  [self.tableView mainThreadReload];
 }
 
 @end

@@ -8,25 +8,28 @@
 
 #import "IJMyFoodViewController.h"
 
+#import "IJAllFoodViewController.h"
 #import "IJFoodItem.h"
 #import "IJFoodItemTableViewCell.h"
 
 @interface IJMyFoodViewController ()
 @property(nonatomic) NSArray *subscribedFoods;
+@property(nonatomic) UIRefreshControl *refreshControl;
 @end
 
 @implementation IJMyFoodViewController
 
 - (void)viewDidLoad {
   [super viewDidLoad];
+  self.title = @"My Food";
   self.view.backgroundColor = [UIColor clearColor];
   [self addTableViewWithDelegate:self];
   self.tableView.backgroundColor = [UIColor clearColor];
-  UIRefreshControl *refreshControl = [[UIRefreshControl alloc] init];
-  [refreshControl addTarget:self
-                     action:@selector(loadData)
-           forControlEvents:UIControlEventValueChanged];
-  [self.tableView addSubview:refreshControl];
+  self.refreshControl = [[UIRefreshControl alloc] init];
+  [self.refreshControl addTarget:self
+                          action:@selector(loadData)
+                forControlEvents:UIControlEventValueChanged];
+  [self.tableView addSubview:self.refreshControl];
   self.subscribedFoods = [IJFoodItem subscribedFood];
   UIBarButtonItem *addBarButtonItem =
       [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd
@@ -34,6 +37,7 @@
                                                     action:@selector(showAllFoodItemsList)];
   self.navigationItem.rightBarButtonItem = addBarButtonItem;
   __weak IJMyFoodViewController *weakSelf = self;
+  [self getSubscriptionNotifications];
   [IJFoodItem fetchSubscribedFoodWithSuccessBlock:^(NSArray *foodItems) {
     NSArray *ids = [foodItems valueForKey:@"id"];
     [IJFoodItem writeSubscribedFoodsToDisk:ids];
@@ -43,9 +47,29 @@
   }];
 }
 
+- (void)getSubscriptionNotifications {
+  [[NSNotificationCenter defaultCenter] addObserver:self
+                                           selector:@selector(updateSubscribedFood)
+                                               name:kSubscribedToFoodItemNotification
+                                             object:nil];
+  [[NSNotificationCenter defaultCenter] addObserver:self
+                                           selector:@selector(updateSubscribedFood)
+                                               name:kUnsubscribedToFoodItemNotification
+                                             object:nil];
+}
+
+- (void)updateSubscribedFood {
+  self.subscribedFoods = [IJFoodItem subscribedFood];
+  [self.tableView mainThreadReload];
+}
+
 - (void)loadData {
+  if (![self.refreshControl isRefreshing]) {
+    [self.refreshControl beginRefreshing];
+  }
   __weak IJMyFoodViewController *weakSelf = self;
   [IJFoodItem fetchSubscribedFoodWithSuccessBlock:^(NSArray *foodItems) {
+    [self.refreshControl endRefreshing];
     weakSelf.subscribedFoods = foodItems;
     NSArray *ids = [foodItems valueForKey:@"id"];
     [IJFoodItem writeSubscribedFoodsToDisk:ids];
@@ -65,6 +89,11 @@
   return cell;
 }
 
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+  IJFoodItem *foodItem = self.subscribedFoods[indexPath.row];
+  [IJFoodItem unsubscribeFromFoodItem:foodItem];
+}
+
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
   return 1;
 }
@@ -74,9 +103,9 @@
 }
 
 - (void)showAllFoodItemsList {
-  UIViewController *vc = [[UIViewController alloc] init];
-  vc.title = @"All Food";
-  [self.navigationController pushViewController:vc animated:YES];
+  IJAllFoodViewController *allFoodVC = [[IJAllFoodViewController alloc] init];
+  allFoodVC.title = @"Food";
+  [self.navigationController pushViewController:allFoodVC animated:YES];
 }
 
 @end

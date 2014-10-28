@@ -46,13 +46,19 @@ typedef NS_ENUM(NSInteger, IJMenuActionSheet) {
   self.edgesForExtendedLayout = UIRectEdgeNone;
   [self setupUI];
   [self loadMenus];
-
+  [self subscribeToNotifications];
   [self.tableView mainThreadReload];
 }
 
-- (void)viewDidAppear:(BOOL)animated {
-  [super viewDidAppear:animated];
-  
+- (void)subscribeToNotifications {
+  [[NSNotificationCenter defaultCenter] addObserver:self.tableView
+                                           selector:@selector(mainThreadReload)
+                                               name:kSubscribedToFoodItemNotification
+                                             object:nil];
+  [[NSNotificationCenter defaultCenter] addObserver:self.tableView
+                                           selector:@selector(mainThreadReload)
+                                               name:kUnsubscribedToFoodItemNotification
+                                             object:nil];
 }
 
 - (BOOL)shouldAutorotate {

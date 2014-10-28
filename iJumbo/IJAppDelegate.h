@@ -16,6 +16,9 @@
 @property (readonly, strong, nonatomic) NSManagedObjectModel *managedObjectModel;
 @property (readonly, strong, nonatomic) NSPersistentStoreCoordinator *persistentStoreCoordinator;
 
++ (void)updateDeviceWithNotificationToken:(NSData *)deviceToken callBack:(void (^)(BOOL))success;
+
 - (void)saveContext;
 - (NSURL *)applicationDocumentsDirectory;
+
 @end

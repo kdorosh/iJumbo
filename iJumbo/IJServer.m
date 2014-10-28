@@ -96,10 +96,21 @@ static NSDate *lastAlertTime;
            success:(void (^)(id object))success
            failure:(void (^)(NSError *error))failure {
   IJAssertNotNil(url);
-  AFHTTPRequestOperationManager *manager = [[AFHTTPRequestOperationManager alloc] init];
-  manager.responseSerializer = [AFJSONResponseSerializer serializer];
-  manager.requestSerializer = [AFJSONRequestSerializer serializer];
+  AFHTTPRequestOperationManager *manager = [self defaultManager];
   [manager DELETE:url parameters:data success:^(AFHTTPRequestOperation *operation, id responseObject) {
+    success(responseObject);
+  } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+    failure(error);
+  }];
+}
+
++ (void)putData:(NSDictionary *)data
+          toURL:(NSString *)url
+        success:(void (^)(id object))success
+        failure:(void (^)(NSError *error))failure {
+  IJAssertNotNil(url);
+  AFHTTPRequestOperationManager *manager = [self defaultManager];
+  [manager PUT:url parameters:data success:^(AFHTTPRequestOperation *operation, id responseObject) {
     success(responseObject);
   } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
     failure(error);

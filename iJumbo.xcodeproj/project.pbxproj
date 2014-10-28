@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		51717AB18D3441268926AA6D /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0027185B941C4F758572F481 /* libPods.a */; };
 		C818148619F635C0005218D8 /* UIAlertView+Blocks.m in Sources */ = {isa = PBXBuildFile; fileRef = C818148519F635C0005218D8 /* UIAlertView+Blocks.m */; };
+		C82937C619FDE344007227F4 /* IJAllFoodViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C82937C519FDE344007227F4 /* IJAllFoodViewController.m */; };
 		C841812419A58CAE007EB13E /* IJCacheManager.m in Sources */ = {isa = PBXBuildFile; fileRef = C841812319A58CAE007EB13E /* IJCacheManager.m */; };
 		C8487ACE19A06F10008F034E /* IJEventTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = C8487ACD19A06F10008F034E /* IJEventTableViewCell.m */; };
 		C8487AD119A07399008F034E /* IJRecord.m in Sources */ = {isa = PBXBuildFile; fileRef = C8487AD019A07399008F034E /* IJRecord.m */; };
@@ -117,9 +118,12 @@
 
 /* Begin PBXFileReference section */
 		0027185B941C4F758572F481 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
-		433B59560D494C359551A7CC /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = "<group>"; };
+		3CC4D3B4D8512561A29FED22 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
+		A70662554892F8A4A191DAFB /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 		C818148419F635C0005218D8 /* UIAlertView+Blocks.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIAlertView+Blocks.h"; sourceTree = "<group>"; };
 		C818148519F635C0005218D8 /* UIAlertView+Blocks.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIAlertView+Blocks.m"; sourceTree = "<group>"; };
+		C82937C419FDE344007227F4 /* IJAllFoodViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = IJAllFoodViewController.h; path = iJumbo/UI/ViewControllers/IJAllFoodViewController.h; sourceTree = "<group>"; };
+		C82937C519FDE344007227F4 /* IJAllFoodViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = IJAllFoodViewController.m; path = iJumbo/UI/ViewControllers/IJAllFoodViewController.m; sourceTree = "<group>"; };
 		C841812219A58CAE007EB13E /* IJCacheManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = IJCacheManager.h; path = Helpers/IJCacheManager.h; sourceTree = "<group>"; };
 		C841812319A58CAE007EB13E /* IJCacheManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = IJCacheManager.m; path = Helpers/IJCacheManager.m; sourceTree = "<group>"; };
 		C8487ACC19A06F10008F034E /* IJEventTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = IJEventTableViewCell.h; path = iJumbo/UI/TableViewCells/IJEventTableViewCell.h; sourceTree = "<group>"; };
@@ -272,6 +276,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		69178F37651EF4658DF8AE36 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				A70662554892F8A4A191DAFB /* Pods.debug.xcconfig */,
+				3CC4D3B4D8512561A29FED22 /* Pods.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 		C8139C3919F965C900D89076 /* Views */ = {
 			isa = PBXGroup;
 			children = (
@@ -303,7 +316,7 @@
 				C87E7CE2198C566500366DF7 /* iJumboTests */,
 				C87E7CBC198C566500366DF7 /* Frameworks */,
 				C87E7CBB198C566500366DF7 /* Products */,
-				433B59560D494C359551A7CC /* Pods.xcconfig */,
+				69178F37651EF4658DF8AE36 /* Pods */,
 			);
 			sourceTree = "<group>";
 		};
@@ -515,6 +528,8 @@
 		C8F00785199DDB67006B7DC4 /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
+				C82937C419FDE344007227F4 /* IJAllFoodViewController.h */,
+				C82937C519FDE344007227F4 /* IJAllFoodViewController.m */,
 				C8FB4FD219A46F3100AC043F /* IJEventViewController.h */,
 				C8FB4FD319A46F3100AC043F /* IJEventViewController.m */,
 				C8D67FB4199EC6F8001C4FD2 /* IJEventTableViewController.h */,
@@ -705,7 +720,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Pods-resources.sh\"\n";
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods/Pods-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -759,6 +774,7 @@
 				C852A6AF19A18CF30048B1C3 /* IJLink.m in Sources */,
 				C8D67FB9199EE342001C4FD2 /* IJNewsTableViewController.m in Sources */,
 				C8F0076B199DD47A006B7DC4 /* IJServer.m in Sources */,
+				C82937C619FDE344007227F4 /* IJAllFoodViewController.m in Sources */,
 				C8FADA6619BE91920000E2A8 /* IJFoodItem.m in Sources */,
 				C8FB4FD419A46F3100AC043F /* IJEventViewController.m in Sources */,
 				C8487AD119A07399008F034E /* IJRecord.m in Sources */,
@@ -876,7 +892,7 @@
 		};
 		C87E7CED198C566600366DF7 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 433B59560D494C359551A7CC /* Pods.xcconfig */;
+			baseConfigurationReference = A70662554892F8A4A191DAFB /* Pods.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = "LaunchImage-1";
@@ -901,7 +917,7 @@
 		};
 		C87E7CEE198C566600366DF7 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 433B59560D494C359551A7CC /* Pods.xcconfig */;
+			baseConfigurationReference = 3CC4D3B4D8512561A29FED22 /* Pods.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = "LaunchImage-1";

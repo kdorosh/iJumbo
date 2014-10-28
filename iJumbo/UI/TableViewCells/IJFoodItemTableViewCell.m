@@ -10,8 +10,10 @@
 
 #import "IJFoodItem.h"
 
+static NSSet *subscribedFood;
+static const CGFloat fontSize = 17;
+
 @interface IJFoodItemTableViewCell ()
-@property(nonatomic) UILabel *nameLabel;
 @end
 
 @implementation IJFoodItemTableViewCell
@@ -22,14 +24,30 @@
     self.selectionStyle = UITableViewCellSelectionStyleNone;
     const CGFloat padding = 20;
     _nameLabel = [[UILabel alloc] initWithFrame:CGRectMake(padding, 0, self.width - padding, self.height)];
-    _nameLabel.font = [UIFont lightFontWithSize:17];
+    _nameLabel.font = [UIFont lightFontWithSize:fontSize];
     [self addSubview:_nameLabel];
   }
   return self;
 }
 
 - (void)addDataFromFoodItem:(IJFoodItem *)foodItem {
+  if (!subscribedFood) {
+    subscribedFood = [NSSet setWithArray:[IJFoodItem subscribedFood]];
+    [[NSNotificationCenter defaultCenter] addObserver:[self class]
+                                             selector:@selector(updateSubscribedFood)
+                                                 name:kSubscribedToFoodItemNotification
+                                               object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:[self class]
+                                             selector:@selector(updateSubscribedFood)
+                                                 name:kUnsubscribedToFoodItemNotification
+                                               object:nil];
+  }
   self.nameLabel.text = foodItem.name;
+  self.nameLabel.font = ([subscribedFood member:foodItem]) ? [UIFont regularFontWithSize:fontSize] : [UIFont lightFontWithSize:fontSize];
+}
+
++ (void)updateSubscribedFood {
+  subscribedFood = [NSSet setWithArray:[IJFoodItem subscribedFood]];
 }
 
 @end

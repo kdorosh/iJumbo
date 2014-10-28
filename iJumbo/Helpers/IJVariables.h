@@ -17,6 +17,7 @@
 
 #define kFirstRunUserDefaultsKey @"FirstRunVersion_1_UserDefaultsKey"
 #define kDeviceIdUserDefaultsKey @"DeviceIdUserDefaultsKey"
-#define kDeviceIdDataUserDefaultsKey @"DeviceNSDataDefaultsKey"  // The key that stores the actualy NSData given by the delegate function.
+#define kDeviceNotificationIdDataUserDefaultsKey @"DeviceNotificationIdNSDataDefaultsKey"  // The key that stores the actualy NSData given by the delegate function.
+#define kDeviceHasRegisteredForNotificationsKey @"kDeviceHasRegisteredForNotificationsKey"  // The server has the apns device id.
 
 #endif

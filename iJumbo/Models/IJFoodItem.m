@@ -8,10 +8,14 @@
 
 #import "IJFoodItem.h"
 
+#import "IJAppDelegate.h"
+#import "IJBottomNotificationView.h"
 #import "IJServer.h"
+#import "RKDropdownAlert.h"
 #import "UIAlertView+Blocks.h"
 
 static NSString * const kAllowNotificationsAlertButtonTitle = @"Yes!";
+static const NSTimeInterval kDropdownAlertShowDuration = 2.75;
 
 @implementation IJFoodItem
 
@@ -34,11 +38,8 @@ static NSString * const kAllowNotificationsAlertButtonTitle = @"Yes!";
 @dynamic menuSections;
 
 + (void)subscribeToFoodItem:(IJFoodItem *)foodItem {
-  NSString *url =
-      [kBaseURL stringByAppendingPathComponent:[NSString stringWithFormat:@"food/%@/subscribe", foodItem.id]];
-  NSString *deviceID = [[NSUserDefaults standardUserDefaults] stringForKey:kDeviceIdUserDefaultsKey];
+  NSData *deviceID = [[NSUserDefaults standardUserDefaults] dataForKey:kDeviceNotificationIdDataUserDefaultsKey];
   if (!deviceID) {
-    NSLog(@"Ask user to allow notifications.");
     // Ask for permission to send notifications.
     [UIAlertView showWithTitle:@"Want Food Alerts?"
                        message:@"Can we have permission to send you notifications?"
@@ -50,31 +51,72 @@ static NSString * const kAllowNotificationsAlertButtonTitle = @"Yes!";
                           UIUserNotificationSettings *pushSettings = [UIUserNotificationSettings settingsForTypes:UIUserNotificationTypeAlert categories:nil];
                           [[UIApplication sharedApplication] registerUserNotificationSettings:pushSettings];
                           [[UIApplication sharedApplication] registerForRemoteNotifications];
+                          [IJFoodItem subscribeServerToFoodItem:foodItem];
                         }
                       }];
   } else {
-    [IJServer postData:@{@"device_id": deviceID} toURL:url success:^(id object) {
-      dispatch_async(dispatch_get_main_queue(), ^{
-        [IJFoodItem addFoodItemToSubscribed:foodItem];
-      });
-    } failure:^(NSError *error) {
-      NSLog(@"Could not subscribe to food %@", foodItem);
-    }];
+    [self subscribeServerToFoodItem:foodItem];
   }
+}
+
++ (void)subscribeServerToFoodItem:(IJFoodItem *)foodItem  {
+  NSString *url =
+      [kBaseURL stringByAppendingPathComponent:[NSString stringWithFormat:@"food/%@/subscribe", foodItem.id]];
+  [IJServer postData:nil toURL:url success:^(id object) {
+    dispatch_async(dispatch_get_main_queue(), ^{
+      [IJFoodItem addFoodItemToSubscribed:foodItem];
+      [[NSNotificationCenter defaultCenter] postNotificationName:kSubscribedToFoodItemNotification object:nil];
+      [RKDropdownAlert title:[NSString stringWithFormat:@"Subscribed to %@!", foodItem.name]
+                     message:nil
+             backgroundColor:kIJumboBlue
+                   textColor:[UIColor whiteColor]
+                        time:kDropdownAlertShowDuration];
+    });
+  } failure:^(NSError *error) {
+    [RKDropdownAlert title:@"Could not subscribe :("
+                   message:@"Try again later"
+           backgroundColor:kIJumboBlue
+                 textColor:[UIColor whiteColor]
+                      time:kDropdownAlertShowDuration];
+    NSLog(@"Could not subscribe to food %@", foodItem);
+  }];
 }
 
 // Make this and the above function use another helper function to stop code duplication.
 + (void)unsubscribeFromFoodItem:(IJFoodItem *)foodItem {
+  [UIAlertView showWithTitle:[NSString stringWithFormat:@"Unsubscribe from %@", foodItem.name]
+                     message:nil
+           cancelButtonTitle:@"Nope"
+           otherButtonTitles:@[kAllowNotificationsAlertButtonTitle]
+                    tapBlock:^(UIAlertView *alertView, NSInteger buttonIndex) {
+                      if ([[alertView buttonTitleAtIndex:buttonIndex] isEqualToString:kAllowNotificationsAlertButtonTitle]) {
+                        [self unsubscribeServerFromFoodItem:foodItem];
+                      }
+                    }];
+}
+
++ (void)unsubscribeServerFromFoodItem:(IJFoodItem *)foodItem {
   NSString *url =
-  [kBaseURL stringByAppendingPathComponent:[NSString stringWithFormat:@"food/%@/subscribe", foodItem.id]];
-  NSString *deviceID = [[NSUserDefaults standardUserDefaults] stringForKey:kDeviceIdUserDefaultsKey];
-  [IJServer deleteData:@{@"device_id": deviceID} toURL:url success:^(id object) {
+      [kBaseURL stringByAppendingPathComponent:[NSString stringWithFormat:@"food/%@/subscribe", foodItem.id]];
+  [IJServer deleteData:nil toURL:url success:^(id object) {
     dispatch_async(dispatch_get_main_queue(), ^{
       [IJFoodItem removeFoodItemFromSubscribed:foodItem];
+      [[NSNotificationCenter defaultCenter] postNotificationName:kUnsubscribedToFoodItemNotification object:nil];
+      [RKDropdownAlert title:[NSString stringWithFormat:@"Unsubscribed from %@", foodItem.name]
+                     message:nil
+             backgroundColor:kIJumboBlue
+                   textColor:[UIColor whiteColor]
+                        time:kDropdownAlertShowDuration];
     });
   } failure:^(NSError *error) {
     NSLog(@"Could not unsubscribe to food %@", foodItem);
+    [RKDropdownAlert title:@"Could not unsubscribe"
+                   message:@"Try again later"
+           backgroundColor:kIJumboBlue
+                 textColor:[UIColor whiteColor]
+                      time:kDropdownAlertShowDuration];
   }];
+
 }
 
 // If this device is subscribed to this given food item.

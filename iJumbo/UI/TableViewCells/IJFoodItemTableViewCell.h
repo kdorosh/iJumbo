@@ -14,6 +14,8 @@ static const int kFoodItemTableViewCellHeight = 40;
 
 @interface IJFoodItemTableViewCell : UITableViewCell
 
+@property(nonatomic) UILabel *nameLabel;
+
 - (void)addDataFromFoodItem:(IJFoodItem *)foodItem;
 
 @end

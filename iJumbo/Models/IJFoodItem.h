@@ -8,6 +8,9 @@
 
 #import "IJRecord.h"
 
+static NSString * const kSubscribedToFoodItemNotification = @"SubscribedToFoodItemNotification";
+static NSString * const kUnsubscribedToFoodItemNotification = @"UnsubscribedToFoodItemNotification";
+
 @interface IJFoodItem : IJRecord
 
 // Attributes.
@@ -40,6 +43,8 @@
 + (BOOL)isSubscribedToFoodItem:(IJFoodItem *)foodItem;
 
 + (NSArray *)subscribedFood;
+
++ (NSArray *)subscribedFoodIds;
 
 + (void)writeSubscribedFoodsToDisk:(NSArray *)subscribedFood;
 

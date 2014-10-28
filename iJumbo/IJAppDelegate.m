@@ -44,23 +44,20 @@
     [self preloadNetworkData];
     [[NSUserDefaults standardUserDefaults] setBool:YES forKey:kFirstRunUserDefaultsKey];
   } else {
-    // Change this for later versions in case they are actually subscribed to food already.
-    [IJFoodItem fetchSubscribedFoodWithSuccessBlock:^(NSArray *foodItems) {
-      NSLog(@"%@", foodItems);
-    } failureBlock:^(NSError *error) {
-      NSLog(@"%@", error);
-    }];
+    [IJFoodItem fetchSubscribedFoodWithSuccessBlock:nil failureBlock:nil];
   }
+  [self registerDeviceWithServer];
   
   // If they began registering for notifications but did not finish start the process again.
   NSData *deviceToken =
-      [[NSUserDefaults standardUserDefaults] dataForKey:kDeviceIdDataUserDefaultsKey];
-  NSString *deviceString =
-      [[NSUserDefaults standardUserDefaults] stringForKey:kDeviceIdUserDefaultsKey];
-  if (deviceToken && !deviceString) {  // Have the data but have not exchanged with the server yet.
-    [self postDeviceIDForServerID:deviceToken];
+      [[NSUserDefaults standardUserDefaults] dataForKey:kDeviceNotificationIdDataUserDefaultsKey];
+  BOOL hasRegisteredForNotifications =
+      [[NSUserDefaults standardUserDefaults] boolForKey:kDeviceHasRegisteredForNotificationsKey];
+  // Have the notification data but have not exchanged with the server yet.
+  if (deviceToken && !hasRegisteredForNotifications) {
+    [IJAppDelegate updateDeviceWithNotificationToken:deviceToken callBack:nil];
   }
-  
+
   [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
   [[UINavigationBar appearance] setShadowImage:[[UIImage alloc] init]];
   [UIApplication sharedApplication].statusBarStyle = UIStatusBarStyleLightContent;
@@ -119,6 +116,17 @@
   }
 }
 
+- (void)registerDeviceWithServer {
+  // If this device is not yet associated with a device on the server, create that association.
+  if (![[NSUserDefaults standardUserDefaults] stringForKey:kDeviceIdUserDefaultsKey]) {
+    [IJServer postData:nil toURL:[kBaseURL stringByAppendingPathComponent:@"device"] success:^(NSDictionary *device) {
+      NSString *device_id = device[@"_id"];
+      [[NSUserDefaults standardUserDefaults] setObject:device_id forKey:kDeviceIdUserDefaultsKey];
+    } failure:^(NSError *error) {
+      NSLog(@"There was an error creating a new device id");
+    }];
+  }
+}
 
 - (id<UIViewControllerAnimatedTransitioning>)navigationController:(UINavigationController *)navigationController
                                   animationControllerForOperation:(UINavigationControllerOperation)operation
@@ -180,6 +188,7 @@
     if ([managedObjectContext hasChanges] && ![managedObjectContext save:&error]) {
       // Replace this implementation with code to handle the error appropriately.
       // abort() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
+      // TODO(amadou): Remove this for production.
       NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
       abort();
     }
@@ -189,27 +198,29 @@
 #pragma mark - Push Notifications
 
 - (void)application:(UIApplication*)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken {
-  [[NSUserDefaults standardUserDefaults] setValue:deviceToken forKey:kDeviceIdDataUserDefaultsKey];
-  [self postDeviceIDForServerID:deviceToken];
+  [[NSUserDefaults standardUserDefaults] setValue:deviceToken forKey:kDeviceNotificationIdDataUserDefaultsKey];
+  [IJAppDelegate updateDeviceWithNotificationToken:deviceToken callBack:nil];
 }
 
 - (void)application:(UIApplication*)application didFailToRegisterForRemoteNotificationsWithError:(NSError *)error {
   NSLog(@"Failed to register remote notifications: %@", error);
 }
 
-// Sends the device id used for push notifications for the server and gets back another id used to
-// represent the device on the server. When subscribing to notifications use that token the server gives.
-- (void)postDeviceIDForServerID:(NSData *)deviceToken {
+// Sends the device id used for push notifications to the server. Updates the object that should
+// already be associated with this device.
++ (void)updateDeviceWithNotificationToken:(NSData *)deviceToken callBack:(void (^)(BOOL))success {
   IJAssertNotNil(deviceToken);
   NSString *deviceString = [[deviceToken description] stringByTrimmingCharactersInSet:[NSCharacterSet characterSetWithCharactersInString:@"<>"]];
   deviceString = [deviceString stringByReplacingOccurrencesOfString:@" " withString:@""];
   NSString *url = [kBaseURL stringByAppendingPathComponent:@"/device"];
-  [IJServer postData:@{@"device_id": deviceString} toURL:url success:^(NSDictionary *device) {
-    NSString *serverDeviceID = device[@"_id"];
-    // Save the id given by mongo on the db to pass when we subscribe/unsubscribe from alerts.
-    [[NSUserDefaults standardUserDefaults] setValue:serverDeviceID forKey:kDeviceIdUserDefaultsKey];
+  [IJServer putData:@{@"device_id": deviceString} toURL:url success:^(NSDictionary *device) {
+    [[NSUserDefaults standardUserDefaults] setBool:YES forKey:kDeviceHasRegisteredForNotificationsKey];
+    if (success)
+      success(YES);
   } failure:^(NSError *error) {
     NSLog(@"There was an error");
+    if (success)
+      success(NO);
   }];
 }
 
