@@ -13,6 +13,8 @@
 #import "IJServer.h"
 #import "IJRecord.h"
 
+#import "UIActionSheet+Blocks.h"
+
 static const int kTimeLowerBound = 2 * 60;
 
 typedef NS_ENUM(NSInteger, IJTransportationSection) {
@@ -26,6 +28,7 @@ typedef NS_ENUM(NSInteger, IJTransportationSection) {
 @property(nonatomic) NSMutableDictionary *mbtaTimes;
 @property(nonatomic) UIRefreshControl *refreshControl;
 @property(nonatomic) NSArray *joeySchedule;
+@property(nonatomic) NSInteger weekday;
 @end
 
 @implementation IJTransportationCollectionViewController
@@ -33,6 +36,7 @@ typedef NS_ENUM(NSInteger, IJTransportationSection) {
 - (void)viewDidLoad {
   [super viewDidLoad];
   self.title = @"Transportation";
+  self.weekday = [IJTransportationCollectionViewController weekdayForDate:[NSDate date]];
   self.mbtaTimes = [NSMutableDictionary dictionaryWithCapacity:2];
   self.joeySchedule =
       [NSArray arrayWithContentsOfFile:[IJTransportationCollectionViewController joeyScheduleFile]];
@@ -196,9 +200,7 @@ typedef NS_ENUM(NSInteger, IJTransportationSection) {
     return 3;
   } else if (section == IJTransportationSectionJoeySchedule) {
     // The big cell that has the schedule.
-    NSInteger weekday =
-        [IJTransportationCollectionViewController weekdayForScheduleOnDate:[NSDate date]];
-    NSArray *times = self.joeySchedule[weekday][@"Olin Center"];
+    NSArray *times = self.joeySchedule[self.weekday][@"Olin Center"];
     if (times) {
       return  3 * [times count] + 1;
     }
@@ -245,10 +247,7 @@ typedef NS_ENUM(NSInteger, IJTransportationSection) {
       cell.timeLabel.font = [UIFont lightFontWithSize:13];
     }
     
-    
-    
-    NSInteger weekday = [IJTransportationCollectionViewController weekdayForDate:[NSDate date]];
-    NSArray *times = self.joeySchedule[weekday][location];
+    NSArray *times = self.joeySchedule[self.weekday][location];
     int index = ((int)indexPath.row - 1) / 3;
     if (index < [times count]) {
       NSNumber *time = times[index];
@@ -391,8 +390,18 @@ typedef NS_ENUM(NSInteger, IJTransportationSection) {
     if (indexPath.section == IJTransportationSectionJoeySchedule) {
       backgroundColor = [UIColor colorWithWhite:1 alpha:0.65];
       headerLabel.textAlignment = NSTextAlignmentCenter;
-      headerLabel.font = [UIFont regularFontWithSize:12];
+      headerLabel.font = [UIFont regularFontWithSize:13];
       headerLabel.numberOfLines = 2;
+      const CGFloat buttonWidth = 100;
+      UIButton *dateButton = [[UIButton alloc] initWithFrame:CGRectMake(header.width -  buttonWidth, 0, buttonWidth, header.height)];
+      [dateButton setTag:4];
+      [dateButton setTitle:[NSString stringWithFormat:@"Day (%@)", [IJTransportationCollectionViewController textForWeekday:self.weekday]]
+                  forState:UIControlStateNormal];
+      [dateButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+      dateButton.titleLabel.font = [UIFont lightFontWithSize:13];
+      dateButton.backgroundColor = [UIColor clearColor];
+      [dateButton addTarget:self action:@selector(showActionSheetForWeekdays) forControlEvents:UIControlEventTouchUpInside];
+      [header addSubview:dateButton];
     } else {
       backgroundColor = [UIColor colorWithRed:26/255.0f
                                         green:191/255.0f
@@ -408,8 +417,55 @@ typedef NS_ENUM(NSInteger, IJTransportationSection) {
   } else if (indexPath.section == IJTransportationSectionJoeySchedule) {
     // Look at mocks for bar that helps select the the date for the schedule.
     headerLabel.text = @"Joey Schedule";
+    UIButton *dateButton = (UIButton *)[header viewWithTag:4];
+    [dateButton setTitle:[NSString stringWithFormat:@"Day (%@)", [IJTransportationCollectionViewController textForWeekday:self.weekday]]
+                forState:UIControlStateNormal];
   }
   return header;
+}
+
+- (void)showActionSheetForWeekdays {
+  NSArray *dateTitles = @[@"Sunday", @"Monday", @"Tuesday", @"Wednesday", @"Thursday", @"Friday", @"Saturday"];
+  [UIActionSheet showInView:self.view
+                  withTitle:@"Schedule Day"
+          cancelButtonTitle:@"Cancel"
+     destructiveButtonTitle:nil
+          otherButtonTitles:dateTitles
+                   tapBlock:^(UIActionSheet *actionSheet, NSInteger buttonIndex) {
+                     NSLog(@"%li", (long)buttonIndex);
+                     const int cancelButtonIndex = 7;
+                     if (buttonIndex < cancelButtonIndex) {
+                       self.weekday = buttonIndex;
+                       dispatch_async(dispatch_get_main_queue(), ^{
+                         [self.collectionView reloadData];
+                        });
+                     }
+                   }];
+}
+
+// This gives the abbreviated name of the weekday.
++ (NSString *)textForWeekday:(NSInteger)weekday {
+  IJAssert(weekday >= 0 && weekday < 7);
+  switch (weekday) {
+    case 0:
+      return @"Sun";
+      break;
+    case 1:
+      return @"Mon";
+    case 2:
+      return @"Tues";
+    case 3:
+      return @"Wed";
+    case 4:
+      return @"Thurs";
+    case 5:
+      return @"Fri";
+    case 6:
+      return @"Sat";
+    default:
+      break;
+  }
+  return @"";
 }
 
 //+ (UICollectionReusableView *)joeyScheduleHeader:(UICollectionView *)collectionView

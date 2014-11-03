@@ -9,8 +9,9 @@
 #import <Foundation/Foundation.h>
 #import "IJAppDelegate.h"
 
-#define IJNSNumberToString(n) [NSString stringWithFormat:@"%@", n]
-#define IJAssertNotNil(a) NSAssert(a, @"%s cannot be nil in %s. Line: %i", #a, __func__, __LINE__)
+#define IJNSNumberToString(number) [NSString stringWithFormat:@"%@", number]
+#define IJAssertNotNil(object) NSAssert(object, @"%s cannot be nil in %s. Line: %i", #object, __func__, __LINE__)
+#define IJAssert(conditional) NSAssert(conditional, @"assert in %s. Line: %i", __func__, __LINE__)
 
 @interface IJHelper : NSObject
 + (NSManagedObjectContext *)mainContext;
