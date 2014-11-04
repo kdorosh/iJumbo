@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		51717AB18D3441268926AA6D /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0027185B941C4F758572F481 /* libPods.a */; };
 		C818148619F635C0005218D8 /* UIAlertView+Blocks.m in Sources */ = {isa = PBXBuildFile; fileRef = C818148519F635C0005218D8 /* UIAlertView+Blocks.m */; };
+		C81928F11A097212007588F7 /* IJDatePicker.m in Sources */ = {isa = PBXBuildFile; fileRef = C81928F01A097212007588F7 /* IJDatePicker.m */; };
 		C82937C619FDE344007227F4 /* IJAllFoodViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C82937C519FDE344007227F4 /* IJAllFoodViewController.m */; };
 		C8334E0319FF47D0002ADB64 /* RKDropdownAlert.m in Sources */ = {isa = PBXBuildFile; fileRef = C8334E0219FF47D0002ADB64 /* RKDropdownAlert.m */; };
 		C841812419A58CAE007EB13E /* IJCacheManager.m in Sources */ = {isa = PBXBuildFile; fileRef = C841812319A58CAE007EB13E /* IJCacheManager.m */; };
@@ -123,6 +124,8 @@
 		A70662554892F8A4A191DAFB /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 		C818148419F635C0005218D8 /* UIAlertView+Blocks.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIAlertView+Blocks.h"; sourceTree = "<group>"; };
 		C818148519F635C0005218D8 /* UIAlertView+Blocks.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIAlertView+Blocks.m"; sourceTree = "<group>"; };
+		C81928EF1A097212007588F7 /* IJDatePicker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = IJDatePicker.h; path = iJumbo/UI/Views/IJDatePicker.h; sourceTree = "<group>"; };
+		C81928F01A097212007588F7 /* IJDatePicker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = IJDatePicker.m; path = iJumbo/UI/Views/IJDatePicker.m; sourceTree = "<group>"; };
 		C82937C419FDE344007227F4 /* IJAllFoodViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = IJAllFoodViewController.h; path = iJumbo/UI/ViewControllers/IJAllFoodViewController.h; sourceTree = "<group>"; };
 		C82937C519FDE344007227F4 /* IJAllFoodViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = IJAllFoodViewController.m; path = iJumbo/UI/ViewControllers/IJAllFoodViewController.m; sourceTree = "<group>"; };
 		C8334E0119FF47D0002ADB64 /* RKDropdownAlert.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RKDropdownAlert.h; sourceTree = "<group>"; };
@@ -293,6 +296,8 @@
 			children = (
 				C884074F19E6D587002545AD /* IJBottomNotificationView.h */,
 				C884075019E6D587002545AD /* IJBottomNotificationView.m */,
+				C81928EF1A097212007588F7 /* IJDatePicker.h */,
+				C81928F01A097212007588F7 /* IJDatePicker.m */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -781,6 +786,7 @@
 				C8D67FB9199EE342001C4FD2 /* IJNewsTableViewController.m in Sources */,
 				C8F0076B199DD47A006B7DC4 /* IJServer.m in Sources */,
 				C82937C619FDE344007227F4 /* IJAllFoodViewController.m in Sources */,
+				C81928F11A097212007588F7 /* IJDatePicker.m in Sources */,
 				C8FADA6619BE91920000E2A8 /* IJFoodItem.m in Sources */,
 				C8FB4FD419A46F3100AC043F /* IJEventViewController.m in Sources */,
 				C8487AD119A07399008F034E /* IJRecord.m in Sources */,

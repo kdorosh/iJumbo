@@ -8,6 +8,7 @@
 
 #import "IJMenuTableViewController.h"
 
+#import "IJDatePicker.h"
 #import "IJFoodItem.h"
 #import "IJFoodItemTableViewCell.h"
 #import "IJFoodItemViewController.h"
@@ -26,7 +27,7 @@ typedef NS_ENUM(NSInteger, IJMenuActionSheet) {
 
 @interface IJMenuTableViewController () <UIActionSheetDelegate, NSFetchedResultsControllerDelegate>
 @property(nonatomic) UIButton *todayButton;
-@property(nonatomic) UIDatePicker *datePicker;
+@property(nonatomic) IJDatePicker *datePicker;
 @property(nonatomic) UIBarButtonItem *hallBarButton;
 @property(nonatomic) NSDateFormatter *dateFormatter;
 @property(nonatomic) NSDate *date;
@@ -125,35 +126,14 @@ typedef NS_ENUM(NSInteger, IJMenuActionSheet) {
   
   // Date Picker.
   const int doneButtonHeight = 30;
-  self.datePicker = [[UIDatePicker alloc] init];
-  self.datePicker.datePickerMode = UIDatePickerModeDate;
+  self.datePicker = [[IJDatePicker alloc] initWithWidth:self.view.width];
+  self.datePicker.datePicker.datePickerMode = UIDatePickerModeDate;
   self.datePicker.frame = CGRectMake(0, doneButtonHeight, self.datePicker.width, self.datePicker.height);
   self.datePicker.backgroundColor = [UIColor whiteColor];
   self.datePicker.date = [NSDate date];
-  [self.datePicker addTarget:self
-                      action:@selector(datePickerDidChangeValue:)
-            forControlEvents:UIControlEventValueChanged];
-  UIButton *dateDoneButton =
-      [[UIButton alloc] initWithFrame:CGRectMake(10, 0, self.datePicker.width, doneButtonHeight)];
-  dateDoneButton.titleLabel.textAlignment = NSTextAlignmentRight;
-  dateDoneButton.backgroundColor = [UIColor clearColor];
-  [dateDoneButton setTitle:@"Done" forState:UIControlStateNormal];
-  [dateDoneButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-  [dateDoneButton setTitleColor:kIJumboBlue forState:UIControlStateSelected];
-  [dateDoneButton setTitleEdgeInsets:UIEdgeInsetsZero];
-  dateDoneButton.contentHorizontalAlignment = UIControlContentHorizontalAlignmentRight;
-  [dateDoneButton addTarget:self
-                     action:@selector(hideDatePicker)
-           forControlEvents:UIControlEventTouchUpInside];
-  
-  UIView *datePickerBackground = [[UIView alloc] initWithFrame:CGRectMake(0,
-                                                                          self.view.maxY,
-                                                                          self.view.width,
-                                                                          self.datePicker.height + doneButtonHeight)];
-  datePickerBackground.backgroundColor = [UIColor whiteColor];
-  [datePickerBackground addSubview:dateDoneButton];
-  [datePickerBackground addSubview:self.datePicker];
-  [self.view addSubview:datePickerBackground];
+  [self.datePicker updatesForDateChangeForTarget:self
+                                      withAction:@selector(datePickerDidChangeValue:)];
+  [self.view addSubview:self.datePicker];
   self.mealSegment.selectedSegmentIndex = [IJMenuTableViewController mealSegmentBasedOnTime];
 }
 
