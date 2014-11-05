@@ -8,6 +8,7 @@
 
 #import "IJEventTableViewController.h"
 
+#import "IJDatePicker.h"
 #import "IJEvent.h"
 #import "IJEventTableViewCell.h"
 #import "IJEventViewController.h"
@@ -22,7 +23,7 @@ static NSDateFormatter *kEventsTableDateFormatter;
 @property(nonatomic) UILabel *dateLabel;
 @property(nonatomic) NSDate *date;
 @property(nonatomic) NSFetchedResultsController *fetchedResultsController;
-@property(nonatomic) UIDatePicker *datePicker;
+@property(nonatomic) IJDatePicker *datePicker;
 @property(nonatomic) UIRefreshControl *refreshControl;
 @end
 
@@ -38,14 +39,6 @@ static NSDateFormatter *kEventsTableDateFormatter;
                                                                        target:self
                                                                       action:@selector(showCalendar:)];
   self.navigationItem.rightBarButtonItem = calendarBarButton;
-
-  self.datePicker = [[UIDatePicker alloc] init];
-  self.datePicker.frame = CGRectMake(0, self.view.height, self.view.width, self.datePicker.height);
-  self.datePicker.backgroundColor = [UIColor whiteColor];
-  self.datePicker.date = [NSDate date];
-  self.datePicker.datePickerMode = UIDatePickerModeDate;
-  [self.datePicker addTarget:self action:@selector(dateChanged:) forControlEvents:UIControlEventValueChanged];
-  [self.view addSubview:self.datePicker];
   
   self.tableView.delegate = self;
   self.tableView.dataSource = self;
@@ -60,8 +53,26 @@ static NSDateFormatter *kEventsTableDateFormatter;
                 forControlEvents:UIControlEventValueChanged];
   [self.tableView addSubview:self.refreshControl];
   
+  [self setupDatePicker];
+  
   [self.tableView reloadData];
   [self loadData];
+}
+
+- (void)setupDatePicker {
+  self.datePicker = [[IJDatePicker alloc] initWithWidth:self.view.width];
+  self.datePicker.frame = CGRectMake(0, self.view.maxY, self.view.width, self.datePicker.height);
+  self.datePicker.backgroundColor = [UIColor whiteColor];
+  self.datePicker.date = [NSDate date];
+  self.datePicker.datePickerMode = UIDatePickerModeDate;
+  [self.datePicker updatesForDateChangeForTarget:self withAction:@selector(dateChanged:)];
+  [self.datePicker.leftButton addTarget:self
+                                 action:@selector(hideCalendar:)
+                       forControlEvents:UIControlEventTouchUpInside];
+  [self.datePicker setLeftButtonTitle:@"Done"];
+  self.datePicker.rightButton.hidden = YES;
+
+  [self.view addSubview:self.datePicker];
 }
 
 - (BOOL)shouldAutorotate {

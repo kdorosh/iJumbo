@@ -8,11 +8,9 @@
 
 #import "IJDatePicker.h"
 
-static const int kIJDatePickerButtonHeight = 30;
+static const int kIJDatePickerButtonHeight = 25;
 
 @interface IJDatePicker ()
-@property(nonatomic) UIButton *leftButton;
-@property(nonatomic) UIButton *rightButton;
 @end
 
 @implementation IJDatePicker
@@ -22,14 +20,18 @@ static const int kIJDatePickerButtonHeight = 30;
   if (self) {
     self.backgroundColor = [UIColor whiteColor];
     self.datePicker = [[UIDatePicker alloc] init];
+    self.datePicker.backgroundColor = [UIColor clearColor];
+    self.datePicker.frame = CGRectMake(0, kIJDatePickerButtonHeight, width, self.datePicker.height);
     self.frame = CGRectMake(0, 0, width, self.datePicker.height + kIJDatePickerButtonHeight);
     [self addSubview:self.datePicker];
-    self.leftButton  = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, width/2.0f, self.datePicker.height)];
-    self.rightButton = [[UIButton alloc] initWithFrame:CGRectMake(width/2.0f, 0, width/2.0f, kIJDatePickerButtonHeight)];
-    [self.leftButton.titleLabel  setTextAlignment:NSTextAlignmentLeft];
-    [self.rightButton.titleLabel setTextAlignment:NSTextAlignmentRight];
-
-    UIFont *buttonFont = [UIFont regularFontWithSize:12];
+    const CGFloat buttonTitlePadding = 10;
+    _leftButton  = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, width/2.0f, kIJDatePickerButtonHeight)];
+    _rightButton = [[UIButton alloc] initWithFrame:CGRectMake(width/2.0f, 0, width/2.0f, kIJDatePickerButtonHeight)];
+    _leftButton.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
+    _rightButton.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
+    _leftButton.contentEdgeInsets  = UIEdgeInsetsMake(0, buttonTitlePadding, 0, 0);
+    _rightButton.contentEdgeInsets = UIEdgeInsetsMake(0, 0, 0, buttonTitlePadding);
+    UIFont *buttonFont = [UIFont regularFontWithSize:14];
     UIColor *buttonTitleColor = [UIColor blackColor];
 
     self.leftButton.backgroundColor  = [UIColor clearColor];
@@ -68,6 +70,11 @@ static const int kIJDatePickerButtonHeight = 30;
 - (void)setDate:(NSDate *)date {
   _date = date;
   self.datePicker.date = date;
+}
+
+- (void)setDatePickerMode:(UIDatePickerMode)datePickerMode {
+  _datePickerMode = datePickerMode;
+  self.datePicker.datePickerMode = datePickerMode;
 }
 
 @end

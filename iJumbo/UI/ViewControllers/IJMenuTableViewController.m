@@ -124,17 +124,27 @@ typedef NS_ENUM(NSInteger, IJMenuActionSheet) {
   //self.tableView.separatorColor = [UIColor clearColor];
   [self.view addSubview:self.tableView];
   
+  [self setupDatePicker];
+  
+  self.mealSegment.selectedSegmentIndex = [IJMenuTableViewController mealSegmentBasedOnTime];
+}
+
+- (void)setupDatePicker {
   // Date Picker.
-  const int doneButtonHeight = 30;
   self.datePicker = [[IJDatePicker alloc] initWithWidth:self.view.width];
   self.datePicker.datePicker.datePickerMode = UIDatePickerModeDate;
-  self.datePicker.frame = CGRectMake(0, doneButtonHeight, self.datePicker.width, self.datePicker.height);
+  self.datePicker.frame = CGRectMake(0, self.view.maxY, self.datePicker.width, self.datePicker.height);
   self.datePicker.backgroundColor = [UIColor whiteColor];
   self.datePicker.date = [NSDate date];
   [self.datePicker updatesForDateChangeForTarget:self
                                       withAction:@selector(datePickerDidChangeValue:)];
+  [self.datePicker.leftButton addTarget:self
+                                 action:@selector(hideDatePicker)
+                       forControlEvents:UIControlEventTouchUpInside];
+  [self.datePicker setLeftButtonTitle:@"Done"];
+  self.datePicker.rightButton.hidden = YES;
   [self.view addSubview:self.datePicker];
-  self.mealSegment.selectedSegmentIndex = [IJMenuTableViewController mealSegmentBasedOnTime];
+
 }
 
 + (NSUInteger)mealSegmentBasedOnTime {
@@ -322,13 +332,13 @@ typedef NS_ENUM(NSInteger, IJMenuActionSheet) {
 #pragma mark - UIDatePicker
 
 - (BOOL)datePickerIsShown {
-  return (self.datePicker.superview.frame.origin.x + self.navigationController.navigationBar.height
+  return (self.datePicker.frame.origin.x + self.navigationController.navigationBar.height
           ==
           self.view.maxY);
 }
 
 - (void)showDatePicker {
-  [self moveDatePickerToY:self.view.maxY - self.datePicker.superview.height];
+  [self moveDatePickerToY:self.view.maxY - self.datePicker.height];
 }
 
 - (void)hideDatePicker {
@@ -347,15 +357,14 @@ typedef NS_ENUM(NSInteger, IJMenuActionSheet) {
 }
 
 - (void)moveDatePickerToY:(CGFloat)y {
-  UIView *datePickerBackground = self.datePicker.superview;
   [UIView animateWithDuration:kDatePickerAnimationDuration
                         delay:0
                       options:UIViewAnimationOptionCurveEaseInOut
                    animations:^{
-                     datePickerBackground.frame = CGRectMake(0,
+                     self.datePicker.frame = CGRectMake(0,
                                                              y - self.navigationController.navigationBar.height,
-                                                             datePickerBackground.width,
-                                                             datePickerBackground.height);
+                                                             self.datePicker.width,
+                                                             self.datePicker.height);
                    } completion:^(BOOL finished) {}];
 }
 

@@ -12,6 +12,10 @@
 
 @property(nonatomic) UIDatePicker *datePicker;
 @property(nonatomic) NSDate *date;
+@property(nonatomic, readonly) UIButton *leftButton;
+@property(nonatomic, readonly) UIButton *rightButton;
+@property(nonatomic) UIDatePickerMode datePickerMode;
+
 - (instancetype)initWithWidth:(CGFloat)width;
 
 - (void)setLeftButtonTitle:(NSString *)title;
