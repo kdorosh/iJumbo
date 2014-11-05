@@ -10,6 +10,10 @@
 #import <MapKit/MapKit.h>
 #import "IJLocation.h"
 
+#import "UIAlertView+Blocks.h"
+
+static NSString * const kUserDefaultsHasAskedForLocation = @"UserDefaultsHasAskedForLocation";
+
 @interface IJMapViewController () <UISearchBarDelegate, MKMapViewDelegate>
 @property(nonatomic) MKMapView *mapView;
 @property(nonatomic) NSMutableArray *locations;
@@ -37,16 +41,37 @@
   self.mapView = [[MKMapView alloc] initWithFrame:CGRectMake(0, searchBar.maxY, self.view.width, self.view.height - searchBar.height)];
   self.mapView.delegate = self;
   self.mapView.zoomEnabled = YES;
+  
+  
+  
+  
   // TODO(amadou): Wait until they click on the current location button.
   // Once that happens set a default that tracks this. And show if they have agreed.
-  if (YES) // Use default here.
-    self.mapView.showsUserLocation = YES;
+  if (![[NSUserDefaults standardUserDefaults] boolForKey:kUserDefaultsHasAskedForLocation]) { // Use default here.
+    [self askForCurrentLocation];
+    [[NSUserDefaults standardUserDefaults] setBool:YES forKey:kUserDefaultsHasAskedForLocation];
+  }
   [self.view addSubview:searchBar];
   [self.view addSubview:self.mapView];
   if (self.locations) {
     [self.mapView showAnnotations:self.locations animated:YES];
   }
   [self.mapView setRegion:[IJMapViewController tuftsRegion] animated:NO];
+}
+
+- (void)askForCurrentLocation {
+  [UIAlertView showWithTitle:@"Want to see your location on the map?"
+                     message:@"Enable current location!"
+           cancelButtonTitle:@"Not Now"
+           otherButtonTitles:@[kAllowNotificationsAlertButtonTitle]
+                    tapBlock:^(UIAlertView *alertView, NSInteger buttonIndex) {
+                      // If they say yes, ask for location abilities.
+                      if ([[alertView buttonTitleAtIndex:buttonIndex] isEqualToString:kAllowNotificationsAlertButtonTitle]) {
+                        CLLocationManager *manager = [[CLLocationManager alloc] init];
+                        [manager requestWhenInUseAuthorization];
+                        self.mapView.showsUserLocation = YES;
+                      }
+                    }];
 }
 
 - (BOOL)shouldAutorotate {

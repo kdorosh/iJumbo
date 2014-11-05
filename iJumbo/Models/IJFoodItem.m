@@ -14,7 +14,6 @@
 #import "RKDropdownAlert.h"
 #import "UIAlertView+Blocks.h"
 
-static NSString * const kAllowNotificationsAlertButtonTitle = @"Yes!";
 static const NSTimeInterval kDropdownAlertShowDuration = 2.75;
 
 @implementation IJFoodItem

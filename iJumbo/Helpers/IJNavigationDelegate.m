@@ -8,6 +8,7 @@
 
 #import "IJNavigationDelegate.h"
 
+#import "IJAppDelegate.h"
 #import "IJHomeViewController.h"
 #import "IJAllFoodViewController.h"
 
@@ -33,7 +34,7 @@
   UIViewController *fromVC = [transitionContext viewControllerForKey:UITransitionContextFromViewControllerKey];
   UIViewController *toVC = [transitionContext viewControllerForKey:UITransitionContextToViewControllerKey];
   // TODO(amadou): Change this magic number and make it a variable somewhere.
-  UIView *whiteView = [[[[UIApplication sharedApplication] delegate] window] viewWithTag:4];
+  UIView *whiteView = [[[[UIApplication sharedApplication] delegate] window] viewWithTag:kWhiteViewBackgroundTag];
   CGSize whiteViewSize = whiteView.frame.size;
   UIView *container = [transitionContext containerView];
   UIView *toView = toVC.view;
@@ -73,7 +74,7 @@
   UIViewController *fromVC = [transitionContext viewControllerForKey:UITransitionContextFromViewControllerKey];
   UIViewController *toVC = [transitionContext viewControllerForKey:UITransitionContextToViewControllerKey];
   // TODO(amadou): Change this magic number and make it a variable somewhere.
-  UIView *whiteView = [[[[UIApplication sharedApplication] delegate] window] viewWithTag:4];
+  UIView *whiteView = [[[[UIApplication sharedApplication] delegate] window] viewWithTag:kWhiteViewBackgroundTag];
   CGSize whiteViewSize = whiteView.frame.size;
 
   UIView *container = [transitionContext containerView];

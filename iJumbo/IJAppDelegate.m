@@ -34,6 +34,9 @@
 @synthesize persistentStoreCoordinator = _persistentStoreCoordinator;
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
+#if ENV_DEVELOPMENT
+  NSLog(@"DEV!!!!");
+#endif
   [Crashlytics startWithAPIKey:@"091a4baa8905651db15d358449cc69ef24a9d492"];
   [MMRecord registerServerClass:[IJServer class]];
   
@@ -77,7 +80,7 @@
   UIView *whiteView =
       [[UIView alloc] initWithFrame:CGRectMake(self.window.maxX, 0, self.window.frame.size.width, self.window.frame.size.height)];
   whiteView.backgroundColor = [UIColor colorWithWhite:1 alpha:0.65];
-  [whiteView setTag:4];
+  [whiteView setTag:kWhiteViewBackgroundTag];
   whiteView.alpha = 0;
   [self.window addSubview:whiteView];
 
@@ -188,9 +191,11 @@
     if ([managedObjectContext hasChanges] && ![managedObjectContext save:&error]) {
       // Replace this implementation with code to handle the error appropriately.
       // abort() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
-      // TODO(amadou): Remove this for production.
+      // TODO(amadou): Figure out how to properly handle this error in production
+#if ENV_DEVELOPMENT
       NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
       abort();
+#endif
     }
   }
 }
@@ -287,7 +292,7 @@
          
          */
     NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
-    abort();
+    IJAssert(NO);
   }
   return _persistentStoreCoordinator;
 }

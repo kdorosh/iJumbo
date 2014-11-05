@@ -16,6 +16,8 @@
 #import "UIActionSheet+Blocks.h"
 
 static const int kTimeLowerBound = 2 * 60;
+static const int kHeaderLabelTag = 2;
+static const int kDateHeaderButtonTag = 4;
 
 typedef NS_ENUM(NSInteger, IJTransportationSection) {
   IJTransportationSectionMBTA = 0,
@@ -187,7 +189,6 @@ typedef NS_ENUM(NSInteger, IJTransportationSection) {
 // Joey estimation.
 // Full Joey Schedule.
 - (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView {
-  // TODO(amadou): Change this once the MBTA stuff works.
   return IJTransportationSectionNumberOfSections;
 }
 
@@ -378,11 +379,11 @@ typedef NS_ENUM(NSInteger, IJTransportationSection) {
                                          withReuseIdentifier:identifier
                                                 forIndexPath:indexPath];
   
-  UILabel *headerLabel = (UILabel*)[header viewWithTag:2];
+  UILabel *headerLabel = (UILabel*)[header viewWithTag:kHeaderLabelTag];
   if (!headerLabel) {
     const int padding = 20;
     headerLabel = [[UILabel alloc] initWithFrame:CGRectMake(20, 0, header.width - (2 * padding), header.height)];
-    [headerLabel setTag:2];
+    [headerLabel setTag:kHeaderLabelTag];
     headerLabel.font = [UIFont regularFontWithSize:18];
     headerLabel.textColor = (indexPath.section == IJTransportationSectionJoeySchedule) ? [UIColor colorWithWhite:0 alpha:0.75] : [UIColor whiteColor];
     [header addSubview:headerLabel];
@@ -394,7 +395,7 @@ typedef NS_ENUM(NSInteger, IJTransportationSection) {
       headerLabel.numberOfLines = 2;
       const CGFloat buttonWidth = 100;
       UIButton *dateButton = [[UIButton alloc] initWithFrame:CGRectMake(header.width -  buttonWidth, 0, buttonWidth, header.height)];
-      [dateButton setTag:4];
+      [dateButton setTag:kDateHeaderButtonTag];
       [dateButton setTitle:[NSString stringWithFormat:@"Day (%@)", [IJTransportationCollectionViewController textForWeekday:self.weekday]]
                   forState:UIControlStateNormal];
       [dateButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
@@ -417,7 +418,7 @@ typedef NS_ENUM(NSInteger, IJTransportationSection) {
   } else if (indexPath.section == IJTransportationSectionJoeySchedule) {
     // Look at mocks for bar that helps select the the date for the schedule.
     headerLabel.text = @"Joey Schedule";
-    UIButton *dateButton = (UIButton *)[header viewWithTag:4];
+    UIButton *dateButton = (UIButton *)[header viewWithTag:kDateHeaderButtonTag];
     [dateButton setTitle:[NSString stringWithFormat:@"Day (%@)", [IJTransportationCollectionViewController textForWeekday:self.weekday]]
                 forState:UIControlStateNormal];
   }

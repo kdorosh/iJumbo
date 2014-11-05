@@ -132,8 +132,6 @@ static NSString * const kActionSheetButtonTitleCopyLink     = @"Copy Link";
 }
 
 - (void)showWebOptions {
-  // TODO(amadou): Show action sheet with the options.
-  // Find out if Chrome is installed on this phone.
   UIActionSheet *actionSheet =
       [[UIActionSheet alloc] initWithTitle:@"Options"
                                   delegate:self

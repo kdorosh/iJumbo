@@ -13,6 +13,7 @@
 #import "IJWebViewController.h"
 
 static const int padding = 20;
+static NSDateFormatter *kEventDateFormatter;
 
 @interface IJEventViewController ()
 @property(nonatomic) IJEvent *event;
@@ -36,16 +37,15 @@ static const int padding = 20;
   self.scrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 0, self.view.width, self.view.height)];
   [self.view addSubview:self.scrollView];
   NSString *time;
-  // TODO(amadou): Make the dateformatter static.
-  // and delete it when there is a memory warning.
-  NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
-  // TODO(amadou): Add am/pm.
-  dateFormatter.locale = [[NSLocale alloc] initWithLocaleIdentifier:@"en_GB"];
-  [dateFormatter setDateFormat:@"hh:mma"];
+  if (!kEventDateFormatter) {
+    kEventDateFormatter = [[NSDateFormatter alloc] init];
+  }
+  kEventDateFormatter.locale = [[NSLocale alloc] initWithLocaleIdentifier:@"en_GB"];
+  [kEventDateFormatter setDateFormat:@"hh:mma"];
   if (self.event.end) {
-    time = [NSString stringWithFormat:@"%@-%@", [dateFormatter stringFromDate:self.event.start], [dateFormatter stringFromDate:self.event.end]];
+    time = [NSString stringWithFormat:@"%@-%@", [kEventDateFormatter stringFromDate:self.event.start], [kEventDateFormatter stringFromDate:self.event.end]];
   } else {
-    time = [NSString stringWithFormat:@"%@", [dateFormatter stringFromDate:self.event.start]];
+    time = [NSString stringWithFormat:@"%@", [kEventDateFormatter stringFromDate:self.event.start]];
   }
   CGFloat y = [self insertLabelAtY:20  withTitle:@"Title" andDetails:self.event.title];
   y = [self insertLabelAtY:y + padding withTitle:@"Time" andDetails:time];
@@ -106,6 +106,10 @@ static const int padding = 20;
 - (void)pushWebView {
   IJWebViewController *webVC = [IJWebViewController defaultInstanceWithURL:self.event.website];
   [self.navigationController pushViewController:webVC animated:YES];
-} 
+}
+
+- (void)didReceiveMemoryWarning {
+  kEventDateFormatter = nil;
+}
 
 @end

@@ -28,8 +28,6 @@ static NSDate *lastAlertTime;
                failureBlock:(void (^)(NSError *))failureBlock {
   NSString* url = [kBaseURL stringByAppendingPathComponent:URN];
   NSMutableDictionary *params_auth = [NSMutableDictionary dictionaryWithDictionary:params];
-  // TODO(amadou): pass something that can help id this device/user for daily active users etc...
-  //params_auth[@"auth_key"] = [RCSession accessToken];
   AFHTTPRequestOperationManager *manager = [self defaultManager];
   [manager GET:url parameters:params_auth
   success:^(AFHTTPRequestOperation *operation, id responseObject) {

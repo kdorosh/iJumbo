@@ -69,8 +69,6 @@ static NSString * const kNewsObserverActionSheetText = @"Observer";
   return UIStatusBarStyleLightContent;
 }
 
-// TODO(amadou): when articles load for the first time ever, they do not show after loading
-// and also causes a crash.
 - (void)loadData {
   [self.refreshControl beginRefreshing];
   [IJArticle startBatchedRequestsInExecutionBlock:^{

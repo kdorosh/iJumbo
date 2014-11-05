@@ -113,11 +113,7 @@ static NSDateFormatter *kEventsTableDateFormatter;
   self.dateLabel.textAlignment = NSTextAlignmentCenter;
   self.dateLabel.font = [UIFont regularFontWithSize:20];
   self.dateLabel.textColor = [UIColor colorWithWhite:0 alpha:0.7];
-  UIButton *backToTodayButton = [[UIButton alloc] initWithFrame:self.dateLabel.frame];
-  [backToTodayButton addTarget:self action:@selector(setDateToToday:) forControlEvents:UIControlEventTouchUpInside];
-  [dateNavigationBar addSubview:self.dateLabel];
-  // TODO(amadou): The sizing of this was off, leading to a jump back to today.
-  //[dateNavigationBar addSubview:backToTodayButton];
+  
   const CGFloat arrowWidth = 14;
   const CGFloat arrowHeight = 22.5;
   const CGFloat arrowPadding = 10;
@@ -232,8 +228,6 @@ static NSDateFormatter *kEventsTableDateFormatter;
   if (!_fetchedResultsController) {
     NSManagedObjectContext *context = [IJHelper mainContext];
     NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] initWithEntityName:NSStringFromClass([IJEvent class])];
-    // Configure the request's entity, and optionally its predicate.
-    // TODO(amadou): set the date on the backend and enable this again - causing a crash.
     fetchRequest.predicate = [NSPredicate predicateWithFormat:@"date == %@ AND start > %@", self.dateLabel.text, [NSDate dateWithTimeIntervalSince1970:[self.date timeIntervalSince1970] - kEventsDateSecondsInOneDay]];
     NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"start" ascending:YES];
     NSArray *sortDescriptors = @[sortDescriptor];
