@@ -52,7 +52,6 @@
                                                                action:@selector(showMap)];
   self.navigationItem.rightBarButtonItem = mapButton;
 
-  // TODO(amadou): Get search bar up there.
   self.title = @"Places";
   self.navigationController.navigationBarHidden = NO;
   [[NSNotificationCenter defaultCenter] addObserver:self
@@ -241,11 +240,6 @@
 }
 
 - (void)searchBarSearchButtonClicked:(UISearchBar *)searchBar {
-  self.fetchedResultsController.fetchRequest.predicate =
-      [NSPredicate predicateWithFormat:@"name CONTAINS[c] %@", self.searchBar.text];
-  NSError *error;
-  [self.fetchedResultsController performFetch:&error];
-  [self.tableView reloadData];
   [self.searchBar resignFirstResponder];
 }
 
@@ -253,6 +247,13 @@
   if (searchText.length == 0) {
     self.fetchedResultsController.fetchRequest.predicate =
         [IJLocationTableViewController defaultPredicate];
+    NSError *error;
+    [self.fetchedResultsController performFetch:&error];
+    [self.tableView reloadData];
+  } else {
+    self.fetchedResultsController.fetchRequest.predicate =
+    [NSPredicate predicateWithFormat:@"name != nil AND name CONTAINS[c] %@ AND section != nil AND "
+                                     @"latitude != 0 AND longitude != 0", self.searchBar.text];
     NSError *error;
     [self.fetchedResultsController performFetch:&error];
     [self.tableView reloadData];

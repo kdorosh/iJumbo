@@ -42,7 +42,7 @@ static const NSTimeInterval kDropdownAlertShowDuration = 2.75;
   if (!deviceID) {
     // Ask for permission to send notifications.
     [UIAlertView showWithTitle:@"Want Food Alerts?"
-                       message:@"Can we have permission to send you notifications?"
+                       message:@"Can we have permission to send you notifications? Then you can subscribe!"
              cancelButtonTitle:@"Not Now"
              otherButtonTitles:@[kAllowNotificationsAlertButtonTitle]
                       tapBlock:^(UIAlertView *alertView, NSInteger buttonIndex) {
