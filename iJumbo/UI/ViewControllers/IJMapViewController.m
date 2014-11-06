@@ -44,9 +44,12 @@ static NSString * const kUserDefaultsHasAskedForLocation = @"UserDefaultsHasAske
   self.mapView.delegate = self;
   self.mapView.zoomEnabled = YES;
 
+  // Do this so that the pop up only appears the first time they launch the map.
+  // TODO(amadou): Should add a current location button and then do this when that happens.
   CLAuthorizationStatus status = [CLLocationManager authorizationStatus];
-  if (status == kCLAuthorizationStatusNotDetermined) {
+  if (status == kCLAuthorizationStatusNotDetermined && ![[NSUserDefaults standardUserDefaults] boolForKey:kUserDefaultsHasAskedForLocation]) {
     [self askForCurrentLocation];
+    [[NSUserDefaults standardUserDefaults] setBool:YES forKey:kUserDefaultsHasAskedForLocation];
   } else if (status == kCLAuthorizationStatusAuthorizedWhenInUse || status == kCLAuthorizationStatusAuthorized) {
     self.mapView.showsUserLocation = YES;
   }
@@ -56,6 +59,15 @@ static NSString * const kUserDefaultsHasAskedForLocation = @"UserDefaultsHasAske
     [self.mapView showAnnotations:self.locations animated:YES];
   }
   [self.mapView setRegion:[IJMapViewController tuftsRegion] animated:NO];
+}
+
+- (void)showCurrentLocation {
+  CLAuthorizationStatus status = [CLLocationManager authorizationStatus];
+  if (status == kCLAuthorizationStatusNotDetermined) {
+    [self askForCurrentLocation];
+  } else if (status == kCLAuthorizationStatusAuthorizedWhenInUse || status == kCLAuthorizationStatusAuthorized) {
+    self.mapView.showsUserLocation = YES;
+  }
 }
 
 - (BOOL)shouldAutorotate {
