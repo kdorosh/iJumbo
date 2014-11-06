@@ -69,6 +69,7 @@ static NSString * const kUserDefaultsHasAskedForLocation = @"UserDefaultsHasAske
                       if ([[alertView buttonTitleAtIndex:buttonIndex] isEqualToString:kAllowNotificationsAlertButtonTitle]) {
                         CLLocationManager *manager = [[CLLocationManager alloc] init];
                         [manager requestWhenInUseAuthorization];
+                        // TODO(amadou): show the user location in the delegate method called after the above function.
                         self.mapView.showsUserLocation = YES;
                       }
                     }];

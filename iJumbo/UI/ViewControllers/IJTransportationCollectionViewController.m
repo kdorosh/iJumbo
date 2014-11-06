@@ -228,7 +228,7 @@ typedef NS_ENUM(NSInteger, IJTransportationSection) {
     IJJoeyTimeCollectionViewCell *cell =
         [collectionView dequeueReusableCellWithReuseIdentifier:@"JoeyScheduleCell"
                                                   forIndexPath:indexPath];
-    
+
     NSString *location = @"Campus Center";
     if (indexPath.row % 3 == 1) {
       location = @"Davis Square";

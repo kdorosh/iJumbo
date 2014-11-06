@@ -33,13 +33,13 @@ static NSDateFormatter *kEventsTableDateFormatter;
   [super viewDidLoad];
   self.title = @"Events";
   [self addTableViewWithDelegate:self];
-  
+
   UIBarButtonItem *calendarBarButton = [[UIBarButtonItem alloc] initWithTitle:@"Calendar"
                                                                         style:UIBarButtonItemStylePlain
                                                                        target:self
                                                                       action:@selector(showCalendar:)];
   self.navigationItem.rightBarButtonItem = calendarBarButton;
-  
+
   self.tableView.delegate = self;
   self.tableView.dataSource = self;
   self.tableView.backgroundColor = [UIColor clearColor];
@@ -113,19 +113,20 @@ static NSDateFormatter *kEventsTableDateFormatter;
   self.dateLabel.textAlignment = NSTextAlignmentCenter;
   self.dateLabel.font = [UIFont regularFontWithSize:20];
   self.dateLabel.textColor = [UIColor colorWithWhite:0 alpha:0.7];
-  
+  [dateNavigationBar addSubview:self.dateLabel];
+
   const CGFloat arrowWidth = 14;
   const CGFloat arrowHeight = 22.5;
   const CGFloat arrowPadding = 10;
   const CGFloat arrow_y = (kEventsDateNavigationBarHeight / 2) - (arrowHeight / 2);
-  
+
   // Previous Arrow Image.
   UIImageView *previousButtonImage = [[UIImageView alloc] initWithFrame:CGRectMake(arrowPadding, arrow_y, arrowWidth, arrowHeight)];
   [previousButtonImage setImage:[UIImage imageNamed:@"arrow_left.png"]];
   UIButton *previousDateButton = [[UIButton alloc] initWithFrame:CGRectMake(0, arrow_y, self.view.width/4.0f, arrowHeight)];
   [dateNavigationBar addSubview:previousButtonImage];
   [dateNavigationBar addSubview:previousDateButton];
-  
+
   // Next Arrow Image.
   const CGFloat nextArrow_x = dateNavigationBar.frame.size.width - arrowPadding - arrowWidth;
   UIButton *nextDateButton = [[UIButton alloc] initWithFrame:CGRectMake(3 * (self.view.width/4.0f), arrow_y, self.view.width/4.0f, arrowHeight)];
@@ -134,7 +135,7 @@ static NSDateFormatter *kEventsTableDateFormatter;
   [nextButtonImage setImage:[UIImage imageNamed:@"arrow_right.png"]];
   [dateNavigationBar addSubview:nextButtonImage];
   [dateNavigationBar addSubview:nextDateButton];
-  
+
   // Button actions.
   [previousDateButton addTarget:self action:@selector(previousDateButtonAction) forControlEvents:UIControlEventTouchUpInside];
   [nextDateButton addTarget:self action:@selector(nextDateButtonAction) forControlEvents:UIControlEventTouchUpInside];
