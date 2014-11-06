@@ -142,11 +142,12 @@
     return [[IJPushViewControllerTransition alloc] init];
   } else if (operation == UINavigationControllerOperationPop) {
     if ([toVC isKindOfClass:[IJHomeViewController class]]) {
-      [self.navcon setNavigationBarHidden:YES animated:YES];
+      dispatch_async(dispatch_get_main_queue(), ^{
+        [self.navcon setNavigationBarHidden:YES animated:YES];
+      });
     }
     return [[IJPopViewControllerTransition alloc] init];
   }
-  
   return nil;
 }
 

@@ -33,7 +33,6 @@
 - (void)animateTransition:(id<UIViewControllerContextTransitioning>)transitionContext {
   UIViewController *fromVC = [transitionContext viewControllerForKey:UITransitionContextFromViewControllerKey];
   UIViewController *toVC = [transitionContext viewControllerForKey:UITransitionContextToViewControllerKey];
-  // TODO(amadou): Change this magic number and make it a variable somewhere.
   UIView *whiteView = [[[[UIApplication sharedApplication] delegate] window] viewWithTag:kWhiteViewBackgroundTag];
   CGSize whiteViewSize = whiteView.frame.size;
   UIView *container = [transitionContext containerView];
@@ -73,7 +72,6 @@
 - (void)animateTransition:(id<UIViewControllerContextTransitioning>)transitionContext {
   UIViewController *fromVC = [transitionContext viewControllerForKey:UITransitionContextFromViewControllerKey];
   UIViewController *toVC = [transitionContext viewControllerForKey:UITransitionContextToViewControllerKey];
-  // TODO(amadou): Change this magic number and make it a variable somewhere.
   UIView *whiteView = [[[[UIApplication sharedApplication] delegate] window] viewWithTag:kWhiteViewBackgroundTag];
   CGSize whiteViewSize = whiteView.frame.size;
 

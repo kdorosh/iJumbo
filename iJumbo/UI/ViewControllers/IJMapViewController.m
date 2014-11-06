@@ -7,16 +7,18 @@
 //
 
 #import "IJMapViewController.h"
-#import <MapKit/MapKit.h>
-#import "IJLocation.h"
 
+#import <MapKit/MapKit.h>
+
+#import "IJLocation.h"
 #import "UIAlertView+Blocks.h"
 
 static NSString * const kUserDefaultsHasAskedForLocation = @"UserDefaultsHasAskedForLocation";
 
-@interface IJMapViewController () <UISearchBarDelegate, MKMapViewDelegate>
+@interface IJMapViewController () <UISearchBarDelegate, MKMapViewDelegate, UIAlertViewDelegate, CLLocationManagerDelegate>
 @property(nonatomic) MKMapView *mapView;
 @property(nonatomic) NSMutableArray *locations;
+@property(nonatomic) CLLocationManager *locationManager;
 @end
 
 @implementation IJMapViewController
@@ -41,15 +43,12 @@ static NSString * const kUserDefaultsHasAskedForLocation = @"UserDefaultsHasAske
   self.mapView = [[MKMapView alloc] initWithFrame:CGRectMake(0, searchBar.maxY, self.view.width, self.view.height - searchBar.height)];
   self.mapView.delegate = self;
   self.mapView.zoomEnabled = YES;
-  
-  
-  
-  
-  // TODO(amadou): Wait until they click on the current location button.
-  // Once that happens set a default that tracks this. And show if they have agreed.
-  if (![[NSUserDefaults standardUserDefaults] boolForKey:kUserDefaultsHasAskedForLocation]) { // Use default here.
+
+  CLAuthorizationStatus status = [CLLocationManager authorizationStatus];
+  if (status == kCLAuthorizationStatusNotDetermined) {
     [self askForCurrentLocation];
-    [[NSUserDefaults standardUserDefaults] setBool:YES forKey:kUserDefaultsHasAskedForLocation];
+  } else if (status == kCLAuthorizationStatusAuthorizedWhenInUse || status == kCLAuthorizationStatusAuthorized) {
+    self.mapView.showsUserLocation = YES;
   }
   [self.view addSubview:searchBar];
   [self.view addSubview:self.mapView];
@@ -57,22 +56,6 @@ static NSString * const kUserDefaultsHasAskedForLocation = @"UserDefaultsHasAske
     [self.mapView showAnnotations:self.locations animated:YES];
   }
   [self.mapView setRegion:[IJMapViewController tuftsRegion] animated:NO];
-}
-
-- (void)askForCurrentLocation {
-  [UIAlertView showWithTitle:@"Want to see your location on the map?"
-                     message:@"Enable current location!"
-           cancelButtonTitle:@"Not Now"
-           otherButtonTitles:@[kAllowNotificationsAlertButtonTitle]
-                    tapBlock:^(UIAlertView *alertView, NSInteger buttonIndex) {
-                      // If they say yes, ask for location abilities.
-                      if ([[alertView buttonTitleAtIndex:buttonIndex] isEqualToString:kAllowNotificationsAlertButtonTitle]) {
-                        CLLocationManager *manager = [[CLLocationManager alloc] init];
-                        [manager requestWhenInUseAuthorization];
-                        // TODO(amadou): show the user location in the delegate method called after the above function.
-                        self.mapView.showsUserLocation = YES;
-                      }
-                    }];
 }
 
 - (BOOL)shouldAutorotate {
@@ -102,8 +85,7 @@ static NSString * const kUserDefaultsHasAskedForLocation = @"UserDefaultsHasAske
 }
 
 - (void)addLocationToMap:(IJLocation *)location {
-  // TODO(amadou): Should drop the pin and zoom into it.
-  [self.mapView addAnnotation:location];  
+  [self.mapView addAnnotation:location];
 }
 
 #pragma mark - MKMapViewDelegate
@@ -147,6 +129,38 @@ static NSString * const kUserDefaultsHasAskedForLocation = @"UserDefaultsHasAske
   } else if (searchText.length > 0 && !searchBar.showsCancelButton) {
     [searchBar setShowsCancelButton:YES animated:YES];
   }
+}
+
+#pragma mark - Location Related Functions.
+
+- (void)locationManager:(CLLocationManager *)manager
+    didChangeAuthorizationStatus:(CLAuthorizationStatus)status {
+  if (status == kCLAuthorizationStatusAuthorizedWhenInUse || status == kCLAuthorizationStatusAuthorized) {
+    self.mapView.showsUserLocation = YES;
+  }
+}
+
+- (void)askForCurrentLocation {
+  [UIAlertView showWithTitle:@"Want to see your location on the map?"
+                     message:@"Enable current location!"
+           cancelButtonTitle:@"Not Now"
+           otherButtonTitles:@[kAllowNotificationsAlertButtonTitle]
+                    tapBlock:^(UIAlertView *alertView, NSInteger buttonIndex) {
+                      if ([[alertView buttonTitleAtIndex:buttonIndex] isEqualToString:kAllowNotificationsAlertButtonTitle]) {
+                        [self.locationManager requestWhenInUseAuthorization];
+                      }
+                    }];
+}
+
+
+#pragma mark - Setters and Getters
+
+- (CLLocationManager *)locationManager {
+  if (!_locationManager) {
+    _locationManager = [[CLLocationManager alloc] init];
+    _locationManager.delegate = self;
+  }
+  return _locationManager;
 }
 
 @end

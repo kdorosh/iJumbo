@@ -26,6 +26,8 @@
 	<string>1.0.2</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
+  <key>NSLocationWhenInUseUsageDescription</key>
+  <string>To show current location on a map.</string>
 	<key>UIAppFonts</key>
 	<array>
 		<string>Roboto-Light.ttf</string>

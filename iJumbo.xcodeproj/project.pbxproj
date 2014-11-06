@@ -49,6 +49,7 @@
 		C884074719E5FA1C002545AD /* links.json in CopyFiles */ = {isa = PBXBuildFile; fileRef = C884074219E5F79E002545AD /* links.json */; };
 		C884074D19E64B96002545AD /* OpenInChromeController.m in Sources */ = {isa = PBXBuildFile; fileRef = C884074C19E64B96002545AD /* OpenInChromeController.m */; };
 		C884075119E6D587002545AD /* IJBottomNotificationView.m in Sources */ = {isa = PBXBuildFile; fileRef = C884075019E6D587002545AD /* IJBottomNotificationView.m */; };
+		C88651581A0C156700C55A96 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C88651571A0C156700C55A96 /* MapKit.framework */; };
 		C887F45E19D22B8F00D82898 /* IJLinkCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = C887F45D19D22B8F00D82898 /* IJLinkCollectionViewCell.m */; };
 		C898760B19B1256800CB425E /* IJMenuTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C898760A19B1256800CB425E /* IJMenuTableViewController.m */; };
 		C8B7000419A03D8A0004FE76 /* Roboto-Black.ttf in Resources */ = {isa = PBXBuildFile; fileRef = C8B7FFF819A03D8A0004FE76 /* Roboto-Black.ttf */; };
@@ -181,6 +182,7 @@
 		C884074C19E64B96002545AD /* OpenInChromeController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OpenInChromeController.m; sourceTree = "<group>"; };
 		C884074F19E6D587002545AD /* IJBottomNotificationView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IJBottomNotificationView.h; sourceTree = "<group>"; };
 		C884075019E6D587002545AD /* IJBottomNotificationView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IJBottomNotificationView.m; sourceTree = "<group>"; };
+		C88651571A0C156700C55A96 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		C887F45C19D22B8F00D82898 /* IJLinkCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = IJLinkCollectionViewCell.h; path = iJumbo/UI/TableViewCells/IJLinkCollectionViewCell.h; sourceTree = "<group>"; };
 		C887F45D19D22B8F00D82898 /* IJLinkCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = IJLinkCollectionViewCell.m; path = iJumbo/UI/TableViewCells/IJLinkCollectionViewCell.m; sourceTree = "<group>"; };
 		C898760919B1256800CB425E /* IJMenuTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = IJMenuTableViewController.h; path = iJumbo/UI/ViewControllers/IJMenuTableViewController.h; sourceTree = "<group>"; };
@@ -263,6 +265,7 @@
 				C87E7CC4198C566500366DF7 /* CoreData.framework in Frameworks */,
 				C87E7CC2198C566500366DF7 /* UIKit.framework in Frameworks */,
 				C87E7CBE198C566500366DF7 /* Foundation.framework in Frameworks */,
+				C88651581A0C156700C55A96 /* MapKit.framework in Frameworks */,
 				C87BB9CB19D36F51001BB67B /* Crashlytics.framework in Frameworks */,
 				51717AB18D3441268926AA6D /* libPods.a in Frameworks */,
 			);
@@ -340,6 +343,7 @@
 		C87E7CBC198C566500366DF7 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				C88651571A0C156700C55A96 /* MapKit.framework */,
 				C87BB9CA19D36F51001BB67B /* Crashlytics.framework */,
 				C87E7CBD198C566500366DF7 /* Foundation.framework */,
 				C87E7CBF198C566500366DF7 /* CoreGraphics.framework */,
@@ -628,6 +632,11 @@
 				TargetAttributes = {
 					C87E7CB9198C566500366DF7 = {
 						DevelopmentTeam = NR3QK94585;
+						SystemCapabilities = {
+							com.apple.Maps.iOS = {
+								enabled = 1;
+							};
+						};
 					};
 					C87E7CD9198C566500366DF7 = {
 						TestTargetID = C87E7CB9198C566500366DF7;

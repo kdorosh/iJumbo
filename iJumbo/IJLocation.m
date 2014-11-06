@@ -27,6 +27,18 @@
 
 + (void)getLocationsWithSuccessBlock:(void (^)(NSArray *locations))successBlock
                         failureBlock:(void (^)(NSError *error))errorBlock {
+  // Delete records that do not have longitude or latitude.
+  MMRecordOptions *options = [IJLocation defaultOptions];
+  options.deleteOrphanedRecordBlock = ^(MMRecord *orphan,
+                                        NSArray *populatedRecords,
+                                        id responseObject,
+                                        BOOL *stop) {
+    IJLocation *location = (IJLocation *)orphan;
+    if (location.latitude.integerValue == 0 && location.longitude.integerValue == 0) {
+      return YES;
+    }
+    return NO;
+  };
   [IJLocation startRequestWithURN:@"/locations"
                              data:nil
                           context:[IJHelper mainContext]

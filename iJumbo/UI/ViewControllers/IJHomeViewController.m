@@ -19,7 +19,7 @@
 
 static const CGFloat kSeparatorBarWidth = 1.5;
 
-@interface IJHomeViewController ()
+@interface IJHomeViewController () <UIGestureRecognizerDelegate>
 @property(nonatomic) UIButton *newsButton;
 @property(nonatomic) UIButton *locationsButton;
 @property(nonatomic) UIButton *menusButton;
@@ -43,7 +43,7 @@ static const CGFloat kSeparatorBarWidth = 1.5;
   self.view.backgroundColor = [UIColor clearColor];
   // TODO(amadou): get gesture pop to work. This is a hack to make it work but there needs to be a
   // new implementation because the animations are done custom now.
-  // self.navigationController.interactivePopGestureRecognizer.delegate = self;
+  //self.navigationController.interactivePopGestureRecognizer.delegate = self;
   [self addSeparators];
   [self setupButtons];
   [self setupIcons];

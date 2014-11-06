@@ -75,8 +75,6 @@
 }
 
 - (void)showMap {
-  // TODO(amadou): Map should show current location.
-  // Ask for permission the first time the map launches.
   [self.navigationController pushViewController:[[IJMapViewController alloc] init] animated:YES];
 }
 
@@ -249,17 +247,17 @@
     [self.tableView reloadData];
   } else {
     self.fetchedResultsController.fetchRequest.predicate =
-    [NSPredicate predicateWithFormat:@"name != nil AND name CONTAINS[c] %@ AND section != nil AND "
-                                     @"latitude != 0 AND longitude != 0", self.searchBar.text];
+        [NSPredicate predicateWithFormat:@"name != nil AND name CONTAINS[c] %@ AND section != nil AND "
+                                         @"latitude != 0 AND longitude != 0", self.searchBar.text];
     NSError *error;
     [self.fetchedResultsController performFetch:&error];
     [self.tableView reloadData];
   }
 }
 
-// TODO(amadou): Create ophan checker to delete objects that do not match this predicate.
 + (NSPredicate*)defaultPredicate {
-  return [NSPredicate predicateWithFormat:@"name != nil AND section != nil"];
+  return [NSPredicate predicateWithFormat:@"name != nil AND section != nil AND "
+                                          @"latitude != 0 AND longitude != 0"];
 }
 
 - (void)controllerDidChangeContent:(NSFetchedResultsController *)controller {
