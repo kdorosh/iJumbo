@@ -229,8 +229,10 @@ typedef NS_ENUM(NSInteger, IJTransportationSection) {
         [collectionView dequeueReusableCellWithReuseIdentifier:@"JoeyScheduleCell"
                                                   forIndexPath:indexPath];
 
-    NSString *location = @"Campus Center";
-    if (indexPath.row % 3 == 1) {
+    NSString *location;
+    if (indexPath.row % 3 == 0) {
+      location = @"Campus Center";
+    } else if (indexPath.row % 3 == 1) {
       location = @"Davis Square";
     } else if (indexPath.row % 3 == 2) {
       location = @"Olin Center";
@@ -249,7 +251,7 @@ typedef NS_ENUM(NSInteger, IJTransportationSection) {
     }
     
     NSArray *times = self.joeySchedule[self.weekday][location];
-    int index = ((int)indexPath.row - 1) / 3;
+    int index = ((int)indexPath.row - 3) / 3;
     if (index < [times count]) {
       NSNumber *time = times[index];
       [cell setTimeSinceMidnight:time];
