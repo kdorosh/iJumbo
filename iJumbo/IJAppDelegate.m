@@ -142,9 +142,7 @@
     return [[IJPushViewControllerTransition alloc] init];
   } else if (operation == UINavigationControllerOperationPop) {
     if ([toVC isKindOfClass:[IJHomeViewController class]]) {
-      dispatch_async(dispatch_get_main_queue(), ^{
-        [self.navcon setNavigationBarHidden:YES animated:YES];
-      });
+      [self.navcon setNavigationBarHidden:YES animated:YES];
     }
     return [[IJPopViewControllerTransition alloc] init];
   }
@@ -172,12 +170,14 @@
 
 - (void)applicationWillEnterForeground:(UIApplication *)application
 {
-    // Called as part of the transition from the background to the inactive state; here you can undo many of the changes made on entering the background.
+  // Called as part of the transition from the background to the inactive state; here you can
+  // undo many of the changes made on entering the background.
 }
 
 - (void)applicationDidBecomeActive:(UIApplication *)application
 {
-    // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
+  // Restart any tasks that were paused (or not yet started) while the application was inactive.
+  //If the application was previously in the background, optionally refresh the user interface.
 }
 
 - (void)applicationWillTerminate:(UIApplication *)application {
@@ -191,7 +191,8 @@
   if (managedObjectContext != nil) {
     if ([managedObjectContext hasChanges] && ![managedObjectContext save:&error]) {
       // Replace this implementation with code to handle the error appropriately.
-      // abort() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
+      // abort() causes the application to generate a crash log and terminate. You should not use
+      // this function in a shipping application, although it may be useful during development.
       // TODO(amadou): Figure out how to properly handle this error in production
 #if ENV_DEVELOPMENT
       NSLog(@"Unresolved error %@, %@", error, [error userInfo]);

@@ -13,7 +13,7 @@
 - (instancetype)initWithReuseIdentifier:(NSString *)reuseIdentifier {
   self = [super initWithReuseIdentifier:reuseIdentifier];
   if (self) {
-    self.contentView.backgroundColor = [UIColor colorWithRed:26/255.0f green:191/255.0f blue:237/255.0 alpha:0.75];
+    self.contentView.backgroundColor = kIJumboBlue;
     self.tintColor = self.contentView.backgroundColor;
     UIView *backView = [[UIView alloc] initWithFrame:CGRectZero];
     self.backgroundView = backView;

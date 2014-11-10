@@ -404,10 +404,7 @@ typedef NS_ENUM(NSInteger, IJTransportationSection) {
       [dateButton addTarget:self action:@selector(showActionSheetForWeekdays) forControlEvents:UIControlEventTouchUpInside];
       [header addSubview:dateButton];
     } else {
-      backgroundColor = [UIColor colorWithRed:26/255.0f
-                                        green:191/255.0f
-                                         blue:237/255.0
-                                        alpha:0.65];
+      backgroundColor = kIJumboBlue;
     }
     header.backgroundColor = backgroundColor;
   }
