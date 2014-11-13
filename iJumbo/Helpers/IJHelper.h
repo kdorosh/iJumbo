@@ -14,10 +14,12 @@
 // Stop asserts from being called when in production.
 #if ENV_DEVELOPMENT
 #define IJAssertNotNil(object) NSAssert(object, @"%s cannot be nil in %s. Line: %i", #object, __func__, __LINE__)
-#define IJAssert(conditional) NSAssert(conditional, @"assert in %s. Line: %i", __func__, __LINE__)
+#define IJAssertTrue(conditional) NSAssert(conditional, @"assert in %s. Line: %i", __func__, __LINE__)
+#define IJAssert(conditional, message) NSAssert(conditional, message)
 #else
 #define IJAssertNotNil(object) NSLog(object, @"%s cannot be nil in %s. Line: %i", #object, __func__, __LINE__)
-#define IJAssert(conditional) NSLog(conditional, @"assert in %s. Line: %i", __func__, __LINE__)
+#define IJAssertTrue(conditional) NSLog(conditional, @"assert in %s. Line: %i", __func__, __LINE__)
+#define IJAssert(conditional, message) NSLog(conditional, message)
 #endif
 
 static NSString * const kAllowNotificationsAlertButtonTitle = @"Yes!";

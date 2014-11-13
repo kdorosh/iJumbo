@@ -8,6 +8,13 @@
 
 #import "MMServer.h"
 
+typedef NSNumber* IJServerDomainCode;
+
+// Server Domain Codes.
+#define IJServerDomainCodeLocalRequest @(0)
+#define IJServerDomainCodeLocalJSONRequest @(1)
+#define IJServerDomainCodeNetworkRequest nil
+
 static NSString * const kBaseURL = @"http://ijumboapp.com/v2/api";
 
 @interface IJServer : MMServer

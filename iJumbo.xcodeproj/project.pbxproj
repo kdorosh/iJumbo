@@ -40,13 +40,7 @@
 		C87E7CDF198C566500366DF7 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C87E7CC3198C566500366DF7 /* CoreData.framework */; };
 		C87E7CE7198C566600366DF7 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = C87E7CE5198C566600366DF7 /* InfoPlist.strings */; };
 		C87E7CE9198C566600366DF7 /* iJumboTests.m in Sources */ = {isa = PBXBuildFile; fileRef = C87E7CE8198C566600366DF7 /* iJumboTests.m */; };
-		C884073D19E5F6A0002545AD /* joey_schedule.json in Resources */ = {isa = PBXBuildFile; fileRef = C884073B19E5F6A0002545AD /* joey_schedule.json */; };
 		C884073E19E5F6A0002545AD /* TemplateIcon2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C884073C19E5F6A0002545AD /* TemplateIcon2x.png */; };
-		C884074119E5F70F002545AD /* places.json in Resources */ = {isa = PBXBuildFile; fileRef = C884074019E5F70F002545AD /* places.json */; };
-		C884074319E5F79E002545AD /* links.json in Resources */ = {isa = PBXBuildFile; fileRef = C884074219E5F79E002545AD /* links.json */; };
-		C884074519E5FA16002545AD /* joey_schedule.json in CopyFiles */ = {isa = PBXBuildFile; fileRef = C884073B19E5F6A0002545AD /* joey_schedule.json */; };
-		C884074619E5FA1A002545AD /* places.json in CopyFiles */ = {isa = PBXBuildFile; fileRef = C884074019E5F70F002545AD /* places.json */; };
-		C884074719E5FA1C002545AD /* links.json in CopyFiles */ = {isa = PBXBuildFile; fileRef = C884074219E5F79E002545AD /* links.json */; };
 		C884074D19E64B96002545AD /* OpenInChromeController.m in Sources */ = {isa = PBXBuildFile; fileRef = C884074C19E64B96002545AD /* OpenInChromeController.m */; };
 		C884075119E6D587002545AD /* IJBottomNotificationView.m in Sources */ = {isa = PBXBuildFile; fileRef = C884075019E6D587002545AD /* IJBottomNotificationView.m */; };
 		C88651581A0C156700C55A96 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C88651571A0C156700C55A96 /* MapKit.framework */; };
@@ -82,6 +76,12 @@
 		C8F0077E199DD872006B7DC4 /* IJHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = C8F0077D199DD872006B7DC4 /* IJHelper.m */; };
 		C8F00783199DDB3F006B7DC4 /* IJHomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C8F00782199DDB3F006B7DC4 /* IJHomeViewController.m */; };
 		C8F00788199DDDE6006B7DC4 /* IJLocationTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C8F00787199DDDE6006B7DC4 /* IJLocationTableViewController.m */; };
+		C8F073D11A1548EC00D34E03 /* locations.json in Resources */ = {isa = PBXBuildFile; fileRef = C8F073D01A1548EC00D34E03 /* locations.json */; };
+		C8F073D31A15491E00D34E03 /* joey_schedule.json in Resources */ = {isa = PBXBuildFile; fileRef = C8F073D21A15491E00D34E03 /* joey_schedule.json */; };
+		C8F073D51A15492F00D34E03 /* links.json in Resources */ = {isa = PBXBuildFile; fileRef = C8F073D41A15492F00D34E03 /* links.json */; };
+		C8F073D61A15498E00D34E03 /* locations.json in CopyFiles */ = {isa = PBXBuildFile; fileRef = C8F073D01A1548EC00D34E03 /* locations.json */; };
+		C8F073D71A15499000D34E03 /* joey_schedule.json in CopyFiles */ = {isa = PBXBuildFile; fileRef = C8F073D21A15491E00D34E03 /* joey_schedule.json */; };
+		C8F073D81A15499200D34E03 /* links.json in CopyFiles */ = {isa = PBXBuildFile; fileRef = C8F073D41A15492F00D34E03 /* links.json */; };
 		C8FADA6619BE91920000E2A8 /* IJFoodItem.m in Sources */ = {isa = PBXBuildFile; fileRef = C8FADA6519BE91920000E2A8 /* IJFoodItem.m */; };
 		C8FADA6919BE91A00000E2A8 /* IJMenuSection.m in Sources */ = {isa = PBXBuildFile; fileRef = C8FADA6819BE91A00000E2A8 /* IJMenuSection.m */; };
 		C8FADA6C19BECF530000E2A8 /* IJTableViewHeaderFooterView.m in Sources */ = {isa = PBXBuildFile; fileRef = C8FADA6B19BECF530000E2A8 /* IJTableViewHeaderFooterView.m */; };
@@ -111,9 +111,9 @@
 			dstPath = "";
 			dstSubfolderSpec = 16;
 			files = (
-				C884074519E5FA16002545AD /* joey_schedule.json in CopyFiles */,
-				C884074619E5FA1A002545AD /* places.json in CopyFiles */,
-				C884074719E5FA1C002545AD /* links.json in CopyFiles */,
+				C8F073D61A15498E00D34E03 /* locations.json in CopyFiles */,
+				C8F073D71A15499000D34E03 /* joey_schedule.json in CopyFiles */,
+				C8F073D81A15499200D34E03 /* links.json in CopyFiles */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -174,10 +174,7 @@
 		C87E7CE4198C566600366DF7 /* iJumboTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "iJumboTests-Info.plist"; sourceTree = "<group>"; };
 		C87E7CE6198C566600366DF7 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		C87E7CE8198C566600366DF7 /* iJumboTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = iJumboTests.m; sourceTree = "<group>"; };
-		C884073B19E5F6A0002545AD /* joey_schedule.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = joey_schedule.json; path = JSON/joey_schedule.json; sourceTree = "<group>"; };
 		C884073C19E5F6A0002545AD /* TemplateIcon2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = TemplateIcon2x.png; path = JSON/TemplateIcon2x.png; sourceTree = "<group>"; };
-		C884074019E5F70F002545AD /* places.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = places.json; path = JSON/places.json; sourceTree = "<group>"; };
-		C884074219E5F79E002545AD /* links.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = links.json; path = JSON/links.json; sourceTree = "<group>"; };
 		C884074B19E64B95002545AD /* OpenInChromeController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OpenInChromeController.h; sourceTree = "<group>"; };
 		C884074C19E64B96002545AD /* OpenInChromeController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OpenInChromeController.m; sourceTree = "<group>"; };
 		C884074F19E6D587002545AD /* IJBottomNotificationView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IJBottomNotificationView.h; sourceTree = "<group>"; };
@@ -234,6 +231,9 @@
 		C8F00782199DDB3F006B7DC4 /* IJHomeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = IJHomeViewController.m; path = iJumbo/UI/ViewControllers/IJHomeViewController.m; sourceTree = "<group>"; };
 		C8F00786199DDDE6006B7DC4 /* IJLocationTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = IJLocationTableViewController.h; path = iJumbo/UI/ViewControllers/IJLocationTableViewController.h; sourceTree = "<group>"; };
 		C8F00787199DDDE6006B7DC4 /* IJLocationTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = IJLocationTableViewController.m; path = iJumbo/UI/ViewControllers/IJLocationTableViewController.m; sourceTree = "<group>"; };
+		C8F073D01A1548EC00D34E03 /* locations.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = locations.json; path = JSON/locations.json; sourceTree = "<group>"; };
+		C8F073D21A15491E00D34E03 /* joey_schedule.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = joey_schedule.json; path = JSON/joey_schedule.json; sourceTree = "<group>"; };
+		C8F073D41A15492F00D34E03 /* links.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = links.json; path = JSON/links.json; sourceTree = "<group>"; };
 		C8FADA6419BE91920000E2A8 /* IJFoodItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = IJFoodItem.h; path = Models/IJFoodItem.h; sourceTree = "<group>"; };
 		C8FADA6519BE91920000E2A8 /* IJFoodItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = IJFoodItem.m; path = Models/IJFoodItem.m; sourceTree = "<group>"; };
 		C8FADA6719BE91A00000E2A8 /* IJMenuSection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = IJMenuSection.h; path = Models/IJMenuSection.h; sourceTree = "<group>"; };
@@ -407,9 +407,9 @@
 		C884073F19E5F6AD002545AD /* JSON */ = {
 			isa = PBXGroup;
 			children = (
-				C884073B19E5F6A0002545AD /* joey_schedule.json */,
-				C884074019E5F70F002545AD /* places.json */,
-				C884074219E5F79E002545AD /* links.json */,
+				C8F073D01A1548EC00D34E03 /* locations.json */,
+				C8F073D21A15491E00D34E03 /* joey_schedule.json */,
+				C8F073D41A15492F00D34E03 /* links.json */,
 			);
 			name = JSON;
 			sourceTree = "<group>";
@@ -667,8 +667,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				C8B7000B19A03D8A0004FE76 /* Roboto-Medium.ttf in Resources */,
-				C884073D19E5F6A0002545AD /* joey_schedule.json in Resources */,
 				C8B7000719A03D8A0004FE76 /* Roboto-BoldItalic.ttf in Resources */,
+				C8F073D11A1548EC00D34E03 /* locations.json in Resources */,
 				C87E7CCA198C566500366DF7 /* InfoPlist.strings in Resources */,
 				C884073E19E5F6A0002545AD /* TemplateIcon2x.png in Resources */,
 				C87E7CD5198C566500366DF7 /* Images.xcassets in Resources */,
@@ -679,9 +679,9 @@
 				C8B7000419A03D8A0004FE76 /* Roboto-Black.ttf in Resources */,
 				C8B7000919A03D8A0004FE76 /* Roboto-Light.ttf in Resources */,
 				C8B7000F19A03D8A0004FE76 /* Roboto-ThinItalic.ttf in Resources */,
+				C8F073D31A15491E00D34E03 /* joey_schedule.json in Resources */,
 				C8B7000C19A03D8A0004FE76 /* Roboto-MediumItalic.ttf in Resources */,
-				C884074119E5F70F002545AD /* places.json in Resources */,
-				C884074319E5F79E002545AD /* links.json in Resources */,
+				C8F073D51A15492F00D34E03 /* links.json in Resources */,
 				C8B7000E19A03D8A0004FE76 /* Roboto-Thin.ttf in Resources */,
 				C8B7000519A03D8A0004FE76 /* Roboto-BlackItalic.ttf in Resources */,
 			);

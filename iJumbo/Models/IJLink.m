@@ -8,6 +8,7 @@
 
 #import "IJLink.h"
 #import "IJHelper.h"
+#import "IJServer.h"
 
 @implementation IJLink
 
@@ -23,6 +24,15 @@
                        domain:nil
                   resultBlock:successBlock
                  failureBlock:errorBlock];
+}
+
++ (void)seedDatabaseWithLocalLinks {
+  [IJLink startRequestWithURN:@"links"
+                         data:nil
+                      context:[IJHelper mainContext]
+                       domain:IJServerDomainCodeLocalJSONRequest
+                  resultBlock:^(NSArray *records) {}
+                 failureBlock:^(NSError *error) {}];
 }
 
 @end

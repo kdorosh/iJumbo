@@ -22,6 +22,7 @@
 #import "IJArticle.h"
 #import "IJLink.h"
 #import "IJFoodItem.h"
+#import "IJTransportationCollectionViewController.h"
 
 @interface IJAppDelegate () <UINavigationControllerDelegate>
 @property(nonatomic) UINavigationController *navcon;
@@ -34,9 +35,6 @@
 @synthesize persistentStoreCoordinator = _persistentStoreCoordinator;
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
-#if ENV_DEVELOPMENT
-  NSLog(@"DEV!!!!");
-#endif
   [Crashlytics startWithAPIKey:@"091a4baa8905651db15d358449cc69ef24a9d492"];
   [MMRecord registerServerClass:[IJServer class]];
   
@@ -47,7 +45,8 @@
     [self preloadNetworkData];
     [[NSUserDefaults standardUserDefaults] setBool:YES forKey:kFirstRunUserDefaultsKey];
   } else {
-    [IJFoodItem fetchSubscribedFoodWithSuccessBlock:nil failureBlock:nil];
+    [IJFoodItem fetchSubscribedFoodWithSuccessBlock:^(NSArray *foodItems) {}
+                                       failureBlock:^(NSError *error) {}];
   }
   [self registerDeviceWithServer];
   
@@ -103,13 +102,20 @@
     [IJMenuSection getMenusForDateObject:[NSDate date] withSuccessBlock:nil failureBlock:nil];
     [IJArticle getArticlesWithSuccessBlock:nil failureBlock:nil];
     [IJLink getLinksWithSuccessBlock:nil failureBlock:nil];
-  } withCompletionBlock:^{
-    NSLog(@"preloading done!");
-  }];
+  } withCompletionBlock:^{ }];
 }
 
 - (void)seedDatabaseWithLocalJSON {
-  // TODO(amadou): Do this at somepoint.
+  // Get the joey schedule.
+  NSError *error;
+  NSString* dataPath = [[NSBundle mainBundle] pathForResource:@"joey_schedule" ofType:@"json"];
+  NSArray* joeySchedule = [NSJSONSerialization JSONObjectWithData:[NSData dataWithContentsOfFile:dataPath]
+                                                   options:kNilOptions
+                                                     error:&error];
+  [joeySchedule writeToFile:[IJTransportationCollectionViewController joeyScheduleFile]
+                 atomically:YES];
+  [IJLink seedDatabaseWithLocalLinks];
+  [IJLocation seedDatabaseWithLocalLocations];
 }
 
 - (void)setupInitialSubscribedFood {
@@ -294,7 +300,7 @@
          
          */
     NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
-    IJAssert(NO);
+    IJAssert(NO, @"This assert should not be called in production");
   }
   return _persistentStoreCoordinator;
 }

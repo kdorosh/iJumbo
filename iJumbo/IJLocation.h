@@ -29,5 +29,5 @@
 // Functions.
 + (void)getLocationsWithSuccessBlock:(void (^)(NSArray *locations))successBlock
                         failureBlock:(void (^)(NSError *error))errorBlock;
-
++ (void)seedDatabaseWithLocalLocations;
 @end

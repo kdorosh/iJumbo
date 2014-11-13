@@ -41,9 +41,7 @@ static const CGFloat kSeparatorBarWidth = 1.5;
   [super viewDidLoad];
   self.edgesForExtendedLayout = UIRectEdgeAll;
   self.view.backgroundColor = [UIColor clearColor];
-  // TODO(amadou): get gesture pop to work. This is a hack to make it work but there needs to be a
-  // new implementation because the animations are done custom now.
-  //self.navigationController.interactivePopGestureRecognizer.delegate = self;
+
   [self addSeparators];
   [self setupButtons];
   [self setupIcons];

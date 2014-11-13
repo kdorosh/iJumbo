@@ -16,5 +16,5 @@
 // Functions.
 + (void)getLinksWithSuccessBlock:(void (^)(NSArray *locations))successBlock
                     failureBlock:(void (^)(NSError *error))errorBlock;
-
++ (void)seedDatabaseWithLocalLinks;
 @end

@@ -8,9 +8,10 @@
 
 #import "IJLocation.h"
 
-#import "IJHelper.h"
-
 #import <AddressBook/AddressBook.h>
+
+#import "IJHelper.h"
+#import "IJServer.h"
 
 @implementation IJLocation
 
@@ -47,6 +48,16 @@
                      failureBlock:errorBlock];
 }
 
++ (void)seedDatabaseWithLocalLocations {
+  [IJLocation startRequestWithURN:@"locations"
+                             data:nil
+                          context:[IJHelper mainContext]
+                           domain:IJServerDomainCodeLocalJSONRequest
+                      resultBlock:^(NSArray *records) {
+                        NSLog(@"%@", records);}
+                     failureBlock:^(NSError *error) {}];
+}
+
 - (CLLocationCoordinate2D)coordinate {
   return CLLocationCoordinate2DMake(self.latitude.doubleValue, self.longitude.doubleValue);
 }
@@ -70,6 +81,7 @@
   
   return mapItem;
 }
+
 
 
 @end

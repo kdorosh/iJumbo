@@ -45,7 +45,6 @@ static NSString * const kUserDefaultsHasAskedForLocation = @"UserDefaultsHasAske
   self.mapView.zoomEnabled = YES;
 
   // Do this so that the pop up only appears the first time they launch the map.
-  // TODO(amadou): Should add a current location button and then do this when that happens.
   CLAuthorizationStatus status = [CLLocationManager authorizationStatus];
   if (status == kCLAuthorizationStatusNotDetermined && ![[NSUserDefaults standardUserDefaults] boolForKey:kUserDefaultsHasAskedForLocation]) {
     [self askForCurrentLocation];

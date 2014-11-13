@@ -10,4 +10,5 @@
 
 @interface IJTransportationCollectionViewController : UIViewController <UICollectionViewDataSource, UICollectionViewDelegate>
 @property(nonatomic) UICollectionView *collectionView;
++ (NSString *)joeyScheduleFile;
 @end

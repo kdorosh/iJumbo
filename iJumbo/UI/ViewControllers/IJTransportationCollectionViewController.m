@@ -114,7 +114,7 @@ typedef NS_ENUM(NSInteger, IJTransportationSection) {
 // TOOD(amadou): Get the time going to alewife?
 - (void)loadMBTATimes {
   NSString *url = @"http://realtime.mbta.com/developer/api/v2/predictionsbystop?"
-  @"api_key=CvuMAlPRQkKWxdmB_v9FCg&stop=place-davis&format=json";
+                  @"api_key=CvuMAlPRQkKWxdmB_v9FCg&stop=place-davis&format=json";
   [IJServer getJSONAtURL:url success:^(NSDictionary *object) {
     NSArray *modes = object[@"mode"];
     // Loop through all MBTA data for stops at Davis (Bus and Subway).
@@ -445,7 +445,7 @@ typedef NS_ENUM(NSInteger, IJTransportationSection) {
 
 // This gives the abbreviated name of the weekday.
 + (NSString *)textForWeekday:(NSInteger)weekday {
-  IJAssert(weekday >= 0 && weekday < 7);
+  IJAssertTrue(weekday >= 0 && weekday < 7);
   switch (weekday) {
     case 0:
       return @"Sun";
@@ -463,6 +463,7 @@ typedef NS_ENUM(NSInteger, IJTransportationSection) {
     case 6:
       return @"Sat";
     default:
+      IJAssert(NO, @"Must provide a valid weekday");
       break;
   }
   return @"";

@@ -26,6 +26,15 @@ static NSDate *lastAlertTime;
               dispatchGroup:(dispatch_group_t)dispatchGroup
               responseBlock:(void (^)(id))responseBlock
                failureBlock:(void (^)(NSError *))failureBlock {
+  if ([domain isEqual:IJServerDomainCodeLocalJSONRequest]) {
+    id object = [self getLocalDataFromJSONResource:URN];
+    if (object) {
+      responseBlock(object);
+    } else {
+      failureBlock([NSError errorWithDomain:@"File not found" code:1 userInfo:nil]);
+    }
+    return;
+  }
   NSString* url = [kBaseURL stringByAppendingPathComponent:URN];
   NSMutableDictionary *params_auth = [NSMutableDictionary dictionaryWithDictionary:params];
   AFHTTPRequestOperationManager *manager = [self defaultManager];
@@ -44,25 +53,17 @@ static NSDate *lastAlertTime;
   }];
 }
 
-/*
-+ (void)getImageAtURL:(NSString*)url
-              success:(void (^)(UIImage *image))success
-              failure:(void (^)(NSError *error))failure {
-  UIImage* cachedImage = [IJCacheManager getImageForURL:url];
-  if (cachedImage) {
-    success(cachedImage);
-    return;
-  }
-  AFHTTPRequestOperationManager* httpManager = [[AFHTTPRequestOperationManager alloc] init];
-  httpManager.responseSerializer = [AFImageResponseSerializer serializer];
-  [httpManager GET:url parameters:nil success:^(AFHTTPRequestOperation *operation, UIImage* image) {
-    [IJCacheManager cacheImage:image forURL:url];
-    success(image);
-  } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-    failure(error);
-  }];
+// @param resource The name of the json resource that should be returned. For a file called
+// locations.json, the resource would be @"locations".
+// @return The object(s) stored to disk as either a NSDictionary or NSArray.
++ (id)getLocalDataFromJSONResource:(NSString *)resource {
+  NSError* err = nil;
+  NSString* dataPath = [[NSBundle mainBundle] pathForResource:resource ofType:@"json"];
+  NSArray* objects = [NSJSONSerialization JSONObjectWithData:[NSData dataWithContentsOfFile:dataPath]
+                                                   options:kNilOptions
+                                                     error:&err];
+  return objects;
 }
- */
 
 + (void)getJSONAtURL:(NSString *)url
              success:(void (^)(id object))success

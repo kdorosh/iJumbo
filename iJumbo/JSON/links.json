@@ -1,7 +1,1 @@
-[
- {"name":"Trunk","url":"https://trunk.tufts.edu/mobile","id":0},
- {"name":"iSIS","url":"https://isis.uit.tufts.edu","id":1},
- {"name":"LaundryView","url":"http://m.laundryview.com/lvs.php?s=17","id":2},
- {"name":"Athletics","url":"http://www.gotuftsjumbos.com/landing/index","id":3},
- {"name":"JumboCash","url":"https://www.jumbocash.net","id":4}
-]
+[{"name":"Trunk","url":"https://trunk.tufts.edu/mobile","id":0},{"name":"SIS","url":"https://isis.uit.tufts.edu","id":1},{"name":"LaundryView","url":"http://m.laundryview.com/lvs.php?s=17","id":2},{"name":"Athletics","url":"http://www.gotuftsjumbos.com/landing/index","id":3},{"name":"JumboCash","url":"https://www.jumbocash.net","id":4},{"name":"Tufts Tickets","url":"http://tuftstickets.universitytickets.com","id":5}]
