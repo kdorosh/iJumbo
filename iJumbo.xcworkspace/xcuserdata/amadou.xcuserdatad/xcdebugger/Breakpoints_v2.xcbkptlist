@@ -144,38 +144,6 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "iJumbo/UI/ViewControllers/IJTransportationCollectionViewController.m"
-            timestampString = "437295631.735678"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "111"
-            endingLineNumber = "111"
-            landmarkName = "-loadDataAnimated:"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "iJumbo/UI/ViewControllers/IJTransportationCollectionViewController.m"
-            timestampString = "437295631.735678"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "104"
-            endingLineNumber = "104"
-            landmarkName = "-loadDataAnimated:"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
             shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
@@ -211,12 +179,12 @@
                   symbolName = "__60-[IJTransportationCollectionViewController loadJoeySchedule]_block_invoke"
                   moduleName = "iJumbo"
                   urlString = "file:///Users/amadou/Desktop/iJumbo/iJumbo/UI/ViewControllers/IJTransportationCollectionViewController.m"
-                  timestampString = "437604564.077064"
+                  timestampString = "437605055.973356"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "174"
                   endingLineNumber = "174"
-                  offsetFromSymbolStart = "328">
+                  offsetFromSymbolStart = "309">
                </Location>
                <Location
                   shouldBeEnabled = "Yes"
@@ -225,12 +193,12 @@
                   symbolName = "__60-[IJTransportationCollectionViewController loadJoeySchedule]_block_invoke211"
                   moduleName = "iJumbo"
                   urlString = "file:///Users/amadou/Desktop/iJumbo/iJumbo/UI/ViewControllers/IJTransportationCollectionViewController.m"
-                  timestampString = "437604564.077201"
+                  timestampString = "437605055.973546"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "174"
                   endingLineNumber = "174"
-                  offsetFromSymbolStart = "36">
+                  offsetFromSymbolStart = "43">
                </Location>
             </Locations>
          </BreakpointContent>
@@ -257,12 +225,12 @@
                   symbolName = "__60-[IJTransportationCollectionViewController loadJoeySchedule]_block_invoke"
                   moduleName = "iJumbo"
                   urlString = "file:///Users/amadou/Desktop/iJumbo/iJumbo/UI/ViewControllers/IJTransportationCollectionViewController.m"
-                  timestampString = "437604564.077925"
+                  timestampString = "437605055.974654"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "174"
                   endingLineNumber = "174"
-                  offsetFromSymbolStart = "328">
+                  offsetFromSymbolStart = "309">
                </Location>
                <Location
                   shouldBeEnabled = "Yes"
@@ -271,12 +239,12 @@
                   symbolName = "__60-[IJTransportationCollectionViewController loadJoeySchedule]_block_invoke211"
                   moduleName = "iJumbo"
                   urlString = "file:///Users/amadou/Desktop/iJumbo/iJumbo/UI/ViewControllers/IJTransportationCollectionViewController.m"
-                  timestampString = "437604564.078064"
+                  timestampString = "437605055.97484"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "174"
                   endingLineNumber = "174"
-                  offsetFromSymbolStart = "36">
+                  offsetFromSymbolStart = "43">
                </Location>
             </Locations>
          </BreakpointContent>
