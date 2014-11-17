@@ -17,7 +17,7 @@
 
 + (UIImageView *)backGroundImage {
   UIImageView *imageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 320, 568)];
-  imageView.image = [UIImage imageNamed:@"west-olin-blur.png"];
+  imageView.image = [UIImage imageNamed:@"background-image.png"];
   return imageView;
 }
 

@@ -40,7 +40,7 @@ static const CGFloat kNotificationViewHeight = 60;
     self.textLabel.textAlignment = NSTextAlignmentCenter;
     self.textLabel.textColor = [UIColor whiteColor];
     self.detailTextLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, self.height/2.0f - 7, self.width, self.height/2.0f)];
-    self.detailTextLabel.font = [UIFont regularFontWithSize:14];
+    self.detailTextLabel.font = [UIFont lightFontWithSize:16];
     self.detailTextLabel.textAlignment = NSTextAlignmentCenter;
     self.detailTextLabel.textColor = [UIColor whiteColor];
     [self addSubview:self.textLabel];

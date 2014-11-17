@@ -38,7 +38,7 @@ typedef NS_ENUM(NSInteger, IJTransportationSection) {
 - (void)viewDidLoad {
   [super viewDidLoad];
   self.title = @"Transportation";
-  self.weekday = [IJTransportationCollectionViewController weekdayForDate:[NSDate date]];
+  self.weekday = [IJTransportationCollectionViewController weekdayForScheduleOnDate:[NSDate date]];
   self.mbtaTimes = [NSMutableDictionary dictionaryWithCapacity:2];
   self.joeySchedule =
       [NSArray arrayWithContentsOfFile:[IJTransportationCollectionViewController joeyScheduleFile]];
@@ -222,43 +222,7 @@ typedef NS_ENUM(NSInteger, IJTransportationSection) {
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView
                   cellForItemAtIndexPath:(NSIndexPath *)indexPath {
   if (indexPath.section == IJTransportationSectionJoeySchedule) {
-    // give the cell the schedule data (maybe do that in the cell.
-    // return it.
-    
-    IJJoeyTimeCollectionViewCell *cell =
-        [collectionView dequeueReusableCellWithReuseIdentifier:@"JoeyScheduleCell"
-                                                  forIndexPath:indexPath];
-
-    NSString *location;
-    if (indexPath.row % 3 == 0) {
-      location = @"Campus Center";
-    } else if (indexPath.row % 3 == 1) {
-      location = @"Davis Square";
-    } else if (indexPath.row % 3 == 2) {
-      location = @"Olin Center";
-    }
-    
-    // TODO(amadou): This header should be its own class!
-    if (indexPath.row == 0 || indexPath.row == 1 || indexPath.row == 2) {
-      cell.timeLabel.numberOfLines = 0;
-      cell.timeLabel.textAlignment = NSTextAlignmentCenter;
-      cell.timeLabel.font = [UIFont regularFontWithSize:14];
-      cell.timeLabel.text = location;
-      return cell;
-    } else {
-      cell.timeLabel.numberOfLines = 1;
-      cell.timeLabel.font = [UIFont lightFontWithSize:13];
-    }
-    
-    NSArray *times = self.joeySchedule[self.weekday][location];
-    int index = ((int)indexPath.row - 3) / 3;
-    if (index < [times count]) {
-      NSNumber *time = times[index];
-      [cell setTimeSinceMidnight:time];
-    } else {
-      cell.timeLabel.text = @"";
-    }
-    return cell;
+    return [self joeyScheduleCellAtIndex:indexPath forCollectionView:collectionView];
   }
   NSString *cellIdentifier =
       (indexPath.section == IJTransportationSectionJoeyTime) ? @"JoeyTimeID" : @"MBTATimeID";
@@ -278,6 +242,46 @@ typedef NS_ENUM(NSInteger, IJTransportationSection) {
     detailText = locationKey;
   }
   [cell updateWithMinutes:minutesTill detailText:detailText];
+  return cell;
+}
+
+- (UICollectionViewCell *)joeyScheduleCellAtIndex:(NSIndexPath *)indexPath
+                                forCollectionView:(UICollectionView *)collectionView {
+  // give the cell the schedule data (maybe do that in the cell.
+  // return it.
+  
+  IJJoeyTimeCollectionViewCell *cell =
+  [collectionView dequeueReusableCellWithReuseIdentifier:@"JoeyScheduleCell"
+                                            forIndexPath:indexPath];
+  
+  NSString *location;
+  if (indexPath.row % 3 == 0) {
+    location = @"Campus Center";
+  } else if (indexPath.row % 3 == 1) {
+    location = @"Davis Square";
+  } else if (indexPath.row % 3 == 2) {
+    location = @"Olin Center";
+  }
+
+  if (indexPath.row == 0 || indexPath.row == 1 || indexPath.row == 2) {
+    cell.timeLabel.numberOfLines = 0;
+    cell.timeLabel.textAlignment = NSTextAlignmentCenter;
+    cell.timeLabel.font = [UIFont regularFontWithSize:14];
+    cell.timeLabel.text = location;
+    return cell;
+  } else {
+    cell.timeLabel.numberOfLines = 1;
+    cell.timeLabel.font = [UIFont lightFontWithSize:13];
+  }
+  
+  NSArray *times = self.joeySchedule[self.weekday][location];
+  int index = ((int)indexPath.row - 3) / 3;
+  if (index < [times count]) {
+    NSNumber *time = times[index];
+    [cell setTimeSinceMidnight:time];
+  } else {
+    cell.timeLabel.text = @"";
+  }
   return cell;
 }
 
@@ -445,7 +449,7 @@ typedef NS_ENUM(NSInteger, IJTransportationSection) {
 
 // This gives the abbreviated name of the weekday.
 + (NSString *)textForWeekday:(NSInteger)weekday {
-  IJAssertTrue(weekday >= 0 && weekday < 7);
+  IJAssert(weekday >= 0 && weekday < 7, @"Must provide a valid weekday");
   switch (weekday) {
     case 0:
       return @"Sun";
@@ -463,8 +467,7 @@ typedef NS_ENUM(NSInteger, IJTransportationSection) {
     case 6:
       return @"Sat";
     default:
-      IJAssert(NO, @"Must provide a valid weekday");
-      break;
+      IJAssert(NO, @"This should never happen");
   }
   return @"";
 }

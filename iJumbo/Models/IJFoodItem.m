@@ -72,11 +72,9 @@ static const NSTimeInterval kDropdownAlertShowDuration = 2.75;
                         time:kDropdownAlertShowDuration];
     });
   } failure:^(NSError *error) {
-    [RKDropdownAlert title:@"Could not subscribe :("
-                   message:@"Try again later"
-           backgroundColor:kIJumboBlue
-                 textColor:[UIColor whiteColor]
-                      time:kDropdownAlertShowDuration];
+    [IJBottomNotificationView presentNotificationWithText:@"Could not subscribe :("
+                                             detailedText:@"Try again later"
+                                              forDuration:kDropdownAlertShowDuration];
     NSLog(@"Could not subscribe to food %@", foodItem);
   }];
 }

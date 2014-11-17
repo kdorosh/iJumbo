@@ -78,7 +78,7 @@
   [self.navcon setNavigationBarHidden:YES animated:NO];
   UIView *whiteView =
       [[UIView alloc] initWithFrame:CGRectMake(self.window.maxX, 0, self.window.frame.size.width, self.window.frame.size.height)];
-  whiteView.backgroundColor = [UIColor colorWithWhite:1 alpha:0.65];
+  whiteView.backgroundColor = [UIColor colorWithWhite:1 alpha:0.7];
   [whiteView setTag:kWhiteViewBackgroundTag];
   whiteView.alpha = 0;
   [self.window addSubview:whiteView];
@@ -156,7 +156,7 @@
 }
 
 - (void)addBackgroundImage {
-  UIImage *image = [UIImage imageNamed:@"west-olin-blur.png"];
+  UIImage *image = [UIImage imageNamed:@"background-image.png"];
   UIImageView *backgroundImage = [[UIImageView alloc] initWithFrame:self.window.frame];
   backgroundImage.image = image;
   [self.window addSubview:backgroundImage];
@@ -196,10 +196,6 @@
   NSManagedObjectContext *managedObjectContext = self.managedObjectContext;
   if (managedObjectContext != nil) {
     if ([managedObjectContext hasChanges] && ![managedObjectContext save:&error]) {
-      // Replace this implementation with code to handle the error appropriately.
-      // abort() causes the application to generate a crash log and terminate. You should not use
-      // this function in a shipping application, although it may be useful during development.
-      // TODO(amadou): Figure out how to properly handle this error in production
 #if ENV_DEVELOPMENT
       NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
       abort();
@@ -300,7 +296,7 @@
          
          */
     NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
-    IJAssert(NO, @"This assert should not be called in production");
+    IJAssert(NO, @"Schema is likely not consistent anymore. Should migrate to the new schema!");
   }
   return _persistentStoreCoordinator;
 }
