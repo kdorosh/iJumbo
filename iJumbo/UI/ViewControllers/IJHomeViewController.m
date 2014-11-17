@@ -57,6 +57,8 @@ static const CGFloat kSeparatorBarWidth = 1.5;
 
 - (void)didReceiveMemoryWarning {
   if (self.navigationController.visibleViewController != self) {
+    // Since this is the root view controller if it is not visible there must be
+    // another view controller pushed on at index 1.
     UIViewController *currentVC = self.navigationController.viewControllers[1];
     if (self.eventsVC != currentVC) {
       self.eventsVC = nil;
@@ -141,7 +143,7 @@ static const CGFloat kSeparatorBarWidth = 1.5;
   linksLabel.text = @"Links";
   linksLabel.textAlignment = NSTextAlignmentCenter;
   
-  UIFont *labelFont = [UIFont regularFontWithSize:12];
+  UIFont *labelFont = [UIFont regularFontWithSize:13];
   newsLabel.font = labelFont;
   placesLabel.font = labelFont;
   menuLabel.font = labelFont;
