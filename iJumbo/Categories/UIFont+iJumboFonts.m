@@ -11,7 +11,7 @@
 @implementation UIFont (iJumboFonts)
 
 + (UIFont *)lightFontWithSize:(CGFloat)size {
-  return [UIFont fontWithName:@"HelveticaNeue-Thin" size:size];
+  return [UIFont fontWithName:@"HelveticaNeue-Light" size:size];
 }
 
 + (UIFont *)regularFontWithSize:(CGFloat)size {

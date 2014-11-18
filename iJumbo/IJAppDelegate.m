@@ -35,6 +35,7 @@
 @synthesize persistentStoreCoordinator = _persistentStoreCoordinator;
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
+  [IJHelper printFontNames];
   [Crashlytics startWithAPIKey:@"091a4baa8905651db15d358449cc69ef24a9d492"];
   [MMRecord registerServerClass:[IJServer class]];
   
@@ -116,6 +117,7 @@
                  atomically:YES];
   [IJLink seedDatabaseWithLocalLinks];
   [IJLocation seedDatabaseWithLocalLocations];
+  // TODO(amadou): Seed some articles.
 }
 
 - (void)setupInitialSubscribedFood {
