@@ -14,6 +14,8 @@
 #import "IJMapViewController.h"
 #import "IJTableViewHeaderFooterView.h"
 
+#import "UIColor+iJumboColors.h"
+
 @interface IJLocationTableViewController () <NSFetchedResultsControllerDelegate, UISearchBarDelegate, IJLocationTableViewCellDelegate, IJMapViewControllerDelegate>
 @property(nonatomic) NSFetchedResultsController *fetchedResultsController;
 @property(nonatomic) UISearchBar *searchBar;
@@ -27,8 +29,8 @@
   // -1 puts the search bar slightly under the navbar so that the border does not show.
   self.searchBar = [[UISearchBar alloc] initWithFrame:CGRectMake(0, -1, self.view.width, 42)];
   self.searchBar.delegate = self;
-  self.searchBar.barTintColor = kIJumboBlue;
-  self.searchBar.backgroundColor = kIJumboBlue;
+  self.searchBar.barTintColor = [UIColor iJumboBlue];
+  self.searchBar.backgroundColor = [UIColor iJumboBlue];
   self.searchBar.tintColor = [UIColor whiteColor];
   self.searchBar.searchBarStyle = UISearchBarStyleProminent;
   [self.view addSubview:self.searchBar];

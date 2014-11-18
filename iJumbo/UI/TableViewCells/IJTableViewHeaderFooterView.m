@@ -8,12 +8,14 @@
 
 #import "IJTableViewHeaderFooterView.h"
 
+#import "UIColor+iJumboColors.h"
+
 @implementation IJTableViewHeaderFooterView
 
 - (instancetype)initWithReuseIdentifier:(NSString *)reuseIdentifier {
   self = [super initWithReuseIdentifier:reuseIdentifier];
   if (self) {
-    self.contentView.backgroundColor = kIJumboBlue;
+    self.contentView.backgroundColor = [UIColor iJumboBlue];
     self.tintColor = self.contentView.backgroundColor;
     UIView *backView = [[UIView alloc] initWithFrame:CGRectZero];
     self.backgroundView = backView;

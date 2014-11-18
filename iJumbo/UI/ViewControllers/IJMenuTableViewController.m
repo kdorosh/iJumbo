@@ -16,6 +16,8 @@
 #import "IJMyFoodViewController.h"
 #import "IJTableViewHeaderFooterView.h"
 
+#import "UIColor+iJumboColors.h"
+
 static const double kDatePickerAnimationDuration = 0.4f;
 
 typedef NS_ENUM(NSInteger, IJMenuActionSheet) {
@@ -74,11 +76,11 @@ typedef NS_ENUM(NSInteger, IJMenuActionSheet) {
   [self.navigationController.navigationBar setShadowImage:[[UIImage alloc] init]];
   // Meal selection bar.
   UIView *mealsBackground = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.view.width, 45)];
-  mealsBackground.backgroundColor = kIJumboBlue;
+  mealsBackground.backgroundColor = [UIColor iJumboBlue];
   self.mealSegment = [[UISegmentedControl alloc]
                           initWithItems:@[@"Breakfast", @"Lunch", @"Dinner"]];
   self.mealSegment.frame = CGRectMake(10, 7.5, self.view.width - 20, 30);
-  self.mealSegment.backgroundColor = kIJumboBlue;
+  self.mealSegment.backgroundColor = [UIColor iJumboBlue];
   self.mealSegment.tintColor = [UIColor whiteColor];
   [self.mealSegment addTarget:self
                    action:@selector(mealSegmentDidChangeValue:)
@@ -90,9 +92,9 @@ typedef NS_ENUM(NSInteger, IJMenuActionSheet) {
   self.dateSegment =
       [[UISegmentedControl alloc] initWithItems:@[@"Today", @"Tomorrow", @"Calendar"]];
   self.dateSegment.backgroundColor = [UIColor clearColor];
-  [self.dateSegment setTitleTextAttributes:@{NSForegroundColorAttributeName : [UIColor blackColor]}
+  [self.dateSegment setTitleTextAttributes:@{NSForegroundColorAttributeName : [UIColor iJumboBlackText]}
                                   forState:UIControlStateNormal];
-  [self.dateSegment setTitleTextAttributes:@{NSForegroundColorAttributeName : kIJumboBlue}
+  [self.dateSegment setTitleTextAttributes:@{NSForegroundColorAttributeName : [UIColor iJumboBlue]}
                                   forState:UIControlStateSelected];
   [self.dateSegment addTarget:self
                        action:@selector(dateSegmentDidChangeValue:)

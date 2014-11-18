@@ -14,6 +14,7 @@
 #import "IJRecord.h"
 
 #import "UIActionSheet+Blocks.h"
+#import "UIColor+iJumboColors.h"
 
 static const int kTimeLowerBound = 2 * 60;
 static const int kHeaderLabelTag = 2;
@@ -251,8 +252,8 @@ typedef NS_ENUM(NSInteger, IJTransportationSection) {
   // return it.
   
   IJJoeyTimeCollectionViewCell *cell =
-  [collectionView dequeueReusableCellWithReuseIdentifier:@"JoeyScheduleCell"
-                                            forIndexPath:indexPath];
+      [collectionView dequeueReusableCellWithReuseIdentifier:@"JoeyScheduleCell"
+                                                forIndexPath:indexPath];
   
   NSString *location;
   if (indexPath.row % 3 == 0) {
@@ -262,7 +263,7 @@ typedef NS_ENUM(NSInteger, IJTransportationSection) {
   } else if (indexPath.row % 3 == 2) {
     location = @"Olin Center";
   }
-
+  cell.timeLabel.textColor = [UIColor iJumboBlackText];
   if (indexPath.row == 0 || indexPath.row == 1 || indexPath.row == 2) {
     cell.timeLabel.numberOfLines = 0;
     cell.timeLabel.textAlignment = NSTextAlignmentCenter;
@@ -271,7 +272,7 @@ typedef NS_ENUM(NSInteger, IJTransportationSection) {
     return cell;
   } else {
     cell.timeLabel.numberOfLines = 1;
-    cell.timeLabel.font = [UIFont lightFontWithSize:13];
+    cell.timeLabel.font = [UIFont lightFontWithSize:14];
   }
   
   NSArray *times = self.joeySchedule[self.weekday][location];
@@ -391,13 +392,13 @@ typedef NS_ENUM(NSInteger, IJTransportationSection) {
     headerLabel = [[UILabel alloc] initWithFrame:CGRectMake(20, 0, header.width - (2 * padding), header.height)];
     [headerLabel setTag:kHeaderLabelTag];
     headerLabel.font = [UIFont regularFontWithSize:18];
-    headerLabel.textColor = (indexPath.section == IJTransportationSectionJoeySchedule) ? [UIColor colorWithWhite:0 alpha:0.75] : [UIColor whiteColor];
+    headerLabel.textColor = (indexPath.section == IJTransportationSectionJoeySchedule) ? [UIColor iJumboBlackText] : [UIColor whiteColor];
     [header addSubview:headerLabel];
     UIColor *backgroundColor;
     if (indexPath.section == IJTransportationSectionJoeySchedule) {
       backgroundColor = [UIColor colorWithWhite:1 alpha:0.65];
       headerLabel.textAlignment = NSTextAlignmentCenter;
-      headerLabel.font = [UIFont regularFontWithSize:13];
+      headerLabel.font = [UIFont regularFontWithSize:14];
       headerLabel.numberOfLines = 2;
       const CGFloat buttonWidth = 100;
       UIButton *dateButton = [[UIButton alloc] initWithFrame:CGRectMake(header.width -  buttonWidth, 0, buttonWidth, header.height)];
@@ -410,7 +411,7 @@ typedef NS_ENUM(NSInteger, IJTransportationSection) {
       [dateButton addTarget:self action:@selector(showActionSheetForWeekdays) forControlEvents:UIControlEventTouchUpInside];
       [header addSubview:dateButton];
     } else {
-      backgroundColor = kIJumboBlue;
+      backgroundColor = [UIColor iJumboBlue];
     }
     header.backgroundColor = backgroundColor;
   }

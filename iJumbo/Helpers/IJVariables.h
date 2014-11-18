@@ -9,10 +9,8 @@
 #ifndef iJumbo_Variables
 #define iJumbo_Variables
 
-#define kIJumboBlue [UIColor colorWithRed:68/255.0f green:138/255.0f blue:255/255.0 alpha:1]
-#define kIJumboGrey [UIColor colorWithRed:240/255.0f green:240/255.0f blue:238/255.0f alpha:1]
-#define iJumboBlueWithAlpha(a) [UIColor colorWithRed:68/255.0f green:138/255.0f blue:255/255.0 alpha:a];
-
+// Call this at the beginning of a function if it must be on the main thread.
+// If it is not, it calls this function again on the main thread.
 #define IJ_runOnMainThread if (![NSThread isMainThread]) { dispatch_sync(dispatch_get_main_queue(), ^{ [self performSelector:_cmd]; }); return; };
 
 #define kFirstRunUserDefaultsKey @"FirstRunVersion_1_UserDefaultsKey"

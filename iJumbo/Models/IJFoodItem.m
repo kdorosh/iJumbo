@@ -9,7 +9,6 @@
 #import "IJFoodItem.h"
 
 #import "IJAppDelegate.h"
-#import "IJBottomNotificationView.h"
 #import "IJServer.h"
 #import "RKDropdownAlert.h"
 #import "UIAlertView+Blocks.h"
@@ -67,14 +66,16 @@ static const NSTimeInterval kDropdownAlertShowDuration = 2.75;
       [[NSNotificationCenter defaultCenter] postNotificationName:kSubscribedToFoodItemNotification object:nil];
       [RKDropdownAlert title:[NSString stringWithFormat:@"Subscribed to %@!", foodItem.name]
                      message:nil
-             backgroundColor:kIJumboBlue
+             backgroundColor:[UIColor iJumboBlue]
                    textColor:[UIColor whiteColor]
                         time:kDropdownAlertShowDuration];
     });
   } failure:^(NSError *error) {
-    [IJBottomNotificationView presentNotificationWithText:@"Could not subscribe :("
-                                             detailedText:@"Try again later"
-                                              forDuration:kDropdownAlertShowDuration];
+    [RKDropdownAlert title:@"Could not subscribe :("
+                   message:@"Try again later"
+           backgroundColor:[UIColor iJumboBlue]
+                 textColor:[UIColor whiteColor]
+                      time:kDropdownAlertShowDuration];
     NSLog(@"Could not subscribe to food %@", foodItem);
   }];
 }
@@ -101,7 +102,7 @@ static const NSTimeInterval kDropdownAlertShowDuration = 2.75;
       [[NSNotificationCenter defaultCenter] postNotificationName:kUnsubscribedToFoodItemNotification object:nil];
       [RKDropdownAlert title:[NSString stringWithFormat:@"Unsubscribed from %@", foodItem.name]
                      message:nil
-             backgroundColor:kIJumboBlue
+             backgroundColor:[UIColor iJumboBlue]
                    textColor:[UIColor whiteColor]
                         time:kDropdownAlertShowDuration];
     });
@@ -109,7 +110,7 @@ static const NSTimeInterval kDropdownAlertShowDuration = 2.75;
     NSLog(@"Could not unsubscribe to food %@", foodItem);
     [RKDropdownAlert title:@"Could not unsubscribe"
                    message:@"Try again later"
-           backgroundColor:kIJumboBlue
+           backgroundColor:[UIColor iJumboBlue]
                  textColor:[UIColor whiteColor]
                       time:kDropdownAlertShowDuration];
   }];

@@ -38,12 +38,12 @@ static NSDateFormatter *kNewsCellDateFormatter;
     UIView *contentView =
         [[UIView alloc] initWithFrame:
             CGRectMake(contentInsetX, contentInsetY, width - (2 * contentInsetX), kNewsTableViewCellHeight - (2 * contentInsetY))];
-    contentView.backgroundColor = kIJumboGrey;
+    contentView.backgroundColor = [UIColor iJumboGrey];
     width = contentView.width;
 
     self.titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(contentInsetX, contentInsetY, 3 * width / 4.0f - 20, contentView.height/2.0f)];
     self.titleLabel.numberOfLines = 0;
-    self.titleLabel.textColor = [UIColor colorWithWhite:0 alpha:0.65];
+    self.titleLabel.textColor = [UIColor iJumboBlackText];
     self.titleLabel.font = [UIFont regularFontWithSize:15];
     
     self.sectionLabel = [[UILabel alloc] initWithFrame:CGRectMake(3 * width / 4, contentInsetY, width / 4.0f - 10, contentView.height/5.0f)];

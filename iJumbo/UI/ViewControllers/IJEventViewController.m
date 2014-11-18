@@ -75,7 +75,7 @@ static NSDateFormatter *kEventDateFormatter;
   detailsButton.titleLabel.font = [UIFont lightFontWithSize:17];
   detailsButton.titleLabel.numberOfLines = 0;
   [detailsButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-  [detailsButton setTitleColor:kIJumboBlue forState:UIControlStateHighlighted];
+  [detailsButton setTitleColor:[UIColor iJumboBlue] forState:UIControlStateHighlighted];
   detailsButton.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
   detailsButton.contentEdgeInsets = UIEdgeInsetsZero;
   [detailsButton sizeToFit];

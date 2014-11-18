@@ -12,6 +12,8 @@ static const int kNameLabelHeight = 25;
 
 #import "IJLink.h"
 
+#import "UIColor+iJumboColors.h"
+
 @interface IJLinkCollectionViewCell ()
 @property(nonatomic) UILabel *nameLabel;
 @end
@@ -28,7 +30,7 @@ static const int kNameLabelHeight = 25;
       self.nameLabel.textAlignment = NSTextAlignmentCenter;
       self.nameLabel.font = [UIFont regularFontWithSize:16];
       [self addSubview:self.nameLabel];
-      self.nameLabel.textColor = [UIColor colorWithWhite:0 alpha:0.9];
+      self.nameLabel.textColor = [UIColor iJumboBlackText];
     }
     return self;
 }

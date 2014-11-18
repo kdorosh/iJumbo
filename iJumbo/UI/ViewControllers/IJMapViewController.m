@@ -12,6 +12,7 @@
 
 #import "IJLocation.h"
 #import "UIAlertView+Blocks.h"
+#import "UIColor+iJumboColors.h"
 
 static NSString * const kUserDefaultsHasAskedForLocation = @"UserDefaultsHasAskedForLocation";
 
@@ -38,7 +39,7 @@ static NSString * const kUserDefaultsHasAskedForLocation = @"UserDefaultsHasAske
   }
   self.edgesForExtendedLayout = UIRectEdgeNone;
   UISearchBar *searchBar = [[UISearchBar alloc] initWithFrame:CGRectMake(0, 0, self.view.width, 40)];
-  searchBar.barTintColor = kIJumboBlue;
+  searchBar.barTintColor = [UIColor iJumboBlue];
   searchBar.tintColor = [UIColor whiteColor];
   searchBar.delegate = self;
   self.mapView = [[MKMapView alloc] initWithFrame:CGRectMake(0, searchBar.maxY, self.view.width, self.view.height - searchBar.height)];

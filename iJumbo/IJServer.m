@@ -12,9 +12,10 @@
 #import <UIKit/UIKit.h>
 
 #import "IJCacheManager.h"
-#import "IJBottomNotificationView.h"
+#import "RKDropdownAlert.h"
 
 static NSDate *lastAlertTime;
+static NSTimeInterval networkAlertInterval = 30;
 
 @implementation IJServer
 
@@ -44,10 +45,14 @@ static NSDate *lastAlertTime;
   } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
     NSLog(@"Failure!!!!");
     NSLog(@"Response: %@", operation.responseString);
-    if (error.code == NSURLErrorNotConnectedToInternet) {
-      [IJBottomNotificationView presentNotificationWithText:@"No Internet Connection"
-                                               detailedText:@"Try again later"
-                                                forDuration:6.5f];
+    if (error.code == NSURLErrorNotConnectedToInternet &&
+        (!lastAlertTime || abs([lastAlertTime timeIntervalSinceNow]) > networkAlertInterval)) {
+      lastAlertTime = [NSDate date];
+      [RKDropdownAlert title:@"No Internet Connection"
+                     message:@"Try again later"
+             backgroundColor:[UIColor iJumboBlue]
+                   textColor:[UIColor whiteColor]
+                        time:5.0f];
     }
     failureBlock(error);
   }];

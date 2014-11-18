@@ -10,6 +10,8 @@
 
 #import "OpenInChromeController.h"
 
+#import "UIColor+iJumboColors.h"
+
 static NSString * const kActionSheetButtonTitleOpenInSafari = @"Open in Safari";
 static NSString * const kActionSheetButtonTitleOpenInChrome = @"Open in Chrome";
 static NSString * const kActionSheetButtonTitleCopyLink     = @"Copy Link";
@@ -63,7 +65,7 @@ static NSString * const kActionSheetButtonTitleCopyLink     = @"Copy Link";
   [super viewDidLoad];
   self.edgesForExtendedLayout = UIRectEdgeNone;
   self.navigationController.toolbar.tintColor = [UIColor whiteColor];
-  self.navigationController.toolbar.barTintColor = kIJumboBlue;
+  self.navigationController.toolbar.barTintColor = [UIColor iJumboBlue];
   _webView =
       [[UIWebView alloc] initWithFrame:CGRectMake(0, 0, self.view.width, self.view.height - self.navigationController.navigationBar.maxY - self.navigationController.toolbar.height)];
   _webView.delegate = self;

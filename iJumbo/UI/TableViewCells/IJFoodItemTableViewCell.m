@@ -25,6 +25,7 @@ static const CGFloat fontSize = 17;
     const CGFloat padding = 20;
     _nameLabel = [[UILabel alloc] initWithFrame:CGRectMake(padding, 0, self.width - padding, self.height)];
     _nameLabel.font = [UIFont lightFontWithSize:fontSize];
+    _nameLabel.textColor = [UIColor iJumboBlackText];
     [self addSubview:_nameLabel];
   }
   return self;

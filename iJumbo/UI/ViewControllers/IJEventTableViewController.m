@@ -13,6 +13,7 @@
 #import "IJEventTableViewCell.h"
 #import "IJEventViewController.h"
 #import "IJHelper.h"
+#import "UIColor+iJumboColors.h"
 
 static const int kEventsDateNavigationBarHeight = 44;
 static const int kEventsDateSecondsInOneDay = (60 * 60 * 24);
@@ -112,7 +113,7 @@ static NSDateFormatter *kEventsTableDateFormatter;
   self.dateLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, dateNavigationBar.frame.size.width, dateNavigationBar.frame.size.height)];
   self.dateLabel.textAlignment = NSTextAlignmentCenter;
   self.dateLabel.font = [UIFont regularFontWithSize:20];
-  self.dateLabel.textColor = [UIColor colorWithWhite:0 alpha:0.7];
+  self.dateLabel.textColor = [UIColor iJumboBlackText];
   [dateNavigationBar addSubview:self.dateLabel];
 
   const CGFloat arrowWidth = 14;

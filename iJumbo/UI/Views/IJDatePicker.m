@@ -38,8 +38,8 @@ static const int kIJDatePickerButtonHeight = 25;
     self.rightButton.backgroundColor = [UIColor clearColor];
     [self.leftButton.titleLabel  setFont:buttonFont];
     [self.rightButton.titleLabel setFont:buttonFont];
-    [self.leftButton  setTitleColor:kIJumboBlue      forState:UIControlStateSelected];
-    [self.rightButton setTitleColor:kIJumboBlue      forState:UIControlStateSelected];
+    [self.leftButton  setTitleColor:[UIColor iJumboBlue]      forState:UIControlStateSelected];
+    [self.rightButton setTitleColor:[UIColor iJumboBlue]      forState:UIControlStateSelected];
     [self.leftButton  setTitleColor:buttonTitleColor forState:UIControlStateNormal];
     [self.rightButton setTitleColor:buttonTitleColor forState:UIControlStateNormal];
 

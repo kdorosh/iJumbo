@@ -20,4 +20,5 @@
   #import "IJAppDelegate.h"
   #import "UIView+Position.h"
   #import "UIFont+iJumboFonts.h"
+  #import "UIColor+iJumboColors.h"
 #endif

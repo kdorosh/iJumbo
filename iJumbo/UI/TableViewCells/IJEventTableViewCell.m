@@ -29,20 +29,20 @@
     UIView *contentView =
         [[UIView alloc] initWithFrame:
             CGRectMake(contentInset, contentInset, width - (2 * contentInset), kEventTableViewCellHeight - (2 * contentInset))];
-    contentView.backgroundColor = kIJumboGrey;
+    contentView.backgroundColor = [UIColor iJumboGrey];
     CGSize contentSize = contentView.frame.size;
     self.timeLabel = [[UILabel alloc] initWithFrame:CGRectMake(contentInset, 0, contentSize.width/3.0 - (2 * contentInset), contentSize.height)];
     self.timeLabel.font = [UIFont lightFontWithSize:12];
     self.timeLabel.numberOfLines = 1;
     self.timeLabel.textAlignment = NSTextAlignmentCenter;
-    self.timeLabel.textColor = [UIColor colorWithWhite:0 alpha:0.8];
+    self.timeLabel.textColor = [UIColor iJumboBlackText];
     [self addSubview:self.timeLabel];
     CGSize timeSize = self.timeLabel.frame.size;
     CGFloat fullTimeWidth = timeSize.width + (2 * contentInset);
     self.titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(fullTimeWidth, 0, contentSize.width - fullTimeWidth, contentSize.height)];
     self.titleLabel.numberOfLines = 0;
     self.titleLabel.font = [UIFont regularFontWithSize:14];
-    self.titleLabel.textColor = [UIColor colorWithWhite:0 alpha:0.75];
+    self.titleLabel.textColor = [UIColor iJumboBlackText];
     
     [contentView addSubview:self.timeLabel];
     [contentView addSubview:self.titleLabel];

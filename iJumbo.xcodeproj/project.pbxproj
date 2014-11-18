@@ -12,6 +12,7 @@
 		C81928F11A097212007588F7 /* IJDatePicker.m in Sources */ = {isa = PBXBuildFile; fileRef = C81928F01A097212007588F7 /* IJDatePicker.m */; };
 		C82937C619FDE344007227F4 /* IJAllFoodViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C82937C519FDE344007227F4 /* IJAllFoodViewController.m */; };
 		C8334E0319FF47D0002ADB64 /* RKDropdownAlert.m in Sources */ = {isa = PBXBuildFile; fileRef = C8334E0219FF47D0002ADB64 /* RKDropdownAlert.m */; };
+		C83E20F71A1B9E8F000D018D /* UIColor+iJumboColors.m in Sources */ = {isa = PBXBuildFile; fileRef = C83E20F61A1B9E8F000D018D /* UIColor+iJumboColors.m */; };
 		C841812419A58CAE007EB13E /* IJCacheManager.m in Sources */ = {isa = PBXBuildFile; fileRef = C841812319A58CAE007EB13E /* IJCacheManager.m */; };
 		C8487ACE19A06F10008F034E /* IJEventTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = C8487ACD19A06F10008F034E /* IJEventTableViewCell.m */; };
 		C8487AD119A07399008F034E /* IJRecord.m in Sources */ = {isa = PBXBuildFile; fileRef = C8487AD019A07399008F034E /* IJRecord.m */; };
@@ -42,7 +43,6 @@
 		C87E7CE9198C566600366DF7 /* iJumboTests.m in Sources */ = {isa = PBXBuildFile; fileRef = C87E7CE8198C566600366DF7 /* iJumboTests.m */; };
 		C884073E19E5F6A0002545AD /* TemplateIcon2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C884073C19E5F6A0002545AD /* TemplateIcon2x.png */; };
 		C884074D19E64B96002545AD /* OpenInChromeController.m in Sources */ = {isa = PBXBuildFile; fileRef = C884074C19E64B96002545AD /* OpenInChromeController.m */; };
-		C884075119E6D587002545AD /* IJBottomNotificationView.m in Sources */ = {isa = PBXBuildFile; fileRef = C884075019E6D587002545AD /* IJBottomNotificationView.m */; };
 		C88651581A0C156700C55A96 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C88651571A0C156700C55A96 /* MapKit.framework */; };
 		C887F45E19D22B8F00D82898 /* IJLinkCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = C887F45D19D22B8F00D82898 /* IJLinkCollectionViewCell.m */; };
 		C898760B19B1256800CB425E /* IJMenuTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C898760A19B1256800CB425E /* IJMenuTableViewController.m */; };
@@ -131,6 +131,8 @@
 		C82937C519FDE344007227F4 /* IJAllFoodViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = IJAllFoodViewController.m; path = iJumbo/UI/ViewControllers/IJAllFoodViewController.m; sourceTree = "<group>"; };
 		C8334E0119FF47D0002ADB64 /* RKDropdownAlert.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RKDropdownAlert.h; sourceTree = "<group>"; };
 		C8334E0219FF47D0002ADB64 /* RKDropdownAlert.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RKDropdownAlert.m; sourceTree = "<group>"; };
+		C83E20F51A1B9E8F000D018D /* UIColor+iJumboColors.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIColor+iJumboColors.h"; path = "Categories/UIColor+iJumboColors.h"; sourceTree = "<group>"; };
+		C83E20F61A1B9E8F000D018D /* UIColor+iJumboColors.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIColor+iJumboColors.m"; path = "Categories/UIColor+iJumboColors.m"; sourceTree = "<group>"; };
 		C841812219A58CAE007EB13E /* IJCacheManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = IJCacheManager.h; path = Helpers/IJCacheManager.h; sourceTree = "<group>"; };
 		C841812319A58CAE007EB13E /* IJCacheManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = IJCacheManager.m; path = Helpers/IJCacheManager.m; sourceTree = "<group>"; };
 		C8487ACC19A06F10008F034E /* IJEventTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = IJEventTableViewCell.h; path = iJumbo/UI/TableViewCells/IJEventTableViewCell.h; sourceTree = "<group>"; };
@@ -177,8 +179,6 @@
 		C884073C19E5F6A0002545AD /* TemplateIcon2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = TemplateIcon2x.png; path = JSON/TemplateIcon2x.png; sourceTree = "<group>"; };
 		C884074B19E64B95002545AD /* OpenInChromeController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OpenInChromeController.h; sourceTree = "<group>"; };
 		C884074C19E64B96002545AD /* OpenInChromeController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OpenInChromeController.m; sourceTree = "<group>"; };
-		C884074F19E6D587002545AD /* IJBottomNotificationView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IJBottomNotificationView.h; sourceTree = "<group>"; };
-		C884075019E6D587002545AD /* IJBottomNotificationView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IJBottomNotificationView.m; sourceTree = "<group>"; };
 		C88651571A0C156700C55A96 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		C887F45C19D22B8F00D82898 /* IJLinkCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = IJLinkCollectionViewCell.h; path = iJumbo/UI/TableViewCells/IJLinkCollectionViewCell.h; sourceTree = "<group>"; };
 		C887F45D19D22B8F00D82898 /* IJLinkCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = IJLinkCollectionViewCell.m; path = iJumbo/UI/TableViewCells/IJLinkCollectionViewCell.m; sourceTree = "<group>"; };
@@ -297,8 +297,6 @@
 		C8139C3919F965C900D89076 /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				C884074F19E6D587002545AD /* IJBottomNotificationView.h */,
-				C884075019E6D587002545AD /* IJBottomNotificationView.m */,
 				C81928EF1A097212007588F7 /* IJDatePicker.h */,
 				C81928F01A097212007588F7 /* IJDatePicker.m */,
 			);
@@ -316,6 +314,8 @@
 				C8FB4FC319A24BC500AC043F /* UIView+Position.m */,
 				C8C783F519C16FA400A3898B /* UIFont+iJumboFonts.h */,
 				C8C783F619C16FA400A3898B /* UIFont+iJumboFonts.m */,
+				C83E20F51A1B9E8F000D018D /* UIColor+iJumboColors.h */,
+				C83E20F61A1B9E8F000D018D /* UIColor+iJumboColors.m */,
 			);
 			name = Categories;
 			sourceTree = "<group>";
@@ -753,6 +753,7 @@
 				C8B7FFF0199FE31E0004FE76 /* IJVariables.h in Sources */,
 				C898760B19B1256800CB425E /* IJMenuTableViewController.m in Sources */,
 				C8F0077E199DD872006B7DC4 /* IJHelper.m in Sources */,
+				C83E20F71A1B9E8F000D018D /* UIColor+iJumboColors.m in Sources */,
 				C8334E0319FF47D0002ADB64 /* RKDropdownAlert.m in Sources */,
 				C87E7CD3198C566500366DF7 /* iJumbo.xcdatamodeld in Sources */,
 				C8FADA6C19BECF530000E2A8 /* IJTableViewHeaderFooterView.m in Sources */,
@@ -768,7 +769,6 @@
 				C884074D19E64B96002545AD /* OpenInChromeController.m in Sources */,
 				C8F00783199DDB3F006B7DC4 /* IJHomeViewController.m in Sources */,
 				C852A6B219A192420048B1C3 /* IJLinkTableViewController.m in Sources */,
-				C884075119E6D587002545AD /* IJBottomNotificationView.m in Sources */,
 				C8D67FB3199EC49F001C4FD2 /* IJEvent.m in Sources */,
 				C8F00788199DDDE6006B7DC4 /* IJLocationTableViewController.m in Sources */,
 				C8FB4FC419A24BC500AC043F /* UIView+Position.m in Sources */,

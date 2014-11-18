@@ -70,7 +70,7 @@
   IJHomeViewController *home = [[IJHomeViewController alloc] init];
   self.navcon = [[UINavigationController alloc] initWithRootViewController:home];
   self.navcon.delegate = self;
-  self.navcon.navigationBar.barTintColor = kIJumboBlue;
+  self.navcon.navigationBar.barTintColor = [UIColor iJumboBlue];
   self.navcon.navigationBar.tintColor = [UIColor whiteColor];
   self.navcon.navigationBar.shadowImage = [[UIImage alloc] init];
   self.navcon.navigationBar.clipsToBounds = YES;
@@ -88,7 +88,7 @@
   [self.navcon.navigationBar setTitleTextAttributes:@{NSForegroundColorAttributeName: [UIColor whiteColor]}];
   [self.window setRootViewController:self.navcon];
   UIView *statusBar = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.window.frame.size.width, 20)];
-  statusBar.backgroundColor = kIJumboBlue;
+  statusBar.backgroundColor = [UIColor iJumboBlue];
   [self.window makeKeyAndVisible];
   [self.window addSubview:statusBar];
 

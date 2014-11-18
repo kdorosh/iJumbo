@@ -8,6 +8,8 @@
 
 #import "RKDropdownAlert.h"
 
+#import "UIColor+iJumboColors.h"
+
 static int HEIGHT = 80; //height of the alert view
 static float ANIMATION_TIME = .36; //time it takes for the animation to complete in seconds
 static int X_BUFFER = 10; //buffer distance on each side for the text
@@ -34,7 +36,7 @@ NSString *DEFAULT_TITLE;
 //%%% customize this to be whatever you want!
 -(void)setupDefaultAttributes
 {
-    defaultViewColor = kIJumboBlue;
+    defaultViewColor = [UIColor iJumboBlue];
   
     defaultTextColor = [UIColor whiteColor];
     DEFAULT_TITLE = @"Default Text Here"; //%%% this text can only be edited if you do not use the pod solution. check the repo's README for more information
@@ -174,7 +176,7 @@ NSString *DEFAULT_TITLE;
 {
     NSInteger time = seconds;
     titleLabel.text = title;
-    
+
     if (message) {
         messageLabel.text = message;
         if ([self messageTextIsOneLine]) {
@@ -188,7 +190,7 @@ NSString *DEFAULT_TITLE;
         frame.origin.y = Y_BUFFER+STATUS_BAR_HEIGHT;
         titleLabel.frame = frame;
     }
-    
+
     if (backgroundColor) {
         self.backgroundColor = backgroundColor;
     }
@@ -200,15 +202,12 @@ NSString *DEFAULT_TITLE;
     if (seconds == -1) {
         time = TIME;
     }
-    
+  
+    // Edited this code so that the dropdown alert stayed over even if
+    // a push or pop happened after it was shown.
     if(!self.superview){
-        NSEnumerator *frontToBackWindows = [[[UIApplication sharedApplication]windows]reverseObjectEnumerator];
-        
-        for (UIWindow *window in frontToBackWindows)
-            if (window.windowLevel == UIWindowLevelNormal) {
-                [window.rootViewController.view addSubview:self];
-                break;
-            }
+      UIWindow *window = [[[UIApplication sharedApplication] delegate] window];
+      [window addSubview:self];
     }
     
     [UIView animateWithDuration:ANIMATION_TIME animations:^{

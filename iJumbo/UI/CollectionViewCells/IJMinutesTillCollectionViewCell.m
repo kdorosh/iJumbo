@@ -8,6 +8,8 @@
 
 #import "IJMinutesTillCollectionViewCell.h"
 
+#import "UIColor+iJumboColors.h"
+
 @interface IJMinutesTillCollectionViewCell ()
 @property(nonatomic) UILabel *minutesTillLabel;
 @property(nonatomic) UILabel *detailLabel;
@@ -30,7 +32,7 @@
                                                                  self.height - self.minutesTillLabel.maxY)];
     self.detailLabel.font = [UIFont regularFontWithSize:14];
     self.detailLabel.textColor = [UIColor colorWithWhite:0 alpha:0.65];
-    self.minutesTillLabel.textColor = [UIColor colorWithWhite:0 alpha:0.8];
+    self.minutesTillLabel.textColor = [UIColor iJumboBlackText];
     [self addSubview:self.minutesTillLabel];
     [self addSubview:self.detailLabel];
   }

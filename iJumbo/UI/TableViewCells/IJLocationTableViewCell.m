@@ -8,6 +8,8 @@
 
 #import "IJLocationTableViewCell.h"
 
+#import "UIColor+iJumboColors.h"
+
 @interface IJLocationTableViewCell ()
 @property(nonatomic) UILabel *nameLabel;
 @property(nonatomic) UIButton *mapButton;
@@ -42,7 +44,7 @@
     [_mapButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
     [_infoButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
     _nameLabel.font = [UIFont regularFontWithSize:17];
-    _nameLabel.textColor = [UIColor colorWithWhite:0 alpha:0.75];
+    _nameLabel.textColor = [UIColor iJumboBlackText];
     _mapButton.titleLabel.font = [UIFont lightFontWithSize:17];
     _infoButton.titleLabel.font = [UIFont lightFontWithSize:17];
 
