@@ -92,7 +92,7 @@ typedef NS_ENUM(NSInteger, IJMenuActionSheet) {
   self.dateSegment =
       [[UISegmentedControl alloc] initWithItems:@[@"Today", @"Tomorrow", @"Calendar"]];
   self.dateSegment.backgroundColor = [UIColor clearColor];
-  [self.dateSegment setTitleTextAttributes:@{NSForegroundColorAttributeName : [UIColor iJumboBlackText]}
+  [self.dateSegment setTitleTextAttributes:@{NSForegroundColorAttributeName : [UIColor iJumboDarkBlackText]}
                                   forState:UIControlStateNormal];
   [self.dateSegment setTitleTextAttributes:@{NSForegroundColorAttributeName : [UIColor iJumboBlue]}
                                   forState:UIControlStateSelected];

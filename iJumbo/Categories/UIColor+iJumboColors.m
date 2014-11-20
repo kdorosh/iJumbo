@@ -26,4 +26,13 @@
   return [UIColor colorWithWhite:0 alpha:0.65];
 }
 
++ (UIColor *)iJumboDarkBlackText {
+  return [UIColor colorWithWhite:0 alpha:0.8];
+}
+
+// basically grey but is translucent black.
++ (UIColor *)iJumboLightBlackText {
+  return [UIColor colorWithWhite:0 alpha:0.5];
+}
+
 @end

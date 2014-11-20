@@ -14,5 +14,7 @@
 + (UIColor *)iJumboBlueWithAlpha:(CGFloat)alpha;
 + (UIColor *)iJumboGrey;
 + (UIColor *)iJumboBlackText;
++ (UIColor *)iJumboDarkBlackText;
++ (UIColor *)iJumboLightBlackText;
 
 @end
