@@ -47,6 +47,7 @@ typedef NS_ENUM(NSInteger, IJMenuActionSheet) {
   self.title = @"Menus";
   self.date = [NSDate date];
   self.edgesForExtendedLayout = UIRectEdgeNone;
+  self.view.backgroundColor = [UIColor transparentWhiteBackground];
   [self setupUI];
   [self loadMenus];
   [self subscribeToNotifications];

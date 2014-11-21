@@ -47,12 +47,13 @@
     whiteView.alpha = 1;
     whiteView.frame = CGRectMake(container.maxX, 0, whiteViewSize.width, whiteViewSize.height);
   }
-  CGPoint newFromCenter = CGPointMake(fromVC.view.center.x - fromVC.view.frame.size.width / 4.0f, fromVC.view.center.y);
+  CGFloat slideShift = fromHome ? 1.0f : 4.0f;
+  CGPoint newFromCenter = CGPointMake(fromVC.view.center.x - fromVC.view.frame.size.width / slideShift, fromVC.view.center.y);
   [container addSubview:toView];
   [UIView animateWithDuration:[self transitionDuration:transitionContext] animations:^{
     toView.frame = CGRectMake(0, originalY, toSize.width, toSize.height);
     fromVC.view.center = newFromCenter;
-    fromVC.view.alpha = 0;
+    fromVC.view.alpha = fromHome ? 1.0f : 0;
     if (fromHome) {
       whiteView.frame = CGRectMake(0, 0, whiteViewSize.width, whiteViewSize.height);
     }
@@ -62,6 +63,9 @@
 }
 
 - (NSTimeInterval)transitionDuration:(id<UIViewControllerContextTransitioning>)transitionContext {
+  if ([[transitionContext viewControllerForKey:UITransitionContextFromViewControllerKey] class] == [IJHomeViewController class]) {
+    return 0.33;
+  }
   return 0.3;
 }
 
@@ -77,7 +81,8 @@
 
   UIView *container = [transitionContext containerView];
   CGRect origFrame = toVC.view.frame;
-  toVC.view.frame = CGRectMake(-origFrame.size.width / 4.0f, origFrame.origin.y, origFrame.size.width, origFrame.size.height);
+  CGFloat slideShift = ([toVC class] == [IJHomeViewController class]) ? 1.0f : 4.0f;
+  toVC.view.frame = CGRectMake(-origFrame.size.width / slideShift, origFrame.origin.y, origFrame.size.width, origFrame.size.height);
   [container insertSubview:toVC.view belowSubview:fromVC.view];
   CGSize fromSize = fromVC.view.frame.size;
   BOOL toHome = [toVC isKindOfClass:[IJHomeViewController class]];
@@ -100,6 +105,8 @@
   UIViewController *fromVC = [transitionContext viewControllerForKey:UITransitionContextFromViewControllerKey];
   if ([fromVC class] == [IJAllFoodViewController class])  {
     return 0.35;
+  } else if ([[transitionContext viewControllerForKey:UITransitionContextToViewControllerKey] class] == [IJHomeViewController class]) {
+    return 0.3;
   }
   return 0.2;
 }

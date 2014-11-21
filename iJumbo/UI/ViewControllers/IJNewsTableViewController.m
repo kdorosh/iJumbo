@@ -26,6 +26,7 @@ static NSString * const kNewsObserverActionSheetText = @"Observer";
 - (void)viewDidLoad {
   [super viewDidLoad];
   self.edgesForExtendedLayout = UIRectEdgeNone;
+  self.view.backgroundColor = [UIColor transparentWhiteBackground];
   [self addTableViewWithDelegate:self];
   self.refreshControl = [[UIRefreshControl alloc] init];
   [self.refreshControl addTarget:self
@@ -33,7 +34,7 @@ static NSString * const kNewsObserverActionSheetText = @"Observer";
                 forControlEvents:UIControlEventValueChanged];
   [self.tableView addSubview:self.refreshControl];
 
-  self.tableView.backgroundColor = self.view.backgroundColor;
+  self.tableView.backgroundColor = [UIColor clearColor];
   self.tableView.separatorColor = [UIColor clearColor];
   self.title = @"News";
   self.sourceBarButton = [[UIBarButtonItem alloc] initWithTitle:kNewsDailyActionSheetText

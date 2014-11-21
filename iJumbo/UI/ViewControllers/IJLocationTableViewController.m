@@ -44,7 +44,7 @@
                 forControlEvents:UIControlEventValueChanged];
   [self.tableView addSubview:self.refreshControl];
   
-  self.view.backgroundColor = [UIColor clearColor];
+  self.view.backgroundColor = [UIColor transparentWhiteBackground];
   self.tableView.backgroundColor = [UIColor clearColor];
   self.tableView.separatorColor = [UIColor clearColor];
   

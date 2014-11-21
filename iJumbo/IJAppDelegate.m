@@ -78,10 +78,10 @@
   self.navcon.navigationBar.translucent = NO;
   [self.navcon setNavigationBarHidden:YES animated:NO];
   UIView *whiteView =
-      [[UIView alloc] initWithFrame:CGRectMake(self.window.maxX, 0, self.window.frame.size.width, self.window.frame.size.height)];
-  whiteView.backgroundColor = [UIColor colorWithWhite:1 alpha:0.7];
-  [whiteView setTag:kWhiteViewBackgroundTag];
-  whiteView.alpha = 0;
+      [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.window.frame.size.width, self.window.frame.size.height)];
+  whiteView.backgroundColor = [UIColor colorWithWhite:1 alpha:0.7f];
+  [whiteView setTag:kWhiteViewBackgroundTag + 1];
+  whiteView.alpha = 1;
   [self.window addSubview:whiteView];
 
   self.navcon.navigationBar.translucent = NO;
@@ -145,7 +145,7 @@
                                                  toViewController:(UIViewController *)toVC {  
   if (operation == UINavigationControllerOperationPush) {
     if ([fromVC isKindOfClass:[IJHomeViewController class]]) {
-      [self.navcon setNavigationBarHidden:NO animated:YES];
+      [self.navcon setNavigationBarHidden:NO animated:NO];
     }
     return [[IJPushViewControllerTransition alloc] init];
   } else if (operation == UINavigationControllerOperationPop) {

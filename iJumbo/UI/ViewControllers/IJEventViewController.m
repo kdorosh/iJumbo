@@ -34,6 +34,7 @@ static NSDateFormatter *kEventDateFormatter;
   IJAssertNotNil(self.event);
   [super viewDidLoad];
   self.title = self.event.date;
+  self.view.backgroundColor = [UIColor transparentWhiteBackground];
   self.scrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 0, self.view.width, self.view.height)];
   [self.view addSubview:self.scrollView];
   NSString *time;

@@ -29,6 +29,7 @@ const int kNumberOfColumns = 2;
   self.title = @"Links";
   UICollectionViewFlowLayout *layout = [[UICollectionViewFlowLayout alloc] init];
   [layout setScrollDirection:UICollectionViewScrollDirectionVertical];
+  self.view.backgroundColor = [UIColor transparentWhiteBackground];
   self.collectionView = [[UICollectionView alloc] initWithFrame:CGRectMake(0, 0, self.view.width, self.view.height - 64)
                                            collectionViewLayout:layout];
   [self.collectionView registerClass:[IJLinkCollectionViewCell class]

@@ -42,6 +42,7 @@ static NSString * const kUserDefaultsHasAskedForLocation = @"UserDefaultsHasAske
   searchBar.barTintColor = [UIColor iJumboBlue];
   searchBar.tintColor = [UIColor whiteColor];
   searchBar.delegate = self;
+  searchBar.searchBarStyle = UISearchBarStyleProminent;
   self.mapView = [[MKMapView alloc] initWithFrame:CGRectMake(0, searchBar.maxY, self.view.width, self.view.height - searchBar.height)];
   self.mapView.delegate = self;
   self.mapView.zoomEnabled = YES;

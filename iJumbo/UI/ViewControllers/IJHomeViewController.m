@@ -40,7 +40,7 @@ static const CGFloat kSeparatorBarWidth = 1.5;
 - (void)viewDidLoad {
   [super viewDidLoad];
   self.edgesForExtendedLayout = UIRectEdgeAll;
-  self.view.backgroundColor = [UIColor clearColor];
+  self.view.backgroundColor = [UIColor iJumboBlueWithAlpha:0.8];
 
   [self addSeparators];
   [self setupButtons];

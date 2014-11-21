@@ -22,7 +22,7 @@
 - (void)viewDidLoad {
   [super viewDidLoad];
   self.title = @"My Food";
-  self.view.backgroundColor = [UIColor clearColor];
+  self.view.backgroundColor = [UIColor transparentWhiteBackground];
   [self addTableViewWithDelegate:self];
   self.tableView.backgroundColor = [UIColor clearColor];
   self.refreshControl = [[UIRefreshControl alloc] init];
@@ -71,7 +71,7 @@
   }
   __weak IJMyFoodViewController *weakSelf = self;
   [IJFoodItem fetchSubscribedFoodWithSuccessBlock:^(NSArray *foodItems) {
-    [self.refreshControl endRefreshing];
+    [weakSelf.refreshControl endRefreshing];
     weakSelf.subscribedFoods = foodItems;
     NSArray *ids = [foodItems valueForKey:@"id"];
     [IJFoodItem writeSubscribedFoodsToDisk:ids];
@@ -92,8 +92,10 @@
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-  IJFoodItem *foodItem = self.subscribedFoods[indexPath.row];
-  [IJFoodItem unsubscribeFromFoodItem:foodItem];
+  if (indexPath.row < [self.subscribedFoods count]) {
+    IJFoodItem *foodItem = self.subscribedFoods[indexPath.row];
+    [IJFoodItem unsubscribeFromFoodItem:foodItem];
+  }
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {

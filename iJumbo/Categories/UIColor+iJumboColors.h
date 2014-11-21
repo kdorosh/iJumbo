@@ -16,5 +16,6 @@
 + (UIColor *)iJumboBlackText;
 + (UIColor *)iJumboDarkBlackText;
 + (UIColor *)iJumboLightBlackText;
++ (UIColor *)transparentWhiteBackground;
 
 @end

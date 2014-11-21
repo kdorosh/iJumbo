@@ -71,7 +71,7 @@ static NSString * const kActionSheetButtonTitleCopyLink     = @"Copy Link";
   _webView.delegate = self;
   _webView.backgroundColor = [UIColor clearColor];
   _webView.scalesPageToFit = YES;
-  self.view.backgroundColor = [UIColor lightGrayColor];
+  self.view.backgroundColor = [UIColor transparentWhiteBackground];
   self.activityIndicator =
       [[UIActivityIndicatorView alloc] initWithFrame:CGRectMake(0, 0, 20, 20)];
   UIBarButtonItem * barButton =

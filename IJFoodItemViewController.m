@@ -33,6 +33,7 @@ static const int kFoodItemPadding = 16;
 - (void)viewDidLoad {
   [super viewDidLoad];
   self.title = self.foodItem.name;
+  self.view.backgroundColor = [UIColor transparentWhiteBackground];
   self.scrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 0, self.view.width, self.view.height)];
   [self.view addSubview:self.scrollView];
   [self addLabelsForFoodItem];

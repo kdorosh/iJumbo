@@ -33,6 +33,7 @@ static NSDateFormatter *kEventsTableDateFormatter;
 - (void)viewDidLoad {
   [super viewDidLoad];
   self.title = @"Events";
+  self.view.backgroundColor = [UIColor transparentWhiteBackground];
   [self addTableViewWithDelegate:self];
 
   UIBarButtonItem *calendarBarButton = [[UIBarButtonItem alloc] initWithTitle:@"Calendar"

@@ -11,7 +11,7 @@
 @implementation UIColor (iJumboColors)
 
 + (UIColor *)iJumboBlue {
-  return [UIColor colorWithRed:68/255.0f green:138/255.0f blue:255/255.0 alpha:1];
+  return [UIColor iJumboBlueWithAlpha:1];
 }
 
 + (UIColor *)iJumboBlueWithAlpha:(CGFloat)alpha {
@@ -33,6 +33,10 @@
 // basically grey but is translucent black.
 + (UIColor *)iJumboLightBlackText {
   return [UIColor colorWithWhite:0 alpha:0.5];
+}
+
++ (UIColor *)transparentWhiteBackground {
+  return [UIColor clearColor];
 }
 
 @end

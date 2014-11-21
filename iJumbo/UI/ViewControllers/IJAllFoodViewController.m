@@ -24,8 +24,9 @@ static NSString * const kAllFoodFirstShowUserDefaultsKey = @"AllFoodFirstShowUse
 - (void)viewDidLoad {
   [super viewDidLoad];
   [self addTableViewWithDelegate:self];
+  self.view.backgroundColor = [UIColor transparentWhiteBackground];
   self.subscribedFood = [NSSet setWithArray:[IJFoodItem subscribedFood]];
-  self.tableView.backgroundColor = [UIColor clearColor];
+  self.tableView.backgroundColor = [UIColor transparentWhiteBackground];
   [[NSNotificationCenter defaultCenter] addObserver:self
                                            selector:@selector(foodSubscriptionsChanged)
                                                name:kSubscribedToFoodItemNotification

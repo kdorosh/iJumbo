@@ -45,6 +45,7 @@
   [super viewDidLoad];
   self.title = @"Info";
   IJAssertNotNil(self.location);
+  self.view.backgroundColor = [UIColor transparentWhiteBackground];
   CGSize viewSize = self.view.frame.size;
   self.edgesForExtendedLayout = UIRectEdgeNone;
   _scrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 0, viewSize.width, viewSize.height)];

@@ -39,6 +39,7 @@ typedef NS_ENUM(NSInteger, IJTransportationSection) {
 - (void)viewDidLoad {
   [super viewDidLoad];
   self.title = @"Transportation";
+  self.view.backgroundColor = [UIColor transparentWhiteBackground];
   self.weekday = [IJTransportationCollectionViewController weekdayForScheduleOnDate:[NSDate date]];
   self.mbtaTimes = [NSMutableDictionary dictionaryWithCapacity:2];
   self.joeySchedule =
@@ -423,6 +424,7 @@ typedef NS_ENUM(NSInteger, IJTransportationSection) {
     // Look at mocks for bar that helps select the the date for the schedule.
     headerLabel.text = @"Joey Schedule";
     UIButton *dateButton = (UIButton *)[header viewWithTag:kDateHeaderButtonTag];
+    dateButton.frame = CGRectMake(header.width - dateButton.width, 0, dateButton.width, header.height);
     [dateButton setTitle:[NSString stringWithFormat:@"Day (%@)", [IJTransportationCollectionViewController textForWeekday:self.weekday]]
                 forState:UIControlStateNormal];
   }
